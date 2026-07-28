@@ -1,0 +1,44 @@
+.home {
+  padding-block: var(--space-2xl) var(--space-3xl);
+}
+
+.home__eyebrow {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.home__title {
+  font-size: var(--text-hero);
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-md);
+}
+
+.home__lead {
+  font-size: var(--text-lg);
+  color: var(--color-muted);
+}
+
+.home__status {
+  margin-top: var(--space-xl);
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface);
+  border-left: 5px solid var(--color-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  max-width: var(--measure);
+}
+
+.home__status h2 {
+  font-size: var(--text-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-2xs);
+}
+
+.home__status ul {
+  padding-left: var(--space-sm);
+}

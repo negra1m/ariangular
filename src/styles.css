@@ -1,0 +1,30 @@
+/**
+ * Estilos globais da aplicação.
+ *
+ * A ordem de carga é definida em angular.json:
+ *   tokens -> reset -> focus -> motion -> este arquivo.
+ *
+ * Aqui ficam só utilitários de layout compartilhados. Estilo de componente
+ * mora junto do componente.
+ */
+
+/* Container de leitura: largura confortável, respiro nas laterais no mobile. */
+.container {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+
+/* Coluna de texto corrido, limitada para não cansar a leitura (WCAG 1.4.8). */
+.prose {
+  max-width: var(--measure);
+}
+
+/* Conteúdo rolável horizontalmente (tabela larga, bloco de código comprido)
+   precisa ser focável, senão vira armadilha para quem usa só teclado: dá para
+   ver que há mais conteúdo, mas não dá para chegar nele. */
+.scroll-x {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}

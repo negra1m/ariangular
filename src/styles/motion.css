@@ -1,0 +1,26 @@
+/**
+ * Movimento.
+ *
+ * WCAG 2.3.3 (animação a partir de interação) e o conforto de quem tem
+ * distúrbio vestibular. Animação neste projeto é sempre opt-in do sistema:
+ * quem pediu menos movimento recebe menos movimento, sem exceção.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scroll suave só para quem não pediu redução.
+   Fora do bloco acima de propósito: aqui é opt-in, não override. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

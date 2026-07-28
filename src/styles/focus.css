@@ -1,0 +1,71 @@
+/**
+ * Foco.
+ *
+ * O documento que este site publica dedica uma seção inteira a isso e lista
+ * "foco perdido" como o bug mais comum em produção. Aqui o indicador é global,
+ * espesso e afastado do elemento — e não existe nenhuma regra neste projeto
+ * que faça `outline: none` sem substituto.
+ *
+ * WCAG 2.4.7 (foco visível), 2.4.11 (foco não obscurecido), 2.4.13 (aparência
+ * do foco: área e contraste mínimos).
+ */
+
+/* Indicador global. `:focus-visible` mostra para teclado e leitor de tela sem
+   poluir o clique de mouse. */
+:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* Navegadores que ainda não suportam :focus-visible continuam mostrando algo. */
+@supports not selector(:focus-visible) {
+  :focus {
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: var(--focus-offset);
+  }
+}
+
+/* Alvos de foco programático (h1 da página, <main>) recebem foco mas não são
+   controles: não devem exibir anel ao serem focados por navegação de rota. */
+[tabindex='-1']:focus {
+  outline: none;
+}
+
+/* ---------- Skip link ----------
+   Primeiro elemento focável do documento. Invisível até receber foco, e aí
+   totalmente visível e com contraste — WCAG 2.4.1. */
+.skip-link {
+  position: absolute;
+  left: var(--space-2xs);
+  top: var(--space-2xs);
+  z-index: var(--z-skip);
+  padding: var(--space-xs) var(--space-md);
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+
+  /* Fora da tela, mas ainda focável e ainda lido. */
+  transform: translateY(calc(-100% - var(--space-lg)));
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ---------- Foco obscurecido (WCAG 2.4.11) ----------
+   O header é sticky. Sem isso, tabular para um item logo abaixo dele deixa o
+   elemento focado escondido atrás do header — a pessoa ouve o anúncio mas não
+   enxerga onde está. */
+:root {
+  --header-height: 4rem;
+  scroll-padding-top: calc(var(--header-height) + var(--space-md));
+}
+
+/* Reforço para âncoras: o alvo do fragmento também não pode nascer sob o header. */
+:target {
+  scroll-margin-top: calc(var(--header-height) + var(--space-md));
+}

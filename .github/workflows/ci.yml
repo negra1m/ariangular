@@ -1,0 +1,50 @@
+name: CI
+
+# Acessibilidade regride em silêncio: ninguém percebe até alguém não conseguir
+# usar o site. Por isso lint de a11y e contraste rodam aqui e quebram o build,
+# em vez de ficarem num script que só roda quando alguém lembra.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Lint (regras de acessibilidade como erro)
+        run: npm run lint
+
+      - name: Contraste WCAG AA nos dois temas
+        run: npm run contrast
+
+      - name: Validar o documento de origem
+        run: npm run fonte:validate
+
+      - name: Conferir perda de conteúdo na fonte
+        run: npm run fonte:diff
+
+      - name: Build com prerender
+        run: npm run build
+
+      - name: Conferir que a saída é estática
+        run: |
+          if [ -d "dist/aria-angular/server" ]; then
+            echo "ERRO: build gerou pasta server/ — a saída deveria ser estática."
+            exit 1
+          fi
+          echo "Saída estática confirmada."
+          echo "Rotas prerenderizadas:"
+          cat dist/aria-angular/prerendered-routes.json

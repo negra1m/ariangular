@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>ARIA Angular — Acessibilidade em Angular</title>
+    <base href="/" />
+    <!--
+      Sem maximum-scale e sem user-scalable=no: bloquear zoom é violação de WCAG 1.4.4.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Guia interativo de acessibilidade para times Angular: fundamentos, ARIA, formulários, componentes, Angular CDK A11y, TalkBack, VoiceOver e WCAG 2.2."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script>
+      // Aplica o tema antes da primeira pintura para não haver flash do tema errado.
+      // Inline de propósito: qualquer arquivo externo já chega tarde demais.
+      (function () {
+        try {
+          var t = localStorage.getItem('aria-angular:theme');
+          if (t === 'light' || t === 'dark') {
+            document.documentElement.setAttribute('data-theme', t);
+          }
+        } catch (e) {
+          /* localStorage indisponível (modo privado): segue o prefers-color-scheme */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>

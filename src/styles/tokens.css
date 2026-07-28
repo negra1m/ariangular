@@ -1,0 +1,194 @@
+/**
+ * Design tokens.
+ *
+ * Base cromática oficial do Angular (angular.dev/press-kit):
+ *   #E40035  Red Ribbon  — primária
+ *   #151517  Woodsmoke   — ink
+ *   #FFFFFF  branco
+ *
+ * ATENÇÃO ao mexer em cor: `scripts/check-contrast.js` lê este arquivo e falha o
+ * build se algum par cair abaixo do exigido pela WCAG AA. Rode `npm run contrast`
+ * depois de qualquer alteração.
+ *
+ * Notas medidas:
+ *   #E40035 dá 4.83:1 sobre branco (passa AA) mas só 3.79:1 sobre #151517
+ *   (reprova AA). Por isso o tema claro escurece levemente o acento e o tema
+ *   escuro usa um acento clareado. A marca se subordina ao critério.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* ---------- Marca Angular (valores oficiais, não alterar) ---------- */
+  --angular-red: #e40035;
+  --angular-ink: #151517;
+  --angular-white: #ffffff;
+
+  /* Gradiente decorativo da família Angular.
+     PENDENTE: substituir pelos stops exatos do SVG oficial do press kit.
+     Uso restrito a superfície decorativa — nunca atrás de texto. */
+  --angular-gradient: linear-gradient(135deg, #e40035 0%, #d0068f 55%, #a219e6 100%);
+
+  /* ---------- Tema claro (padrão) ---------- */
+  --color-bg: #ffffff;
+  --color-surface: #f5f5f7;
+  --color-text: #151517;
+  --color-muted: #56565f;
+
+  /* Borda de controle é indicador não-textual: precisa de 3:1 (WCAG 1.4.11) */
+  --color-border: #8b8b95;
+  /* Divisória puramente decorativa pode ser mais suave */
+  --color-rule: #dcdce2;
+
+  --color-accent: #d1002f;
+  --color-on-accent: #ffffff;
+
+  --color-focus: #0b4fd6;
+
+  --color-code-bg: #17171a;
+  --color-code-text: #ececf0;
+
+  --color-info: #1a4fbd;
+  --color-info-bg: #eef3fd;
+  --color-warning: #a8102b;
+  --color-warning-bg: #fdeef0;
+  --color-success: #10614a;
+  --color-success-bg: #eaf7f2;
+
+  --color-mark-bg: #ffe8a3;
+  --color-mark-text: #3d2c00;
+
+  /* ---------- Espaçamento ---------- */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  /* ---------- Tipografia ---------- */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
+    monospace;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.75rem;
+  --text-4xl: 3.75rem;
+  --text-hero: clamp(2.5rem, 7vw, 5rem);
+  --text-numeral: clamp(3rem, 10vw, 7rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.7;
+
+  /* WCAG 1.4.8: linha curta o suficiente para não perder o lugar ao ler */
+  --measure: 68ch;
+
+  /* ---------- Forma ---------- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-full: 999px;
+
+  --border-thin: 1px;
+  --border-thick: 2px;
+
+  /* ---------- Foco ----------
+     Espessura e offset generosos: WCAG 2.4.11 e 2.4.13 */
+  --focus-width: 3px;
+  --focus-offset: 3px;
+
+  /* ---------- Elevação ---------- */
+  --shadow-sm: 0 1px 2px rgb(21 21 23 / 8%);
+  --shadow-md: 0 4px 16px rgb(21 21 23 / 10%);
+  --shadow-lg: 0 12px 40px rgb(21 21 23 / 14%);
+
+  /* ---------- Camadas ---------- */
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-header: 20;
+  --z-overlay: 30;
+  --z-dialog: 40;
+  --z-skip: 50;
+
+  /* ---------- Movimento ---------- */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --ease: cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+/* ---------- Tema escuro ----------
+   Aplicado pela preferência do sistema, a menos que a pessoa tenha escolhido claro. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-bg: #101013;
+    --color-surface: #1b1b20;
+    --color-text: #f2f2f5;
+    --color-muted: #a6a6b2;
+    --color-border: #63636e;
+    --color-rule: #2c2c34;
+
+    --color-accent: #ff7a94;
+    --color-on-accent: #17171a;
+
+    --color-focus: #7fb2ff;
+
+    --color-code-bg: #08080a;
+    --color-code-text: #e6e6ec;
+
+    --color-info: #8fbaff;
+    --color-info-bg: #131b2b;
+    --color-warning: #ffa1ae;
+    --color-warning-bg: #2a1319;
+    --color-success: #6fd5b3;
+    --color-success-bg: #0d2620;
+
+    --color-mark-bg: #5c4600;
+    --color-mark-text: #ffe9ab;
+
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
+    --shadow-md: 0 4px 16px rgb(0 0 0 / 50%);
+    --shadow-lg: 0 12px 40px rgb(0 0 0 / 60%);
+  }
+}
+
+/* ...e pela escolha explícita, que precisa ganhar da preferência do sistema. */
+[data-theme='dark'] {
+  --color-bg: #101013;
+  --color-surface: #1b1b20;
+  --color-text: #f2f2f5;
+  --color-muted: #a6a6b2;
+  --color-border: #63636e;
+  --color-rule: #2c2c34;
+
+  --color-accent: #ff7a94;
+  --color-on-accent: #17171a;
+
+  --color-focus: #7fb2ff;
+
+  --color-code-bg: #08080a;
+  --color-code-text: #e6e6ec;
+
+  --color-info: #8fbaff;
+  --color-info-bg: #131b2b;
+  --color-warning: #ffa1ae;
+  --color-warning-bg: #2a1319;
+  --color-success: #6fd5b3;
+  --color-success-bg: #0d2620;
+
+  --color-mark-bg: #5c4600;
+  --color-mark-text: #ffe9ab;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-md: 0 4px 16px rgb(0 0 0 / 50%);
+  --shadow-lg: 0 12px 40px rgb(0 0 0 / 60%);
+}

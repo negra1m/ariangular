@@ -1,0 +1,4229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acessibilidade em Angular — TalkBack, VoiceOver e WCAG 2.2</title>
+<meta name="description" content="Documentação de acessibilidade para aplicações Angular: fundamentos, ARIA, formulários, componentes, Angular CDK A11y, leitores de tela e QA.">
+<style>
+:root {
+  --bg: #ffffff;
+  --fg: #18181b;
+  --muted: #52525b;
+  --border: #d4d4d8;
+  --surface: #f4f4f5;
+  --code-bg: #1e293b;
+  --code-fg: #f1f5f9;
+  --info: #1d4ed8;
+  --info-bg: #eff6ff;
+  --warning: #b91c1c;
+  --warning-bg: #fef2f2;
+  --success: #047857;
+  --success-bg: #ecfdf5;
+  --focus: #1d4ed8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f0f11;
+    --fg: #f4f4f5;
+    --muted: #a1a1aa;
+    --border: #3f3f46;
+    --surface: #1c1c1f;
+    --code-bg: #09090b;
+    --code-fg: #e4e4e7;
+    --info: #93c5fd;
+    --info-bg: #172033;
+    --warning: #fca5a5;
+    --warning-bg: #2a1416;
+    --success: #6ee7b7;
+    --success-bg: #0d2620;
+    --focus: #93c5fd;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  line-height: 1.7;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 6rem;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 0.75rem 1.25rem;
+  z-index: 10;
+}
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+h1, h2, h3, h4, h5 { line-height: 1.25; }
+h1 { font-size: 2.25rem; margin: 0 0 0.5rem; }
+h2 {
+  font-size: 1.75rem;
+  margin: 4rem 0 1rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--border);
+}
+h3 { font-size: 1.3rem; margin: 2.5rem 0 0.75rem; }
+h4 { font-size: 1.05rem; margin: 1.75rem 0 0.5rem; }
+h5 { font-size: 0.95rem; margin: 1.25rem 0 0.5rem; color: var(--muted); }
+
+p { max-width: 68ch; }
+.lead { font-size: 1.1rem; color: var(--muted); max-width: 68ch; }
+
+a { color: var(--info); }
+a:hover { text-decoration-thickness: 2px; }
+
+.sumario {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+  margin: 2.5rem 0;
+}
+.sumario h2 {
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 0;
+  font-size: 1.15rem;
+}
+.sumario ul { margin: 0; padding-left: 1.25rem; }
+.sumario > ul > li { margin-bottom: 0.75rem; }
+.sumario > ul > li > a { font-weight: 600; }
+.sumario ul ul { margin: 0.35rem 0 0; }
+.sumario ul ul a { color: var(--muted); font-size: 0.9rem; }
+
+ul li, ol li { margin-bottom: 0.4rem; }
+
+pre {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+pre:focus-visible { outline-offset: 0; }
+code { font-family: ui-monospace, Consolas, "Courier New", monospace; font-size: 0.9rem; }
+p > code, li > code, td > code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+
+.callout {
+  border-left: 5px solid;
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.callout__label {
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+.callout > :last-child { margin-bottom: 0; }
+.callout--info { border-color: var(--info); background: var(--info-bg); }
+.callout--info .callout__label { color: var(--info); }
+.callout--warning { border-color: var(--warning); background: var(--warning-bg); }
+.callout--warning .callout__label { color: var(--warning); }
+.callout--success { border-color: var(--success); background: var(--success-bg); }
+.callout--success .callout__label { color: var(--success); }
+
+.tabela-wrap { overflow-x: auto; margin: 1.25rem 0; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid var(--border); padding: 0.6rem 0.75rem; text-align: left; }
+th { background: var(--surface); font-weight: 700; }
+
+.rodape {
+  margin-top: 5rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--border);
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header>
+
+<h1>Acessibilidade em Angular</h1>
+
+<p class="lead">Documentação de acessibilidade para aplicações Angular, com foco em TalkBack, VoiceOver e WCAG 2.2.</p>
+
+</header>
+
+<nav class="sumario" aria-labelledby="sumario-titulo">
+
+<h2 id="sumario-titulo">Sumário</h2>
+
+<ul>
+<li>
+<a href="#fundamentos">Fundamentos de Acessibilidade Angular</a>
+<ul>
+<li><a href="#o-que-e-acessibilidade">1. O que é acessibilidade?</a></li>
+<li><a href="#wcag-2-2">2. WCAG 2.2</a></li>
+<li><a href="#pour">3. POUR</a></li>
+<li><a href="#leitores-de-tela-2">4. Leitores de tela</a></li>
+<li><a href="#como-um-leitor-de-tela-enxerga-uma-pagina">5. Como um leitor de tela enxerga uma página?</a></li>
+<li><a href="#regra-de-ouro-da-acessibilidade">6. Regra de Ouro da Acessibilidade</a></li>
+<li><a href="#estrutura-semantica-basica">7. Estrutura Semântica Básica</a></li>
+<li><a href="#landmarks">8. Landmarks</a></li>
+<li><a href="#headings">9. Headings</a></li>
+<li><a href="#accessible-name">10. Accessible Name</a></li>
+<li><a href="#accessible-description">11. Accessible Description</a></li>
+<li><a href="#nome-role-estado">12. Nome + Role + Estado</a></li>
+<li><a href="#erros-mais-comuns-encontrados-em-angular">13. Erros mais comuns encontrados em Angular</a></li>
+<li><a href="#mentalidade-para-o-time-angular">14. Mentalidade para o time Angular</a></li>
+</ul>
+</li>
+<li>
+<a href="#aria">ARIA Completo para Angular</a>
+<ul>
+<li><a href="#o-que-e-aria">1. O que é ARIA?</a></li>
+<li><a href="#regra-de-ouro">2. Regra de Ouro</a></li>
+<li><a href="#accessible-name-2">3. Accessible Name</a></li>
+<li><a href="#aria-label">4. aria-label</a></li>
+<li><a href="#aria-labelledby">5. aria-labelledby</a></li>
+<li><a href="#aria-describedby">6. aria-describedby</a></li>
+<li><a href="#aria-hidden">7. aria-hidden</a></li>
+<li><a href="#aria-expanded">8. aria-expanded</a></li>
+<li><a href="#aria-controls">9. aria-controls</a></li>
+<li><a href="#aria-current">10. aria-current</a></li>
+<li><a href="#aria-selected">11. aria-selected</a></li>
+<li><a href="#aria-checked">12. aria-checked</a></li>
+<li><a href="#aria-pressed">13. aria-pressed</a></li>
+<li><a href="#aria-disabled">14. aria-disabled</a></li>
+<li><a href="#aria-required">15. aria-required</a></li>
+<li><a href="#aria-invalid">16. aria-invalid</a></li>
+<li><a href="#aria-live">17. aria-live</a></li>
+<li><a href="#aria-atomic">18. aria-atomic</a></li>
+<li><a href="#aria-busy">19. aria-busy</a></li>
+<li><a href="#aria-modal">20. aria-modal</a></li>
+<li><a href="#aria-haspopup">21. aria-haspopup</a></li>
+<li><a href="#aria-para-progress-bar">22. ARIA para Progress Bar</a></li>
+<li><a href="#principais-roles">23. Principais Roles</a></li>
+<li><a href="#roles-que-voce-quase-nunca-precisara">24. Roles que você quase nunca precisará</a></li>
+<li><a href="#angular-attribute-binding">25. Angular Attribute Binding</a></li>
+<li><a href="#erros-mais-comuns-com-aria">26. Erros mais comuns com ARIA</a></li>
+<li><a href="#checklist-aria">27. Checklist ARIA</a></li>
+</ul>
+</li>
+<li>
+<a href="#formularios">Formulários Acessíveis</a>
+<ul>
+<li><a href="#label">Label</a></li>
+<li><a href="#placeholder-nao-e-label">Placeholder não é Label</a></li>
+<li><a href="#campos-obrigatorios">Campos Obrigatórios</a></li>
+<li><a href="#mensagens-de-ajuda">Mensagens de Ajuda</a></li>
+<li><a href="#validacao-de-erro">Validação de Erro</a></li>
+<li><a href="#erro-associado-ao-campo">Erro Associado ao Campo</a></li>
+<li><a href="#erro-dinamico-com-aria-live">Erro Dinâmico com aria-live</a></li>
+</ul>
+</li>
+<li>
+<a href="#componentes">Componentes Interativos e Estruturas Complexas</a>
+<ul>
+<li><a href="#botoes">Botões</a></li>
+<li><a href="#botao-apenas-com-icone">Botão Apenas com Ícone</a></li>
+<li><a href="#links">Links</a></li>
+<li><a href="#cards-clicaveis">Cards Clicáveis</a></li>
+<li><a href="#accordion">Accordion</a></li>
+<li><a href="#accordion-com-angular">Accordion com Angular</a></li>
+<li><a href="#tabs">Tabs</a></li>
+<li><a href="#tab-panel">Tab Panel</a></li>
+<li><a href="#modal">Modal</a></li>
+<li><a href="#checklist-modal">Checklist Modal</a></li>
+<li><a href="#bottom-sheet">Bottom Sheet</a></li>
+<li><a href="#menu">Menu</a></li>
+<li><a href="#itens-de-menu">Itens de Menu</a></li>
+<li><a href="#dropdown">Dropdown</a></li>
+<li><a href="#combobox">Combobox</a></li>
+<li><a href="#lista">Lista</a></li>
+<li><a href="#breadcrumb">Breadcrumb</a></li>
+<li><a href="#stepper">Stepper</a></li>
+<li><a href="#tabela-simples">Tabela Simples</a></li>
+<li><a href="#tabela-boas-praticas">Tabela - Boas Práticas</a></li>
+<li><a href="#tooltip">Tooltip</a></li>
+<li><a href="#toast">Toast</a></li>
+<li><a href="#snackbar">Snackbar</a></li>
+<li><a href="#alertas-criticos">Alertas Críticos</a></li>
+<li><a href="#loading">Loading</a></li>
+<li><a href="#progress-bar">Progress Bar</a></li>
+<li><a href="#skeleton-loading">Skeleton Loading</a></li>
+<li><a href="#carrossel">Carrossel</a></li>
+<li><a href="#infinite-scroll">Infinite Scroll</a></li>
+<li><a href="#drag-and-drop">Drag and Drop</a></li>
+<li><a href="#upload-de-arquivo">Upload de Arquivo</a></li>
+<li><a href="#mensagens-dinamicas">Mensagens Dinâmicas</a></li>
+<li><a href="#checklist-de-componentes">Checklist de Componentes</a></li>
+</ul>
+</li>
+<li>
+<a href="#angular">Angular, Angular Material e Angular CDK A11y</a>
+<ul>
+<li><a href="#angular-e-acessivel-por-padrao">Angular é acessível por padrão?</a></li>
+<li><a href="#regra-principal-para-angular">Regra Principal para Angular</a></li>
+<li><a href="#binding-de-aria">Binding de ARIA</a></li>
+<li><a href="#ngif-e-foco">NgIf e Foco</a></li>
+<li><a href="#ngfor-e-acessibilidade">NgFor e Acessibilidade</a></li>
+<li><a href="#router-angular">Router Angular</a></li>
+<li><a href="#foco-apos-navegacao">Foco Após Navegação</a></li>
+<li><a href="#exemplo-de-destino-de-foco">Exemplo de Destino de Foco</a></li>
+<li><a href="#anunciar-mudancas-de-tela">Anunciar Mudanças de Tela</a></li>
+<li><a href="#angular-cdk-accessibility">Angular CDK Accessibility</a></li>
+<li><a href="#liveannouncer">LiveAnnouncer</a></li>
+<li><a href="#quando-usar-liveannouncer">Quando usar LiveAnnouncer</a></li>
+<li><a href="#cdktrapfocus">cdkTrapFocus</a></li>
+<li><a href="#exemplo-cdktrapfocus">Exemplo cdkTrapFocus</a></li>
+<li><a href="#focusmonitor">FocusMonitor</a></li>
+<li><a href="#focuskeymanager">FocusKeyManager</a></li>
+<li><a href="#angular-material">Angular Material</a></li>
+<li><a href="#matdialog">MatDialog</a></li>
+<li><a href="#checklist-matdialog">Checklist MatDialog</a></li>
+<li><a href="#mattabs">MatTabs</a></li>
+<li><a href="#matmenu">MatMenu</a></li>
+<li><a href="#matselect">MatSelect</a></li>
+<li><a href="#matexpansionpanel">MatExpansionPanel</a></li>
+<li><a href="#mattable">MatTable</a></li>
+<li><a href="#overlay-components">Overlay Components</a></li>
+<li><a href="#datepicker">Datepicker</a></li>
+<li><a href="#loading-angular">Loading Angular</a></li>
+<li><a href="#lazy-loading">Lazy Loading</a></li>
+<li><a href="#signals-e-acessibilidade">Signals e Acessibilidade</a></li>
+<li><a href="#standalone-components">Standalone Components</a></li>
+<li><a href="#pipes">Pipes</a></li>
+<li><a href="#custom-components">Custom Components</a></li>
+<li><a href="#regra-para-custom-components">Regra para Custom Components</a></li>
+<li><a href="#erro-mais-comum-do-time-front">Erro Mais Comum do Time Front</a></li>
+<li><a href="#checklist-angular">Checklist Angular</a></li>
+</ul>
+</li>
+<li>
+<a href="#leitores-de-tela">TalkBack, VoiceOver e Testes Reais</a>
+<ul>
+<li><a href="#principio-fundamental">Princípio Fundamental</a></li>
+<li><a href="#exemplo-de-leitura">Exemplo de Leitura</a></li>
+<li><a href="#botao-com-icone">Botão com Ícone</a></li>
+<li><a href="#campos-obrigatorios-2">Campos Obrigatórios</a></li>
+<li><a href="#campo-invalido">Campo Inválido</a></li>
+<li><a href="#checkbox">Checkbox</a></li>
+<li><a href="#switch">Switch</a></li>
+<li><a href="#accordion-2">Accordion</a></li>
+<li><a href="#tabs-2">Tabs</a></li>
+<li><a href="#stepper-2">Stepper</a></li>
+<li><a href="#mensagens-dinamicas-2">Mensagens Dinâmicas</a></li>
+<li><a href="#role-alert">Role Alert</a></li>
+<li><a href="#foco-visivel">Foco Visível</a></li>
+<li><a href="#sequencia-de-foco">Sequência de Foco</a></li>
+<li><a href="#modais">Modais</a></li>
+<li><a href="#problema-classico">Problema Clássico</a></li>
+<li><a href="#loading-2">Loading</a></li>
+<li><a href="#talkback-x-voiceover">TalkBack x VoiceOver</a></li>
+<li><a href="#roteiro-de-teste-manual">Roteiro de Teste Manual</a></li>
+<li><a href="#bugs-mais-comuns-encontrados-em-producao">Bugs Mais Comuns Encontrados em Produção</a></li>
+<li><a href="#checklist-final-de-talkback-e-voiceover">Checklist Final de TalkBack e VoiceOver</a></li>
+</ul>
+</li>
+<li>
+<a href="#qa-wcag">QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular</a>
+<ul>
+<li><a href="#o-que-significa-uma-tela-acessivel">O que significa uma tela acessível?</a></li>
+<li><a href="#principais-criterios-wcag-para-angular">Principais Critérios WCAG para Angular</a></li>
+<li><a href="#criterios-que-mais-geram-bugs">Critérios que Mais Geram Bugs</a></li>
+<li><a href="#checklist-de-story">Checklist de Story</a></li>
+<li><a href="#checklist-de-desenvolvimento">Checklist de Desenvolvimento</a></li>
+<li><a href="#checklist-de-pull-request">Checklist de Pull Request</a></li>
+<li><a href="#checklist-de-qa">Checklist de QA</a></li>
+<li><a href="#checklist-para-talkback">Checklist para TalkBack</a></li>
+<li><a href="#checklist-para-voiceover">Checklist para VoiceOver</a></li>
+<li><a href="#quando-abrir-um-bug-de-acessibilidade">Quando Abrir um Bug de Acessibilidade?</a></li>
+<li><a href="#template-de-bug">Template de Bug</a></li>
+<li><a href="#classificacao-de-severidade">Classificação de Severidade</a></li>
+<li><a href="#exemplos-de-bugs-criticos">Exemplos de Bugs Críticos</a></li>
+<li><a href="#exemplos-de-bugs-medios">Exemplos de Bugs Médios</a></li>
+<li><a href="#definition-of-done-acessivel">Definition of Done Acessível</a></li>
+<li><a href="#checklist-para-revisao-de-tela-nova">Checklist para Revisão de Tela Nova</a></li>
+<li><a href="#ferramentas-recomendadas">Ferramentas Recomendadas</a></li>
+<li><a href="#o-que-ferramentas-nao-encontram">O que Ferramentas NÃO Encontram</a></li>
+<li><a href="#mentalidade-final">Mentalidade Final</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+
+<main id="conteudo" tabindex="-1">
+
+<section class="parte" id="fundamentos" aria-labelledby="fundamentos-titulo">
+
+<h2 id="fundamentos-titulo">Fundamentos de Acessibilidade Angular</h2>
+
+<p>
+Primeira parte da documentação de acessibilidade para aplicações Angular,
+VoiceOver e TalkBack.
+</p>
+
+<section class="secao" id="o-que-e-acessibilidade" aria-labelledby="o-que-e-acessibilidade-titulo">
+
+<h3 id="o-que-e-acessibilidade-titulo">1. O que é acessibilidade?</h3>
+
+<p>
+Acessibilidade é a capacidade de um produto digital ser utilizado
+por todas as pessoas, independentemente de limitações visuais,
+auditivas, motoras, cognitivas ou temporárias.
+</p>
+
+<aside class="callout callout--info" aria-label="Informação">
+<p class="callout__label">Informação</p>
+<p>Exemplos de usuários:</p>
+<ul>
+<li>Pessoa cega usando TalkBack.</li>
+<li>Pessoa cega usando VoiceOver.</li>
+<li>Pessoa com baixa visão usando zoom.</li>
+<li>Pessoa com mobilidade reduzida utilizando teclado.</li>
+<li>Pessoa com deficiência cognitiva.</li>
+<li>Pessoa com braço machucado utilizando somente uma mão.</li>
+</ul>
+</aside>
+
+</section>
+
+<section class="secao" id="wcag-2-2" aria-labelledby="wcag-2-2-titulo">
+
+<h3 id="wcag-2-2-titulo">2. WCAG 2.2</h3>
+
+<p>
+A WCAG (Web Content Accessibility Guidelines) é o conjunto mais utilizado
+no mundo para avaliar acessibilidade digital.
+</p>
+
+<h4>Níveis de conformidade</h4>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: 2. WCAG 2.2"><table>
+<thead>
+<tr>
+<th scope="col">Nível</th>
+<th scope="col">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Requisitos mínimos.</td>
+</tr>
+<tr>
+<td>AA</td>
+<td>Padrão adotado pela maioria das empresas.</td>
+</tr>
+<tr>
+<td>AAA</td>
+<td>Nível mais rigoroso.</td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+
+<section class="secao" id="pour" aria-labelledby="pour-titulo">
+
+<h3 id="pour-titulo">3. POUR</h3>
+
+<p>
+Todos os critérios da WCAG derivam de quatro pilares:
+</p>
+
+<h4>P - Perceivable (Perceptível)</h4>
+
+<ul>
+<li>O usuário precisa conseguir perceber o conteúdo.</li>
+<li>Imagens precisam de texto alternativo.</li>
+<li>Informações não podem depender apenas de cor.</li>
+</ul>
+
+<h4>O - Operable (Operável)</h4>
+
+<ul>
+<li>A interface deve ser utilizável.</li>
+<li>Compatível com teclado.</li>
+<li>Compatível com leitores de tela.</li>
+</ul>
+
+<h4>U - Understandable (Compreensível)</h4>
+
+<ul>
+<li>Fluxos consistentes.</li>
+<li>Mensagens claras.</li>
+<li>Erros compreensíveis.</li>
+</ul>
+
+<h4>R - Robust (Robusto)</h4>
+
+<ul>
+<li>Compatível com tecnologias assistivas.</li>
+<li>HTML semântico.</li>
+<li>ARIA correta.</li>
+</ul>
+
+</section>
+
+<section class="secao" id="leitores-de-tela-2" aria-labelledby="leitores-de-tela-2-titulo">
+
+<h3 id="leitores-de-tela-2-titulo">4. Leitores de tela</h3>
+
+<h4>TalkBack</h4>
+
+<p>
+Leitor de tela nativo do Android.
+</p>
+
+<h4>VoiceOver</h4>
+
+<p>
+Leitor de tela nativo do iOS.
+</p>
+
+<h4>O que eles precisam para funcionar corretamente?</h4>
+
+<ul>
+<li>Nome acessível.</li>
+<li>Role correta.</li>
+<li>Estado correto.</li>
+</ul>
+
+<h4>Exemplo</h4>
+
+<pre><code>&lt;button&gt;
+Salvar
+&lt;/button&gt;</code></pre>
+
+<p>Leitura esperada:</p>
+
+<pre><code>Salvar, botão</code></pre>
+
+</section>
+
+<section class="secao" id="como-um-leitor-de-tela-enxerga-uma-pagina" aria-labelledby="como-um-leitor-de-tela-enxerga-uma-pagina-titulo">
+
+<h3 id="como-um-leitor-de-tela-enxerga-uma-pagina-titulo">5. Como um leitor de tela enxerga uma página?</h3>
+
+<p>
+Usuários não enxergam a interface da mesma forma que usuários visuais.
+</p>
+
+<p>
+Eles navegam por:
+</p>
+
+<ul>
+<li>Títulos.</li>
+<li>Botões.</li>
+<li>Links.</li>
+<li>Campos.</li>
+<li>Landmarks.</li>
+</ul>
+
+<aside class="callout callout--warning" aria-label="Atenção">
+<p class="callout__label">Atenção</p>
+<p>Uma tela visualmente perfeita pode ser completamente inutilizável
+para um leitor de tela.</p>
+
+</aside>
+
+</section>
+
+<section class="secao" id="regra-de-ouro-da-acessibilidade" aria-labelledby="regra-de-ouro-da-acessibilidade-titulo">
+
+<h3 id="regra-de-ouro-da-acessibilidade-titulo">6. Regra de Ouro da Acessibilidade</h3>
+
+<h4>HTML primeiro</h4>
+
+<p>
+Sempre prefira HTML semântico antes de usar ARIA.
+</p>
+
+<h5>✅ Correto</h5>
+
+<pre><code>&lt;button&gt;
+Salvar
+&lt;/button&gt;</code></pre>
+
+<h5>❌ Errado</h5>
+
+<pre><code>&lt;div (click)="salvar()"&gt;
+Salvar
+&lt;/div&gt;</code></pre>
+
+<aside class="callout callout--success" aria-label="Boa prática">
+<p class="callout__label">Boa prática</p>
+<p>Se existe uma tag HTML nativa capaz de resolver o problema,
+use ela.</p>
+
+</aside>
+
+</section>
+
+<section class="secao" id="estrutura-semantica-basica" aria-labelledby="estrutura-semantica-basica-titulo">
+
+<h3 id="estrutura-semantica-basica-titulo">7. Estrutura Semântica Básica</h3>
+
+<pre><code>&lt;header&gt;
+  Cabeçalho
+&lt;/header&gt;
+
+&lt;nav&gt;
+  Navegação
+&lt;/nav&gt;
+
+&lt;main&gt;
+
+  &lt;section&gt;
+
+    &lt;h1&gt;Título principal&lt;/h1&gt;
+
+  &lt;/section&gt;
+
+&lt;/main&gt;
+
+&lt;footer&gt;
+  Rodapé
+&lt;/footer&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="landmarks" aria-labelledby="landmarks-titulo">
+
+<h3 id="landmarks-titulo">8. Landmarks</h3>
+
+<p>
+Landmarks permitem que leitores de tela naveguem rapidamente
+pelas regiões importantes da página.
+</p>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: 8. Landmarks"><table>
+<thead>
+<tr>
+<th scope="col">Tag</th>
+<th scope="col">Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>header</td>
+<td>Cabeçalho.</td>
+</tr>
+<tr>
+<td>nav</td>
+<td>Navegação.</td>
+</tr>
+<tr>
+<td>main</td>
+<td>Conteúdo principal.</td>
+</tr>
+<tr>
+<td>aside</td>
+<td>Conteúdo complementar.</td>
+</tr>
+<tr>
+<td>footer</td>
+<td>Rodapé.</td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+
+<section class="secao" id="headings" aria-labelledby="headings-titulo">
+
+<h3 id="headings-titulo">9. Headings</h3>
+
+<p>
+Headings criam uma árvore de navegação.
+</p>
+
+<h4>✅ Correto</h4>
+
+<pre><code>&lt;h1&gt;Conta Corrente&lt;/h1&gt;
+
+&lt;h2&gt;Saldo&lt;/h2&gt;
+
+&lt;h2&gt;Extrato&lt;/h2&gt;
+
+&lt;h3&gt;Últimos lançamentos&lt;/h3&gt;</code></pre>
+
+<h4>❌ Evitar</h4>
+
+<pre><code>&lt;h1&gt;Conta Corrente&lt;/h1&gt;
+&lt;h4&gt;Extrato&lt;/h4&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="accessible-name" aria-labelledby="accessible-name-titulo">
+
+<h3 id="accessible-name-titulo">10. Accessible Name</h3>
+
+<p>
+Todo elemento interativo deve possuir um nome acessível.
+</p>
+
+<h4>Texto visível</h4>
+
+<pre><code>&lt;button&gt;
+Continuar
+&lt;/button&gt;</code></pre>
+
+<p>Leitura:</p>
+
+<pre><code>Continuar, botão</code></pre>
+
+<h4>aria-label</h4>
+
+<pre><code>&lt;button aria-label="Fechar modal"&gt;
+
+  &lt;mat-icon&gt;close&lt;/mat-icon&gt;
+
+&lt;/button&gt;</code></pre>
+
+<p>Leitura:</p>
+
+<pre><code>Fechar modal, botão</code></pre>
+
+</section>
+
+<section class="secao" id="accessible-description" aria-labelledby="accessible-description-titulo">
+
+<h3 id="accessible-description-titulo">11. Accessible Description</h3>
+
+<pre><code>&lt;input
+ id="cpf"
+ aria-describedby="ajudaCpf"&gt;
+
+&lt;span id="ajudaCpf"&gt;
+Digite somente números
+&lt;/span&gt;</code></pre>
+
+<p>
+O leitor combinará o nome do campo com sua descrição.
+</p>
+
+</section>
+
+<section class="secao" id="nome-role-estado" aria-labelledby="nome-role-estado-titulo">
+
+<h3 id="nome-role-estado-titulo">12. Nome + Role + Estado</h3>
+
+<p>
+Quase toda análise de leitor de tela pode ser resumida
+em três perguntas:
+</p>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: 12. Nome + Role + Estado"><table>
+<thead>
+<tr>
+<th scope="col">Pergunta</th>
+<th scope="col">Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qual é o nome?</td>
+<td>Salvar</td>
+</tr>
+<tr>
+<td>Qual é a role?</td>
+<td>Botão</td>
+</tr>
+<tr>
+<td>Qual é o estado?</td>
+<td>Desabilitado</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>Exemplo</h4>
+
+<pre><code>&lt;button disabled&gt;
+Salvar
+&lt;/button&gt;</code></pre>
+
+<p>Leitura:</p>
+
+<pre><code>Salvar, botão, desabilitado</code></pre>
+
+</section>
+
+<section class="secao" id="erros-mais-comuns-encontrados-em-angular" aria-labelledby="erros-mais-comuns-encontrados-em-angular-titulo">
+
+<h3 id="erros-mais-comuns-encontrados-em-angular-titulo">13. Erros mais comuns encontrados em Angular</h3>
+
+<ul>
+
+<li>Div clicável simulando botão.</li>
+
+<li>Ícone clicável sem aria-label.</li>
+
+<li>Input apenas com placeholder.</li>
+
+<li>Ausência de heading principal.</li>
+
+<li>Modal sem gerenciamento de foco.</li>
+
+<li>Erros de formulário não anunciados.</li>
+
+<li>Uso excessivo de ARIA.</li>
+
+<li>Links agindo como botão.</li>
+
+<li>Botões agindo como links.</li>
+
+<li>tabindex positivo.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="mentalidade-para-o-time-angular" aria-labelledby="mentalidade-para-o-time-angular-titulo">
+
+<h3 id="mentalidade-para-o-time-angular-titulo">14. Mentalidade para o time Angular</h3>
+
+<aside class="callout callout--info" aria-label="Informação">
+<p class="callout__label">Informação</p>
+<p>Antes de criar qualquer componente, pergunte:</p>
+<ol>
+<li>Existe uma tag HTML nativa para isso?</li>
+<li>O elemento possui nome acessível?</li>
+<li>Funciona com teclado?</li>
+<li>Funciona com TalkBack?</li>
+<li>Funciona com VoiceOver?</li>
+</ol>
+</aside>
+
+</section>
+
+</section>
+
+<section class="parte" id="aria" aria-labelledby="aria-titulo">
+
+<h2 id="aria-titulo">ARIA Completo para Angular</h2>
+
+<p>
+Tudo que um dev Angular normalmente usa no dia a dia
+para TalkBack, VoiceOver e WCAG.
+</p>
+
+<section class="secao" id="o-que-e-aria" aria-labelledby="o-que-e-aria-titulo">
+
+<h3 id="o-que-e-aria-titulo">1. O que é ARIA?</h3>
+
+<p>
+ARIA significa:
+</p>
+
+<pre><code>Accessible Rich Internet Applications</code></pre>
+
+<p>
+ARIA existe para complementar a semântica HTML.
+</p>
+
+<aside class="callout callout--warning" aria-label="Atenção">
+<p class="callout__label">Atenção</p>
+<p>ARIA NÃO substitui HTML semântico.</p>
+
+</aside>
+
+<h4>✅ Preferir</h4>
+
+<pre><code>&lt;button&gt;
+Salvar
+&lt;/button&gt;</code></pre>
+
+<h4>🚫 Evitar</h4>
+
+<pre><code>&lt;div role="button"&gt;
+Salvar
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="regra-de-ouro" aria-labelledby="regra-de-ouro-titulo">
+
+<h3 id="regra-de-ouro-titulo">2. Regra de Ouro</h3>
+
+<pre><code>No ARIA is better than bad ARIA.</code></pre>
+
+<p>
+Se o HTML nativo resolve,
+não use ARIA desnecessariamente.
+</p>
+
+</section>
+
+<section class="secao" id="accessible-name-2" aria-labelledby="accessible-name-2-titulo">
+
+<h3 id="accessible-name-2-titulo">3. Accessible Name</h3>
+
+<p>
+Todo elemento interativo deve possuir um nome acessível.
+</p>
+
+<h4>Texto interno</h4>
+
+<pre><code>&lt;button&gt;
+Continuar
+&lt;/button&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Continuar, botão</code></pre>
+
+</section>
+
+<section class="secao" id="aria-label" aria-labelledby="aria-label-titulo">
+
+<h3 id="aria-label-titulo">4. aria-label</h3>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: 4. aria-label"><table>
+<thead>
+<tr>
+<th scope="col">Atributo</th>
+<th scope="col">Valor</th>
+<th scope="col">Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aria-label</td>
+<td>string</td>
+<td>Define nome acessível.</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>Quando usar</h4>
+
+<ul>
+<li>Botão apenas com ícone.</li>
+<li>Ações sem texto visível.</li>
+<li>Elementos customizados.</li>
+</ul>
+
+<h4>Exemplo</h4>
+
+<pre><code>&lt;button aria-label="Fechar modal"&gt;
+
+  &lt;mat-icon&gt;close&lt;/mat-icon&gt;
+
+&lt;/button&gt;</code></pre>
+
+<p>
+TalkBack:
+</p>
+
+<pre><code>Fechar modal, botão</code></pre>
+
+</section>
+
+<section class="secao" id="aria-labelledby" aria-labelledby="aria-labelledby-titulo">
+
+<h3 id="aria-labelledby-titulo">5. aria-labelledby</h3>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: 5. aria-labelledby"><table>
+<thead>
+<tr>
+<th scope="col">Valor</th>
+<th scope="col">Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>Usa outro elemento como nome.</td>
+</tr>
+</tbody>
+</table></div>
+
+<pre><code>&lt;h2 id="titulo"&gt;
+Pagamento
+&lt;/h2&gt;
+
+&lt;button
+aria-labelledby="titulo"&gt;
+
+Confirmar
+
+&lt;/button&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-describedby" aria-labelledby="aria-describedby-titulo">
+
+<h3 id="aria-describedby-titulo">6. aria-describedby</h3>
+
+<p>
+Adiciona descrição complementar.
+</p>
+
+<pre><code>&lt;input
+id="cpf"
+aria-describedby="ajudaCpf"&gt;
+
+&lt;span id="ajudaCpf"&gt;
+Digite apenas números
+&lt;/span&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-hidden" aria-labelledby="aria-hidden-titulo">
+
+<h3 id="aria-hidden-titulo">7. aria-hidden</h3>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: 7. aria-hidden"><table>
+<thead>
+<tr>
+<th scope="col">Valor</th>
+<th scope="col">Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>true</td>
+<td>Oculta do leitor.</td>
+</tr>
+<tr>
+<td>false</td>
+<td>Expõe ao leitor.</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>Imagem decorativa</h4>
+
+<pre><code>&lt;img
+src="ornamento.svg"
+alt=""
+aria-hidden="true"&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-expanded" aria-labelledby="aria-expanded-titulo">
+
+<h3 id="aria-expanded-titulo">8. aria-expanded</h3>
+
+<p>
+Indica estado expandido.
+</p>
+
+<pre><code>&lt;button
+aria-expanded="false"&gt;
+
+Detalhes
+
+&lt;/button&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Detalhes, botão, recolhido</code></pre>
+
+</section>
+
+<section class="secao" id="aria-controls" aria-labelledby="aria-controls-titulo">
+
+<h3 id="aria-controls-titulo">9. aria-controls</h3>
+
+<p>
+Relaciona um controlador a um conteúdo.
+</p>
+
+<pre><code>&lt;button
+aria-expanded="false"
+aria-controls="painel1"&gt;
+
+Abrir
+
+&lt;/button&gt;
+
+&lt;div id="painel1"&gt;
+
+Conteúdo
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-current" aria-labelledby="aria-current-titulo">
+
+<h3 id="aria-current-titulo">10. aria-current</h3>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: 10. aria-current"><table>
+<thead>
+<tr>
+<th scope="col">Valor</th>
+<th scope="col">Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>page</td>
+<td>Página atual.</td>
+</tr>
+<tr>
+<td>step</td>
+<td>Etapa atual.</td>
+</tr>
+<tr>
+<td>location</td>
+<td>Local atual.</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>Stepper</h4>
+
+<pre><code>&lt;li aria-current="step"&gt;
+
+Pagamento
+
+&lt;/li&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-selected" aria-labelledby="aria-selected-titulo">
+
+<h3 id="aria-selected-titulo">11. aria-selected</h3>
+
+<p>
+Indica seleção.
+</p>
+
+<pre><code>&lt;button
+role="tab"
+aria-selected="true"&gt;
+
+Dados
+
+&lt;/button&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-checked" aria-labelledby="aria-checked-titulo">
+
+<h3 id="aria-checked-titulo">12. aria-checked</h3>
+
+<pre><code>&lt;div
+role="checkbox"
+aria-checked="true"&gt;
+
+Aceito
+
+&lt;/div&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Aceito, checkbox, marcado</code></pre>
+
+</section>
+
+<section class="secao" id="aria-pressed" aria-labelledby="aria-pressed-titulo">
+
+<h3 id="aria-pressed-titulo">13. aria-pressed</h3>
+
+<p>
+Botões toggle.
+</p>
+
+<pre><code>&lt;button
+aria-pressed="true"&gt;
+
+Favorito
+
+&lt;/button&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-disabled" aria-labelledby="aria-disabled-titulo">
+
+<h3 id="aria-disabled-titulo">14. aria-disabled</h3>
+
+<pre><code>&lt;button
+aria-disabled="true"&gt;
+
+Continuar
+
+&lt;/button&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Continuar, botão, indisponível</code></pre>
+
+</section>
+
+<section class="secao" id="aria-required" aria-labelledby="aria-required-titulo">
+
+<h3 id="aria-required-titulo">15. aria-required</h3>
+
+<pre><code>&lt;input
+aria-required="true"&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Campo obrigatório</code></pre>
+
+</section>
+
+<section class="secao" id="aria-invalid" aria-labelledby="aria-invalid-titulo">
+
+<h3 id="aria-invalid-titulo">16. aria-invalid</h3>
+
+<pre><code>&lt;input
+aria-invalid="true"&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Campo inválido</code></pre>
+
+</section>
+
+<section class="secao" id="aria-live" aria-labelledby="aria-live-titulo">
+
+<h3 id="aria-live-titulo">17. aria-live</h3>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: 17. aria-live"><table>
+<thead>
+<tr>
+<th scope="col">Valor</th>
+<th scope="col">Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>off</td>
+<td>Não anuncia.</td>
+</tr>
+<tr>
+<td>polite</td>
+<td>Anuncia quando possível.</td>
+</tr>
+<tr>
+<td>assertive</td>
+<td>Anuncia imediatamente.</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>Toast</h4>
+
+<pre><code>&lt;div aria-live="polite"&gt;
+
+Pagamento realizado
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-atomic" aria-labelledby="aria-atomic-titulo">
+
+<h3 id="aria-atomic-titulo">18. aria-atomic</h3>
+
+<p>
+Controla quanto será relido.
+</p>
+
+<pre><code>&lt;div
+aria-live="polite"
+aria-atomic="true"&gt;
+
+3 itens selecionados
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-busy" aria-labelledby="aria-busy-titulo">
+
+<h3 id="aria-busy-titulo">19. aria-busy</h3>
+
+<p>
+Informa carregamento.
+</p>
+
+<pre><code>&lt;div aria-busy="true"&gt;
+
+Carregando
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-modal" aria-labelledby="aria-modal-titulo">
+
+<h3 id="aria-modal-titulo">20. aria-modal</h3>
+
+<pre><code>&lt;div
+role="dialog"
+aria-modal="true"&gt;
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-haspopup" aria-labelledby="aria-haspopup-titulo">
+
+<h3 id="aria-haspopup-titulo">21. aria-haspopup</h3>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: 21. aria-haspopup"><table>
+<thead>
+<tr>
+<th scope="col">Valor</th>
+<th scope="col">Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>menu</td>
+<td>Abre menu.</td>
+</tr>
+<tr>
+<td>dialog</td>
+<td>Abre modal.</td>
+</tr>
+<tr>
+<td>listbox</td>
+<td>Abre lista.</td>
+</tr>
+</tbody>
+</table></div>
+
+<pre><code>&lt;button
+aria-haspopup="menu"&gt;
+
+Ações
+
+&lt;/button&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="aria-para-progress-bar" aria-labelledby="aria-para-progress-bar-titulo">
+
+<h3 id="aria-para-progress-bar-titulo">22. ARIA para Progress Bar</h3>
+
+<pre><code>&lt;div
+role="progressbar"
+aria-valuemin="0"
+aria-valuemax="100"
+aria-valuenow="50"&gt;
+
+&lt;/div&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>50%</code></pre>
+
+</section>
+
+<section class="secao" id="principais-roles" aria-labelledby="principais-roles-titulo">
+
+<h3 id="principais-roles-titulo">23. Principais Roles</h3>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: 23. Principais Roles"><table>
+<thead>
+<tr>
+<th scope="col">Role</th>
+<th scope="col">Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>button</td>
+<td>Botão.</td>
+</tr>
+<tr>
+<td>link</td>
+<td>Link.</td>
+</tr>
+<tr>
+<td>dialog</td>
+<td>Modal.</td>
+</tr>
+<tr>
+<td>alert</td>
+<td>Mensagem urgente.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Status informativo.</td>
+</tr>
+<tr>
+<td>tablist</td>
+<td>Container de abas.</td>
+</tr>
+<tr>
+<td>tab</td>
+<td>Aba.</td>
+</tr>
+<tr>
+<td>tabpanel</td>
+<td>Conteúdo da aba.</td>
+</tr>
+<tr>
+<td>checkbox</td>
+<td>Checkbox.</td>
+</tr>
+<tr>
+<td>switch</td>
+<td>Liga e desliga.</td>
+</tr>
+<tr>
+<td>menu</td>
+<td>Menu.</td>
+</tr>
+<tr>
+<td>menuitem</td>
+<td>Item menu.</td>
+</tr>
+<tr>
+<td>listbox</td>
+<td>Lista selecionável.</td>
+</tr>
+<tr>
+<td>option</td>
+<td>Opção.</td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+
+<section class="secao" id="roles-que-voce-quase-nunca-precisara" aria-labelledby="roles-que-voce-quase-nunca-precisara-titulo">
+
+<h3 id="roles-que-voce-quase-nunca-precisara-titulo">24. Roles que você quase nunca precisará</h3>
+
+<ul>
+
+<li>tree</li>
+
+<li>treegrid</li>
+
+<li>feed</li>
+
+<li>math</li>
+
+<li>meter</li>
+
+<li>log</li>
+
+<li>marquee</li>
+
+</ul>
+
+<p>
+Não use sem necessidade real.
+</p>
+
+</section>
+
+<section class="secao" id="angular-attribute-binding" aria-labelledby="angular-attribute-binding-titulo">
+
+<h3 id="angular-attribute-binding-titulo">25. Angular Attribute Binding</h3>
+
+<h4>Correto</h4>
+
+<pre><code>&lt;button
+[attr.aria-label]="descricao"&gt;
+
+&lt;/button&gt;</code></pre>
+
+<h4>Também funciona</h4>
+
+<pre><code>&lt;button
+[aria-label]="descricao"&gt;
+
+&lt;/button&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="erros-mais-comuns-com-aria" aria-labelledby="erros-mais-comuns-com-aria-titulo">
+
+<h3 id="erros-mais-comuns-com-aria-titulo">26. Erros mais comuns com ARIA</h3>
+
+<ul>
+
+<li>Adicionar role="button" em botão.</li>
+
+<li>Adicionar aria-label desnecessária.</li>
+
+<li>aria-hidden em conteúdo importante.</li>
+
+<li>aria-live em excesso.</li>
+
+<li>Estado aria-expanded desatualizado.</li>
+
+<li>aria-describedby apontando para id inexistente.</li>
+
+<li>Criar componente customizado sem teclado.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="checklist-aria" aria-labelledby="checklist-aria-titulo">
+
+<h3 id="checklist-aria-titulo">27. Checklist ARIA</h3>
+
+<ul>
+
+<li>Possui nome acessível?</li>
+
+<li>Possui role correta?</li>
+
+<li>Possui estado correto?</li>
+
+<li>Está sincronizado com o DOM?</li>
+
+<li>TalkBack anuncia corretamente?</li>
+
+<li>VoiceOver anuncia corretamente?</li>
+
+</ul>
+
+</section>
+
+</section>
+
+<section class="parte" id="formularios" aria-labelledby="formularios-titulo">
+
+<h2 id="formularios-titulo">Formulários Acessíveis</h2>
+
+<p>
+Formulários são uma das áreas com mais problemas de acessibilidade.
+</p>
+
+<p>
+Os princípios básicos são:
+</p>
+
+<ul>
+<li>Todo campo precisa de label.</li>
+<li>Todo erro precisa ser anunciado.</li>
+<li>Todo campo obrigatório deve informar essa condição.</li>
+<li>A navegação por teclado deve funcionar.</li>
+<li>O foco deve ir para o erro ou mensagem importante.</li>
+</ul>
+
+<section class="secao" id="label" aria-labelledby="label-titulo">
+
+<h3 id="label-titulo">Label</h3>
+
+<h4>✅ Correto</h4>
+
+<pre><code>&lt;label for="nome"&gt;
+Nome
+&lt;/label&gt;
+
+&lt;input
+id="nome"
+type="text"&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Nome, campo de edição</code></pre>
+
+<h4>🚫 Errado</h4>
+
+<pre><code>&lt;input
+placeholder="Nome"&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="placeholder-nao-e-label" aria-labelledby="placeholder-nao-e-label-titulo">
+
+<h3 id="placeholder-nao-e-label-titulo">Placeholder não é Label</h3>
+
+<p>
+Placeholder desaparece durante o preenchimento.
+</p>
+
+<p>
+Leitores de tela também podem apresentar inconsistências
+ao depender exclusivamente dele.
+</p>
+
+<h4>✅ Correto</h4>
+
+<pre><code>&lt;label for="cpf"&gt;
+CPF
+&lt;/label&gt;
+
+&lt;input
+id="cpf"
+placeholder="Digite seu CPF"&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="campos-obrigatorios" aria-labelledby="campos-obrigatorios-titulo">
+
+<h3 id="campos-obrigatorios-titulo">Campos Obrigatórios</h3>
+
+<h4>HTML Nativo</h4>
+
+<pre><code>&lt;input
+required&gt;</code></pre>
+
+<h4>Com ARIA</h4>
+
+<pre><code>&lt;input
+required
+aria-required="true"&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Campo obrigatório</code></pre>
+
+</section>
+
+<section class="secao" id="mensagens-de-ajuda" aria-labelledby="mensagens-de-ajuda-titulo">
+
+<h3 id="mensagens-de-ajuda-titulo">Mensagens de Ajuda</h3>
+
+<p>
+Utilize aria-describedby.
+</p>
+
+<pre><code>&lt;label for="senha"&gt;
+Senha
+&lt;/label&gt;
+
+&lt;input
+id="senha"
+aria-describedby="senhaAjuda"&gt;
+
+&lt;small id="senhaAjuda"&gt;
+Mínimo 8 caracteres
+&lt;/small&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="validacao-de-erro" aria-labelledby="validacao-de-erro-titulo">
+
+<h3 id="validacao-de-erro-titulo">Validação de Erro</h3>
+
+<pre><code>&lt;input
+aria-invalid="true"&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Campo inválido</code></pre>
+
+</section>
+
+<section class="secao" id="erro-associado-ao-campo" aria-labelledby="erro-associado-ao-campo-titulo">
+
+<h3 id="erro-associado-ao-campo-titulo">Erro Associado ao Campo</h3>
+
+<pre><code>&lt;label for="cpf"&gt;
+CPF
+&lt;/label&gt;
+
+&lt;input
+id="cpf"
+aria-invalid="true"
+aria-describedby="cpfErro"&gt;
+
+&lt;span id="cpfErro"&gt;
+CPF inválido
+&lt;/span&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>CPF
+Campo inválido
+CPF inválido</code></pre>
+
+</section>
+
+<section class="secao" id="erro-dinamico-com-aria-live" aria-labelledby="erro-dinamico-com-aria-live-titulo">
+
+<h3 id="erro-dinamico-com-aria-live-titulo">Erro Dinâmico com aria-live</h3>
+
+<pre><code>&lt;div aria-live="assertive"&gt;
+
+{{ mensagemErro }}
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+</section>
+
+<section class="parte" id="componentes" aria-labelledby="componentes-titulo">
+
+<h2 id="componentes-titulo">Componentes Interativos e Estruturas Complexas</h2>
+
+<p>
+Esta seção cobre os componentes que mais geram bugs
+de acessibilidade em aplicações Angular.
+</p>
+
+<section class="secao" id="botoes" aria-labelledby="botoes-titulo">
+
+<h3 id="botoes-titulo">Botões</h3>
+
+<h4>✅ Correto</h4>
+
+<pre><code>&lt;button&gt;
+Continuar
+&lt;/button&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Continuar, botão</code></pre>
+
+<h4>🚫 Evitar</h4>
+
+<pre><code>&lt;div (click)="continuar()"&gt;
+Continuar
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="botao-apenas-com-icone" aria-labelledby="botao-apenas-com-icone-titulo">
+
+<h3 id="botao-apenas-com-icone-titulo">Botão Apenas com Ícone</h3>
+
+<pre><code>&lt;button
+aria-label="Editar endereço"&gt;
+
+  &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
+
+&lt;/button&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Editar endereço, botão</code></pre>
+
+</section>
+
+<section class="secao" id="links" aria-labelledby="links-titulo">
+
+<h3 id="links-titulo">Links</h3>
+
+<h4>✅ Correto</h4>
+
+<pre><code>&lt;a href="/conta"&gt;
+Ver conta
+&lt;/a&gt;</code></pre>
+
+<h4>🚫 Evitar</h4>
+
+<pre><code>&lt;a (click)="salvar()"&gt;
+Salvar
+&lt;/a&gt;</code></pre>
+
+<p>
+Links navegam.
+Botões executam ações.
+</p>
+
+</section>
+
+<section class="secao" id="cards-clicaveis" aria-labelledby="cards-clicaveis-titulo">
+
+<h3 id="cards-clicaveis-titulo">Cards Clicáveis</h3>
+
+<h4>✅ Preferencial</h4>
+
+<pre><code>&lt;button class="card"&gt;
+
+Conta Corrente
+
+&lt;/button&gt;</code></pre>
+
+<h4>Alternativa</h4>
+
+<pre><code>&lt;a
+href="/conta"&gt;
+
+Conta Corrente
+
+&lt;/a&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="accordion" aria-labelledby="accordion-titulo">
+
+<h3 id="accordion-titulo">Accordion</h3>
+
+<pre><code>&lt;button
+aria-expanded="false"
+aria-controls="faq1"&gt;
+
+Como funciona?
+
+&lt;/button&gt;
+
+&lt;div id="faq1"&gt;
+
+Conteúdo
+
+&lt;/div&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Como funciona?
+Botão
+Recolhido</code></pre>
+
+</section>
+
+<section class="secao" id="accordion-com-angular" aria-labelledby="accordion-com-angular-titulo">
+
+<h3 id="accordion-com-angular-titulo">Accordion com Angular</h3>
+
+<pre><code>&lt;button
+[attr.aria-expanded]="aberto"&gt;
+
+Pergunta
+
+&lt;/button&gt;</code></pre>
+
+<p>
+aria-expanded deve refletir o estado real.
+</p>
+
+</section>
+
+<section class="secao" id="tabs" aria-labelledby="tabs-titulo">
+
+<h3 id="tabs-titulo">Tabs</h3>
+
+<pre><code>&lt;div role="tablist"&gt;
+
+  &lt;button
+  role="tab"
+  aria-selected="true"&gt;
+
+    Dados
+
+  &lt;/button&gt;
+
+  &lt;button
+  role="tab"
+  aria-selected="false"&gt;
+
+    Endereço
+
+  &lt;/button&gt;
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="tab-panel" aria-labelledby="tab-panel-titulo">
+
+<h3 id="tab-panel-titulo">Tab Panel</h3>
+
+<pre><code>&lt;div role="tabpanel"&gt;
+
+Conteúdo da aba.
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="modal" aria-labelledby="modal-titulo">
+
+<h3 id="modal-titulo">Modal</h3>
+
+<pre><code>&lt;div
+role="dialog"
+aria-modal="true"
+aria-labelledby="tituloModal"&gt;
+
+&lt;h2 id="tituloModal"&gt;
+Confirmar pagamento
+&lt;/h2&gt;
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="checklist-modal" aria-labelledby="checklist-modal-titulo">
+
+<h3 id="checklist-modal-titulo">Checklist Modal</h3>
+
+<ul>
+
+<li>Possui role="dialog"?</li>
+
+<li>Possui aria-modal?</li>
+
+<li>Recebe foco ao abrir?</li>
+
+<li>Prende foco internamente?</li>
+
+<li>Fecha com ESC?</li>
+
+<li>Retorna foco ao fechar?</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="bottom-sheet" aria-labelledby="bottom-sheet-titulo">
+
+<h3 id="bottom-sheet-titulo">Bottom Sheet</h3>
+
+<p>
+Tratar como modal.
+</p>
+
+<pre><code>role="dialog"
+aria-modal="true"</code></pre>
+
+</section>
+
+<section class="secao" id="menu" aria-labelledby="menu-titulo">
+
+<h3 id="menu-titulo">Menu</h3>
+
+<pre><code>&lt;button
+aria-haspopup="menu"
+aria-expanded="false"&gt;
+
+Ações
+
+&lt;/button&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="itens-de-menu" aria-labelledby="itens-de-menu-titulo">
+
+<h3 id="itens-de-menu-titulo">Itens de Menu</h3>
+
+<pre><code>&lt;div role="menu"&gt;
+
+  &lt;button role="menuitem"&gt;
+  Editar
+  &lt;/button&gt;
+
+  &lt;button role="menuitem"&gt;
+  Excluir
+  &lt;/button&gt;
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="dropdown" aria-labelledby="dropdown-titulo">
+
+<h3 id="dropdown-titulo">Dropdown</h3>
+
+<p>
+Sempre que possível,
+prefira select nativo.
+</p>
+
+<pre><code>&lt;select&gt;
+
+...
+
+&lt;/select&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="combobox" aria-labelledby="combobox-titulo">
+
+<h3 id="combobox-titulo">Combobox</h3>
+
+<pre><code>&lt;div
+role="combobox"
+aria-expanded="false"&gt;
+
+&lt;/div&gt;</code></pre>
+
+<p>
+Implementação complexa.
+Evite criar manualmente.
+</p>
+
+</section>
+
+<section class="secao" id="lista" aria-labelledby="lista-titulo">
+
+<h3 id="lista-titulo">Lista</h3>
+
+<pre><code>&lt;ul&gt;
+
+  &lt;li&gt;Item 1&lt;/li&gt;
+
+  &lt;li&gt;Item 2&lt;/li&gt;
+
+&lt;/ul&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Lista com 2 itens</code></pre>
+
+</section>
+
+<section class="secao" id="breadcrumb" aria-labelledby="breadcrumb-titulo">
+
+<h3 id="breadcrumb-titulo">Breadcrumb</h3>
+
+<pre><code>&lt;nav aria-label="Breadcrumb"&gt;
+
+...
+
+&lt;/nav&gt;</code></pre>
+
+<h4>Item Atual</h4>
+
+<pre><code>aria-current="page"</code></pre>
+
+</section>
+
+<section class="secao" id="stepper" aria-labelledby="stepper-titulo">
+
+<h3 id="stepper-titulo">Stepper</h3>
+
+<pre><code>&lt;li aria-current="step"&gt;
+
+Pagamento
+
+&lt;/li&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Pagamento
+Etapa atual</code></pre>
+
+</section>
+
+<section class="secao" id="tabela-simples" aria-labelledby="tabela-simples-titulo">
+
+<h3 id="tabela-simples-titulo">Tabela Simples</h3>
+
+<pre><code>&lt;table&gt;
+
+  &lt;caption&gt;
+  Extrato
+  &lt;/caption&gt;
+
+  &lt;thead&gt;
+
+    &lt;tr&gt;
+
+      &lt;th scope="col"&gt;
+      Data
+      &lt;/th&gt;
+
+      &lt;th scope="col"&gt;
+      Valor
+      &lt;/th&gt;
+
+    &lt;/tr&gt;
+
+  &lt;/thead&gt;
+
+&lt;/table&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="tabela-boas-praticas" aria-labelledby="tabela-boas-praticas-titulo">
+
+<h3 id="tabela-boas-praticas-titulo">Tabela - Boas Práticas</h3>
+
+<ul>
+
+<li>Usar caption.</li>
+
+<li>Usar th.</li>
+
+<li>Usar scope.</li>
+
+<li>Evitar tabela feita com div.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="tooltip" aria-labelledby="tooltip-titulo">
+
+<h3 id="tooltip-titulo">Tooltip</h3>
+
+<pre><code>&lt;button
+aria-describedby="tooltip1"&gt;
+
+?</code></pre>
+
+<pre><code>&lt;div
+id="tooltip1"
+role="tooltip"&gt;
+
+Informação adicional
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="toast" aria-labelledby="toast-titulo">
+
+<h3 id="toast-titulo">Toast</h3>
+
+<pre><code>&lt;div
+role="status"&gt;
+
+Pagamento realizado
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="snackbar" aria-labelledby="snackbar-titulo">
+
+<h3 id="snackbar-titulo">Snackbar</h3>
+
+<pre><code>&lt;div
+aria-live="polite"&gt;
+
+Item adicionado
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="alertas-criticos" aria-labelledby="alertas-criticos-titulo">
+
+<h3 id="alertas-criticos-titulo">Alertas Críticos</h3>
+
+<pre><code>&lt;div
+role="alert"&gt;
+
+Falha na transação
+
+&lt;/div&gt;</code></pre>
+
+<p>
+Anunciado imediatamente.
+</p>
+
+</section>
+
+<section class="secao" id="loading" aria-labelledby="loading-titulo">
+
+<h3 id="loading-titulo">Loading</h3>
+
+<pre><code>&lt;div
+aria-busy="true"&gt;
+
+Carregando
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="progress-bar" aria-labelledby="progress-bar-titulo">
+
+<h3 id="progress-bar-titulo">Progress Bar</h3>
+
+<pre><code>&lt;div
+role="progressbar"
+aria-valuemin="0"
+aria-valuemax="100"
+aria-valuenow="30"&gt;
+
+&lt;/div&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>30%</code></pre>
+
+</section>
+
+<section class="secao" id="skeleton-loading" aria-labelledby="skeleton-loading-titulo">
+
+<h3 id="skeleton-loading-titulo">Skeleton Loading</h3>
+
+<p>
+Conteúdo visual deve ser ignorado
+pelo leitor de tela.
+</p>
+
+<pre><code>aria-hidden="true"</code></pre>
+
+</section>
+
+<section class="secao" id="carrossel" aria-labelledby="carrossel-titulo">
+
+<h3 id="carrossel-titulo">Carrossel</h3>
+
+<ul>
+
+<li>Botão anterior.</li>
+
+<li>Botão próximo.</li>
+
+<li>Botão pausar.</li>
+
+<li>Slides identificáveis.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="infinite-scroll" aria-labelledby="infinite-scroll-titulo">
+
+<h3 id="infinite-scroll-titulo">Infinite Scroll</h3>
+
+<ul>
+
+<li>Anunciar novos itens carregados.</li>
+
+<li>Preservar foco.</li>
+
+<li>Evitar mudanças bruscas.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="drag-and-drop" aria-labelledby="drag-and-drop-titulo">
+
+<h3 id="drag-and-drop-titulo">Drag and Drop</h3>
+
+<p>
+Nunca dependa exclusivamente do gesto.
+</p>
+
+<p>
+Sempre ofereça alternativa por clique
+ou teclado.
+</p>
+
+</section>
+
+<section class="secao" id="upload-de-arquivo" aria-labelledby="upload-de-arquivo-titulo">
+
+<h3 id="upload-de-arquivo-titulo">Upload de Arquivo</h3>
+
+<pre><code>&lt;label for="arquivo"&gt;
+Documento
+&lt;/label&gt;
+
+&lt;input
+id="arquivo"
+type="file"&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="mensagens-dinamicas" aria-labelledby="mensagens-dinamicas-titulo">
+
+<h3 id="mensagens-dinamicas-titulo">Mensagens Dinâmicas</h3>
+
+<pre><code>&lt;div
+aria-live="polite"&gt;
+
+{{ mensagem }}
+
+&lt;/div&gt;</code></pre>
+
+<p>
+Muito utilizado para:
+</p>
+
+<ul>
+
+<li>Toast.</li>
+
+<li>Filtro aplicado.</li>
+
+<li>Busca concluída.</li>
+
+<li>Pagamento aprovado.</li>
+
+<li>Upload concluído.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="checklist-de-componentes" aria-labelledby="checklist-de-componentes-titulo">
+
+<h3 id="checklist-de-componentes-titulo">Checklist de Componentes</h3>
+
+<ul>
+
+<li>Possui nome acessível?</li>
+
+<li>Possui role correta?</li>
+
+<li>Possui estado correto?</li>
+
+<li>Funciona com teclado?</li>
+
+<li>Possui foco visível?</li>
+
+<li>Funciona com TalkBack?</li>
+
+<li>Funciona com VoiceOver?</li>
+
+<li>Anuncia mudanças importantes?</li>
+
+<li>Mantém ordem de foco adequada?</li>
+
+</ul>
+
+</section>
+
+</section>
+
+<section class="parte" id="angular" aria-labelledby="angular-titulo">
+
+<h2 id="angular-titulo">Angular, Angular Material e Angular CDK A11y</h2>
+
+<p>
+Esta seção cobre as práticas específicas para Angular,
+Angular Material e Angular CDK.
+</p>
+
+<section class="secao" id="angular-e-acessivel-por-padrao" aria-labelledby="angular-e-acessivel-por-padrao-titulo">
+
+<h3 id="angular-e-acessivel-por-padrao-titulo">Angular é acessível por padrão?</h3>
+
+<p>
+Não.
+</p>
+
+<p>
+Angular renderiza o HTML que você escreve.
+Se o HTML for acessível, a aplicação tende a ser acessível.
+Se o HTML for ruim, Angular não corrige isso.
+</p>
+
+</section>
+
+<section class="secao" id="regra-principal-para-angular" aria-labelledby="regra-principal-para-angular-titulo">
+
+<h3 id="regra-principal-para-angular-titulo">Regra Principal para Angular</h3>
+
+<pre><code>HTML semântico primeiro.
+ARIA depois.</code></pre>
+
+<h4>✅ Correto</h4>
+
+<pre><code>&lt;button (click)="salvar()"&gt;
+
+Salvar
+
+&lt;/button&gt;</code></pre>
+
+<h4>🚫 Evitar</h4>
+
+<pre><code>&lt;div (click)="salvar()"&gt;
+
+Salvar
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="binding-de-aria" aria-labelledby="binding-de-aria-titulo">
+
+<h3 id="binding-de-aria-titulo">Binding de ARIA</h3>
+
+<p>
+Quando o valor é dinâmico:
+</p>
+
+<pre><code>&lt;button
+[attr.aria-label]="descricao"&gt;
+
+&lt;/button&gt;</code></pre>
+
+<h4>Accordion</h4>
+
+<pre><code>&lt;button
+[attr.aria-expanded]="aberto"&gt;
+
+Detalhes
+
+&lt;/button&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="ngif-e-foco" aria-labelledby="ngif-e-foco-titulo">
+
+<h3 id="ngif-e-foco-titulo">NgIf e Foco</h3>
+
+<p>
+Um dos problemas mais comuns.
+</p>
+
+<pre><code>&lt;div *ngIf="mostrar"&gt;
+
+Conteúdo
+
+&lt;/div&gt;</code></pre>
+
+<p>
+Quando o elemento some do DOM,
+o foco pode ser perdido.
+</p>
+
+</section>
+
+<section class="secao" id="ngfor-e-acessibilidade" aria-labelledby="ngfor-e-acessibilidade-titulo">
+
+<h3 id="ngfor-e-acessibilidade-titulo">NgFor e Acessibilidade</h3>
+
+<pre><code>&lt;li *ngFor="let item of itens"&gt;
+
+{{ item.nome }}
+
+&lt;/li&gt;</code></pre>
+
+<p>
+Prefira estruturas semânticas.
+</p>
+
+<h4>✅ Correto</h4>
+
+<pre><code>&lt;ul&gt;
+
+&lt;li *ngFor="let item of itens"&gt;
+
+...
+
+&lt;/li&gt;
+
+&lt;/ul&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="router-angular" aria-labelledby="router-angular-titulo">
+
+<h3 id="router-angular-titulo">Router Angular</h3>
+
+<p>
+Aplicações SPA não recarregam a página.
+</p>
+
+<p>
+O leitor de tela não percebe automaticamente
+que houve mudança de tela.
+</p>
+
+</section>
+
+<section class="secao" id="foco-apos-navegacao" aria-labelledby="foco-apos-navegacao-titulo">
+
+<h3 id="foco-apos-navegacao-titulo">Foco Após Navegação</h3>
+
+<pre><code>this.router.events
+.subscribe(...)</code></pre>
+
+<p>
+Após a navegação:
+</p>
+
+<ul>
+
+<li>Mover foco para o H1.</li>
+
+<li>Ou para o conteúdo principal.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="exemplo-de-destino-de-foco" aria-labelledby="exemplo-de-destino-de-foco-titulo">
+
+<h3 id="exemplo-de-destino-de-foco-titulo">Exemplo de Destino de Foco</h3>
+
+<pre><code>&lt;h1
+tabindex="-1"
+#titulo&gt;
+
+Conta Corrente
+
+&lt;/h1&gt;</code></pre>
+
+<pre><code>this.titulo.nativeElement.focus();</code></pre>
+
+</section>
+
+<section class="secao" id="anunciar-mudancas-de-tela" aria-labelledby="anunciar-mudancas-de-tela-titulo">
+
+<h3 id="anunciar-mudancas-de-tela-titulo">Anunciar Mudanças de Tela</h3>
+
+<p>
+Em aplicações Angular
+é comum anunciar o nome da tela.
+</p>
+
+<pre><code>Extrato carregado
+
+Transferência carregada
+
+Pagamento carregado</code></pre>
+
+</section>
+
+<section class="secao" id="angular-cdk-accessibility" aria-labelledby="angular-cdk-accessibility-titulo">
+
+<h3 id="angular-cdk-accessibility-titulo">Angular CDK Accessibility</h3>
+
+<p>
+O pacote mais importante para acessibilidade
+na stack Angular.
+</p>
+
+<ul>
+
+<li>LiveAnnouncer</li>
+
+<li>FocusMonitor</li>
+
+<li>FocusTrap</li>
+
+<li>FocusKeyManager</li>
+
+<li>InteractivityChecker</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="liveannouncer" aria-labelledby="liveannouncer-titulo">
+
+<h3 id="liveannouncer-titulo">LiveAnnouncer</h3>
+
+<p>
+Permite criar anúncios para leitores de tela.
+</p>
+
+<pre><code>constructor(
+private live: LiveAnnouncer
+) {}</code></pre>
+
+<pre><code>this.live.announce(
+'Pagamento realizado com sucesso'
+);</code></pre>
+
+</section>
+
+<section class="secao" id="quando-usar-liveannouncer" aria-labelledby="quando-usar-liveannouncer-titulo">
+
+<h3 id="quando-usar-liveannouncer-titulo">Quando usar LiveAnnouncer</h3>
+
+<ul>
+
+<li>Pagamento concluído.</li>
+
+<li>Filtro aplicado.</li>
+
+<li>Busca concluída.</li>
+
+<li>Upload concluído.</li>
+
+<li>Erro importante.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="cdktrapfocus" aria-labelledby="cdktrapfocus-titulo">
+
+<h3 id="cdktrapfocus-titulo">cdkTrapFocus</h3>
+
+<p>
+Prende o foco em uma região.
+</p>
+
+<p>
+Ideal para:
+</p>
+
+<ul>
+
+<li>Modal.</li>
+
+<li>Bottom Sheet.</li>
+
+<li>Dialog.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="exemplo-cdktrapfocus" aria-labelledby="exemplo-cdktrapfocus-titulo">
+
+<h3 id="exemplo-cdktrapfocus-titulo">Exemplo cdkTrapFocus</h3>
+
+<pre><code>&lt;div cdkTrapFocus&gt;
+
+...
+
+&lt;/div&gt;</code></pre>
+
+</section>
+
+<section class="secao" id="focusmonitor" aria-labelledby="focusmonitor-titulo">
+
+<h3 id="focusmonitor-titulo">FocusMonitor</h3>
+
+<p>
+Identifica como o foco chegou até o elemento.
+</p>
+
+<ul>
+
+<li>Mouse.</li>
+
+<li>Teclado.</li>
+
+<li>Touch.</li>
+
+<li>Programático.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="focuskeymanager" aria-labelledby="focuskeymanager-titulo">
+
+<h3 id="focuskeymanager-titulo">FocusKeyManager</h3>
+
+<p>
+Gerencia navegação por setas.
+</p>
+
+<p>
+Muito utilizado em:
+</p>
+
+<ul>
+
+<li>Tabs.</li>
+
+<li>Menus.</li>
+
+<li>Listbox.</li>
+
+<li>Combobox.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="angular-material" aria-labelledby="angular-material-titulo">
+
+<h3 id="angular-material-titulo">Angular Material</h3>
+
+<p>
+O Material já possui boa parte da acessibilidade
+implementada.
+</p>
+
+<p>
+Mesmo assim,
+deve ser testado.
+</p>
+
+</section>
+
+<section class="secao" id="matdialog" aria-labelledby="matdialog-titulo">
+
+<h3 id="matdialog-titulo">MatDialog</h3>
+
+<h4>Benefícios</h4>
+
+<ul>
+
+<li>Role dialog.</li>
+
+<li>Gerenciamento de foco.</li>
+
+<li>ESC.</li>
+
+<li>Backdrop.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="checklist-matdialog" aria-labelledby="checklist-matdialog-titulo">
+
+<h3 id="checklist-matdialog-titulo">Checklist MatDialog</h3>
+
+<ul>
+
+<li>Tem título?</li>
+
+<li>Recebe foco?</li>
+
+<li>Retorna foco?</li>
+
+<li>Possui botão fechar?</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="mattabs" aria-labelledby="mattabs-titulo">
+
+<h3 id="mattabs-titulo">MatTabs</h3>
+
+<p>
+Implementa a estrutura de tabs.
+</p>
+
+<p>
+Mesmo assim valide:
+</p>
+
+<ul>
+
+<li>Setas funcionam.</li>
+
+<li>TalkBack anuncia corretamente.</li>
+
+<li>VoiceOver anuncia corretamente.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="matmenu" aria-labelledby="matmenu-titulo">
+
+<h3 id="matmenu-titulo">MatMenu</h3>
+
+<p>
+Preferível criar menus usando MatMenu
+ao invés de implementação caseira.
+</p>
+
+</section>
+
+<section class="secao" id="matselect" aria-labelledby="matselect-titulo">
+
+<h3 id="matselect-titulo">MatSelect</h3>
+
+<p>
+Componente mais propenso a bugs de acessibilidade.
+</p>
+
+<p>
+Sempre validar:
+</p>
+
+<ul>
+
+<li>Abertura.</li>
+
+<li>Fechamento.</li>
+
+<li>Leitura da opção.</li>
+
+<li>Estado selecionado.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="matexpansionpanel" aria-labelledby="matexpansionpanel-titulo">
+
+<h3 id="matexpansionpanel-titulo">MatExpansionPanel</h3>
+
+<p>
+Equivalente ao Accordion.
+</p>
+
+<p>
+Verificar:
+</p>
+
+<ul>
+
+<li>aria-expanded.</li>
+
+<li>Foco.</li>
+
+<li>Anúncio do estado.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="mattable" aria-labelledby="mattable-titulo">
+
+<h3 id="mattable-titulo">MatTable</h3>
+
+<p>
+Não assumir que toda tabela Material
+é automaticamente acessível.
+</p>
+
+<p>
+Validar:
+</p>
+
+<ul>
+
+<li>caption.</li>
+
+<li>headers.</li>
+
+<li>sort.</li>
+
+<li>foco.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="overlay-components" aria-labelledby="overlay-components-titulo">
+
+<h3 id="overlay-components-titulo">Overlay Components</h3>
+
+<p>
+Todo componente que abre sobre a tela
+merece atenção extra.
+</p>
+
+<ul>
+
+<li>Modal.</li>
+
+<li>Popover.</li>
+
+<li>Tooltip.</li>
+
+<li>Select.</li>
+
+<li>Menu.</li>
+
+<li>Datepicker.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="datepicker" aria-labelledby="datepicker-titulo">
+
+<h3 id="datepicker-titulo">Datepicker</h3>
+
+<p>
+Validar:
+</p>
+
+<ul>
+
+<li>Navegação por teclado.</li>
+
+<li>Leitura do dia.</li>
+
+<li>Leitura do mês.</li>
+
+<li>Leitura do ano.</li>
+
+<li>Seleção correta.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="loading-angular" aria-labelledby="loading-angular-titulo">
+
+<h3 id="loading-angular-titulo">Loading Angular</h3>
+
+<p>
+Mudanças de estado devem ser anunciadas.
+</p>
+
+<pre><code>aria-busy="true"</code></pre>
+
+<p>
+Ou:
+</p>
+
+<pre><code>this.live.announce(
+'Carregamento concluído'
+);</code></pre>
+
+</section>
+
+<section class="secao" id="lazy-loading" aria-labelledby="lazy-loading-titulo">
+
+<h3 id="lazy-loading-titulo">Lazy Loading</h3>
+
+<p>
+Quando conteúdo aparece
+após carregamento assíncrono,
+o foco e o anúncio devem ser avaliados.
+</p>
+
+</section>
+
+<section class="secao" id="signals-e-acessibilidade" aria-labelledby="signals-e-acessibilidade-titulo">
+
+<h3 id="signals-e-acessibilidade-titulo">Signals e Acessibilidade</h3>
+
+<p>
+Signals atualizam a UI automaticamente.
+</p>
+
+<p>
+Mas leitores de tela não são notificados
+automaticamente.
+</p>
+
+<p>
+Use:
+</p>
+
+<ul>
+
+<li>aria-live</li>
+
+<li>LiveAnnouncer</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="standalone-components" aria-labelledby="standalone-components-titulo">
+
+<h3 id="standalone-components-titulo">Standalone Components</h3>
+
+<p>
+Não possuem diferenças específicas
+de acessibilidade.
+</p>
+
+<p>
+As mesmas regras continuam válidas.
+</p>
+
+</section>
+
+<section class="secao" id="pipes" aria-labelledby="pipes-titulo">
+
+<h3 id="pipes-titulo">Pipes</h3>
+
+<p>
+Cuidado com formatações que prejudicam
+a leitura.
+</p>
+
+<h4>Exemplo</h4>
+
+<pre><code>R$ 1.500,00</code></pre>
+
+<p>
+Validar como o leitor anuncia.
+</p>
+
+</section>
+
+<section class="secao" id="custom-components" aria-labelledby="custom-components-titulo">
+
+<h3 id="custom-components-titulo">Custom Components</h3>
+
+<p>
+A maior origem de bugs em Angular.
+</p>
+
+<ul>
+
+<li>Botões customizados.</li>
+
+<li>Select customizado.</li>
+
+<li>Dropdown customizado.</li>
+
+<li>Stepper customizado.</li>
+
+<li>Menu customizado.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="regra-para-custom-components" aria-labelledby="regra-para-custom-components-titulo">
+
+<h3 id="regra-para-custom-components-titulo">Regra para Custom Components</h3>
+
+<p>
+Sempre perguntar:
+</p>
+
+<ul>
+
+<li>Existe componente nativo?</li>
+
+<li>Existe componente Material?</li>
+
+<li>Preciso mesmo criar do zero?</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="erro-mais-comum-do-time-front" aria-labelledby="erro-mais-comum-do-time-front-titulo">
+
+<h3 id="erro-mais-comum-do-time-front-titulo">Erro Mais Comum do Time Front</h3>
+
+<pre><code>&lt;div
+(click)="abrir()"&gt;
+
+Abrir
+
+&lt;/div&gt;</code></pre>
+
+<p>
+Visualmente funciona.
+</p>
+
+<p>
+Mas perde:
+</p>
+
+<ul>
+
+<li>Role.</li>
+
+<li>Teclado.</li>
+
+<li>Estado.</li>
+
+<li>Semântica.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="checklist-angular" aria-labelledby="checklist-angular-titulo">
+
+<h3 id="checklist-angular-titulo">Checklist Angular</h3>
+
+<ul>
+
+<li>Existe HTML semântico?</li>
+
+<li>Existe nome acessível?</li>
+
+<li>Existe gerenciamento de foco?</li>
+
+<li>Existe anúncio para mudanças importantes?</li>
+
+<li>Router move foco corretamente?</li>
+
+<li>Material foi validado?</li>
+
+<li>Custom Components foram auditados?</li>
+
+<li>Funciona só com teclado?</li>
+
+<li>Funciona com TalkBack?</li>
+
+<li>Funciona com VoiceOver?</li>
+
+</ul>
+
+</section>
+
+</section>
+
+<section class="parte" id="leitores-de-tela" aria-labelledby="leitores-de-tela-titulo">
+
+<h2 id="leitores-de-tela-titulo">TalkBack, VoiceOver e Testes Reais</h2>
+
+<p>
+Nesta seção vamos focar em como leitores de tela
+realmente se comportam.
+</p>
+
+<p>
+Muitos componentes estão tecnicamente corretos
+no HTML, mas a experiência final para o usuário
+continua ruim.
+</p>
+
+<section class="secao" id="principio-fundamental" aria-labelledby="principio-fundamental-titulo">
+
+<h3 id="principio-fundamental-titulo">Princípio Fundamental</h3>
+
+<p>
+Leitores de tela dependem de:
+</p>
+
+<ul>
+
+<li>Nome acessível.</li>
+
+<li>Role correta.</li>
+
+<li>Estado correto.</li>
+
+</ul>
+
+<p>
+Quase todos os bugs podem ser analisados
+por esses três pontos.
+</p>
+
+</section>
+
+<section class="secao" id="exemplo-de-leitura" aria-labelledby="exemplo-de-leitura-titulo">
+
+<h3 id="exemplo-de-leitura-titulo">Exemplo de Leitura</h3>
+
+<pre><code>&lt;button&gt;
+
+Salvar
+
+&lt;/button&gt;</code></pre>
+
+<p>
+TalkBack:
+</p>
+
+<pre><code>Salvar, botão</code></pre>
+
+<p>
+VoiceOver:
+</p>
+
+<pre><code>Salvar, botão</code></pre>
+
+</section>
+
+<section class="secao" id="botao-com-icone" aria-labelledby="botao-com-icone-titulo">
+
+<h3 id="botao-com-icone-titulo">Botão com Ícone</h3>
+
+<h4>Errado</h4>
+
+<pre><code>&lt;button&gt;
+
+&lt;mat-icon&gt;
+close
+&lt;/mat-icon&gt;
+
+&lt;/button&gt;</code></pre>
+
+<p>
+Possível leitura:
+</p>
+
+<pre><code>Botão</code></pre>
+
+<h4>Correto</h4>
+
+<pre><code>&lt;button
+aria-label="Fechar"&gt;
+
+&lt;mat-icon&gt;
+close
+&lt;/mat-icon&gt;
+
+&lt;/button&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Fechar, botão</code></pre>
+
+</section>
+
+<section class="secao" id="campos-obrigatorios-2" aria-labelledby="campos-obrigatorios-2-titulo">
+
+<h3 id="campos-obrigatorios-2-titulo">Campos Obrigatórios</h3>
+
+<pre><code>&lt;input
+required&gt;</code></pre>
+
+<p>
+Leitura esperada:
+</p>
+
+<pre><code>Campo de edição
+Obrigatório</code></pre>
+
+</section>
+
+<section class="secao" id="campo-invalido" aria-labelledby="campo-invalido-titulo">
+
+<h3 id="campo-invalido-titulo">Campo Inválido</h3>
+
+<pre><code>&lt;input
+aria-invalid="true"&gt;</code></pre>
+
+<p>
+Leitura esperada:
+</p>
+
+<pre><code>Campo inválido</code></pre>
+
+</section>
+
+<section class="secao" id="checkbox" aria-labelledby="checkbox-titulo">
+
+<h3 id="checkbox-titulo">Checkbox</h3>
+
+<pre><code>&lt;input
+type="checkbox"&gt;
+
+&lt;label&gt;
+
+Aceito os termos
+
+&lt;/label&gt;</code></pre>
+
+<p>
+Não marcado:
+</p>
+
+<pre><code>Aceito os termos
+Checkbox
+Não marcado</code></pre>
+
+<p>
+Marcado:
+</p>
+
+<pre><code>Aceito os termos
+Checkbox
+Marcado</code></pre>
+
+</section>
+
+<section class="secao" id="switch" aria-labelledby="switch-titulo">
+
+<h3 id="switch-titulo">Switch</h3>
+
+<pre><code>&lt;button
+role="switch"
+aria-checked="true"&gt;
+
+Notificações
+
+&lt;/button&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Notificações
+Switch
+Ligado</code></pre>
+
+</section>
+
+<section class="secao" id="accordion-2" aria-labelledby="accordion-2-titulo">
+
+<h3 id="accordion-2-titulo">Accordion</h3>
+
+<pre><code>&lt;button
+aria-expanded="false"&gt;
+
+Detalhes
+
+&lt;/button&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Detalhes
+Botão
+Recolhido</code></pre>
+
+<p>
+Após abrir:
+</p>
+
+<pre><code>Detalhes
+Botão
+Expandido</code></pre>
+
+</section>
+
+<section class="secao" id="tabs-2" aria-labelledby="tabs-2-titulo">
+
+<h3 id="tabs-2-titulo">Tabs</h3>
+
+<pre><code>&lt;button
+role="tab"
+aria-selected="true"&gt;
+
+Dados
+
+&lt;/button&gt;</code></pre>
+
+<p>
+Leitura:
+</p>
+
+<pre><code>Dados
+Aba
+Selecionada</code></pre>
+
+</section>
+
+<section class="secao" id="stepper-2" aria-labelledby="stepper-2-titulo">
+
+<h3 id="stepper-2-titulo">Stepper</h3>
+
+<pre><code>&lt;li
+aria-current="step"&gt;
+
+Pagamento
+
+&lt;/li&gt;</code></pre>
+
+<p>
+Leitura possível:
+</p>
+
+<pre><code>Pagamento
+Etapa atual</code></pre>
+
+</section>
+
+<section class="secao" id="mensagens-dinamicas-2" aria-labelledby="mensagens-dinamicas-2-titulo">
+
+<h3 id="mensagens-dinamicas-2-titulo">Mensagens Dinâmicas</h3>
+
+<pre><code>&lt;div
+aria-live="polite"&gt;
+
+Pagamento realizado
+
+&lt;/div&gt;</code></pre>
+
+<p>
+O foco não precisa mudar.
+</p>
+
+<p>
+O leitor anuncia automaticamente.
+</p>
+
+</section>
+
+<section class="secao" id="role-alert" aria-labelledby="role-alert-titulo">
+
+<h3 id="role-alert-titulo">Role Alert</h3>
+
+<pre><code>&lt;div role="alert"&gt;
+
+Falha no pagamento
+
+&lt;/div&gt;</code></pre>
+
+<p>
+É anunciado imediatamente.
+</p>
+
+<p>
+Utilizar apenas para mensagens importantes.
+</p>
+
+</section>
+
+<section class="secao" id="foco-visivel" aria-labelledby="foco-visivel-titulo">
+
+<h3 id="foco-visivel-titulo">Foco Visível</h3>
+
+<p>
+Todo elemento focável deve indicar visualmente
+que recebeu foco.
+</p>
+
+<h4>✅ Correto</h4>
+
+<pre><code>button:focus {
+
+outline: 3px solid blue;
+
+}</code></pre>
+
+<h4>🚫 Evitar</h4>
+
+<pre><code>button:focus {
+
+outline: none;
+
+}</code></pre>
+
+</section>
+
+<section class="secao" id="sequencia-de-foco" aria-labelledby="sequencia-de-foco-titulo">
+
+<h3 id="sequencia-de-foco-titulo">Sequência de Foco</h3>
+
+<p>
+A ordem do DOM deve refletir
+a ordem visual.
+</p>
+
+<p>
+Usuários de leitor de tela navegam
+seguindo a estrutura da página.
+</p>
+
+</section>
+
+<section class="secao" id="modais" aria-labelledby="modais-titulo">
+
+<h3 id="modais-titulo">Modais</h3>
+
+<p>
+Ao abrir:
+</p>
+
+<ul>
+
+<li>Foco vai para o modal.</li>
+
+<li>Conteúdo anterior fica inacessível.</li>
+
+<li>Tab navega apenas dentro dele.</li>
+
+</ul>
+
+<p>
+Ao fechar:
+</p>
+
+<ul>
+
+<li>Foco retorna ao elemento que abriu.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="problema-classico" aria-labelledby="problema-classico-titulo">
+
+<h3 id="problema-classico-titulo">Problema Clássico</h3>
+
+<pre><code>&lt;button&gt;
+
+Editar
+
+&lt;/button&gt;
+
+&lt;div *ngIf="aberto"&gt;
+
+Modal
+
+&lt;/div&gt;</code></pre>
+
+<p>
+Ao fechar o modal,
+o foco muitas vezes desaparece.
+</p>
+
+<p>
+Deve retornar ao botão Editar.
+</p>
+
+</section>
+
+<section class="secao" id="loading-2" aria-labelledby="loading-2-titulo">
+
+<h3 id="loading-2-titulo">Loading</h3>
+
+<p>
+Evite deixar usuário sem feedback.
+</p>
+
+<h4>Exemplo</h4>
+
+<pre><code>Carregando extrato...</code></pre>
+
+<p>
+Após concluir:
+</p>
+
+<pre><code>Extrato carregado com sucesso</code></pre>
+
+</section>
+
+<section class="secao" id="talkback-x-voiceover" aria-labelledby="talkback-x-voiceover-titulo">
+
+<h3 id="talkback-x-voiceover-titulo">TalkBack x VoiceOver</h3>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: TalkBack x VoiceOver"><table>
+<thead>
+<tr>
+<th scope="col">Cenário</th>
+<th scope="col">Diferenças comuns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Forms</td>
+<td>Pequenas diferenças de anúncio.</td>
+</tr>
+<tr>
+<td>Tabs</td>
+<td>Ordem de anúncio pode variar.</td>
+</tr>
+<tr>
+<td>Modais</td>
+<td>Foco pode variar.</td>
+</tr>
+<tr>
+<td>Selects</td>
+<td>Muito dependente da implementação.</td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+
+<section class="secao" id="roteiro-de-teste-manual" aria-labelledby="roteiro-de-teste-manual-titulo">
+
+<h3 id="roteiro-de-teste-manual-titulo">Roteiro de Teste Manual</h3>
+
+<ol>
+
+<li>Ativar leitor de tela.</li>
+
+<li>Percorrer toda tela.</li>
+
+<li>Verificar títulos.</li>
+
+<li>Verificar botões.</li>
+
+<li>Verificar formulários.</li>
+
+<li>Testar erros.</li>
+
+<li>Testar loading.</li>
+
+<li>Testar modal.</li>
+
+<li>Testar navegação.</li>
+
+<li>Testar saída do fluxo.</li>
+
+</ol>
+
+</section>
+
+<section class="secao" id="bugs-mais-comuns-encontrados-em-producao" aria-labelledby="bugs-mais-comuns-encontrados-em-producao-titulo">
+
+<h3 id="bugs-mais-comuns-encontrados-em-producao-titulo">Bugs Mais Comuns Encontrados em Produção</h3>
+
+<ul>
+
+<li>Botão sem nome acessível.</li>
+
+<li>Ícone clicável sem label.</li>
+
+<li>Modal sem foco.</li>
+
+<li>Erro não anunciado.</li>
+
+<li>Toast não anunciado.</li>
+
+<li>Foco perdido após navegação.</li>
+
+<li>Ordem de foco incorreta.</li>
+
+<li>Accordion sem aria-expanded.</li>
+
+<li>Tabs sem aria-selected.</li>
+
+<li>Select customizado incompleto.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="checklist-final-de-talkback-e-voiceover" aria-labelledby="checklist-final-de-talkback-e-voiceover-titulo">
+
+<h3 id="checklist-final-de-talkback-e-voiceover-titulo">Checklist Final de TalkBack e VoiceOver</h3>
+
+<ul>
+
+<li>Todos os elementos possuem nome?</li>
+
+<li>Todos possuem role correta?</li>
+
+<li>Estado é anunciado?</li>
+
+<li>Fluxo funciona sem visão?</li>
+
+<li>Erros são anunciados?</li>
+
+<li>Mensagens dinâmicas são anunciadas?</li>
+
+<li>Foco nunca desaparece?</li>
+
+<li>A navegação faz sentido?</li>
+
+<li>Existe feedback para sucesso e erro?</li>
+
+</ul>
+
+</section>
+
+</section>
+
+<section class="parte" id="qa-wcag" aria-labelledby="qa-wcag-titulo">
+
+<h2 id="qa-wcag-titulo">QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular</h2>
+
+<p>
+Esta seção serve como guia operacional para desenvolvimento,
+QA, refinamentos, stories, PRs e releases.
+</p>
+
+<p>
+O objetivo não é decorar a WCAG,
+mas aplicá-la diariamente.
+</p>
+
+<section class="secao" id="o-que-significa-uma-tela-acessivel" aria-labelledby="o-que-significa-uma-tela-acessivel-titulo">
+
+<h3 id="o-que-significa-uma-tela-acessivel-titulo">O que significa uma tela acessível?</h3>
+
+<p>
+Uma tela acessível não é apenas uma tela
+sem erros de WCAG.
+</p>
+
+<p>
+Uma tela acessível permite que o usuário:
+</p>
+
+<ul>
+
+<li>Compreenda o conteúdo.</li>
+
+<li>Navegue sozinho.</li>
+
+<li>Execute ações.</li>
+
+<li>Receba feedback.</li>
+
+<li>Conclua a jornada.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="principais-criterios-wcag-para-angular" aria-labelledby="principais-criterios-wcag-para-angular-titulo">
+
+<h3 id="principais-criterios-wcag-para-angular-titulo">Principais Critérios WCAG para Angular</h3>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: Principais Critérios WCAG para Angular"><table>
+<thead>
+<tr>
+<th scope="col">Critério</th>
+<th scope="col">Tema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1.1</td>
+<td>Texto alternativo.</td>
+</tr>
+<tr>
+<td>1.3.1</td>
+<td>Info e relacionamentos.</td>
+</tr>
+<tr>
+<td>1.3.2</td>
+<td>Sequência significativa.</td>
+</tr>
+<tr>
+<td>1.4.3</td>
+<td>Contraste.</td>
+</tr>
+<tr>
+<td>1.4.10</td>
+<td>Reflow.</td>
+</tr>
+<tr>
+<td>2.1.1</td>
+<td>Teclado.</td>
+</tr>
+<tr>
+<td>2.1.2</td>
+<td>Sem armadilha de teclado.</td>
+</tr>
+<tr>
+<td>2.4.3</td>
+<td>Ordem de foco.</td>
+</tr>
+<tr>
+<td>2.4.6</td>
+<td>Títulos e labels.</td>
+</tr>
+<tr>
+<td>2.4.7</td>
+<td>Foco visível.</td>
+</tr>
+<tr>
+<td>3.3.1</td>
+<td>Identificação de erros.</td>
+</tr>
+<tr>
+<td>3.3.2</td>
+<td>Instruções e labels.</td>
+</tr>
+<tr>
+<td>4.1.2</td>
+<td>Name, Role e Value.</td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+
+<section class="secao" id="criterios-que-mais-geram-bugs" aria-labelledby="criterios-que-mais-geram-bugs-titulo">
+
+<h3 id="criterios-que-mais-geram-bugs-titulo">Critérios que Mais Geram Bugs</h3>
+
+<ol>
+
+<li>2.4.3 Ordem de foco.</li>
+
+<li>4.1.2 Name Role Value.</li>
+
+<li>3.3.1 Identificação de erros.</li>
+
+<li>2.1.1 Navegação por teclado.</li>
+
+<li>1.3.1 Relacionamentos.</li>
+
+</ol>
+
+</section>
+
+<section class="secao" id="checklist-de-story" aria-labelledby="checklist-de-story-titulo">
+
+<h3 id="checklist-de-story-titulo">Checklist de Story</h3>
+
+<p>
+Toda história deveria responder:
+</p>
+
+<ul>
+
+<li>Possui componentes interativos?</li>
+
+<li>Existe leitor de tela impactado?</li>
+
+<li>Existe navegação por teclado?</li>
+
+<li>Existe foco?</li>
+
+<li>Existe anúncio dinâmico?</li>
+
+<li>Existe tratamento de erro?</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="checklist-de-desenvolvimento" aria-labelledby="checklist-de-desenvolvimento-titulo">
+
+<h3 id="checklist-de-desenvolvimento-titulo">Checklist de Desenvolvimento</h3>
+
+<ul>
+
+<li>Existe HTML semântico?</li>
+
+<li>Existe label para todos os campos?</li>
+
+<li>Existe nome acessível?</li>
+
+<li>Existe role correta?</li>
+
+<li>Existe gerenciamento de foco?</li>
+
+<li>Existe suporte a teclado?</li>
+
+<li>Existe feedback para erro?</li>
+
+<li>Existe feedback para sucesso?</li>
+
+<li>Existe validação TalkBack?</li>
+
+<li>Existe validação VoiceOver?</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="checklist-de-pull-request" aria-labelledby="checklist-de-pull-request-titulo">
+
+<h3 id="checklist-de-pull-request-titulo">Checklist de Pull Request</h3>
+
+<ul>
+
+<li>Novos componentes foram testados?</li>
+
+<li>O foco continua correto?</li>
+
+<li>Não houve regressão de leitor de tela?</li>
+
+<li>Os labels permanecem corretos?</li>
+
+<li>ARIA continua sincronizada?</li>
+
+<li>Teclado continua funcionando?</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="checklist-de-qa" aria-labelledby="checklist-de-qa-titulo">
+
+<h3 id="checklist-de-qa-titulo">Checklist de QA</h3>
+
+<ul>
+
+<li>Todos os botões são anunciados?</li>
+
+<li>Todos os links são anunciados?</li>
+
+<li>Todos os campos possuem label?</li>
+
+<li>Todos os erros são anunciados?</li>
+
+<li>Todos os modais abrem corretamente?</li>
+
+<li>Todos os modais devolvem foco?</li>
+
+<li>Todos os accordions anunciam expandido/recolhido?</li>
+
+<li>Todas as tabs anunciam estado selecionado?</li>
+
+<li>Todos os steppers anunciam etapa atual?</li>
+
+<li>Existem regiões com foco perdido?</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="checklist-para-talkback" aria-labelledby="checklist-para-talkback-titulo">
+
+<h3 id="checklist-para-talkback-titulo">Checklist para TalkBack</h3>
+
+<ul>
+
+<li>Navegar a tela inteira.</li>
+
+<li>Validar headings.</li>
+
+<li>Validar botões.</li>
+
+<li>Validar formulários.</li>
+
+<li>Validar modal.</li>
+
+<li>Validar mensagens de erro.</li>
+
+<li>Validar toast.</li>
+
+<li>Validar loading.</li>
+
+<li>Validar conclusão do fluxo.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="checklist-para-voiceover" aria-labelledby="checklist-para-voiceover-titulo">
+
+<h3 id="checklist-para-voiceover-titulo">Checklist para VoiceOver</h3>
+
+<ul>
+
+<li>Navegar tela completa.</li>
+
+<li>Validar todos os elementos focáveis.</li>
+
+<li>Validar formulários.</li>
+
+<li>Validar alertas.</li>
+
+<li>Validar menus.</li>
+
+<li>Validar overlays.</li>
+
+<li>Validar conclusão da jornada.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="quando-abrir-um-bug-de-acessibilidade" aria-labelledby="quando-abrir-um-bug-de-acessibilidade-titulo">
+
+<h3 id="quando-abrir-um-bug-de-acessibilidade-titulo">Quando Abrir um Bug de Acessibilidade?</h3>
+
+<p>
+Sempre que o usuário:
+</p>
+
+<ul>
+
+<li>Não conseguir concluir uma tarefa.</li>
+
+<li>Não conseguir identificar um elemento.</li>
+
+<li>Não conseguir navegar.</li>
+
+<li>Perder foco.</li>
+
+<li>Não receber feedback.</li>
+
+<li>Receber informação incorreta.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="template-de-bug" aria-labelledby="template-de-bug-titulo">
+
+<h3 id="template-de-bug-titulo">Template de Bug</h3>
+
+<pre><code>Título:
+Botão sem nome acessível
+
+Problema:
+TalkBack anuncia apenas "botão"
+
+Comportamento esperado:
+"Editar endereço, botão"
+
+Impacto:
+Usuário não identifica a ação.
+
+WCAG:
+4.1.2 Name Role Value</code></pre>
+
+</section>
+
+<section class="secao" id="classificacao-de-severidade" aria-labelledby="classificacao-de-severidade-titulo">
+
+<h3 id="classificacao-de-severidade-titulo">Classificação de Severidade</h3>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: Classificação de Severidade"><table>
+<thead>
+<tr>
+<th scope="col">Nível</th>
+<th scope="col">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Crítico</td>
+<td>Usuário não conclui a jornada.</td>
+</tr>
+<tr>
+<td>Alto</td>
+<td>Grande dificuldade de navegação.</td>
+</tr>
+<tr>
+<td>Médio</td>
+<td>Experiência degradada.</td>
+</tr>
+<tr>
+<td>Baixo</td>
+<td>Melhoria recomendada.</td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+
+<section class="secao" id="exemplos-de-bugs-criticos" aria-labelledby="exemplos-de-bugs-criticos-titulo">
+
+<h3 id="exemplos-de-bugs-criticos-titulo">Exemplos de Bugs Críticos</h3>
+
+<ul>
+
+<li>Botão principal sem nome.</li>
+
+<li>Modal inacessível.</li>
+
+<li>Erro não anunciado.</li>
+
+<li>Foco preso incorretamente.</li>
+
+<li>Campo sem label.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="exemplos-de-bugs-medios" aria-labelledby="exemplos-de-bugs-medios-titulo">
+
+<h3 id="exemplos-de-bugs-medios-titulo">Exemplos de Bugs Médios</h3>
+
+<ul>
+
+<li>Heading incorreto.</li>
+
+<li>Texto alternativo ruim.</li>
+
+<li>Tooltip sem descrição.</li>
+
+<li>Leitura redundante.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="definition-of-done-acessivel" aria-labelledby="definition-of-done-acessivel-titulo">
+
+<h3 id="definition-of-done-acessivel-titulo">Definition of Done Acessível</h3>
+
+<ul>
+
+<li>WCAG AA atendida.</li>
+
+<li>Teclado funcionando.</li>
+
+<li>TalkBack validado.</li>
+
+<li>VoiceOver validado.</li>
+
+<li>Nome acessível definido.</li>
+
+<li>Role correta.</li>
+
+<li>Estado correto.</li>
+
+<li>Sem perda de foco.</li>
+
+<li>Sem erros conhecidos.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="checklist-para-revisao-de-tela-nova" aria-labelledby="checklist-para-revisao-de-tela-nova-titulo">
+
+<h3 id="checklist-para-revisao-de-tela-nova-titulo">Checklist para Revisão de Tela Nova</h3>
+
+<ol>
+
+<li>Existe H1?</li>
+
+<li>Existe estrutura semântica?</li>
+
+<li>Existe ordem lógica?</li>
+
+<li>Existe foco?</li>
+
+<li>Existe suporte para leitor?</li>
+
+<li>Existe tratamento de erro?</li>
+
+<li>Existe feedback de sucesso?</li>
+
+<li>Existe feedback de carregamento?</li>
+
+<li>Existe navegação consistente?</li>
+
+</ol>
+
+</section>
+
+<section class="secao" id="ferramentas-recomendadas" aria-labelledby="ferramentas-recomendadas-titulo">
+
+<h3 id="ferramentas-recomendadas-titulo">Ferramentas Recomendadas</h3>
+
+<ul>
+
+<li>TalkBack.</li>
+
+<li>VoiceOver.</li>
+
+<li>Chrome Lighthouse.</li>
+
+<li>axe DevTools.</li>
+
+<li>Accessibility Insights.</li>
+
+<li>Angular CDK A11y.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="o-que-ferramentas-nao-encontram" aria-labelledby="o-que-ferramentas-nao-encontram-titulo">
+
+<h3 id="o-que-ferramentas-nao-encontram-titulo">O que Ferramentas NÃO Encontram</h3>
+
+<p>
+Ferramentas automatizadas não substituem
+testes reais.
+</p>
+
+<p>
+Elas não identificam bem:
+</p>
+
+<ul>
+
+<li>Fluxos quebrados.</li>
+
+<li>Foco ruim.</li>
+
+<li>Experiência ruim.</li>
+
+<li>Anúncios confusos.</li>
+
+<li>Navegação complexa.</li>
+
+</ul>
+
+</section>
+
+<section class="secao" id="mentalidade-final" aria-labelledby="mentalidade-final-titulo">
+
+<h3 id="mentalidade-final-titulo">Mentalidade Final</h3>
+
+<p>
+A pergunta não deve ser:
+</p>
+
+<pre><code>A tela passou na WCAG?</code></pre>
+
+<p>
+Mas sim:
+</p>
+
+<pre><code>Uma pessoa usando TalkBack ou VoiceOver
+consegue concluir a jornada sozinha?</code></pre>
+
+<p>
+Se a resposta for sim,
+normalmente a implementação está no caminho certo.
+</p>
+
+</section>
+
+</section>
+</main>
+
+<footer class="rodape">
+
+<h2>Fim da Documentação</h2>
+
+<p>
+Parabéns.
+</p>
+
+<p>
+Se você chegou até aqui, possui uma base sólida para desenvolver,
+testar e revisar aplicações Angular compatíveis com:
+</p>
+
+<ul>
+
+<li>TalkBack</li>
+
+<li>VoiceOver</li>
+
+<li>WCAG 2.2</li>
+
+<li>Angular CDK A11y</li>
+
+<li>Angular Material</li>
+
+</ul>
+
+<p>
+Lembre-se:
+</p>
+
+<pre><code>Acessibilidade não é uma tela sem erros.
+
+Acessibilidade é permitir que uma pessoa
+consiga concluir sua jornada de forma autônoma.</code></pre>
+
+</footer>
+
+</body>
+
+</html>
