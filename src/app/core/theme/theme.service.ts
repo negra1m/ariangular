@@ -2,7 +2,7 @@ import { Injectable, inject, signal, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 
 type Theme = 'light' | 'dark';
-const KEY = 'angularia:theme';
+const KEY = 'ariangular:theme';
 
 /**
  * Tema claro/escuro.

@@ -16,9 +16,9 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const DIST = path.join(ROOT, 'dist', 'angularia');
+const DIST = path.join(ROOT, 'dist', 'ariangular');
 const BROWSER = path.join(DIST, 'browser');
-const ORIGIN = process.env.SITE_ORIGIN || 'https://angularia.vercel.app';
+const ORIGIN = process.env.SITE_ORIGIN || 'https://ariangular.vercel.app';
 
 const LOCALES = ['pt', 'en', 'zh'];
 const TAG = { pt: 'pt-BR', en: 'en', zh: 'zh-Hans' };
@@ -97,6 +97,55 @@ Allow: /
 Sitemap: ${ORIGIN}/sitemap.xml
 `;
 fs.writeFileSync(path.join(BROWSER, 'robots.txt'), robots, 'utf8');
+
+/* ------------------------------------------------------------------ */
+/* Página raiz                                                         */
+/* ------------------------------------------------------------------ */
+
+/**
+ * O Angular gera a raiz como um meta-refresh mínimo, sem `lang` e sem
+ * alternativa para quem não segue o refresh. Isso é uma violação de WCAG 3.1.1
+ * — pegada pelo axe em `check-a11y.js`.
+ *
+ * Aqui ela vira uma página de verdade: `lang` correto, um h1, e links para os
+ * três idiomas. Quem tem o refresh funcionando nem vê; quem não tem, escolhe.
+ * O hreflang x-default aponta para cá.
+ */
+const rootIndex = path.join(BROWSER, 'index.html');
+const rootPage = `<!doctype html>
+<html lang="${TAG[DEFAULT]}">
+<head>
+<meta charset="utf-8">
+<title>ariangular — Acessibilidade em Angular</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Guia interativo de acessibilidade para times Angular. Escolha o idioma.">
+<link rel="canonical" href="${ORIGIN}/${DEFAULT}">
+${LOCALES.map((l) => `<link rel="alternate" hreflang="${TAG[l]}" href="${ORIGIN}/${l}">`).join('\n')}
+<link rel="alternate" hreflang="x-default" href="${ORIGIN}/${DEFAULT}">
+<meta http-equiv="refresh" content="0; url=/${DEFAULT}">
+<style>
+body{font-family:system-ui,sans-serif;max-width:32rem;margin:4rem auto;padding:0 1.5rem;line-height:1.7}
+h1{font-size:1.75rem;margin:0 0 .5rem}
+ul{padding-left:1.2rem}
+li{margin-bottom:.4rem}
+a{color:#d1002f}
+:focus-visible{outline:3px solid #0b4fd6;outline-offset:3px}
+@media(prefers-color-scheme:dark){body{background:#101013;color:#f2f2f5}a{color:#ff7a94}}
+</style>
+</head>
+<body>
+<h1>ariangular</h1>
+<p>Guia de acessibilidade para times Angular.</p>
+<nav aria-label="Idioma">
+<ul>
+${LOCALES.map((l) => `<li><a href="/${l}" lang="${TAG[l]}" hreflang="${TAG[l]}">${{ pt: 'Português', en: 'English', zh: '简体中文' }[l]}</a></li>`).join('\n')}
+</ul>
+</nav>
+</body>
+</html>
+`;
+fs.writeFileSync(rootIndex, rootPage, 'utf8');
+console.log('index.html:  raiz reescrita com lang e escolha de idioma');
 
 console.log(`sitemap.xml: ${sorted.length} páginas x ${LOCALES.length} idiomas`);
 console.log(`             ${sorted.length * LOCALES.length} URLs cobertas`);

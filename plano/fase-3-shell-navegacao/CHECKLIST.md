@@ -17,7 +17,7 @@ Marcar concluído com data: `(YYYY-MM-DD)`
 - [ ] Rota 404 com página própria e link de volta
 - [ ] Navegação por fragmento funcionando (`/aria#aria-label`)
 - [ ] `title` definido em toda rota
-- [ ] `TitleStrategy` customizada compondo `"<Seção> · AngulARIA"`
+- [ ] `TitleStrategy` customizada compondo `"<Seção> · ariangular"`
 
 ## Estrutura semântica
 

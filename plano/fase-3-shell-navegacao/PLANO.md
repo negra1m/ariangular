@@ -37,7 +37,7 @@ exatamente o que este shell precisa implementar. É a prova de conceito do produ
 Navegação para seção específica via fragmento: `/aria#aria-label`.
 
 Todas as rotas com `title` no `Route`, e `TitleStrategy` customizada que compõe
-`"<Seção> · AngulARIA"`. Título de página é WCAG 2.4.2 — não é detalhe de SEO.
+`"<Seção> · ariangular"`. Título de página é WCAG 2.4.2 — não é detalhe de SEO.
 
 ### 3.2 Estrutura semântica
 

@@ -34,7 +34,7 @@
   white-space: nowrap;
 }
 
-/* Destaque de "ARIA" dentro de "AngulARIA".
+/* Destaque de "ARIA" dentro de "ariangular".
    É <b> e não <strong>: a diferença é visual, não de ênfase semântica —
    <strong> faria alguns leitores mudarem a entonação sem motivo. */
 .brand__word-aria {

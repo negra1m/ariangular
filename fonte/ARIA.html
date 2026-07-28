@@ -3029,9 +3029,213 @@ Sempre perguntar:
 
 <li>Existe componente Material?</li>
 
+<li>Existe diretiva no Angular Aria?</li>
+
 <li>Preciso mesmo criar do zero?</li>
 
 </ul>
+
+</section>
+
+<section class="secao" id="angular-aria" aria-labelledby="angular-aria-titulo">
+
+<h3 id="angular-aria-titulo">Angular Aria</h3>
+
+<p>
+Em novembro de 2025, com o Angular v22, o time Angular lançou o pacote
+oficial Angular Aria.
+</p>
+
+<pre><code>npm install @angular/aria</code></pre>
+
+<p>
+São diretivas headless que implementam os padrões da WAI-ARIA Authoring
+Practices. Elas cuidam de navegação por teclado, atributos ARIA, gerenciamento
+de foco e suporte a leitor de tela. Você fornece o HTML e o estilo.
+</p>
+
+<aside class="callout callout--success" aria-label="Boa prática">
+<p class="callout__label">Boa prática</p>
+<p>
+Este é o lançamento mais relevante para acessibilidade na história do Angular.
+Combobox, listbox, menu e tree são os componentes que mais geram bug de
+acessibilidade quando feitos à mão — e agora existe uma implementação oficial,
+mantida pelo time do framework, seguindo a especificação.
+</p>
+</aside>
+
+<p>
+Antes dele, a resposta para "preciso de um combobox acessível" era
+"a implementação é complexa, evite fazer à mão" — sem dizer o que fazer no
+lugar. Agora tem resposta.
+</p>
+
+</section>
+
+<section class="secao" id="padroes-do-angular-aria" aria-labelledby="padroes-do-angular-aria-titulo">
+
+<h3 id="padroes-do-angular-aria-titulo">Padrões do Angular Aria</h3>
+
+<p>
+São treze padrões disponíveis.
+</p>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: Padrões do Angular Aria">
+<table>
+<thead>
+<tr>
+<th scope="col">Diretiva</th>
+<th scope="col">Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ngCombobox</td>
+<td>Campo de texto coordenado com um popup.</td>
+</tr>
+<tr>
+<td>ngAutocomplete</td>
+<td>Campo com sugestões filtradas.</td>
+</tr>
+<tr>
+<td>ngListbox</td>
+<td>Lista de opções, seleção única ou múltipla.</td>
+</tr>
+<tr>
+<td>ngSelect</td>
+<td>Dropdown de seleção única.</td>
+</tr>
+<tr>
+<td>ngMultiselect</td>
+<td>Dropdown de seleção múltipla.</td>
+</tr>
+<tr>
+<td>ngMenu</td>
+<td>Menu com submenus.</td>
+</tr>
+<tr>
+<td>ngMenubar</td>
+<td>Barra de navegação horizontal.</td>
+</tr>
+<tr>
+<td>ngToolbar</td>
+<td>Grupo de controles.</td>
+</tr>
+<tr>
+<td>ngTabs</td>
+<td>Abas.</td>
+</tr>
+<tr>
+<td>ngAccordion</td>
+<td>Painéis expansíveis.</td>
+</tr>
+<tr>
+<td>ngTree</td>
+<td>Lista hierárquica com expandir e recolher.</td>
+</tr>
+<tr>
+<td>ngGrid</td>
+<td>Dados em duas dimensões com navegação por célula.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>
+Compare com a lista de componentes que mais geram bug de acessibilidade em
+Angular. É quase a mesma lista.
+</p>
+
+</section>
+
+<section class="secao" id="angular-aria-material-ou-cdk" aria-labelledby="angular-aria-material-ou-cdk-titulo">
+
+<h3 id="angular-aria-material-ou-cdk-titulo">Angular Aria, Material ou CDK?</h3>
+
+<p>
+Os três convivem e resolvem coisas diferentes.
+</p>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: Angular Aria, Material ou CDK">
+<table>
+<thead>
+<tr>
+<th scope="col">Pacote</th>
+<th scope="col">Entrega</th>
+<th scope="col">Quando usar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Angular Material</td>
+<td>Componente pronto, com estilo.</td>
+<td>O visual do Material serve para o produto.</td>
+</tr>
+<tr>
+<td>Angular Aria</td>
+<td>Comportamento sem estilo.</td>
+<td>Design system próprio, mas sem reimplementar teclado e ARIA.</td>
+</tr>
+<tr>
+<td>Angular CDK A11y</td>
+<td>Utilitários de baixo nível.</td>
+<td>LiveAnnouncer, FocusTrap e FocusMonitor em qualquer cenário.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>
+O CDK A11y continua necessário mesmo usando Angular Aria. Anunciar
+"pagamento concluído" com LiveAnnouncer não é padrão de widget.
+</p>
+
+</section>
+
+<section class="secao" id="o-que-o-angular-aria-nao-resolve" aria-labelledby="o-que-o-angular-aria-nao-resolve-titulo">
+
+<h3 id="o-que-o-angular-aria-nao-resolve-titulo">O que o Angular Aria não resolve</h3>
+
+<p>
+A biblioteca resolve padrões de widget. A maior parte dos bugs de
+acessibilidade em produção não é widget complexo.
+</p>
+
+<ul>
+
+<li>Div clicável no lugar de botão.</li>
+
+<li>Ícone clicável sem nome acessível.</li>
+
+<li>Input apenas com placeholder.</li>
+
+<li>Erro de formulário não anunciado.</li>
+
+<li>Foco perdido após navegação de rota.</li>
+
+<li>Heading fora de ordem.</li>
+
+<li>Contraste insuficiente.</li>
+
+<li>Imagem sem texto alternativo.</li>
+
+<li>Tabela sem cabeçalho associado.</li>
+
+</ul>
+
+<aside class="callout callout--warning" aria-label="Atenção">
+<p class="callout__label">Atenção</p>
+<p>
+Diretiva headless significa que você fornece o HTML e o CSS. Dá para usar o
+Angular Aria e ainda assim entregar uma tela inacessível: foco invisível,
+contraste ruim, ordem de DOM diferente da ordem visual.
+</p>
+</aside>
+
+<p>
+A biblioteca elimina uma classe de erro. Ela não substitui saber o assunto,
+nem testar com TalkBack e VoiceOver.
+</p>
 
 </section>
 

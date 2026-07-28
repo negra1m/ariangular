@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "angularia": {
+    "ariangular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -66,10 +66,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angularia:build:production"
+              "buildTarget": "ariangular:build:production"
             },
             "development": {
-              "buildTarget": "angularia:build:development"
+              "buildTarget": "ariangular:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -1,5 +1,5 @@
 {
-  "name": "angularia",
+  "name": "ariangular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "contrast": "node scripts/check-contrast.js",
-    "verify": "npm run lint && npm run contrast && npm run build",
+    "verify": "npm run lint && npm run contrast && npm run build && npm run a11y",
     "format": "prettier --write \"src/**/*.{ts,html,css,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,html,css,json}\"",
     "fonte:fix": "node scripts/fix-aria.js fonte/ARIA.original.html fonte/ARIA.html",
@@ -20,11 +20,14 @@
     "i18n:strings": "node scripts/extract-strings.js",
     "i18n:build": "node scripts/build-locale.js en && node scripts/build-locale.js zh",
     "content:all": "npm run content:extract && npm run i18n:strings",
-    "sitemap": "node scripts/generate-sitemap.js"
+    "sitemap": "node scripts/generate-sitemap.js",
+    "a11y": "node scripts/check-a11y.js",
+    "a11y:sample": "node scripts/check-a11y.js --sample"
   },
   "private": true,
   "packageManager": "npm@11.16.0",
   "dependencies": {
+    "@angular/aria": "^22.0.6",
     "@angular/cdk": "^22.0.6",
     "@angular/common": "^22.0.0",
     "@angular/compiler": "^22.0.0",
@@ -44,6 +47,7 @@
     "@eslint/js": "^10.0.1",
     "@types/node": "^24.10.1",
     "angular-eslint": "22.1.0",
+    "axe-core": "^4.12.1",
     "eslint": "^10.6.0",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
@@ -55,9 +59,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/negra1m/AngulARIA.git"
+    "url": "https://github.com/negra1m/ariangular.git"
   },
-  "homepage": "https://github.com/negra1m/AngulARIA",
+  "homepage": "https://github.com/negra1m/ariangular",
   "author": "Vinicius Negrao",
   "keywords": [
     "angular",

@@ -21,7 +21,7 @@ as regras de estilo/foco. Ambas ficam travadas aqui.
 
 Angular 22 criado com SSR habilitado e depois configurado para **output estático**.
 
-- `ng new angularia --ssr --style=css --routing`
+- `ng new ariangular --ssr --style=css --routing`
 - Em `angular.json`, o build usa `"outputMode": "static"`.
 - `app.routes.server.ts` marca todas as rotas com `RenderMode.Prerender`.
 
@@ -29,8 +29,8 @@ O motivo de nascer com `--ssr` mesmo sendo SSG: o esquema de prerender do Angula
 pacote `@angular/ssr`. Sem ele não existe prerender de rota. O `outputMode: static` é o
 que faz o build cuspir HTML e não uma função de servidor.
 
-**Verificação:** após `ng build`, `dist/angularia/browser/` contém um `index.html` por
-rota e **não** existe `dist/angularia/server/`.
+**Verificação:** após `ng build`, `dist/ariangular/browser/` contém um `index.html` por
+rota e **não** existe `dist/ariangular/server/`.
 
 ### 1.2 Configuração da aplicação
 

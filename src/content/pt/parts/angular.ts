@@ -732,7 +732,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 33,
       "title": "Regra para Custom Components",
-      "summary": "Regra para Custom Components: Existe componente nativo?; Existe componente Material?; Preciso mesmo criar do zero?",
+      "summary": "Regra para Custom Components: Existe componente nativo?; Existe componente Material?; Existe diretiva no Angular Aria?",
       "blocks": [
         {
           "kind": "paragraph",
@@ -744,15 +744,210 @@ export const angular: Part = {
           "items": [
             "Existe componente nativo?",
             "Existe componente Material?",
+            "Existe diretiva no Angular Aria?",
             "Preciso mesmo criar do zero?"
           ]
         }
       ]
     },
     {
-      "id": "erro-mais-comum-do-time-front",
+      "id": "angular-aria",
       "partId": "angular",
       "order": 34,
+      "title": "Angular Aria",
+      "summary": "Em novembro de 2025, com o Angular v22, o time Angular lançou o pacote oficial Angular Aria.",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Em novembro de 2025, com o Angular v22, o time Angular lançou o pacote oficial Angular Aria."
+        },
+        {
+          "kind": "code",
+          "code": "npm install @angular/aria",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "São diretivas headless que implementam os padrões da WAI-ARIA Authoring Practices. Elas cuidam de navegação por teclado, atributos ARIA, gerenciamento de foco e suporte a leitor de tela. Você fornece o HTML e o estilo."
+        },
+        {
+          "kind": "callout",
+          "tone": "success",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "text": "Este é o lançamento mais relevante para acessibilidade na história do Angular. Combobox, listbox, menu e tree são os componentes que mais geram bug de acessibilidade quando feitos à mão — e agora existe uma implementação oficial, mantida pelo time do framework, seguindo a especificação."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Antes dele, a resposta para \"preciso de um combobox acessível\" era \"a implementação é complexa, evite fazer à mão\" — sem dizer o que fazer no lugar. Agora tem resposta."
+        }
+      ]
+    },
+    {
+      "id": "padroes-do-angular-aria",
+      "partId": "angular",
+      "order": 35,
+      "title": "Padrões do Angular Aria",
+      "summary": "Compare com a lista de componentes que mais geram bug de acessibilidade em Angular. É quase a mesma lista.",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "São treze padrões disponíveis."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Diretiva",
+            "Uso"
+          ],
+          "rows": [
+            [
+              "ngCombobox",
+              "Campo de texto coordenado com um popup."
+            ],
+            [
+              "ngAutocomplete",
+              "Campo com sugestões filtradas."
+            ],
+            [
+              "ngListbox",
+              "Lista de opções, seleção única ou múltipla."
+            ],
+            [
+              "ngSelect",
+              "Dropdown de seleção única."
+            ],
+            [
+              "ngMultiselect",
+              "Dropdown de seleção múltipla."
+            ],
+            [
+              "ngMenu",
+              "Menu com submenus."
+            ],
+            [
+              "ngMenubar",
+              "Barra de navegação horizontal."
+            ],
+            [
+              "ngToolbar",
+              "Grupo de controles."
+            ],
+            [
+              "ngTabs",
+              "Abas."
+            ],
+            [
+              "ngAccordion",
+              "Painéis expansíveis."
+            ],
+            [
+              "ngTree",
+              "Lista hierárquica com expandir e recolher."
+            ],
+            [
+              "ngGrid",
+              "Dados em duas dimensões com navegação por célula."
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Compare com a lista de componentes que mais geram bug de acessibilidade em Angular. É quase a mesma lista."
+        }
+      ]
+    },
+    {
+      "id": "angular-aria-material-ou-cdk",
+      "partId": "angular",
+      "order": 36,
+      "title": "Angular Aria, Material ou CDK?",
+      "summary": "Os três convivem e resolvem coisas diferentes.",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Os três convivem e resolvem coisas diferentes."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Pacote",
+            "Entrega",
+            "Quando usar"
+          ],
+          "rows": [
+            [
+              "Angular Material",
+              "Componente pronto, com estilo.",
+              "O visual do Material serve para o produto."
+            ],
+            [
+              "Angular Aria",
+              "Comportamento sem estilo.",
+              "Design system próprio, mas sem reimplementar teclado e ARIA."
+            ],
+            [
+              "Angular CDK A11y",
+              "Utilitários de baixo nível.",
+              "LiveAnnouncer, FocusTrap e FocusMonitor em qualquer cenário."
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "O CDK A11y continua necessário mesmo usando Angular Aria. Anunciar \"pagamento concluído\" com LiveAnnouncer não é padrão de widget."
+        }
+      ]
+    },
+    {
+      "id": "o-que-o-angular-aria-nao-resolve",
+      "partId": "angular",
+      "order": 37,
+      "title": "O que o Angular Aria não resolve",
+      "summary": "A biblioteca resolve padrões de widget. A maior parte dos bugs de acessibilidade em produção não é widget complexo.",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "A biblioteca resolve padrões de widget. A maior parte dos bugs de acessibilidade em produção não é widget complexo."
+        },
+        {
+          "kind": "list",
+          "ordered": false,
+          "items": [
+            "Div clicável no lugar de botão.",
+            "Ícone clicável sem nome acessível.",
+            "Input apenas com placeholder.",
+            "Erro de formulário não anunciado.",
+            "Foco perdido após navegação de rota.",
+            "Heading fora de ordem.",
+            "Contraste insuficiente.",
+            "Imagem sem texto alternativo.",
+            "Tabela sem cabeçalho associado."
+          ]
+        },
+        {
+          "kind": "callout",
+          "tone": "warning",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "text": "Diretiva headless significa que você fornece o HTML e o CSS. Dá para usar o Angular Aria e ainda assim entregar uma tela inacessível: foco invisível, contraste ruim, ordem de DOM diferente da ordem visual."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "A biblioteca elimina uma classe de erro. Ela não substitui saber o assunto, nem testar com TalkBack e VoiceOver."
+        }
+      ]
+    },
+    {
+      "id": "erro-mais-comum-do-time-front",
+      "partId": "angular",
+      "order": 38,
       "title": "Erro Mais Comum do Time Front",
       "summary": "Erro Mais Comum do Time Front: Role.; Teclado.; Estado.",
       "blocks": [
@@ -784,7 +979,7 @@ export const angular: Part = {
     {
       "id": "checklist-angular",
       "partId": "angular",
-      "order": 35,
+      "order": 39,
       "title": "Checklist Angular",
       "summary": "Checklist Angular: Existe HTML semântico?; Existe nome acessível?; Existe gerenciamento de foco?",
       "blocks": [

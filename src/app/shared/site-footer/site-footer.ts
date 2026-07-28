@@ -12,6 +12,6 @@ export class SiteFooter {
   protected readonly locale = inject(LocaleService);
   protected readonly year = new Date().getFullYear();
   protected readonly linkedin = 'https://www.linkedin.com/in/negra1m/';
-  protected readonly repo = 'https://github.com/negra1m/AngulARIA';
+  protected readonly repo = 'https://github.com/negra1m/ariangular';
   protected readonly pressKit = 'https://angular.dev/press-kit';
 }

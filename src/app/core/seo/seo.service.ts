@@ -4,8 +4,8 @@ import { DOCUMENT } from '@angular/common';
 import { LocaleService } from '../i18n/locale.service';
 import { LOCALES, LOCALE_TAG, DEFAULT_LOCALE } from '../../../content/types';
 
-const SITE = 'AngulARIA';
-const ORIGIN = 'https://angularia.vercel.app';
+const SITE = 'ariangular';
+const ORIGIN = 'https://ariangular.vercel.app';
 
 export interface SeoInput {
   title: string;

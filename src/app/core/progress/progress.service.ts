@@ -1,7 +1,7 @@
 import { Injectable, inject, signal, PLATFORM_ID, computed } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
-const KEY = 'angularia:progress:v1';
+const KEY = 'ariangular:progress:v1';
 
 type Store = Record<string, string[]>;
 

@@ -39,12 +39,14 @@ jobs:
       - name: Build com prerender
         run: npm run build
 
+      - name: axe — WCAG A e AA em todas as páginas geradas
+        run: npm run a11y
+
       - name: Conferir que a saída é estática
         run: |
-          if [ -d "dist/angularia/server" ]; then
+          if [ -d "dist/ariangular/server" ]; then
             echo "ERRO: build gerou pasta server/ — a saída deveria ser estática."
             exit 1
           fi
           echo "Saída estática confirmada."
-          echo "Rotas prerenderizadas:"
-          cat dist/angularia/prerendered-routes.json
+          echo "Páginas geradas: $(find dist/ariangular/browser -name index.html | wc -l)"
