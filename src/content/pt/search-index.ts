@@ -6,1434 +6,1632 @@ import type { SearchEntry } from '../types';
 
 export const searchIndex: SearchEntry[] = [
   {
-    id: 'fundamentos/o-que-e-acessibilidade',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'o-que-e-acessibilidade',
-    sectionTitle: 'O que é acessibilidade?',
-    text: 'Acessibilidade é a capacidade de um produto digital ser utilizado por todas as pessoas, independentemente de limitações visuais, auditivas, motoras, cognitivas ou temporárias. Exemplos de usuários: Pessoa cega usando TalkBack. Pessoa cega usando VoiceOver. Pessoa com baixa visão usando zoom. Pessoa com mobilidade reduzida utilizando teclado. Pessoa com deficiência cognitiva. Pessoa com braço machucado utilizando somente uma mão.',
-    keywords: [],
-  },
-  {
-    id: 'fundamentos/wcag-2-2',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'wcag-2-2',
-    sectionTitle: 'WCAG 2.2',
-    text: 'A WCAG (Web Content Accessibility Guidelines) é o conjunto mais utilizado no mundo para avaliar acessibilidade digital. Níveis de conformidade Nível Descrição A Requisitos mínimos. AA Padrão adotado pela maioria das empresas. AAA Nível mais rigoroso.',
-    keywords: [],
-  },
-  {
-    id: 'fundamentos/pour',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'pour',
-    sectionTitle: 'POUR',
-    text: 'Todos os critérios da WCAG derivam de quatro pilares: P - Perceivable (Perceptível) O usuário precisa conseguir perceber o conteúdo. Imagens precisam de texto alternativo. Informações não podem depender apenas de cor. O - Operable (Operável) A interface deve ser utilizável. Compatível com teclado. Compatível com leitores de tela. U - Understandable (Compreensível) Fluxos consistentes. Mensagens claras. Erros compreensíveis. R - Robust (Robusto) Compatível com tecnologias assistivas. HTML semântico. ARIA correta.',
-    keywords: [],
-  },
-  {
-    id: 'fundamentos/leitores-de-tela-2',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'leitores-de-tela-2',
-    sectionTitle: 'Leitores de tela',
-    text: 'TalkBack Leitor de tela nativo do Android. VoiceOver Leitor de tela nativo do iOS. O que eles precisam para funcionar corretamente? Nome acessível. Role correta. Estado correto. Exemplo Salvar, botão',
-    keywords: [],
-  },
-  {
-    id: 'fundamentos/como-um-leitor-de-tela-enxerga-uma-pagina',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'como-um-leitor-de-tela-enxerga-uma-pagina',
-    sectionTitle: 'Como um leitor de tela enxerga uma página?',
-    text: 'Usuários não enxergam a interface da mesma forma que usuários visuais. Eles navegam por: Títulos. Botões. Links. Campos. Landmarks. Uma tela visualmente perfeita pode ser completamente inutilizável para um leitor de tela.',
-    keywords: [],
-  },
-  {
-    id: 'fundamentos/regra-de-ouro-da-acessibilidade',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'regra-de-ouro-da-acessibilidade',
-    sectionTitle: 'Regra de Ouro da Acessibilidade',
-    text: 'HTML primeiro Sempre prefira HTML semântico antes de usar ARIA. Se existe uma tag HTML nativa capaz de resolver o problema, use ela.',
-    keywords: [],
-  },
-  {
-    id: 'fundamentos/estrutura-semantica-basica',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'estrutura-semantica-basica',
-    sectionTitle: 'Estrutura Semântica Básica',
-    text: '',
-    keywords: [],
-  },
-  {
-    id: 'fundamentos/landmarks',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'landmarks',
-    sectionTitle: 'Landmarks',
-    text: 'Landmarks permitem que leitores de tela naveguem rapidamente pelas regiões importantes da página. Tag Função header Cabeçalho. nav Navegação. main Conteúdo principal. aside Conteúdo complementar. footer Rodapé.',
-    keywords: [],
-  },
-  {
-    id: 'fundamentos/headings',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'headings',
-    sectionTitle: 'Headings',
-    text: 'Headings criam uma árvore de navegação.',
-    keywords: [],
-  },
-  {
-    id: 'fundamentos/accessible-name',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'accessible-name',
-    sectionTitle: 'Accessible Name',
-    text: 'Todo elemento interativo deve possuir um nome acessível. Texto visível Continuar, botão aria-label Fechar modal, botão',
-    keywords: ['aria-label'],
-  },
-  {
-    id: 'fundamentos/accessible-description',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'accessible-description',
-    sectionTitle: 'Accessible Description',
-    text: 'O leitor combinará o nome do campo com sua descrição.',
-    keywords: ['aria-describedby'],
-  },
-  {
-    id: 'fundamentos/nome-role-estado',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'nome-role-estado',
-    sectionTitle: 'Nome + Role + Estado',
-    text: 'Quase toda análise de leitor de tela pode ser resumida em três perguntas: Pergunta Exemplo Qual é o nome? Salvar Qual é a role? Botão Qual é o estado? Desabilitado Exemplo Salvar, botão, desabilitado',
-    keywords: [],
-  },
-  {
-    id: 'fundamentos/erros-mais-comuns-encontrados-em-angular',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'erros-mais-comuns-encontrados-em-angular',
-    sectionTitle: 'Erros mais comuns encontrados em Angular',
-    text: 'Div clicável simulando botão. Ícone clicável sem aria-label. Input apenas com placeholder. Ausência de heading principal. Modal sem gerenciamento de foco. Erros de formulário não anunciados. Uso excessivo de ARIA. Links agindo como botão. Botões agindo como links. tabindex positivo.',
-    keywords: ['aria-label', 'tabindex'],
-  },
-  {
-    id: 'fundamentos/mentalidade-para-o-time-angular',
-    partId: 'fundamentos',
-    partTitle: 'Fundamentos de Acessibilidade Angular',
-    sectionId: 'mentalidade-para-o-time-angular',
-    sectionTitle: 'Mentalidade para o time Angular',
-    text: 'Antes de criar qualquer componente, pergunte: Existe uma tag HTML nativa para isso? O elemento possui nome acessível? Funciona com teclado? Funciona com TalkBack? Funciona com VoiceOver?',
-    keywords: [],
-  },
-  {
-    id: 'aria/o-que-e-aria',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'o-que-e-aria',
-    sectionTitle: 'O que é ARIA?',
-    text: 'ARIA significa: ARIA existe para complementar a semântica HTML. ARIA NÃO substitui HTML semântico.',
-    keywords: ['role:button'],
-  },
-  {
-    id: 'aria/regra-de-ouro',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'regra-de-ouro',
-    sectionTitle: 'Regra de Ouro',
-    text: 'Se o HTML nativo resolve, não use ARIA desnecessariamente.',
-    keywords: [],
-  },
-  {
-    id: 'aria/accessible-name-2',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'accessible-name-2',
-    sectionTitle: 'Accessible Name',
-    text: 'Todo elemento interativo deve possuir um nome acessível. Texto interno Continuar, botão',
-    keywords: [],
-  },
-  {
-    id: 'aria/aria-label',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-label',
-    sectionTitle: 'aria-label',
-    text: 'Atributo Valor Uso aria-label string Define nome acessível. Quando usar Botão apenas com ícone. Ações sem texto visível. Elementos customizados. Exemplo Fechar modal, botão',
-    keywords: ['aria-label'],
-  },
-  {
-    id: 'aria/aria-labelledby',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-labelledby',
-    sectionTitle: 'aria-labelledby',
-    text: 'Valor Uso id Usa outro elemento como nome.',
-    keywords: ['aria-labelledby'],
-  },
-  {
-    id: 'aria/aria-describedby',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-describedby',
-    sectionTitle: 'aria-describedby',
-    text: 'Adiciona descrição complementar.',
-    keywords: ['aria-describedby'],
-  },
-  {
-    id: 'aria/aria-hidden',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-hidden',
-    sectionTitle: 'aria-hidden',
-    text: 'Valor Uso true Oculta do leitor. false Expõe ao leitor. Imagem decorativa',
-    keywords: ['aria-hidden'],
-  },
-  {
-    id: 'aria/aria-expanded',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-expanded',
-    sectionTitle: 'aria-expanded',
-    text: 'Indica estado expandido. Detalhes, botão, recolhido',
-    keywords: ['aria-expanded'],
-  },
-  {
-    id: 'aria/aria-controls',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-controls',
-    sectionTitle: 'aria-controls',
-    text: 'Relaciona um controlador a um conteúdo.',
-    keywords: ['aria-controls', 'aria-expanded'],
-  },
-  {
-    id: 'aria/aria-current',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-current',
-    sectionTitle: 'aria-current',
-    text: 'Valor Uso page Página atual. step Etapa atual. location Local atual. Stepper',
-    keywords: ['aria-current'],
-  },
-  {
-    id: 'aria/aria-selected',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-selected',
-    sectionTitle: 'aria-selected',
-    text: 'Indica seleção.',
-    keywords: ['aria-selected', 'role:tab'],
-  },
-  {
-    id: 'aria/aria-checked',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-checked',
-    sectionTitle: 'aria-checked',
-    text: 'Aceito, checkbox, marcado',
-    keywords: ['aria-checked', 'role:checkbox'],
-  },
-  {
-    id: 'aria/aria-pressed',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-pressed',
-    sectionTitle: 'aria-pressed',
-    text: 'Botões toggle.',
-    keywords: ['aria-pressed'],
-  },
-  {
-    id: 'aria/aria-disabled',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-disabled',
-    sectionTitle: 'aria-disabled',
-    text: 'Continuar, botão, indisponível',
-    keywords: ['aria-disabled'],
-  },
-  {
-    id: 'aria/aria-required',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-required',
-    sectionTitle: 'aria-required',
-    text: 'Campo obrigatório',
-    keywords: ['aria-required'],
-  },
-  {
-    id: 'aria/aria-invalid',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-invalid',
-    sectionTitle: 'aria-invalid',
-    text: 'Campo inválido',
-    keywords: ['aria-invalid'],
-  },
-  {
-    id: 'aria/aria-live',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-live',
-    sectionTitle: 'aria-live',
-    text: 'Valor Uso off Não anuncia. polite Anuncia quando possível. assertive Anuncia imediatamente. Toast',
-    keywords: ['aria-live'],
-  },
-  {
-    id: 'aria/aria-atomic',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-atomic',
-    sectionTitle: 'aria-atomic',
-    text: 'Controla quanto será relido.',
-    keywords: ['aria-atomic', 'aria-live'],
-  },
-  {
-    id: 'aria/aria-busy',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-busy',
-    sectionTitle: 'aria-busy',
-    text: 'Informa carregamento.',
-    keywords: ['aria-busy'],
-  },
-  {
-    id: 'aria/aria-modal',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-modal',
-    sectionTitle: 'aria-modal',
-    text: '',
-    keywords: ['aria-modal', 'role:dialog'],
-  },
-  {
-    id: 'aria/aria-haspopup',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-haspopup',
-    sectionTitle: 'aria-haspopup',
-    text: 'Valor Uso menu Abre menu. dialog Abre modal. listbox Abre lista.',
-    keywords: ['aria-haspopup'],
-  },
-  {
-    id: 'aria/aria-para-progress-bar',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'aria-para-progress-bar',
-    sectionTitle: 'ARIA para Progress Bar',
-    text: '50%',
-    keywords: ['aria-valuemin', 'aria-valuemax', 'aria-valuenow', 'role:progressbar'],
-  },
-  {
-    id: 'aria/principais-roles',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'principais-roles',
-    sectionTitle: 'Principais Roles',
-    text: 'Role Uso button Botão. link Link. dialog Modal. alert Mensagem urgente. status Status informativo. tablist Container de abas. tab Aba. tabpanel Conteúdo da aba. checkbox Checkbox. switch Liga e desliga. menu Menu. menuitem Item menu. listbox Lista selecionável. option Opção.',
-    keywords: [],
-  },
-  {
-    id: 'aria/roles-que-voce-quase-nunca-precisara',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'roles-que-voce-quase-nunca-precisara',
-    sectionTitle: 'Roles que você quase nunca precisará',
-    text: 'tree treegrid feed math meter log marquee Não use sem necessidade real.',
-    keywords: [],
-  },
-  {
-    id: 'aria/angular-attribute-binding',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'angular-attribute-binding',
-    sectionTitle: 'Angular Attribute Binding',
-    text: 'Também funciona',
-    keywords: ['aria-label'],
-  },
-  {
-    id: 'aria/erros-mais-comuns-com-aria',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'erros-mais-comuns-com-aria',
-    sectionTitle: 'Erros mais comuns com ARIA',
-    text: 'Adicionar role="button" em botão. Adicionar aria-label desnecessária. aria-hidden em conteúdo importante. aria-live em excesso. Estado aria-expanded desatualizado. aria-describedby apontando para id inexistente. Criar componente customizado sem teclado.',
-    keywords: [
-      'aria-label',
-      'aria-hidden',
-      'aria-live',
-      'aria-expanded',
-      'aria-describedby',
-      'role:button',
-    ],
-  },
-  {
-    id: 'aria/checklist-aria',
-    partId: 'aria',
-    partTitle: 'ARIA Completo para Angular',
-    sectionId: 'checklist-aria',
-    sectionTitle: 'Checklist ARIA',
-    text: 'Possui nome acessível? Possui role correta? Possui estado correto? Está sincronizado com o DOM? TalkBack anuncia corretamente? VoiceOver anuncia corretamente?',
-    keywords: [],
-  },
-  {
-    id: 'formularios/label',
-    partId: 'formularios',
-    partTitle: 'Formulários Acessíveis',
-    sectionId: 'label',
-    sectionTitle: 'Label',
-    text: 'Nome, campo de edição',
-    keywords: [],
-  },
-  {
-    id: 'formularios/placeholder-nao-e-label',
-    partId: 'formularios',
-    partTitle: 'Formulários Acessíveis',
-    sectionId: 'placeholder-nao-e-label',
-    sectionTitle: 'Placeholder não é Label',
-    text: 'Placeholder desaparece durante o preenchimento. Leitores de tela também podem apresentar inconsistências ao depender exclusivamente dele.',
-    keywords: [],
-  },
-  {
-    id: 'formularios/campos-obrigatorios',
-    partId: 'formularios',
-    partTitle: 'Formulários Acessíveis',
-    sectionId: 'campos-obrigatorios',
-    sectionTitle: 'Campos Obrigatórios',
-    text: 'HTML Nativo Com ARIA Campo obrigatório',
-    keywords: ['aria-required'],
-  },
-  {
-    id: 'formularios/mensagens-de-ajuda',
-    partId: 'formularios',
-    partTitle: 'Formulários Acessíveis',
-    sectionId: 'mensagens-de-ajuda',
-    sectionTitle: 'Mensagens de Ajuda',
-    text: 'Utilize aria-describedby.',
-    keywords: ['aria-describedby'],
-  },
-  {
-    id: 'formularios/validacao-de-erro',
-    partId: 'formularios',
-    partTitle: 'Formulários Acessíveis',
-    sectionId: 'validacao-de-erro',
-    sectionTitle: 'Validação de Erro',
-    text: 'Campo inválido',
-    keywords: ['aria-invalid'],
-  },
-  {
-    id: 'formularios/erro-associado-ao-campo',
-    partId: 'formularios',
-    partTitle: 'Formulários Acessíveis',
-    sectionId: 'erro-associado-ao-campo',
-    sectionTitle: 'Erro Associado ao Campo',
-    text: 'CPF Campo inválido CPF inválido',
-    keywords: ['aria-invalid', 'aria-describedby'],
-  },
-  {
-    id: 'formularios/erro-dinamico-com-aria-live',
-    partId: 'formularios',
-    partTitle: 'Formulários Acessíveis',
-    sectionId: 'erro-dinamico-com-aria-live',
-    sectionTitle: 'Erro Dinâmico com aria-live',
-    text: '',
-    keywords: ['aria-live'],
-  },
-  {
-    id: 'componentes/botoes',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'botoes',
-    sectionTitle: 'Botões',
-    text: 'Continuar, botão',
-    keywords: [],
-  },
-  {
-    id: 'componentes/botao-apenas-com-icone',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'botao-apenas-com-icone',
-    sectionTitle: 'Botão Apenas com Ícone',
-    text: 'Editar endereço, botão',
-    keywords: ['aria-label'],
-  },
-  {
-    id: 'componentes/links',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'links',
-    sectionTitle: 'Links',
-    text: 'Links navegam. Botões executam ações.',
-    keywords: [],
-  },
-  {
-    id: 'componentes/cards-clicaveis',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'cards-clicaveis',
-    sectionTitle: 'Cards Clicáveis',
-    text: 'Alternativa',
-    keywords: [],
-  },
-  {
-    id: 'componentes/accordion',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'accordion',
-    sectionTitle: 'Accordion',
-    text: 'Como funciona? Botão Recolhido',
-    keywords: ['aria-expanded', 'aria-controls'],
-  },
-  {
-    id: 'componentes/accordion-com-angular',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'accordion-com-angular',
-    sectionTitle: 'Accordion com Angular',
-    text: 'aria-expanded deve refletir o estado real.',
-    keywords: ['aria-expanded'],
-  },
-  {
-    id: 'componentes/tabs',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'tabs',
-    sectionTitle: 'Tabs',
-    text: '',
-    keywords: ['aria-selected', 'role:tablist', 'role:tab'],
-  },
-  {
-    id: 'componentes/tab-panel',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'tab-panel',
-    sectionTitle: 'Tab Panel',
-    text: '',
-    keywords: ['role:tabpanel'],
-  },
-  {
-    id: 'componentes/modal',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'modal',
-    sectionTitle: 'Modal',
-    text: '',
-    keywords: ['aria-modal', 'aria-labelledby', 'role:dialog'],
-  },
-  {
-    id: 'componentes/checklist-modal',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'checklist-modal',
-    sectionTitle: 'Checklist Modal',
-    text: 'Possui role="dialog"? Possui aria-modal? Recebe foco ao abrir? Prende foco internamente? Fecha com ESC? Retorna foco ao fechar?',
-    keywords: ['aria-modal', 'role:dialog'],
-  },
-  {
-    id: 'componentes/bottom-sheet',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'bottom-sheet',
-    sectionTitle: 'Bottom Sheet',
-    text: 'Tratar como modal.',
-    keywords: ['aria-modal', 'role:dialog'],
-  },
-  {
-    id: 'componentes/menu',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'menu',
-    sectionTitle: 'Menu',
-    text: '',
-    keywords: ['aria-haspopup', 'aria-expanded'],
-  },
-  {
-    id: 'componentes/itens-de-menu',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'itens-de-menu',
-    sectionTitle: 'Itens de Menu',
-    text: '',
-    keywords: ['role:menu', 'role:menuitem'],
-  },
-  {
-    id: 'componentes/dropdown',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'dropdown',
-    sectionTitle: 'Dropdown',
-    text: 'Sempre que possível, prefira select nativo.',
-    keywords: [],
-  },
-  {
-    id: 'componentes/combobox',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'combobox',
-    sectionTitle: 'Combobox',
-    text: 'Implementação complexa. Evite criar manualmente.',
-    keywords: ['aria-expanded', 'role:combobox'],
-  },
-  {
-    id: 'componentes/lista',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'lista',
-    sectionTitle: 'Lista',
-    text: 'Lista com 2 itens',
-    keywords: [],
-  },
-  {
-    id: 'componentes/breadcrumb',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'breadcrumb',
-    sectionTitle: 'Breadcrumb',
-    text: 'Item Atual',
-    keywords: ['aria-label', 'aria-current'],
-  },
-  {
-    id: 'componentes/stepper',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'stepper',
-    sectionTitle: 'Stepper',
-    text: 'Pagamento Etapa atual',
-    keywords: ['aria-current'],
-  },
-  {
-    id: 'componentes/tabela-simples',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'tabela-simples',
-    sectionTitle: 'Tabela Simples',
-    text: '',
-    keywords: [],
-  },
-  {
-    id: 'componentes/tabela-boas-praticas',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'tabela-boas-praticas',
-    sectionTitle: 'Tabela - Boas Práticas',
-    text: 'Usar caption. Usar th. Usar scope. Evitar tabela feita com div.',
-    keywords: [],
-  },
-  {
-    id: 'componentes/tooltip',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'tooltip',
-    sectionTitle: 'Tooltip',
-    text: '',
-    keywords: ['aria-describedby', 'role:tooltip'],
-  },
-  {
-    id: 'componentes/toast',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'toast',
-    sectionTitle: 'Toast',
-    text: '',
-    keywords: ['role:status'],
-  },
-  {
-    id: 'componentes/snackbar',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'snackbar',
-    sectionTitle: 'Snackbar',
-    text: '',
-    keywords: ['aria-live'],
-  },
-  {
-    id: 'componentes/alertas-criticos',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'alertas-criticos',
-    sectionTitle: 'Alertas Críticos',
-    text: 'Anunciado imediatamente.',
-    keywords: ['role:alert'],
-  },
-  {
-    id: 'componentes/loading',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'loading',
-    sectionTitle: 'Loading',
-    text: '',
-    keywords: ['aria-busy'],
-  },
-  {
-    id: 'componentes/progress-bar',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'progress-bar',
-    sectionTitle: 'Progress Bar',
-    text: '30%',
-    keywords: ['aria-valuemin', 'aria-valuemax', 'aria-valuenow', 'role:progressbar'],
-  },
-  {
-    id: 'componentes/skeleton-loading',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'skeleton-loading',
-    sectionTitle: 'Skeleton Loading',
-    text: 'Conteúdo visual deve ser ignorado pelo leitor de tela.',
-    keywords: ['aria-hidden'],
-  },
-  {
-    id: 'componentes/carrossel',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'carrossel',
-    sectionTitle: 'Carrossel',
-    text: 'Botão anterior. Botão próximo. Botão pausar. Slides identificáveis.',
-    keywords: [],
-  },
-  {
-    id: 'componentes/infinite-scroll',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'infinite-scroll',
-    sectionTitle: 'Infinite Scroll',
-    text: 'Anunciar novos itens carregados. Preservar foco. Evitar mudanças bruscas.',
-    keywords: [],
-  },
-  {
-    id: 'componentes/drag-and-drop',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'drag-and-drop',
-    sectionTitle: 'Drag and Drop',
-    text: 'Nunca dependa exclusivamente do gesto. Sempre ofereça alternativa por clique ou teclado.',
-    keywords: [],
-  },
-  {
-    id: 'componentes/upload-de-arquivo',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'upload-de-arquivo',
-    sectionTitle: 'Upload de Arquivo',
-    text: '',
-    keywords: [],
-  },
-  {
-    id: 'componentes/mensagens-dinamicas',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'mensagens-dinamicas',
-    sectionTitle: 'Mensagens Dinâmicas',
-    text: 'Muito utilizado para: Toast. Filtro aplicado. Busca concluída. Pagamento aprovado. Upload concluído.',
-    keywords: ['aria-live'],
-  },
-  {
-    id: 'componentes/checklist-de-componentes',
-    partId: 'componentes',
-    partTitle: 'Componentes Interativos e Estruturas Complexas',
-    sectionId: 'checklist-de-componentes',
-    sectionTitle: 'Checklist de Componentes',
-    text: 'Possui nome acessível? Possui role correta? Possui estado correto? Funciona com teclado? Possui foco visível? Funciona com TalkBack? Funciona com VoiceOver? Anuncia mudanças importantes? Mantém ordem de foco adequada?',
-    keywords: [],
-  },
-  {
-    id: 'angular/angular-e-acessivel-por-padrao',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'angular-e-acessivel-por-padrao',
-    sectionTitle: 'Angular é acessível por padrão?',
-    text: 'Não. Angular renderiza o HTML que você escreve. Se o HTML for acessível, a aplicação tende a ser acessível. Se o HTML for ruim, Angular não corrige isso.',
-    keywords: [],
-  },
-  {
-    id: 'angular/regra-principal-para-angular',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'regra-principal-para-angular',
-    sectionTitle: 'Regra Principal para Angular',
-    text: '',
-    keywords: [],
-  },
-  {
-    id: 'angular/binding-de-aria',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'binding-de-aria',
-    sectionTitle: 'Binding de ARIA',
-    text: 'Quando o valor é dinâmico: Accordion',
-    keywords: ['aria-label', 'aria-expanded'],
-  },
-  {
-    id: 'angular/ngif-e-foco',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'ngif-e-foco',
-    sectionTitle: 'NgIf e Foco',
-    text: 'Um dos problemas mais comuns. Quando o elemento some do DOM, o foco pode ser perdido.',
-    keywords: ['ngIf'],
-  },
-  {
-    id: 'angular/ngfor-e-acessibilidade',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'ngfor-e-acessibilidade',
-    sectionTitle: 'NgFor e Acessibilidade',
-    text: 'Prefira estruturas semânticas.',
-    keywords: ['ngFor'],
-  },
-  {
-    id: 'angular/router-angular',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'router-angular',
-    sectionTitle: 'Router Angular',
-    text: 'Aplicações SPA não recarregam a página. O leitor de tela não percebe automaticamente que houve mudança de tela.',
-    keywords: [],
-  },
-  {
-    id: 'angular/foco-apos-navegacao',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'foco-apos-navegacao',
-    sectionTitle: 'Foco Após Navegação',
-    text: 'Após a navegação: Mover foco para o H1. Ou para o conteúdo principal.',
-    keywords: [],
-  },
-  {
-    id: 'angular/exemplo-de-destino-de-foco',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'exemplo-de-destino-de-foco',
-    sectionTitle: 'Exemplo de Destino de Foco',
-    text: '',
-    keywords: ['tabindex'],
-  },
-  {
-    id: 'angular/anunciar-mudancas-de-tela',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'anunciar-mudancas-de-tela',
-    sectionTitle: 'Anunciar Mudanças de Tela',
-    text: 'Em aplicações Angular é comum anunciar o nome da tela.',
-    keywords: [],
-  },
-  {
-    id: 'angular/angular-cdk-accessibility',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'angular-cdk-accessibility',
-    sectionTitle: 'Angular CDK Accessibility',
-    text: 'O pacote mais importante para acessibilidade na stack Angular. LiveAnnouncer FocusMonitor FocusTrap FocusKeyManager InteractivityChecker',
-    keywords: [
-      'LiveAnnouncer',
-      'FocusMonitor',
-      'FocusTrap',
-      'FocusKeyManager',
-      'InteractivityChecker',
-    ],
-  },
-  {
-    id: 'angular/liveannouncer',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'liveannouncer',
-    sectionTitle: 'LiveAnnouncer',
-    text: 'Permite criar anúncios para leitores de tela.',
-    keywords: ['LiveAnnouncer'],
-  },
-  {
-    id: 'angular/quando-usar-liveannouncer',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'quando-usar-liveannouncer',
-    sectionTitle: 'Quando usar LiveAnnouncer',
-    text: 'Pagamento concluído. Filtro aplicado. Busca concluída. Upload concluído. Erro importante.',
-    keywords: ['LiveAnnouncer'],
-  },
-  {
-    id: 'angular/cdktrapfocus',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'cdktrapfocus',
-    sectionTitle: 'cdkTrapFocus',
-    text: 'Prende o foco em uma região. Ideal para: Modal. Bottom Sheet. Dialog.',
-    keywords: ['cdkTrapFocus'],
-  },
-  {
-    id: 'angular/exemplo-cdktrapfocus',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'exemplo-cdktrapfocus',
-    sectionTitle: 'Exemplo cdkTrapFocus',
-    text: '',
-    keywords: ['cdkTrapFocus'],
-  },
-  {
-    id: 'angular/focusmonitor',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'focusmonitor',
-    sectionTitle: 'FocusMonitor',
-    text: 'Identifica como o foco chegou até o elemento. Mouse. Teclado. Touch. Programático.',
-    keywords: ['FocusMonitor'],
-  },
-  {
-    id: 'angular/focuskeymanager',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'focuskeymanager',
-    sectionTitle: 'FocusKeyManager',
-    text: 'Gerencia navegação por setas. Muito utilizado em: Tabs. Menus. Listbox. Combobox.',
-    keywords: ['FocusKeyManager'],
-  },
-  {
-    id: 'angular/angular-material',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'angular-material',
-    sectionTitle: 'Angular Material',
-    text: 'O Material já possui boa parte da acessibilidade implementada. Mesmo assim, deve ser testado.',
-    keywords: [],
-  },
-  {
-    id: 'angular/matdialog',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'matdialog',
-    sectionTitle: 'MatDialog',
-    text: 'Benefícios Role dialog. Gerenciamento de foco. ESC. Backdrop.',
-    keywords: ['MatDialog'],
-  },
-  {
-    id: 'angular/checklist-matdialog',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'checklist-matdialog',
-    sectionTitle: 'Checklist MatDialog',
-    text: 'Tem título? Recebe foco? Retorna foco? Possui botão fechar?',
-    keywords: ['MatDialog'],
-  },
-  {
-    id: 'angular/mattabs',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'mattabs',
-    sectionTitle: 'MatTabs',
-    text: 'Implementa a estrutura de tabs. Mesmo assim valide: Setas funcionam. TalkBack anuncia corretamente. VoiceOver anuncia corretamente.',
-    keywords: ['MatTabs'],
-  },
-  {
-    id: 'angular/matmenu',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'matmenu',
-    sectionTitle: 'MatMenu',
-    text: 'Preferível criar menus usando MatMenu ao invés de implementação caseira.',
-    keywords: ['MatMenu'],
-  },
-  {
-    id: 'angular/matselect',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'matselect',
-    sectionTitle: 'MatSelect',
-    text: 'Componente mais propenso a bugs de acessibilidade. Sempre validar: Abertura. Fechamento. Leitura da opção. Estado selecionado.',
-    keywords: ['MatSelect'],
-  },
-  {
-    id: 'angular/matexpansionpanel',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'matexpansionpanel',
-    sectionTitle: 'MatExpansionPanel',
-    text: 'Equivalente ao Accordion. Verificar: aria-expanded. Foco. Anúncio do estado.',
-    keywords: ['aria-expanded', 'MatExpansionPanel'],
-  },
-  {
-    id: 'angular/mattable',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'mattable',
-    sectionTitle: 'MatTable',
-    text: 'Não assumir que toda tabela Material é automaticamente acessível. Validar: caption. headers. sort. foco.',
-    keywords: ['MatTable'],
-  },
-  {
-    id: 'angular/overlay-components',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'overlay-components',
-    sectionTitle: 'Overlay Components',
-    text: 'Todo componente que abre sobre a tela merece atenção extra. Modal. Popover. Tooltip. Select. Menu. Datepicker.',
-    keywords: [],
-  },
-  {
-    id: 'angular/datepicker',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'datepicker',
-    sectionTitle: 'Datepicker',
-    text: 'Validar: Navegação por teclado. Leitura do dia. Leitura do mês. Leitura do ano. Seleção correta.',
-    keywords: [],
-  },
-  {
-    id: 'angular/loading-angular',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'loading-angular',
-    sectionTitle: 'Loading Angular',
-    text: 'Mudanças de estado devem ser anunciadas. Ou:',
-    keywords: ['aria-busy'],
-  },
-  {
-    id: 'angular/lazy-loading',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'lazy-loading',
-    sectionTitle: 'Lazy Loading',
-    text: 'Quando conteúdo aparece após carregamento assíncrono, o foco e o anúncio devem ser avaliados.',
-    keywords: [],
-  },
-  {
-    id: 'angular/signals-e-acessibilidade',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'signals-e-acessibilidade',
-    sectionTitle: 'Signals e Acessibilidade',
-    text: 'Signals atualizam a UI automaticamente. Mas leitores de tela não são notificados automaticamente. Use: aria-live LiveAnnouncer',
-    keywords: ['aria-live', 'Signals', 'LiveAnnouncer'],
-  },
-  {
-    id: 'angular/standalone-components',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'standalone-components',
-    sectionTitle: 'Standalone Components',
-    text: 'Não possuem diferenças específicas de acessibilidade. As mesmas regras continuam válidas.',
-    keywords: [],
-  },
-  {
-    id: 'angular/pipes',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'pipes',
-    sectionTitle: 'Pipes',
-    text: 'Cuidado com formatações que prejudicam a leitura. Exemplo Validar como o leitor anuncia.',
-    keywords: [],
-  },
-  {
-    id: 'angular/custom-components',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'custom-components',
-    sectionTitle: 'Custom Components',
-    text: 'A maior origem de bugs em Angular. Botões customizados. Select customizado. Dropdown customizado. Stepper customizado. Menu customizado.',
-    keywords: [],
-  },
-  {
-    id: 'angular/regra-para-custom-components',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'regra-para-custom-components',
-    sectionTitle: 'Regra para Custom Components',
-    text: 'Sempre perguntar: Existe componente nativo? Existe componente Material? Preciso mesmo criar do zero?',
-    keywords: [],
-  },
-  {
-    id: 'angular/erro-mais-comum-do-time-front',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'erro-mais-comum-do-time-front',
-    sectionTitle: 'Erro Mais Comum do Time Front',
-    text: 'Visualmente funciona. Mas perde: Role. Teclado. Estado. Semântica.',
-    keywords: [],
-  },
-  {
-    id: 'angular/checklist-angular',
-    partId: 'angular',
-    partTitle: 'Angular, Angular Material e Angular CDK A11y',
-    sectionId: 'checklist-angular',
-    sectionTitle: 'Checklist Angular',
-    text: 'Existe HTML semântico? Existe nome acessível? Existe gerenciamento de foco? Existe anúncio para mudanças importantes? Router move foco corretamente? Material foi validado? Custom Components foram auditados? Funciona só com teclado? Funciona com TalkBack? Funciona com VoiceOver?',
-    keywords: [],
-  },
-  {
-    id: 'leitores-de-tela/principio-fundamental',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'principio-fundamental',
-    sectionTitle: 'Princípio Fundamental',
-    text: 'Leitores de tela dependem de: Nome acessível. Role correta. Estado correto. Quase todos os bugs podem ser analisados por esses três pontos.',
-    keywords: [],
-  },
-  {
-    id: 'leitores-de-tela/exemplo-de-leitura',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'exemplo-de-leitura',
-    sectionTitle: 'Exemplo de Leitura',
-    text: 'Salvar, botão Salvar, botão',
-    keywords: [],
-  },
-  {
-    id: 'leitores-de-tela/botao-com-icone',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'botao-com-icone',
-    sectionTitle: 'Botão com Ícone',
-    text: 'Botão Fechar, botão',
-    keywords: ['aria-label'],
-  },
-  {
-    id: 'leitores-de-tela/campos-obrigatorios-2',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'campos-obrigatorios-2',
-    sectionTitle: 'Campos Obrigatórios',
-    text: 'Campo de edição Obrigatório',
-    keywords: [],
-  },
-  {
-    id: 'leitores-de-tela/campo-invalido',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'campo-invalido',
-    sectionTitle: 'Campo Inválido',
-    text: 'Campo inválido',
-    keywords: ['aria-invalid'],
-  },
-  {
-    id: 'leitores-de-tela/checkbox',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'checkbox',
-    sectionTitle: 'Checkbox',
-    text: 'Aceito os termos Checkbox Não marcado Aceito os termos Checkbox Marcado',
-    keywords: [],
-  },
-  {
-    id: 'leitores-de-tela/switch',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'switch',
-    sectionTitle: 'Switch',
-    text: 'Notificações Switch Ligado',
-    keywords: ['aria-checked', 'role:switch'],
-  },
-  {
-    id: 'leitores-de-tela/accordion-2',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'accordion-2',
-    sectionTitle: 'Accordion',
-    text: 'Detalhes Botão Recolhido Detalhes Botão Expandido',
-    keywords: ['aria-expanded'],
-  },
-  {
-    id: 'leitores-de-tela/tabs-2',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'tabs-2',
-    sectionTitle: 'Tabs',
-    text: 'Dados Aba Selecionada',
-    keywords: ['aria-selected', 'role:tab'],
-  },
-  {
-    id: 'leitores-de-tela/stepper-2',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'stepper-2',
-    sectionTitle: 'Stepper',
-    text: 'Pagamento Etapa atual',
-    keywords: ['aria-current'],
-  },
-  {
-    id: 'leitores-de-tela/mensagens-dinamicas-2',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'mensagens-dinamicas-2',
-    sectionTitle: 'Mensagens Dinâmicas',
-    text: 'O foco não precisa mudar. O leitor anuncia automaticamente.',
-    keywords: ['aria-live'],
-  },
-  {
-    id: 'leitores-de-tela/role-alert',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'role-alert',
-    sectionTitle: 'Role Alert',
-    text: 'É anunciado imediatamente. Utilizar apenas para mensagens importantes.',
-    keywords: ['role:alert'],
-  },
-  {
-    id: 'leitores-de-tela/foco-visivel',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'foco-visivel',
-    sectionTitle: 'Foco Visível',
-    text: 'Todo elemento focável deve indicar visualmente que recebeu foco.',
-    keywords: [],
-  },
-  {
-    id: 'leitores-de-tela/sequencia-de-foco',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'sequencia-de-foco',
-    sectionTitle: 'Sequência de Foco',
-    text: 'A ordem do DOM deve refletir a ordem visual. Usuários de leitor de tela navegam seguindo a estrutura da página.',
-    keywords: [],
-  },
-  {
-    id: 'leitores-de-tela/modais',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'modais',
-    sectionTitle: 'Modais',
-    text: 'Ao abrir: Foco vai para o modal. Conteúdo anterior fica inacessível. Tab navega apenas dentro dele. Ao fechar: Foco retorna ao elemento que abriu.',
-    keywords: [],
-  },
-  {
-    id: 'leitores-de-tela/problema-classico',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'problema-classico',
-    sectionTitle: 'Problema Clássico',
-    text: 'Ao fechar o modal, o foco muitas vezes desaparece. Deve retornar ao botão Editar.',
-    keywords: ['ngIf'],
-  },
-  {
-    id: 'leitores-de-tela/loading-2',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'loading-2',
-    sectionTitle: 'Loading',
-    text: 'Evite deixar usuário sem feedback. Exemplo Extrato carregado com sucesso',
-    keywords: [],
-  },
-  {
-    id: 'leitores-de-tela/talkback-x-voiceover',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'talkback-x-voiceover',
-    sectionTitle: 'TalkBack x VoiceOver',
-    text: 'Cenário Diferenças comuns Forms Pequenas diferenças de anúncio. Tabs Ordem de anúncio pode variar. Modais Foco pode variar. Selects Muito dependente da implementação.',
-    keywords: [],
-  },
-  {
-    id: 'leitores-de-tela/roteiro-de-teste-manual',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'roteiro-de-teste-manual',
-    sectionTitle: 'Roteiro de Teste Manual',
-    text: 'Ativar leitor de tela. Percorrer toda tela. Verificar títulos. Verificar botões. Verificar formulários. Testar erros. Testar loading. Testar modal. Testar navegação. Testar saída do fluxo.',
-    keywords: [],
-  },
-  {
-    id: 'leitores-de-tela/bugs-mais-comuns-encontrados-em-producao',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'bugs-mais-comuns-encontrados-em-producao',
-    sectionTitle: 'Bugs Mais Comuns Encontrados em Produção',
-    text: 'Botão sem nome acessível. Ícone clicável sem label. Modal sem foco. Erro não anunciado. Toast não anunciado. Foco perdido após navegação. Ordem de foco incorreta. Accordion sem aria-expanded. Tabs sem aria-selected. Select customizado incompleto.',
-    keywords: ['aria-expanded', 'aria-selected'],
-  },
-  {
-    id: 'leitores-de-tela/checklist-final-de-talkback-e-voiceover',
-    partId: 'leitores-de-tela',
-    partTitle: 'TalkBack, VoiceOver e Testes Reais',
-    sectionId: 'checklist-final-de-talkback-e-voiceover',
-    sectionTitle: 'Checklist Final de TalkBack e VoiceOver',
-    text: 'Todos os elementos possuem nome? Todos possuem role correta? Estado é anunciado? Fluxo funciona sem visão? Erros são anunciados? Mensagens dinâmicas são anunciadas? Foco nunca desaparece? A navegação faz sentido? Existe feedback para sucesso e erro?',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/o-que-significa-uma-tela-acessivel',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'o-que-significa-uma-tela-acessivel',
-    sectionTitle: 'O que significa uma tela acessível?',
-    text: 'Uma tela acessível não é apenas uma tela sem erros de WCAG. Uma tela acessível permite que o usuário: Compreenda o conteúdo. Navegue sozinho. Execute ações. Receba feedback. Conclua a jornada.',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/principais-criterios-wcag-para-angular',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'principais-criterios-wcag-para-angular',
-    sectionTitle: 'Principais Critérios WCAG para Angular',
-    text: 'Critério Tema 1.1.1 Texto alternativo. 1.3.1 Info e relacionamentos. 1.3.2 Sequência significativa. 1.4.3 Contraste. 1.4.10 Reflow. 2.1.1 Teclado. 2.1.2 Sem armadilha de teclado. 2.4.3 Ordem de foco. 2.4.6 Títulos e labels. 2.4.7 Foco visível. 3.3.1 Identificação de erros. 3.3.2 Instruções e labels. 4.1.2 Name, Role e Value.',
-    keywords: [
-      '1.1.1',
-      '1.3.1',
-      '1.3.2',
-      '1.4.3',
-      '1.4.10',
-      '2.1.1',
-      '2.1.2',
-      '2.4.3',
-      '2.4.6',
-      '2.4.7',
-      '3.3.1',
-      '3.3.2',
-      '4.1.2',
-    ],
-  },
-  {
-    id: 'qa-wcag/criterios-que-mais-geram-bugs',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'criterios-que-mais-geram-bugs',
-    sectionTitle: 'Critérios que Mais Geram Bugs',
-    text: '2.4.3 Ordem de foco. 4.1.2 Name Role Value. 3.3.1 Identificação de erros. 2.1.1 Navegação por teclado. 1.3.1 Relacionamentos.',
-    keywords: ['2.4.3', '4.1.2', '3.3.1', '2.1.1', '1.3.1'],
-  },
-  {
-    id: 'qa-wcag/checklist-de-story',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'checklist-de-story',
-    sectionTitle: 'Checklist de Story',
-    text: 'Toda história deveria responder: Possui componentes interativos? Existe leitor de tela impactado? Existe navegação por teclado? Existe foco? Existe anúncio dinâmico? Existe tratamento de erro?',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/checklist-de-desenvolvimento',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'checklist-de-desenvolvimento',
-    sectionTitle: 'Checklist de Desenvolvimento',
-    text: 'Existe HTML semântico? Existe label para todos os campos? Existe nome acessível? Existe role correta? Existe gerenciamento de foco? Existe suporte a teclado? Existe feedback para erro? Existe feedback para sucesso? Existe validação TalkBack? Existe validação VoiceOver?',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/checklist-de-pull-request',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'checklist-de-pull-request',
-    sectionTitle: 'Checklist de Pull Request',
-    text: 'Novos componentes foram testados? O foco continua correto? Não houve regressão de leitor de tela? Os labels permanecem corretos? ARIA continua sincronizada? Teclado continua funcionando?',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/checklist-de-qa',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'checklist-de-qa',
-    sectionTitle: 'Checklist de QA',
-    text: 'Todos os botões são anunciados? Todos os links são anunciados? Todos os campos possuem label? Todos os erros são anunciados? Todos os modais abrem corretamente? Todos os modais devolvem foco? Todos os accordions anunciam expandido/recolhido? Todas as tabs anunciam estado selecionado? Todos os steppers anunciam etapa atual? Existem regiões com foco perdido?',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/checklist-para-talkback',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'checklist-para-talkback',
-    sectionTitle: 'Checklist para TalkBack',
-    text: 'Navegar a tela inteira. Validar headings. Validar botões. Validar formulários. Validar modal. Validar mensagens de erro. Validar toast. Validar loading. Validar conclusão do fluxo.',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/checklist-para-voiceover',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'checklist-para-voiceover',
-    sectionTitle: 'Checklist para VoiceOver',
-    text: 'Navegar tela completa. Validar todos os elementos focáveis. Validar formulários. Validar alertas. Validar menus. Validar overlays. Validar conclusão da jornada.',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/quando-abrir-um-bug-de-acessibilidade',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'quando-abrir-um-bug-de-acessibilidade',
-    sectionTitle: 'Quando Abrir um Bug de Acessibilidade?',
-    text: 'Sempre que o usuário: Não conseguir concluir uma tarefa. Não conseguir identificar um elemento. Não conseguir navegar. Perder foco. Não receber feedback. Receber informação incorreta.',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/template-de-bug',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'template-de-bug',
-    sectionTitle: 'Template de Bug',
-    text: '',
-    keywords: ['4.1.2'],
-  },
-  {
-    id: 'qa-wcag/classificacao-de-severidade',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'classificacao-de-severidade',
-    sectionTitle: 'Classificação de Severidade',
-    text: 'Nível Descrição Crítico Usuário não conclui a jornada. Alto Grande dificuldade de navegação. Médio Experiência degradada. Baixo Melhoria recomendada.',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/exemplos-de-bugs-criticos',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'exemplos-de-bugs-criticos',
-    sectionTitle: 'Exemplos de Bugs Críticos',
-    text: 'Botão principal sem nome. Modal inacessível. Erro não anunciado. Foco preso incorretamente. Campo sem label.',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/exemplos-de-bugs-medios',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'exemplos-de-bugs-medios',
-    sectionTitle: 'Exemplos de Bugs Médios',
-    text: 'Heading incorreto. Texto alternativo ruim. Tooltip sem descrição. Leitura redundante.',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/definition-of-done-acessivel',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'definition-of-done-acessivel',
-    sectionTitle: 'Definition of Done Acessível',
-    text: 'WCAG AA atendida. Teclado funcionando. TalkBack validado. VoiceOver validado. Nome acessível definido. Role correta. Estado correto. Sem perda de foco. Sem erros conhecidos.',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/checklist-para-revisao-de-tela-nova',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'checklist-para-revisao-de-tela-nova',
-    sectionTitle: 'Checklist para Revisão de Tela Nova',
-    text: 'Existe H1? Existe estrutura semântica? Existe ordem lógica? Existe foco? Existe suporte para leitor? Existe tratamento de erro? Existe feedback de sucesso? Existe feedback de carregamento? Existe navegação consistente?',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/ferramentas-recomendadas',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'ferramentas-recomendadas',
-    sectionTitle: 'Ferramentas Recomendadas',
-    text: 'TalkBack. VoiceOver. Chrome Lighthouse. axe DevTools. Accessibility Insights. Angular CDK A11y.',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/o-que-ferramentas-nao-encontram',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'o-que-ferramentas-nao-encontram',
-    sectionTitle: 'O que Ferramentas NÃO Encontram',
-    text: 'Ferramentas automatizadas não substituem testes reais. Elas não identificam bem: Fluxos quebrados. Foco ruim. Experiência ruim. Anúncios confusos. Navegação complexa.',
-    keywords: [],
-  },
-  {
-    id: 'qa-wcag/mentalidade-final',
-    partId: 'qa-wcag',
-    partTitle: 'QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular',
-    sectionId: 'mentalidade-final',
-    sectionTitle: 'Mentalidade Final',
-    text: 'A pergunta não deve ser: Mas sim: Se a resposta for sim, normalmente a implementação está no caminho certo.',
-    keywords: [],
-  },
+    "id": "fundamentos/o-que-e-acessibilidade",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "o-que-e-acessibilidade",
+    "sectionTitle": "O que é acessibilidade?",
+    "text": "Acessibilidade é a capacidade de um produto digital ser utilizado por todas as pessoas, independentemente de limitações visuais, auditivas, motoras, cognitivas ou temporárias. Exemplos de usuários: Pessoa cega usando TalkBack. Pessoa cega usando VoiceOver. Pessoa com baixa visão usando zoom. Pessoa com mobilidade reduzida utilizando teclado. Pessoa com deficiência cognitiva. Pessoa com braço machucado utilizando somente uma mão.",
+    "keywords": []
+  },
+  {
+    "id": "fundamentos/wcag-2-2",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "wcag-2-2",
+    "sectionTitle": "WCAG 2.2",
+    "text": "A WCAG (Web Content Accessibility Guidelines) é o conjunto mais utilizado no mundo para avaliar acessibilidade digital. Níveis de conformidade Nível Descrição A Requisitos mínimos. AA Padrão adotado pela maioria das empresas. AAA Nível mais rigoroso.",
+    "keywords": []
+  },
+  {
+    "id": "fundamentos/pour",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "pour",
+    "sectionTitle": "POUR",
+    "text": "Todos os critérios da WCAG derivam de quatro pilares: P - Perceivable (Perceptível) O usuário precisa conseguir perceber o conteúdo. Imagens precisam de texto alternativo. Informações não podem depender apenas de cor. O - Operable (Operável) A interface deve ser utilizável. Compatível com teclado. Compatível com leitores de tela. U - Understandable (Compreensível) Fluxos consistentes. Mensagens claras. Erros compreensíveis. R - Robust (Robusto) Compatível com tecnologias assistivas. HTML semântico. ARIA correta.",
+    "keywords": []
+  },
+  {
+    "id": "fundamentos/leitores-de-tela-2",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "leitores-de-tela-2",
+    "sectionTitle": "Leitores de tela",
+    "text": "TalkBack Leitor de tela nativo do Android. VoiceOver Leitor de tela nativo do iOS. O que eles precisam para funcionar corretamente? Nome acessível. Role correta. Estado correto. Exemplo Salvar, botão",
+    "keywords": []
+  },
+  {
+    "id": "fundamentos/como-um-leitor-de-tela-enxerga-uma-pagina",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "como-um-leitor-de-tela-enxerga-uma-pagina",
+    "sectionTitle": "Como um leitor de tela enxerga uma página?",
+    "text": "Usuários não enxergam a interface da mesma forma que usuários visuais. Eles navegam por: Títulos. Botões. Links. Campos. Landmarks. Uma tela visualmente perfeita pode ser completamente inutilizável para um leitor de tela.",
+    "keywords": []
+  },
+  {
+    "id": "fundamentos/regra-de-ouro-da-acessibilidade",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "regra-de-ouro-da-acessibilidade",
+    "sectionTitle": "Regra de Ouro da Acessibilidade",
+    "text": "HTML primeiro Sempre prefira HTML semântico antes de usar ARIA. Se existe uma tag HTML nativa capaz de resolver o problema, use ela.",
+    "keywords": []
+  },
+  {
+    "id": "fundamentos/estrutura-semantica-basica",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "estrutura-semantica-basica",
+    "sectionTitle": "Estrutura Semântica Básica",
+    "text": "",
+    "keywords": []
+  },
+  {
+    "id": "fundamentos/landmarks",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "landmarks",
+    "sectionTitle": "Landmarks",
+    "text": "Landmarks permitem que leitores de tela naveguem rapidamente pelas regiões importantes da página. Tag Função header Cabeçalho. nav Navegação. main Conteúdo principal. aside Conteúdo complementar. footer Rodapé.",
+    "keywords": []
+  },
+  {
+    "id": "fundamentos/headings",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "headings",
+    "sectionTitle": "Headings",
+    "text": "Headings criam uma árvore de navegação.",
+    "keywords": []
+  },
+  {
+    "id": "fundamentos/accessible-name",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "accessible-name",
+    "sectionTitle": "Accessible Name",
+    "text": "Todo elemento interativo deve possuir um nome acessível. Texto visível Continuar, botão aria-label Fechar modal, botão",
+    "keywords": [
+      "aria-label"
+    ]
+  },
+  {
+    "id": "fundamentos/accessible-description",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "accessible-description",
+    "sectionTitle": "Accessible Description",
+    "text": "O leitor combinará o nome do campo com sua descrição.",
+    "keywords": [
+      "aria-describedby"
+    ]
+  },
+  {
+    "id": "fundamentos/nome-role-estado",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "nome-role-estado",
+    "sectionTitle": "Nome + Role + Estado",
+    "text": "Quase toda análise de leitor de tela pode ser resumida em três perguntas: Pergunta Exemplo Qual é o nome? Salvar Qual é a role? Botão Qual é o estado? Desabilitado Exemplo Salvar, botão, desabilitado",
+    "keywords": []
+  },
+  {
+    "id": "fundamentos/erros-mais-comuns-encontrados-em-angular",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "erros-mais-comuns-encontrados-em-angular",
+    "sectionTitle": "Erros mais comuns encontrados em Angular",
+    "text": "Div clicável simulando botão. Ícone clicável sem aria-label. Input apenas com placeholder. Ausência de heading principal. Modal sem gerenciamento de foco. Erros de formulário não anunciados. Uso excessivo de ARIA. Links agindo como botão. Botões agindo como links. tabindex positivo.",
+    "keywords": [
+      "aria-label",
+      "tabindex"
+    ]
+  },
+  {
+    "id": "fundamentos/mentalidade-para-o-time-angular",
+    "partId": "fundamentos",
+    "partTitle": "Fundamentos de Acessibilidade Angular",
+    "sectionId": "mentalidade-para-o-time-angular",
+    "sectionTitle": "Mentalidade para o time Angular",
+    "text": "Antes de criar qualquer componente, pergunte: Existe uma tag HTML nativa para isso? O elemento possui nome acessível? Funciona com teclado? Funciona com TalkBack? Funciona com VoiceOver?",
+    "keywords": []
+  },
+  {
+    "id": "aria/o-que-e-aria",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "o-que-e-aria",
+    "sectionTitle": "O que é ARIA?",
+    "text": "ARIA significa: ARIA existe para complementar a semântica HTML. ARIA NÃO substitui HTML semântico.",
+    "keywords": [
+      "role:button"
+    ]
+  },
+  {
+    "id": "aria/regra-de-ouro",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "regra-de-ouro",
+    "sectionTitle": "Regra de Ouro",
+    "text": "Se o HTML nativo resolve, não use ARIA desnecessariamente.",
+    "keywords": []
+  },
+  {
+    "id": "aria/accessible-name-2",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "accessible-name-2",
+    "sectionTitle": "Accessible Name",
+    "text": "Todo elemento interativo deve possuir um nome acessível. Texto interno Continuar, botão",
+    "keywords": []
+  },
+  {
+    "id": "aria/aria-label",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-label",
+    "sectionTitle": "aria-label",
+    "text": "Atributo Valor Uso aria-label string Define nome acessível. Quando usar Botão apenas com ícone. Ações sem texto visível. Elementos customizados. Exemplo Fechar modal, botão",
+    "keywords": [
+      "aria-label"
+    ]
+  },
+  {
+    "id": "aria/aria-labelledby",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-labelledby",
+    "sectionTitle": "aria-labelledby",
+    "text": "Valor Uso id Usa outro elemento como nome.",
+    "keywords": [
+      "aria-labelledby"
+    ]
+  },
+  {
+    "id": "aria/aria-describedby",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-describedby",
+    "sectionTitle": "aria-describedby",
+    "text": "Adiciona descrição complementar.",
+    "keywords": [
+      "aria-describedby"
+    ]
+  },
+  {
+    "id": "aria/aria-hidden",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-hidden",
+    "sectionTitle": "aria-hidden",
+    "text": "Valor Uso true Oculta do leitor. false Expõe ao leitor. Imagem decorativa",
+    "keywords": [
+      "aria-hidden"
+    ]
+  },
+  {
+    "id": "aria/aria-expanded",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-expanded",
+    "sectionTitle": "aria-expanded",
+    "text": "Indica estado expandido. Detalhes, botão, recolhido",
+    "keywords": [
+      "aria-expanded"
+    ]
+  },
+  {
+    "id": "aria/aria-controls",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-controls",
+    "sectionTitle": "aria-controls",
+    "text": "Relaciona um controlador a um conteúdo.",
+    "keywords": [
+      "aria-controls",
+      "aria-expanded"
+    ]
+  },
+  {
+    "id": "aria/aria-current",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-current",
+    "sectionTitle": "aria-current",
+    "text": "Valor Uso page Página atual. step Etapa atual. location Local atual. Stepper",
+    "keywords": [
+      "aria-current"
+    ]
+  },
+  {
+    "id": "aria/aria-selected",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-selected",
+    "sectionTitle": "aria-selected",
+    "text": "Indica seleção.",
+    "keywords": [
+      "aria-selected",
+      "role:tab"
+    ]
+  },
+  {
+    "id": "aria/aria-checked",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-checked",
+    "sectionTitle": "aria-checked",
+    "text": "Aceito, checkbox, marcado",
+    "keywords": [
+      "aria-checked",
+      "role:checkbox"
+    ]
+  },
+  {
+    "id": "aria/aria-pressed",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-pressed",
+    "sectionTitle": "aria-pressed",
+    "text": "Botões toggle.",
+    "keywords": [
+      "aria-pressed"
+    ]
+  },
+  {
+    "id": "aria/aria-disabled",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-disabled",
+    "sectionTitle": "aria-disabled",
+    "text": "Continuar, botão, indisponível",
+    "keywords": [
+      "aria-disabled"
+    ]
+  },
+  {
+    "id": "aria/aria-required",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-required",
+    "sectionTitle": "aria-required",
+    "text": "Campo obrigatório",
+    "keywords": [
+      "aria-required"
+    ]
+  },
+  {
+    "id": "aria/aria-invalid",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-invalid",
+    "sectionTitle": "aria-invalid",
+    "text": "Campo inválido",
+    "keywords": [
+      "aria-invalid"
+    ]
+  },
+  {
+    "id": "aria/aria-live",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-live",
+    "sectionTitle": "aria-live",
+    "text": "Valor Uso off Não anuncia. polite Anuncia quando possível. assertive Anuncia imediatamente. Toast",
+    "keywords": [
+      "aria-live"
+    ]
+  },
+  {
+    "id": "aria/aria-atomic",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-atomic",
+    "sectionTitle": "aria-atomic",
+    "text": "Controla quanto será relido.",
+    "keywords": [
+      "aria-atomic",
+      "aria-live"
+    ]
+  },
+  {
+    "id": "aria/aria-busy",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-busy",
+    "sectionTitle": "aria-busy",
+    "text": "Informa carregamento.",
+    "keywords": [
+      "aria-busy"
+    ]
+  },
+  {
+    "id": "aria/aria-modal",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-modal",
+    "sectionTitle": "aria-modal",
+    "text": "",
+    "keywords": [
+      "aria-modal",
+      "role:dialog"
+    ]
+  },
+  {
+    "id": "aria/aria-haspopup",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-haspopup",
+    "sectionTitle": "aria-haspopup",
+    "text": "Valor Uso menu Abre menu. dialog Abre modal. listbox Abre lista.",
+    "keywords": [
+      "aria-haspopup"
+    ]
+  },
+  {
+    "id": "aria/aria-para-progress-bar",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "aria-para-progress-bar",
+    "sectionTitle": "ARIA para Progress Bar",
+    "text": "50%",
+    "keywords": [
+      "aria-valuemin",
+      "aria-valuemax",
+      "aria-valuenow",
+      "role:progressbar"
+    ]
+  },
+  {
+    "id": "aria/principais-roles",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "principais-roles",
+    "sectionTitle": "Principais Roles",
+    "text": "Role Uso button Botão. link Link. dialog Modal. alert Mensagem urgente. status Status informativo. tablist Container de abas. tab Aba. tabpanel Conteúdo da aba. checkbox Checkbox. switch Liga e desliga. menu Menu. menuitem Item menu. listbox Lista selecionável. option Opção.",
+    "keywords": []
+  },
+  {
+    "id": "aria/roles-que-voce-quase-nunca-precisara",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "roles-que-voce-quase-nunca-precisara",
+    "sectionTitle": "Roles que você quase nunca precisará",
+    "text": "tree treegrid feed math meter log marquee Não use sem necessidade real.",
+    "keywords": []
+  },
+  {
+    "id": "aria/angular-attribute-binding",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "angular-attribute-binding",
+    "sectionTitle": "Angular Attribute Binding",
+    "text": "Também funciona",
+    "keywords": [
+      "aria-label"
+    ]
+  },
+  {
+    "id": "aria/erros-mais-comuns-com-aria",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "erros-mais-comuns-com-aria",
+    "sectionTitle": "Erros mais comuns com ARIA",
+    "text": "Adicionar role=\"button\" em botão. Adicionar aria-label desnecessária. aria-hidden em conteúdo importante. aria-live em excesso. Estado aria-expanded desatualizado. aria-describedby apontando para id inexistente. Criar componente customizado sem teclado.",
+    "keywords": [
+      "aria-label",
+      "aria-hidden",
+      "aria-live",
+      "aria-expanded",
+      "aria-describedby",
+      "role:button"
+    ]
+  },
+  {
+    "id": "aria/checklist-aria",
+    "partId": "aria",
+    "partTitle": "ARIA Completo para Angular",
+    "sectionId": "checklist-aria",
+    "sectionTitle": "Checklist ARIA",
+    "text": "Possui nome acessível? Possui role correta? Possui estado correto? Está sincronizado com o DOM? TalkBack anuncia corretamente? VoiceOver anuncia corretamente?",
+    "keywords": []
+  },
+  {
+    "id": "formularios/label",
+    "partId": "formularios",
+    "partTitle": "Formulários Acessíveis",
+    "sectionId": "label",
+    "sectionTitle": "Label",
+    "text": "Nome, campo de edição",
+    "keywords": []
+  },
+  {
+    "id": "formularios/placeholder-nao-e-label",
+    "partId": "formularios",
+    "partTitle": "Formulários Acessíveis",
+    "sectionId": "placeholder-nao-e-label",
+    "sectionTitle": "Placeholder não é Label",
+    "text": "Placeholder desaparece durante o preenchimento. Leitores de tela também podem apresentar inconsistências ao depender exclusivamente dele.",
+    "keywords": []
+  },
+  {
+    "id": "formularios/campos-obrigatorios",
+    "partId": "formularios",
+    "partTitle": "Formulários Acessíveis",
+    "sectionId": "campos-obrigatorios",
+    "sectionTitle": "Campos Obrigatórios",
+    "text": "HTML Nativo Com ARIA Campo obrigatório",
+    "keywords": [
+      "aria-required"
+    ]
+  },
+  {
+    "id": "formularios/mensagens-de-ajuda",
+    "partId": "formularios",
+    "partTitle": "Formulários Acessíveis",
+    "sectionId": "mensagens-de-ajuda",
+    "sectionTitle": "Mensagens de Ajuda",
+    "text": "Utilize aria-describedby.",
+    "keywords": [
+      "aria-describedby"
+    ]
+  },
+  {
+    "id": "formularios/validacao-de-erro",
+    "partId": "formularios",
+    "partTitle": "Formulários Acessíveis",
+    "sectionId": "validacao-de-erro",
+    "sectionTitle": "Validação de Erro",
+    "text": "Campo inválido",
+    "keywords": [
+      "aria-invalid"
+    ]
+  },
+  {
+    "id": "formularios/erro-associado-ao-campo",
+    "partId": "formularios",
+    "partTitle": "Formulários Acessíveis",
+    "sectionId": "erro-associado-ao-campo",
+    "sectionTitle": "Erro Associado ao Campo",
+    "text": "CPF Campo inválido CPF inválido",
+    "keywords": [
+      "aria-invalid",
+      "aria-describedby"
+    ]
+  },
+  {
+    "id": "formularios/erro-dinamico-com-aria-live",
+    "partId": "formularios",
+    "partTitle": "Formulários Acessíveis",
+    "sectionId": "erro-dinamico-com-aria-live",
+    "sectionTitle": "Erro Dinâmico com aria-live",
+    "text": "",
+    "keywords": [
+      "aria-live"
+    ]
+  },
+  {
+    "id": "componentes/botoes",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "botoes",
+    "sectionTitle": "Botões",
+    "text": "Continuar, botão",
+    "keywords": []
+  },
+  {
+    "id": "componentes/botao-apenas-com-icone",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "botao-apenas-com-icone",
+    "sectionTitle": "Botão Apenas com Ícone",
+    "text": "Editar endereço, botão",
+    "keywords": [
+      "aria-label"
+    ]
+  },
+  {
+    "id": "componentes/links",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "links",
+    "sectionTitle": "Links",
+    "text": "Links navegam. Botões executam ações.",
+    "keywords": []
+  },
+  {
+    "id": "componentes/cards-clicaveis",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "cards-clicaveis",
+    "sectionTitle": "Cards Clicáveis",
+    "text": "Alternativa",
+    "keywords": []
+  },
+  {
+    "id": "componentes/accordion",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "accordion",
+    "sectionTitle": "Accordion",
+    "text": "Como funciona? Botão Recolhido",
+    "keywords": [
+      "aria-expanded",
+      "aria-controls"
+    ]
+  },
+  {
+    "id": "componentes/accordion-com-angular",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "accordion-com-angular",
+    "sectionTitle": "Accordion com Angular",
+    "text": "aria-expanded deve refletir o estado real.",
+    "keywords": [
+      "aria-expanded"
+    ]
+  },
+  {
+    "id": "componentes/tabs",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "tabs",
+    "sectionTitle": "Tabs",
+    "text": "",
+    "keywords": [
+      "aria-selected",
+      "role:tablist",
+      "role:tab"
+    ]
+  },
+  {
+    "id": "componentes/tab-panel",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "tab-panel",
+    "sectionTitle": "Tab Panel",
+    "text": "",
+    "keywords": [
+      "role:tabpanel"
+    ]
+  },
+  {
+    "id": "componentes/modal",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "modal",
+    "sectionTitle": "Modal",
+    "text": "",
+    "keywords": [
+      "aria-modal",
+      "aria-labelledby",
+      "role:dialog"
+    ]
+  },
+  {
+    "id": "componentes/checklist-modal",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "checklist-modal",
+    "sectionTitle": "Checklist Modal",
+    "text": "Possui role=\"dialog\"? Possui aria-modal? Recebe foco ao abrir? Prende foco internamente? Fecha com ESC? Retorna foco ao fechar?",
+    "keywords": [
+      "aria-modal",
+      "role:dialog"
+    ]
+  },
+  {
+    "id": "componentes/bottom-sheet",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "bottom-sheet",
+    "sectionTitle": "Bottom Sheet",
+    "text": "Tratar como modal.",
+    "keywords": [
+      "aria-modal",
+      "role:dialog"
+    ]
+  },
+  {
+    "id": "componentes/menu",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "menu",
+    "sectionTitle": "Menu",
+    "text": "",
+    "keywords": [
+      "aria-haspopup",
+      "aria-expanded"
+    ]
+  },
+  {
+    "id": "componentes/itens-de-menu",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "itens-de-menu",
+    "sectionTitle": "Itens de Menu",
+    "text": "",
+    "keywords": [
+      "role:menu",
+      "role:menuitem"
+    ]
+  },
+  {
+    "id": "componentes/dropdown",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "dropdown",
+    "sectionTitle": "Dropdown",
+    "text": "Sempre que possível, prefira select nativo.",
+    "keywords": []
+  },
+  {
+    "id": "componentes/combobox",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "combobox",
+    "sectionTitle": "Combobox",
+    "text": "Implementação complexa. Evite criar manualmente.",
+    "keywords": [
+      "aria-expanded",
+      "role:combobox"
+    ]
+  },
+  {
+    "id": "componentes/lista",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "lista",
+    "sectionTitle": "Lista",
+    "text": "Lista com 2 itens",
+    "keywords": []
+  },
+  {
+    "id": "componentes/breadcrumb",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "breadcrumb",
+    "sectionTitle": "Breadcrumb",
+    "text": "Item Atual",
+    "keywords": [
+      "aria-label",
+      "aria-current"
+    ]
+  },
+  {
+    "id": "componentes/stepper",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "stepper",
+    "sectionTitle": "Stepper",
+    "text": "Pagamento Etapa atual",
+    "keywords": [
+      "aria-current"
+    ]
+  },
+  {
+    "id": "componentes/tabela-simples",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "tabela-simples",
+    "sectionTitle": "Tabela Simples",
+    "text": "",
+    "keywords": []
+  },
+  {
+    "id": "componentes/tabela-boas-praticas",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "tabela-boas-praticas",
+    "sectionTitle": "Tabela - Boas Práticas",
+    "text": "Usar caption. Usar th. Usar scope. Evitar tabela feita com div.",
+    "keywords": []
+  },
+  {
+    "id": "componentes/tooltip",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "tooltip",
+    "sectionTitle": "Tooltip",
+    "text": "",
+    "keywords": [
+      "aria-describedby",
+      "role:tooltip"
+    ]
+  },
+  {
+    "id": "componentes/toast",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "toast",
+    "sectionTitle": "Toast",
+    "text": "",
+    "keywords": [
+      "role:status"
+    ]
+  },
+  {
+    "id": "componentes/snackbar",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "snackbar",
+    "sectionTitle": "Snackbar",
+    "text": "",
+    "keywords": [
+      "aria-live"
+    ]
+  },
+  {
+    "id": "componentes/alertas-criticos",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "alertas-criticos",
+    "sectionTitle": "Alertas Críticos",
+    "text": "Anunciado imediatamente.",
+    "keywords": [
+      "role:alert"
+    ]
+  },
+  {
+    "id": "componentes/loading",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "loading",
+    "sectionTitle": "Loading",
+    "text": "",
+    "keywords": [
+      "aria-busy"
+    ]
+  },
+  {
+    "id": "componentes/progress-bar",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "progress-bar",
+    "sectionTitle": "Progress Bar",
+    "text": "30%",
+    "keywords": [
+      "aria-valuemin",
+      "aria-valuemax",
+      "aria-valuenow",
+      "role:progressbar"
+    ]
+  },
+  {
+    "id": "componentes/skeleton-loading",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "skeleton-loading",
+    "sectionTitle": "Skeleton Loading",
+    "text": "Conteúdo visual deve ser ignorado pelo leitor de tela.",
+    "keywords": [
+      "aria-hidden"
+    ]
+  },
+  {
+    "id": "componentes/carrossel",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "carrossel",
+    "sectionTitle": "Carrossel",
+    "text": "Botão anterior. Botão próximo. Botão pausar. Slides identificáveis.",
+    "keywords": []
+  },
+  {
+    "id": "componentes/infinite-scroll",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "infinite-scroll",
+    "sectionTitle": "Infinite Scroll",
+    "text": "Anunciar novos itens carregados. Preservar foco. Evitar mudanças bruscas.",
+    "keywords": []
+  },
+  {
+    "id": "componentes/drag-and-drop",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "drag-and-drop",
+    "sectionTitle": "Drag and Drop",
+    "text": "Nunca dependa exclusivamente do gesto. Sempre ofereça alternativa por clique ou teclado.",
+    "keywords": []
+  },
+  {
+    "id": "componentes/upload-de-arquivo",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "upload-de-arquivo",
+    "sectionTitle": "Upload de Arquivo",
+    "text": "",
+    "keywords": []
+  },
+  {
+    "id": "componentes/mensagens-dinamicas",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "mensagens-dinamicas",
+    "sectionTitle": "Mensagens Dinâmicas",
+    "text": "Muito utilizado para: Toast. Filtro aplicado. Busca concluída. Pagamento aprovado. Upload concluído.",
+    "keywords": [
+      "aria-live"
+    ]
+  },
+  {
+    "id": "componentes/checklist-de-componentes",
+    "partId": "componentes",
+    "partTitle": "Componentes Interativos e Estruturas Complexas",
+    "sectionId": "checklist-de-componentes",
+    "sectionTitle": "Checklist de Componentes",
+    "text": "Possui nome acessível? Possui role correta? Possui estado correto? Funciona com teclado? Possui foco visível? Funciona com TalkBack? Funciona com VoiceOver? Anuncia mudanças importantes? Mantém ordem de foco adequada?",
+    "keywords": []
+  },
+  {
+    "id": "angular/angular-e-acessivel-por-padrao",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "angular-e-acessivel-por-padrao",
+    "sectionTitle": "Angular é acessível por padrão?",
+    "text": "Não. Angular renderiza o HTML que você escreve. Se o HTML for acessível, a aplicação tende a ser acessível. Se o HTML for ruim, Angular não corrige isso.",
+    "keywords": []
+  },
+  {
+    "id": "angular/regra-principal-para-angular",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "regra-principal-para-angular",
+    "sectionTitle": "Regra Principal para Angular",
+    "text": "",
+    "keywords": []
+  },
+  {
+    "id": "angular/binding-de-aria",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "binding-de-aria",
+    "sectionTitle": "Binding de ARIA",
+    "text": "Quando o valor é dinâmico: Accordion",
+    "keywords": [
+      "aria-label",
+      "aria-expanded"
+    ]
+  },
+  {
+    "id": "angular/ngif-e-foco",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "ngif-e-foco",
+    "sectionTitle": "NgIf e Foco",
+    "text": "Um dos problemas mais comuns. Quando o elemento some do DOM, o foco pode ser perdido.",
+    "keywords": [
+      "ngIf"
+    ]
+  },
+  {
+    "id": "angular/ngfor-e-acessibilidade",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "ngfor-e-acessibilidade",
+    "sectionTitle": "NgFor e Acessibilidade",
+    "text": "Prefira estruturas semânticas.",
+    "keywords": [
+      "ngFor"
+    ]
+  },
+  {
+    "id": "angular/router-angular",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "router-angular",
+    "sectionTitle": "Router Angular",
+    "text": "Aplicações SPA não recarregam a página. O leitor de tela não percebe automaticamente que houve mudança de tela.",
+    "keywords": []
+  },
+  {
+    "id": "angular/foco-apos-navegacao",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "foco-apos-navegacao",
+    "sectionTitle": "Foco Após Navegação",
+    "text": "Após a navegação: Mover foco para o H1. Ou para o conteúdo principal.",
+    "keywords": []
+  },
+  {
+    "id": "angular/exemplo-de-destino-de-foco",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "exemplo-de-destino-de-foco",
+    "sectionTitle": "Exemplo de Destino de Foco",
+    "text": "",
+    "keywords": [
+      "tabindex"
+    ]
+  },
+  {
+    "id": "angular/anunciar-mudancas-de-tela",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "anunciar-mudancas-de-tela",
+    "sectionTitle": "Anunciar Mudanças de Tela",
+    "text": "Em aplicações Angular é comum anunciar o nome da tela.",
+    "keywords": []
+  },
+  {
+    "id": "angular/angular-cdk-accessibility",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "angular-cdk-accessibility",
+    "sectionTitle": "Angular CDK Accessibility",
+    "text": "O pacote mais importante para acessibilidade na stack Angular. LiveAnnouncer FocusMonitor FocusTrap FocusKeyManager InteractivityChecker",
+    "keywords": [
+      "LiveAnnouncer",
+      "FocusMonitor",
+      "FocusTrap",
+      "FocusKeyManager",
+      "InteractivityChecker"
+    ]
+  },
+  {
+    "id": "angular/liveannouncer",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "liveannouncer",
+    "sectionTitle": "LiveAnnouncer",
+    "text": "Permite criar anúncios para leitores de tela.",
+    "keywords": [
+      "LiveAnnouncer"
+    ]
+  },
+  {
+    "id": "angular/quando-usar-liveannouncer",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "quando-usar-liveannouncer",
+    "sectionTitle": "Quando usar LiveAnnouncer",
+    "text": "Pagamento concluído. Filtro aplicado. Busca concluída. Upload concluído. Erro importante.",
+    "keywords": [
+      "LiveAnnouncer"
+    ]
+  },
+  {
+    "id": "angular/cdktrapfocus",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "cdktrapfocus",
+    "sectionTitle": "cdkTrapFocus",
+    "text": "Prende o foco em uma região. Ideal para: Modal. Bottom Sheet. Dialog.",
+    "keywords": [
+      "cdkTrapFocus"
+    ]
+  },
+  {
+    "id": "angular/exemplo-cdktrapfocus",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "exemplo-cdktrapfocus",
+    "sectionTitle": "Exemplo cdkTrapFocus",
+    "text": "",
+    "keywords": [
+      "cdkTrapFocus"
+    ]
+  },
+  {
+    "id": "angular/focusmonitor",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "focusmonitor",
+    "sectionTitle": "FocusMonitor",
+    "text": "Identifica como o foco chegou até o elemento. Mouse. Teclado. Touch. Programático.",
+    "keywords": [
+      "FocusMonitor"
+    ]
+  },
+  {
+    "id": "angular/focuskeymanager",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "focuskeymanager",
+    "sectionTitle": "FocusKeyManager",
+    "text": "Gerencia navegação por setas. Muito utilizado em: Tabs. Menus. Listbox. Combobox.",
+    "keywords": [
+      "FocusKeyManager"
+    ]
+  },
+  {
+    "id": "angular/angular-material",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "angular-material",
+    "sectionTitle": "Angular Material",
+    "text": "O Material já possui boa parte da acessibilidade implementada. Mesmo assim, deve ser testado.",
+    "keywords": []
+  },
+  {
+    "id": "angular/matdialog",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "matdialog",
+    "sectionTitle": "MatDialog",
+    "text": "Benefícios Role dialog. Gerenciamento de foco. ESC. Backdrop.",
+    "keywords": [
+      "MatDialog"
+    ]
+  },
+  {
+    "id": "angular/checklist-matdialog",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "checklist-matdialog",
+    "sectionTitle": "Checklist MatDialog",
+    "text": "Tem título? Recebe foco? Retorna foco? Possui botão fechar?",
+    "keywords": [
+      "MatDialog"
+    ]
+  },
+  {
+    "id": "angular/mattabs",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "mattabs",
+    "sectionTitle": "MatTabs",
+    "text": "Implementa a estrutura de tabs. Mesmo assim valide: Setas funcionam. TalkBack anuncia corretamente. VoiceOver anuncia corretamente.",
+    "keywords": [
+      "MatTabs"
+    ]
+  },
+  {
+    "id": "angular/matmenu",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "matmenu",
+    "sectionTitle": "MatMenu",
+    "text": "Preferível criar menus usando MatMenu ao invés de implementação caseira.",
+    "keywords": [
+      "MatMenu"
+    ]
+  },
+  {
+    "id": "angular/matselect",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "matselect",
+    "sectionTitle": "MatSelect",
+    "text": "Componente mais propenso a bugs de acessibilidade. Sempre validar: Abertura. Fechamento. Leitura da opção. Estado selecionado.",
+    "keywords": [
+      "MatSelect"
+    ]
+  },
+  {
+    "id": "angular/matexpansionpanel",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "matexpansionpanel",
+    "sectionTitle": "MatExpansionPanel",
+    "text": "Equivalente ao Accordion. Verificar: aria-expanded. Foco. Anúncio do estado.",
+    "keywords": [
+      "aria-expanded",
+      "MatExpansionPanel"
+    ]
+  },
+  {
+    "id": "angular/mattable",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "mattable",
+    "sectionTitle": "MatTable",
+    "text": "Não assumir que toda tabela Material é automaticamente acessível. Validar: caption. headers. sort. foco.",
+    "keywords": [
+      "MatTable"
+    ]
+  },
+  {
+    "id": "angular/overlay-components",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "overlay-components",
+    "sectionTitle": "Overlay Components",
+    "text": "Todo componente que abre sobre a tela merece atenção extra. Modal. Popover. Tooltip. Select. Menu. Datepicker.",
+    "keywords": []
+  },
+  {
+    "id": "angular/datepicker",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "datepicker",
+    "sectionTitle": "Datepicker",
+    "text": "Validar: Navegação por teclado. Leitura do dia. Leitura do mês. Leitura do ano. Seleção correta.",
+    "keywords": []
+  },
+  {
+    "id": "angular/loading-angular",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "loading-angular",
+    "sectionTitle": "Loading Angular",
+    "text": "Mudanças de estado devem ser anunciadas. Ou:",
+    "keywords": [
+      "aria-busy"
+    ]
+  },
+  {
+    "id": "angular/lazy-loading",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "lazy-loading",
+    "sectionTitle": "Lazy Loading",
+    "text": "Quando conteúdo aparece após carregamento assíncrono, o foco e o anúncio devem ser avaliados.",
+    "keywords": []
+  },
+  {
+    "id": "angular/signals-e-acessibilidade",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "signals-e-acessibilidade",
+    "sectionTitle": "Signals e Acessibilidade",
+    "text": "Signals atualizam a UI automaticamente. Mas leitores de tela não são notificados automaticamente. Use: aria-live LiveAnnouncer",
+    "keywords": [
+      "aria-live",
+      "Signals",
+      "LiveAnnouncer"
+    ]
+  },
+  {
+    "id": "angular/standalone-components",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "standalone-components",
+    "sectionTitle": "Standalone Components",
+    "text": "Não possuem diferenças específicas de acessibilidade. As mesmas regras continuam válidas.",
+    "keywords": []
+  },
+  {
+    "id": "angular/pipes",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "pipes",
+    "sectionTitle": "Pipes",
+    "text": "Cuidado com formatações que prejudicam a leitura. Exemplo Validar como o leitor anuncia.",
+    "keywords": []
+  },
+  {
+    "id": "angular/custom-components",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "custom-components",
+    "sectionTitle": "Custom Components",
+    "text": "A maior origem de bugs em Angular. Botões customizados. Select customizado. Dropdown customizado. Stepper customizado. Menu customizado.",
+    "keywords": []
+  },
+  {
+    "id": "angular/regra-para-custom-components",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "regra-para-custom-components",
+    "sectionTitle": "Regra para Custom Components",
+    "text": "Sempre perguntar: Existe componente nativo? Existe componente Material? Preciso mesmo criar do zero?",
+    "keywords": []
+  },
+  {
+    "id": "angular/erro-mais-comum-do-time-front",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "erro-mais-comum-do-time-front",
+    "sectionTitle": "Erro Mais Comum do Time Front",
+    "text": "Visualmente funciona. Mas perde: Role. Teclado. Estado. Semântica.",
+    "keywords": []
+  },
+  {
+    "id": "angular/checklist-angular",
+    "partId": "angular",
+    "partTitle": "Angular, Angular Material e Angular CDK A11y",
+    "sectionId": "checklist-angular",
+    "sectionTitle": "Checklist Angular",
+    "text": "Existe HTML semântico? Existe nome acessível? Existe gerenciamento de foco? Existe anúncio para mudanças importantes? Router move foco corretamente? Material foi validado? Custom Components foram auditados? Funciona só com teclado? Funciona com TalkBack? Funciona com VoiceOver?",
+    "keywords": []
+  },
+  {
+    "id": "leitores-de-tela/principio-fundamental",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "principio-fundamental",
+    "sectionTitle": "Princípio Fundamental",
+    "text": "Leitores de tela dependem de: Nome acessível. Role correta. Estado correto. Quase todos os bugs podem ser analisados por esses três pontos.",
+    "keywords": []
+  },
+  {
+    "id": "leitores-de-tela/exemplo-de-leitura",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "exemplo-de-leitura",
+    "sectionTitle": "Exemplo de Leitura",
+    "text": "Salvar, botão Salvar, botão",
+    "keywords": []
+  },
+  {
+    "id": "leitores-de-tela/botao-com-icone",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "botao-com-icone",
+    "sectionTitle": "Botão com Ícone",
+    "text": "Botão Fechar, botão",
+    "keywords": [
+      "aria-label"
+    ]
+  },
+  {
+    "id": "leitores-de-tela/campos-obrigatorios-2",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "campos-obrigatorios-2",
+    "sectionTitle": "Campos Obrigatórios",
+    "text": "Campo de edição Obrigatório",
+    "keywords": []
+  },
+  {
+    "id": "leitores-de-tela/campo-invalido",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "campo-invalido",
+    "sectionTitle": "Campo Inválido",
+    "text": "Campo inválido",
+    "keywords": [
+      "aria-invalid"
+    ]
+  },
+  {
+    "id": "leitores-de-tela/checkbox",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "checkbox",
+    "sectionTitle": "Checkbox",
+    "text": "Aceito os termos Checkbox Não marcado Aceito os termos Checkbox Marcado",
+    "keywords": []
+  },
+  {
+    "id": "leitores-de-tela/switch",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "switch",
+    "sectionTitle": "Switch",
+    "text": "Notificações Switch Ligado",
+    "keywords": [
+      "aria-checked",
+      "role:switch"
+    ]
+  },
+  {
+    "id": "leitores-de-tela/accordion-2",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "accordion-2",
+    "sectionTitle": "Accordion",
+    "text": "Detalhes Botão Recolhido Detalhes Botão Expandido",
+    "keywords": [
+      "aria-expanded"
+    ]
+  },
+  {
+    "id": "leitores-de-tela/tabs-2",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "tabs-2",
+    "sectionTitle": "Tabs",
+    "text": "Dados Aba Selecionada",
+    "keywords": [
+      "aria-selected",
+      "role:tab"
+    ]
+  },
+  {
+    "id": "leitores-de-tela/stepper-2",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "stepper-2",
+    "sectionTitle": "Stepper",
+    "text": "Pagamento Etapa atual",
+    "keywords": [
+      "aria-current"
+    ]
+  },
+  {
+    "id": "leitores-de-tela/mensagens-dinamicas-2",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "mensagens-dinamicas-2",
+    "sectionTitle": "Mensagens Dinâmicas",
+    "text": "O foco não precisa mudar. O leitor anuncia automaticamente.",
+    "keywords": [
+      "aria-live"
+    ]
+  },
+  {
+    "id": "leitores-de-tela/role-alert",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "role-alert",
+    "sectionTitle": "Role Alert",
+    "text": "É anunciado imediatamente. Utilizar apenas para mensagens importantes.",
+    "keywords": [
+      "role:alert"
+    ]
+  },
+  {
+    "id": "leitores-de-tela/foco-visivel",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "foco-visivel",
+    "sectionTitle": "Foco Visível",
+    "text": "Todo elemento focável deve indicar visualmente que recebeu foco.",
+    "keywords": []
+  },
+  {
+    "id": "leitores-de-tela/sequencia-de-foco",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "sequencia-de-foco",
+    "sectionTitle": "Sequência de Foco",
+    "text": "A ordem do DOM deve refletir a ordem visual. Usuários de leitor de tela navegam seguindo a estrutura da página.",
+    "keywords": []
+  },
+  {
+    "id": "leitores-de-tela/modais",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "modais",
+    "sectionTitle": "Modais",
+    "text": "Ao abrir: Foco vai para o modal. Conteúdo anterior fica inacessível. Tab navega apenas dentro dele. Ao fechar: Foco retorna ao elemento que abriu.",
+    "keywords": []
+  },
+  {
+    "id": "leitores-de-tela/problema-classico",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "problema-classico",
+    "sectionTitle": "Problema Clássico",
+    "text": "Ao fechar o modal, o foco muitas vezes desaparece. Deve retornar ao botão Editar.",
+    "keywords": [
+      "ngIf"
+    ]
+  },
+  {
+    "id": "leitores-de-tela/loading-2",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "loading-2",
+    "sectionTitle": "Loading",
+    "text": "Evite deixar usuário sem feedback. Exemplo Extrato carregado com sucesso",
+    "keywords": []
+  },
+  {
+    "id": "leitores-de-tela/talkback-x-voiceover",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "talkback-x-voiceover",
+    "sectionTitle": "TalkBack x VoiceOver",
+    "text": "Cenário Diferenças comuns Forms Pequenas diferenças de anúncio. Tabs Ordem de anúncio pode variar. Modais Foco pode variar. Selects Muito dependente da implementação.",
+    "keywords": []
+  },
+  {
+    "id": "leitores-de-tela/roteiro-de-teste-manual",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "roteiro-de-teste-manual",
+    "sectionTitle": "Roteiro de Teste Manual",
+    "text": "Ativar leitor de tela. Percorrer toda tela. Verificar títulos. Verificar botões. Verificar formulários. Testar erros. Testar loading. Testar modal. Testar navegação. Testar saída do fluxo.",
+    "keywords": []
+  },
+  {
+    "id": "leitores-de-tela/bugs-mais-comuns-encontrados-em-producao",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "bugs-mais-comuns-encontrados-em-producao",
+    "sectionTitle": "Bugs Mais Comuns Encontrados em Produção",
+    "text": "Botão sem nome acessível. Ícone clicável sem label. Modal sem foco. Erro não anunciado. Toast não anunciado. Foco perdido após navegação. Ordem de foco incorreta. Accordion sem aria-expanded. Tabs sem aria-selected. Select customizado incompleto.",
+    "keywords": [
+      "aria-expanded",
+      "aria-selected"
+    ]
+  },
+  {
+    "id": "leitores-de-tela/checklist-final-de-talkback-e-voiceover",
+    "partId": "leitores-de-tela",
+    "partTitle": "TalkBack, VoiceOver e Testes Reais",
+    "sectionId": "checklist-final-de-talkback-e-voiceover",
+    "sectionTitle": "Checklist Final de TalkBack e VoiceOver",
+    "text": "Todos os elementos possuem nome? Todos possuem role correta? Estado é anunciado? Fluxo funciona sem visão? Erros são anunciados? Mensagens dinâmicas são anunciadas? Foco nunca desaparece? A navegação faz sentido? Existe feedback para sucesso e erro?",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/o-que-significa-uma-tela-acessivel",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "o-que-significa-uma-tela-acessivel",
+    "sectionTitle": "O que significa uma tela acessível?",
+    "text": "Uma tela acessível não é apenas uma tela sem erros de WCAG. Uma tela acessível permite que o usuário: Compreenda o conteúdo. Navegue sozinho. Execute ações. Receba feedback. Conclua a jornada.",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/principais-criterios-wcag-para-angular",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "principais-criterios-wcag-para-angular",
+    "sectionTitle": "Principais Critérios WCAG para Angular",
+    "text": "Critério Tema 1.1.1 Texto alternativo. 1.3.1 Info e relacionamentos. 1.3.2 Sequência significativa. 1.4.3 Contraste. 1.4.10 Reflow. 2.1.1 Teclado. 2.1.2 Sem armadilha de teclado. 2.4.3 Ordem de foco. 2.4.6 Títulos e labels. 2.4.7 Foco visível. 3.3.1 Identificação de erros. 3.3.2 Instruções e labels. 4.1.2 Name, Role e Value.",
+    "keywords": [
+      "1.1.1",
+      "1.3.1",
+      "1.3.2",
+      "1.4.3",
+      "1.4.10",
+      "2.1.1",
+      "2.1.2",
+      "2.4.3",
+      "2.4.6",
+      "2.4.7",
+      "3.3.1",
+      "3.3.2",
+      "4.1.2"
+    ]
+  },
+  {
+    "id": "qa-wcag/criterios-que-mais-geram-bugs",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "criterios-que-mais-geram-bugs",
+    "sectionTitle": "Critérios que Mais Geram Bugs",
+    "text": "2.4.3 Ordem de foco. 4.1.2 Name Role Value. 3.3.1 Identificação de erros. 2.1.1 Navegação por teclado. 1.3.1 Relacionamentos.",
+    "keywords": [
+      "2.4.3",
+      "4.1.2",
+      "3.3.1",
+      "2.1.1",
+      "1.3.1"
+    ]
+  },
+  {
+    "id": "qa-wcag/checklist-de-story",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "checklist-de-story",
+    "sectionTitle": "Checklist de Story",
+    "text": "Toda história deveria responder: Possui componentes interativos? Existe leitor de tela impactado? Existe navegação por teclado? Existe foco? Existe anúncio dinâmico? Existe tratamento de erro?",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/checklist-de-desenvolvimento",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "checklist-de-desenvolvimento",
+    "sectionTitle": "Checklist de Desenvolvimento",
+    "text": "Existe HTML semântico? Existe label para todos os campos? Existe nome acessível? Existe role correta? Existe gerenciamento de foco? Existe suporte a teclado? Existe feedback para erro? Existe feedback para sucesso? Existe validação TalkBack? Existe validação VoiceOver?",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/checklist-de-pull-request",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "checklist-de-pull-request",
+    "sectionTitle": "Checklist de Pull Request",
+    "text": "Novos componentes foram testados? O foco continua correto? Não houve regressão de leitor de tela? Os labels permanecem corretos? ARIA continua sincronizada? Teclado continua funcionando?",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/checklist-de-qa",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "checklist-de-qa",
+    "sectionTitle": "Checklist de QA",
+    "text": "Todos os botões são anunciados? Todos os links são anunciados? Todos os campos possuem label? Todos os erros são anunciados? Todos os modais abrem corretamente? Todos os modais devolvem foco? Todos os accordions anunciam expandido/recolhido? Todas as tabs anunciam estado selecionado? Todos os steppers anunciam etapa atual? Existem regiões com foco perdido?",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/checklist-para-talkback",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "checklist-para-talkback",
+    "sectionTitle": "Checklist para TalkBack",
+    "text": "Navegar a tela inteira. Validar headings. Validar botões. Validar formulários. Validar modal. Validar mensagens de erro. Validar toast. Validar loading. Validar conclusão do fluxo.",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/checklist-para-voiceover",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "checklist-para-voiceover",
+    "sectionTitle": "Checklist para VoiceOver",
+    "text": "Navegar tela completa. Validar todos os elementos focáveis. Validar formulários. Validar alertas. Validar menus. Validar overlays. Validar conclusão da jornada.",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/quando-abrir-um-bug-de-acessibilidade",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "quando-abrir-um-bug-de-acessibilidade",
+    "sectionTitle": "Quando Abrir um Bug de Acessibilidade?",
+    "text": "Sempre que o usuário: Não conseguir concluir uma tarefa. Não conseguir identificar um elemento. Não conseguir navegar. Perder foco. Não receber feedback. Receber informação incorreta.",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/template-de-bug",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "template-de-bug",
+    "sectionTitle": "Template de Bug",
+    "text": "",
+    "keywords": [
+      "4.1.2"
+    ]
+  },
+  {
+    "id": "qa-wcag/classificacao-de-severidade",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "classificacao-de-severidade",
+    "sectionTitle": "Classificação de Severidade",
+    "text": "Nível Descrição Crítico Usuário não conclui a jornada. Alto Grande dificuldade de navegação. Médio Experiência degradada. Baixo Melhoria recomendada.",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/exemplos-de-bugs-criticos",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "exemplos-de-bugs-criticos",
+    "sectionTitle": "Exemplos de Bugs Críticos",
+    "text": "Botão principal sem nome. Modal inacessível. Erro não anunciado. Foco preso incorretamente. Campo sem label.",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/exemplos-de-bugs-medios",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "exemplos-de-bugs-medios",
+    "sectionTitle": "Exemplos de Bugs Médios",
+    "text": "Heading incorreto. Texto alternativo ruim. Tooltip sem descrição. Leitura redundante.",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/definition-of-done-acessivel",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "definition-of-done-acessivel",
+    "sectionTitle": "Definition of Done Acessível",
+    "text": "WCAG AA atendida. Teclado funcionando. TalkBack validado. VoiceOver validado. Nome acessível definido. Role correta. Estado correto. Sem perda de foco. Sem erros conhecidos.",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/checklist-para-revisao-de-tela-nova",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "checklist-para-revisao-de-tela-nova",
+    "sectionTitle": "Checklist para Revisão de Tela Nova",
+    "text": "Existe H1? Existe estrutura semântica? Existe ordem lógica? Existe foco? Existe suporte para leitor? Existe tratamento de erro? Existe feedback de sucesso? Existe feedback de carregamento? Existe navegação consistente?",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/ferramentas-recomendadas",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "ferramentas-recomendadas",
+    "sectionTitle": "Ferramentas Recomendadas",
+    "text": "TalkBack. VoiceOver. Chrome Lighthouse. axe DevTools. Accessibility Insights. Angular CDK A11y.",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/o-que-ferramentas-nao-encontram",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "o-que-ferramentas-nao-encontram",
+    "sectionTitle": "O que Ferramentas NÃO Encontram",
+    "text": "Ferramentas automatizadas não substituem testes reais. Elas não identificam bem: Fluxos quebrados. Foco ruim. Experiência ruim. Anúncios confusos. Navegação complexa.",
+    "keywords": []
+  },
+  {
+    "id": "qa-wcag/mentalidade-final",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "mentalidade-final",
+    "sectionTitle": "Mentalidade Final",
+    "text": "A pergunta não deve ser: Mas sim: Se a resposta for sim, normalmente a implementação está no caminho certo.",
+    "keywords": []
+  }
 ];

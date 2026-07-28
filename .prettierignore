@@ -1,0 +1,13 @@
+# Conteúdo gerado — formatar aqui só cria ruído de diff a cada extração.
+src/content/*/parts/
+src/content/*/checklists.ts
+src/content/*/search-index.ts
+
+# Catálogos de tradução: a ordem das chaves é significativa para revisão.
+i18n/
+
+# Documento de origem
+fonte/
+
+dist/
+.angular/

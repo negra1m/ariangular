@@ -385,6 +385,16 @@ export const searchIndex: SearchEntry[] = ${JSON.stringify(searchIndex, null, 2)
   'utf8',
 );
 
+// Dump bruto, consumido pelos scripts de i18n e de índice de busca.
+// Os .ts gerados passam pelo Prettier e deixam de ser JSON parseável — este
+// arquivo é a fonte estável para as demais ferramentas.
+fs.mkdirSync(path.join(ROOT, 'i18n'), { recursive: true });
+fs.writeFileSync(
+  path.join(ROOT, 'i18n', 'content.pt.json'),
+  JSON.stringify({ parts, checklists, searchIndex }, null, 2) + '\n',
+  'utf8',
+);
+
 fs.writeFileSync(
   path.join(OUT, 'index.ts'),
   `${banner}
