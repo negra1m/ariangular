@@ -4,7 +4,7 @@
 **Natureza:** ferramenta pessoal (PF), open source, de uso social/público — sem branding Few Company.
 **Visual:** ver [IDENTIDADE-VISUAL.md](IDENTIDADE-VISUAL.md).
 **Marca e licença:** ver [MARCA-E-LICENCA.md](MARCA-E-LICENCA.md).
-**Stack:** Angular 21 (standalone, signals, zoneless) + SSG/prerender + TypeScript.
+**Stack:** Angular 22 (standalone, signals, zoneless) + SSG/prerender + TypeScript.
 **Deploy:** Vercel, domínio `*.vercel.app`.
 **Fonte do conteúdo:** [`fonte/ARIA.html`](../fonte/README.md) — já corrigido e validado (2026-07-28).
 
@@ -87,12 +87,12 @@ alimentam a Fase 6.
 
 | Tema | Decisão | Motivo |
 |------|---------|--------|
-| Framework | Angular 21, standalone, zoneless | Pedido do PO; o produto fala de Angular, tem que ser Angular |
+| Framework | Angular 22, standalone, zoneless | Pedido do PO; o produto fala de Angular, tem que ser Angular |
 | Renderização | SSG / prerender de todas as rotas | Conteúdo fixo. Sem servidor, custo zero, SEO e first paint bons |
 | Hospedagem | Vercel, output estático | Pedido do PO |
 | Estilo | CSS puro com custom properties, sem Tailwind/Material | O site precisa de controle total sobre foco, contraste e reduced-motion |
 | Visual | Referência dragonfly.xyz + cores Angular + ilustrações | Decisão do PO (2026-07-28) |
-| Estado | Signals | Padrão Angular 21 |
+| Estado | Signals | Padrão Angular 22 |
 | Persistência | localStorage (checklists) | Sem backend, sem conta, sem LGPD |
 | Formato de dados | Módulos TypeScript tipados | **Sem FEW-AI-SERIAL** — decisão do PO (2026-07-28) |
 | Branding | Nenhum. Footer com LinkedIn pessoal | Decisão do PO (2026-07-28) |
@@ -122,7 +122,7 @@ Nada pendente. As fases podem rodar de ponta a ponta.
 | Fase | Nome | Entrega |
 |------|------|---------|
 | 0 | ~~Ajuste da fonte~~ | ✅ **Concluída (2026-07-28)** — `fonte/ARIA.html` corrigido e validado |
-| 1 | [Fundação](fase-1-fundacao/PLANO.md) | Workspace Angular 21 rodando, tooling, tokens, `ng build` limpo |
+| 1 | [Fundação](fase-1-fundacao/PLANO.md) | Workspace Angular 22 rodando, tooling, tokens, `ng build` limpo |
 | 2 | [Conteúdo](fase-2-conteudo/PLANO.md) | ARIA.html convertido em dados estruturados e tipados |
 | 3 | [Shell e navegação](fase-3-shell-navegacao/PLANO.md) | Header, sidebar, footer, rotas, foco pós-navegação |
 | 4 | [Renderização da doc](fase-4-renderizacao-doc/PLANO.md) | Seções, code blocks, tabelas, callouts, TOC |

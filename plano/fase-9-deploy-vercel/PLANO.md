@@ -40,7 +40,7 @@ nesse caso não aponta a linha com clareza. Os pontos de risco já mapeados: `Pr
 - **Framework preset:** Angular
 - **Build command:** `npm run build`
 - **Output directory:** `dist/aria-angular/browser`
-- **Node:** versão LTS compatível com Angular 21
+- **Node:** versão LTS compatível com Angular 22
 - **Install command:** `npm ci`
 
 `vercel.json` com:

@@ -1,6 +1,6 @@
 # Fase 1 — Fundação
 
-**Objetivo:** ter um workspace Angular 21 configurado para saída estática, com o tooling
+**Objetivo:** ter um workspace Angular 22 configurado para saída estática, com o tooling
 que vai garantir acessibilidade e consistência do primeiro commit ao último.
 
 **Depende de:** nada.
@@ -19,7 +19,7 @@ as regras de estilo/foco. Ambas ficam travadas aqui.
 
 ### 1.1 Workspace
 
-Angular 21 criado com SSR habilitado e depois configurado para **output estático**.
+Angular 22 criado com SSR habilitado e depois configurado para **output estático**.
 
 - `ng new aria-angular --ssr --style=css --routing`
 - Em `angular.json`, o build usa `"outputMode": "static"`.
@@ -36,7 +36,7 @@ rota e **não** existe `dist/aria-angular/server/`.
 
 `app.config.ts`:
 
-- `provideZonelessChangeDetection()` — zoneless, padrão Angular 21.
+- `provideZonelessChangeDetection()` — zoneless, padrão Angular 22.
 - `provideRouter(routes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }))`
   — âncoras e restauração de scroll são requisito de acessibilidade, não conforto.
 - `provideClientHydration(withEventReplay())`.
@@ -154,7 +154,7 @@ mesmo que vazio, para não haver improviso de organização depois.
 | CSS | CSS puro + custom properties | Tailwind — abstrai foco e contraste, e o projeto precisa de controle explícito |
 | UI kit | Nenhum | Angular Material — o site precisa demonstrar HTML semântico cru, não delegar |
 | Change detection | Zoneless | Zone.js — descontinuado como padrão no 21 |
-| Testes | Vitest (padrão do Angular 21) | Karma — descontinuado |
+| Testes | Vitest (padrão do Angular 22) | Karma — descontinuado |
 
 ---
 

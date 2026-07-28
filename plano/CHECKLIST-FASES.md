@@ -22,7 +22,7 @@ Toda tarefa concluída recebe a data no final: `(YYYY-MM-DD)`.
 
 ## Fase 1 — Fundação
 
-- [ ] Workspace Angular 21 criado e rodando em `ng serve`
+- [ ] Workspace Angular 22 criado e rodando em `ng serve`
 - [ ] `ng build` gera saída estática sem erro nem warning
 - [ ] Tooling de qualidade instalado e passando (lint com regras a11y, format)
 - [ ] Design tokens com as cores Angular, contraste verificado nos dois temas

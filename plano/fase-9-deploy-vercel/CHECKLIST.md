@@ -29,7 +29,7 @@ Marcar concluído com data: `(YYYY-MM-DD)`
 - [ ] Build command: `npm run build`
 - [ ] Output directory: `dist/aria-angular/browser`
 - [ ] Install command: `npm ci`
-- [ ] Versão do Node compatível com Angular 21
+- [ ] Versão do Node compatível com Angular 22
 
 ## vercel.json
 

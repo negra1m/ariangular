@@ -2,68 +2,83 @@
 
 Marcar concluído com data: `(YYYY-MM-DD)`
 
+> **Nota:** o PO trocou Angular 21 por **Angular 22** em 2026-07-28. Angular 22 exige
+> Node ≥22.22.3; a máquina tinha 22.22.0. Resolvido instalando **fnm** e fixando
+> **Node 24** via `.node-version`, sem tocar no Node global dos outros projetos.
+
 ## Workspace
 
-- [ ] `ng new aria-angular --ssr --style=css --routing` executado na raiz do repo
-- [ ] `angular.json` com `"outputMode": "static"` no target de build
-- [ ] `app.routes.server.ts` com `RenderMode.Prerender` como padrão
-- [ ] `ng build` gera `dist/aria-angular/browser/index.html`
-- [ ] `ng build` **não** gera `dist/aria-angular/server/`
-- [ ] `.gitignore` cobrindo `node_modules`, `dist`, `.angular`, `.vercel`, `.env`
+- [x] Workspace Angular 22 criado na raiz do repo (2026-07-28)
+- [x] `angular.json` com `"outputMode": "static"` no target de build (2026-07-28)
+- [x] `app.routes.server.ts` com `RenderMode.Prerender` como padrão (2026-07-28)
+- [x] `ng build` gera `dist/aria-angular/browser/index.html` (2026-07-28)
+- [x] `ng build` **não** gera `dist/aria-angular/server/` (2026-07-28)
+- [x] `src/server.ts` e `express` removidos — SSG não usa servidor (2026-07-28)
+- [x] `.gitignore` correto para Angular + Vercel (o herdado era de Next.js) (2026-07-28)
+- [x] `.gitattributes` normalizando fim de linha (2026-07-28)
+- [x] `.node-version` fixando Node 24 (2026-07-28)
 
 ## Configuração da app
 
-- [ ] `provideZonelessChangeDetection()` em `app.config.ts`
-- [ ] `provideRouter` com `withInMemoryScrolling` (anchorScrolling + scrollPositionRestoration)
-- [ ] `provideClientHydration(withEventReplay())`
-- [ ] `<html lang="pt-BR">` no `index.html`
-- [ ] Viewport sem `maximum-scale` e sem `user-scalable=no`
-- [ ] `<title>` e `<meta name="description">` base definidos
+- [x] Zoneless (padrão do Angular 22, sem `zone.js` nas dependências) (2026-07-28)
+- [x] `provideRouter` com `withInMemoryScrolling` (anchor + scroll restoration) (2026-07-28)
+- [x] `withRouterConfig({ onSameUrlNavigation: 'reload' })` para fragmentos (2026-07-28)
+- [x] `provideClientHydration(withEventReplay())` (2026-07-28)
+- [x] `<html lang="pt-BR">` no `index.html` (2026-07-28)
+- [x] Viewport sem `maximum-scale` e sem `user-scalable=no` (2026-07-28)
+- [x] `<title>` e `<meta name="description">` base definidos (2026-07-28)
+- [x] Script inline aplicando o tema antes da primeira pintura (sem flash) (2026-07-28)
 
 ## Tooling
 
-- [ ] `angular-eslint` instalado e configurado
-- [ ] Regras de template a11y ligadas como **error**:
-  - [ ] `alt-text`
-  - [ ] `elements-content`
-  - [ ] `label-has-associated-control`
-  - [ ] `no-autofocus`
-  - [ ] `no-positive-tabindex`
-  - [ ] `valid-aria`
-  - [ ] `click-events-have-key-events`
-  - [ ] `interactive-supports-focus`
-  - [ ] `role-has-required-aria`
-  - [ ] `table-scope`
-- [ ] Prettier configurado com `.prettierrc` no repo
-- [ ] Scripts `dev`, `build`, `lint`, `format`, `test` no `package.json`
-- [ ] `ng lint` passa sem erro nem warning
+- [x] `angular-eslint` instalado e configurado (2026-07-28)
+- [x] Regras de template a11y ligadas como **error**, explicitamente (2026-07-28):
+  - [x] `alt-text`
+  - [x] `elements-content`
+  - [x] `label-has-associated-control`
+  - [x] `no-autofocus`
+  - [x] `no-distracting-elements`
+  - [x] `no-positive-tabindex`
+  - [x] `valid-aria`
+  - [x] `click-events-have-key-events`
+  - [x] `interactive-supports-focus`
+  - [x] `role-has-required-aria`
+  - [x] `table-scope`
+  - [x] `mouse-events-have-key-events`
+  - [x] `button-has-type`
+- [x] Prettier configurado (2026-07-28)
+- [x] Scripts no `package.json`: `dev`, `build`, `lint`, `contrast`, `verify`, `format`, `test` (2026-07-28)
+- [x] `ng lint` passa sem erro nem warning (2026-07-28)
+- [x] CI no GitHub Actions rodando lint + contraste + validação da fonte + build (2026-07-28)
+- [x] CI falha se o build gerar pasta `server/` (2026-07-28)
 
 ## Estilos
 
-- [ ] `IDENTIDADE-VISUAL.md` lido antes de começar
-- [ ] `src/styles/tokens.css` com custom properties de cor, espaço, tipografia
-- [ ] Cores oficiais Angular como base (`#E40035`, `#151517`, `#FFFFFF`)
+- [x] `IDENTIDADE-VISUAL.md` lido antes de começar (2026-07-28)
+- [x] `src/styles/tokens.css` com custom properties de cor, espaço, tipografia (2026-07-28)
+- [x] Cores oficiais Angular como base (`#E40035`, `#151517`, `#FFFFFF`) (2026-07-28)
 - [ ] Stops do gradiente Angular extraídos do press kit oficial
-- [ ] Gradiente usado só em superfície decorativa, nunca atrás de texto
-- [ ] `--accent-dark` derivado e medido (o `#E40035` reprova AA no tema escuro)
-- [ ] Tema **claro** como padrão
-- [ ] Tokens definidos para light e dark via `prefers-color-scheme`
-- [ ] Tokens sobrescritíveis por `[data-theme="light"]` e `[data-theme="dark"]`
-- [ ] `src/styles/reset.css` sem zerar `outline`
-- [ ] `src/styles/focus.css` com `:focus-visible` global, espessura e offset visíveis
-- [ ] `src/styles/motion.css` com `@media (prefers-reduced-motion: reduce)`
-- [ ] Contraste da paleta verificado: 4.5:1 texto normal nos dois temas
-- [ ] Contraste da paleta verificado: 3:1 texto grande e bordas de componente nos dois temas
-- [ ] Contraste do indicador de foco verificado nos dois temas
+      — usando aproximação; os stops exatos só estão nos arquivos do Google Drive
+- [x] Gradiente usado só em superfície decorativa, nunca atrás de texto (2026-07-28)
+- [x] `--accent-dark` derivado e medido (2026-07-28)
+- [x] Tema **claro** como padrão (2026-07-28)
+- [x] Tokens definidos para light e dark via `prefers-color-scheme` (2026-07-28)
+- [x] Tokens sobrescritíveis por `[data-theme="light"]` e `[data-theme="dark"]` (2026-07-28)
+- [x] `src/styles/reset.css` sem zerar `outline` (2026-07-28)
+- [x] `src/styles/focus.css` com `:focus-visible` global, espessura e offset visíveis (2026-07-28)
+- [x] `scroll-padding-top` para o foco não ficar sob o header sticky (WCAG 2.4.11) (2026-07-28)
+- [x] `src/styles/motion.css` com `@media (prefers-reduced-motion: reduce)` (2026-07-28)
+- [x] Contraste verificado: 4.5:1 texto normal nos dois temas (2026-07-28)
+- [x] Contraste verificado: 3:1 borda de componente e foco nos dois temas (2026-07-28)
+- [x] `scripts/check-contrast.js` automatiza a verificação — 36 pares, 0 falhas (2026-07-28)
 
 ## Tipografia
 
-- [ ] Escala tipográfica definida (título de parte bem maior que o corpo)
-- [ ] Corpo entre 17 e 18px, line-height ~1.7
-- [ ] Fonte monoespaçada para código
-- [ ] **Nenhuma fonte externa bloqueante**
-- [ ] Se self-hosted: `font-display: swap`
-- [ ] Corpo limitado a ~68 caracteres por linha
+- [x] Escala tipográfica definida (2026-07-28)
+- [x] Corpo em 17px (`--text-base: 1.0625rem`), line-height 1.7 (2026-07-28)
+- [x] Fonte monoespaçada para código (2026-07-28)
+- [x] **Nenhuma fonte externa bloqueante** — só fontes de sistema (2026-07-28)
+- [x] Corpo limitado a 68 caracteres por linha (`--measure`) (2026-07-28)
 
 ## Ilustrações base
 
@@ -77,38 +92,46 @@ Marcar concluído com data: `(YYYY-MM-DD)`
 
 ## Logo e marca
 
-- [ ] `MARCA-E-LICENCA.md` lido antes de desenhar o logo
+- [x] `MARCA-E-LICENCA.md` escrito, com os limites levantados nas fontes (2026-07-28)
 - [ ] Logo é adaptação do escudo Angular **atual (v17+)**
 - [ ] **Não** usa o escudo de 2016 (v3–v16)
 - [ ] **Não** usa o logo AngularJS
 - [ ] **Não** usa o escudo oficial intacto como logo do produto
 - [ ] Conteúdo interno do escudo é próprio, ligado a acessibilidade
-- [ ] Favicon e ícones derivados do mesmo logo
-- [ ] Atribuição CC BY 4.0 preparada para site e repo
+- [ ] Favicon e ícones derivados do mesmo logo (ainda o favicon padrão do Angular CLI)
+- [x] Atribuição CC BY 4.0 preparada em `NOTICE.md` (2026-07-28)
+
+## Watermark
+
+- [ ] Watermark zero-width (U+200B / U+200D) no shell
+- [ ] Fora do fluxo de leitura, com `aria-hidden="true"`
+- [ ] Verificado em TalkBack e VoiceOver (Fase 8)
 
 ## Open source
 
-- [ ] PO confirmou a origem/titularidade do texto do `ARIA.html`
-- [ ] PO confirmou a licença do conteúdo (CC BY 4.0 ou CC BY-SA 4.0)
-- [ ] `LICENSE` (MIT) na raiz
-- [ ] `LICENSE-CONTENT` (CC do conteúdo) na raiz
-- [ ] `README.md` com disclaimer de não-afiliação
-- [ ] `NOTICE.md` com atribuição CC BY 4.0 do logo
-- [ ] `CONTRIBUTING.md`, incluindo a regra de acessibilidade em PR
-- [ ] `CODE_OF_CONDUCT.md`
-- [ ] Issue template de bug de acessibilidade usando o Template de Bug do conteúdo
+- [x] PO confirmou a origem do conteúdo: autoria própria (2026-07-28)
+- [x] PO confirmou a licença do conteúdo: CC BY 4.0 (2026-07-28)
+- [x] `LICENSE` (MIT) na raiz (2026-07-28)
+- [x] `LICENSE-CONTENT` (CC BY 4.0) na raiz (2026-07-28)
+- [x] `README.md` com disclaimer de não-afiliação (2026-07-28)
+- [x] `NOTICE.md` com atribuição CC BY 4.0 do logo (2026-07-28)
+- [x] `CONTRIBUTING.md`, incluindo a regra de acessibilidade em PR (2026-07-28)
+- [x] `CODE_OF_CONDUCT.md` (2026-07-28)
+- [x] Issue template de bug de acessibilidade seguindo o Template de Bug do conteúdo (2026-07-28)
 
 ## Estrutura
 
 - [ ] `src/app/core/` criado
 - [ ] `src/app/shared/` criado
-- [ ] `src/app/features/` criado
-- [ ] `src/content/` criado
-- [ ] `src/styles/` criado
+- [x] `src/app/features/` criado (2026-07-28)
+- [ ] `src/content/` criado (Fase 2)
+- [x] `src/styles/` criado (2026-07-28)
 
 ## Fechamento da fase
 
-- [ ] `ng serve` sobe sem erro
-- [ ] Página inicial passa em axe sem violação
-- [ ] Tabular na página inicial mostra foco visível
-- [ ] Commit com gitmoji feito e `git push` executado
+- [x] `ng build` passa e prerenderiza (2026-07-28)
+- [x] `npm run verify` (lint + contraste + build) verde (2026-07-28)
+- [x] Conteúdo presente no HTML estático, não só shell (2026-07-28)
+- [ ] Página inicial passa em axe sem violação (axe entra na Fase 8)
+- [ ] Tabular na página inicial mostra foco visível (verificar no navegador)
+- [x] Commit com gitmoji feito e `git push` executado (2026-07-28)
