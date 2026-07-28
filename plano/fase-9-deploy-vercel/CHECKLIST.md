@@ -27,7 +27,7 @@ Marcar concluído com data: `(YYYY-MM-DD)`
 - [ ] Projeto criado e repositório conectado
 - [ ] Framework preset: Angular
 - [ ] Build command: `npm run build`
-- [ ] Output directory: `dist/aria-angular/browser`
+- [ ] Output directory: `dist/angularia/browser`
 - [ ] Install command: `npm ci`
 - [ ] Versão do Node compatível com Angular 22
 

@@ -49,7 +49,7 @@ Condições:
 
 ### 2.2 Nome
 
-**"ARIA Angular"** é uso nominativo descritivo: descreve para que serve a ferramenta.
+**"AngulARIA"** é uso nominativo descritivo: descreve para que serve a ferramenta.
 Segue o padrão consolidado da comunidade (`ngx-*`, `Angular Material`, etc.).
 
 O que evitar no nome e na comunicação:

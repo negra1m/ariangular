@@ -27,4 +27,4 @@ vêm da mesma fonte.
 ## Dependências
 
 As licenças das dependências de produção são agregadas no build em
-`dist/aria-angular/3rdpartylicenses.txt`.
+`dist/angularia/3rdpartylicenses.txt`.

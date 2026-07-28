@@ -9,7 +9,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    title: 'ARIA Angular — Acessibilidade em Angular',
+    title: 'AngulARIA — Acessibilidade em Angular',
     loadComponent: () => import('./features/home/home').then((m) => m.Home),
   },
 ];

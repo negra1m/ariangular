@@ -79,7 +79,7 @@ Cada checklist mostra:
 
 `core/progress/progress.service.ts` sobre localStorage.
 
-- Chave versionada: `aria-angular:progress:v1`.
+- Chave versionada: `angularia:progress:v1`.
 - Formato JSON (interno do localStorage).
 - Escrita com debounce; leitura só na inicialização.
 - **Guard de SSR**: localStorage não existe no prerender. Todo acesso protegido —

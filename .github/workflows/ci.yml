@@ -41,10 +41,10 @@ jobs:
 
       - name: Conferir que a saída é estática
         run: |
-          if [ -d "dist/aria-angular/server" ]; then
+          if [ -d "dist/angularia/server" ]; then
             echo "ERRO: build gerou pasta server/ — a saída deveria ser estática."
             exit 1
           fi
           echo "Saída estática confirmada."
           echo "Rotas prerenderizadas:"
-          cat dist/aria-angular/prerendered-routes.json
+          cat dist/angularia/prerendered-routes.json

@@ -25,7 +25,7 @@ export const serverRoutes: ServerRoute[] = [
 Rota com parâmetro (`/checklists/:id`) precisa de `getPrerenderParams` devolvendo os 14
 ids. Sem isso o build ignora as páginas de checklist individuais.
 
-**Verificação obrigatória:** contar os `index.html` gerados em `dist/aria-angular/browser/`
+**Verificação obrigatória:** contar os `index.html` gerados em `dist/angularia/browser/`
 e conferir contra a lista de rotas esperadas. São 10 rotas fixas + 14 de checklist + 404.
 
 Armadilha conhecida: qualquer acesso a `window`, `document`, `localStorage` ou
@@ -39,7 +39,7 @@ nesse caso não aponta a linha com clareza. Os pontos de risco já mapeados: `Pr
 
 - **Framework preset:** Angular
 - **Build command:** `npm run build`
-- **Output directory:** `dist/aria-angular/browser`
+- **Output directory:** `dist/angularia/browser`
 - **Node:** versão LTS compatível com Angular 22
 - **Install command:** `npm ci`
 

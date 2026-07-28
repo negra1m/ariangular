@@ -1,4 +1,4 @@
-# ARIA Angular
+# AngulARIA
 
 Guia interativo de acessibilidade para times Angular — fundamentos, ARIA, formulários,
 componentes, Angular CDK A11y, TalkBack, VoiceOver e WCAG 2.2.

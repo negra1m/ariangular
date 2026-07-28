@@ -46,7 +46,7 @@ Marcar concluído com data: `(YYYY-MM-DD)`
 ## Persistência
 
 - [ ] `ProgressService` criado
-- [ ] Chave versionada `aria-angular:progress:v1`
+- [ ] Chave versionada `angularia:progress:v1`
 - [ ] Escrita com debounce
 - [ ] Leitura só na inicialização
 - [ ] Guard de plataforma em todo acesso a localStorage
