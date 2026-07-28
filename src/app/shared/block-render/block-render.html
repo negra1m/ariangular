@@ -1,0 +1,174 @@
+@for (block of blocks(); track $index; let i = $index) {
+  @switch (block.kind) {
+    @case ('paragraph') {
+      <p class="blk-p prose">{{ block.text }}</p>
+    }
+
+    @case ('heading') {
+      <!-- Nível calculado, nunca fixo: pular de h2 para h4 quebra a árvore de
+           navegação por headings, que é como quem usa leitor de tela se move. -->
+      @if (headingTag(block.level) === 'h3') {
+        <h3 class="blk-h">{{ block.text }}</h3>
+      } @else if (headingTag(block.level) === 'h4') {
+        <h4 class="blk-h">{{ block.text }}</h4>
+      } @else {
+        <h5 class="blk-h">{{ block.text }}</h5>
+      }
+    }
+
+    @case ('list') {
+      @if (block.ordered) {
+        <ol class="blk-list prose">
+          @for (item of block.items; track $index) {
+            <li>{{ item }}</li>
+          }
+        </ol>
+      } @else {
+        <ul class="blk-list prose">
+          @for (item of block.items; track $index) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      }
+    }
+
+    @case ('table') {
+      <!-- Container rolável focável e rotulado: sem tabindex, conteúdo que
+           passa da largura fica inalcançável por teclado (WCAG 2.1.1). -->
+      <div
+        class="blk-table scroll-x"
+        tabindex="0"
+        role="region"
+        [attr.aria-label]="locale.strings().table + ': ' + (block.caption || context())"
+      >
+        <table>
+          @if (block.caption) {
+            <caption>
+              {{ block.caption }}
+            </caption>
+          }
+          <thead>
+            <tr>
+              @for (h of block.headers; track $index) {
+                <th scope="col">{{ h }}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of block.rows; track $index) {
+              <tr>
+                @for (cell of row; track $index) {
+                  <td>{{ cell }}</td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    @case ('code') {
+      <figure class="blk-code" [attr.data-variant]="block.variant">
+        @if (block.variant !== 'neutral') {
+          <!-- Rótulo TEXTUAL da variante. A cor da borda é reforço, não o
+               portador do significado (WCAG 1.4.1). -->
+          <figcaption class="blk-code__label">
+            <span class="blk-code__icon" aria-hidden="true">
+              {{ block.variant === 'correct' ? '✓' : '✕' }}
+            </span>
+            {{
+              block.variant === 'correct' ? locale.strings().correct : locale.strings().wrong
+            }}
+          </figcaption>
+        }
+
+        <div class="blk-code__body">
+          <pre><code>{{ block.code }}</code></pre>
+
+          <button
+            type="button"
+            class="blk-code__copy"
+            [attr.aria-label]="locale.strings().copy + ' — ' + context()"
+            (click)="copy(block.code, i)"
+          >
+            <span aria-hidden="true">{{ copiedIndex() === i ? '✓' : '⧉' }}</span>
+          </button>
+        </div>
+      </figure>
+    }
+
+    @case ('reading') {
+      <!-- Bloco característico do documento: o que o leitor de tela fala.
+           É conteúdo normal, sem ARIA especial — o rótulo dá o contexto. -->
+      <figure class="blk-reading">
+        <figcaption class="blk-reading__label">
+          <span class="blk-reading__icon" aria-hidden="true">🔊</span>
+          {{ locale.strings().reading }}
+        </figcaption>
+        <p class="blk-reading__text">{{ block.text }}</p>
+      </figure>
+    }
+
+    @case ('callout') {
+      <!-- Sem role=alert e sem aria-live: é conteúdo estático de página, não
+           notificação. Usar alert aqui seria o "aria-live em excesso" que o
+           próprio documento lista como erro comum. -->
+      <aside
+        class="blk-callout"
+        [attr.data-tone]="block.tone"
+        [attr.aria-label]="
+          block.tone === 'warning'
+            ? locale.strings().calloutWarning
+            : block.tone === 'success'
+              ? locale.strings().calloutSuccess
+              : locale.strings().calloutInfo
+        "
+      >
+        <p class="blk-callout__label">
+          {{
+            block.tone === 'warning'
+              ? locale.strings().calloutWarning
+              : block.tone === 'success'
+                ? locale.strings().calloutSuccess
+                : locale.strings().calloutInfo
+          }}
+        </p>
+
+        <!--
+          Conteúdo do callout renderizado inline, sem recursão.
+          Componente standalone não pode se auto-importar (referência circular
+          no decorator), e os callouts do documento têm um nível só: parágrafo,
+          lista e código. Recursão aqui seria complexidade sem uso.
+        -->
+        @for (inner of block.blocks; track $index) {
+          @switch (inner.kind) {
+            @case ('paragraph') {
+              <p class="blk-p">{{ inner.text }}</p>
+            }
+            @case ('list') {
+              @if (inner.ordered) {
+                <ol class="blk-list">
+                  @for (item of inner.items; track $index) {
+                    <li>{{ item }}</li>
+                  }
+                </ol>
+              } @else {
+                <ul class="blk-list">
+                  @for (item of inner.items; track $index) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              }
+            }
+            @case ('code') {
+              <pre class="blk-callout__code"><code>{{ inner.code }}</code></pre>
+            }
+            @case ('heading') {
+              <p class="blk-callout__heading"><strong>{{ inner.text }}</strong></p>
+            }
+          }
+        }
+      </aside>
+    }
+  }
+}

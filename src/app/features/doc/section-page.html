@@ -1,0 +1,47 @@
+@if (data(); as d) {
+  <article class="container section">
+    <nav class="section__crumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a [routerLink]="locale.path()">{{ locale.strings().home }}</a></li>
+        <li>
+          <a [routerLink]="locale.path(d.part.id)">
+            <span class="section__numeral" aria-hidden="true">{{ d.part.numeral }}</span>
+            {{ d.part.title }}
+          </a>
+        </li>
+        <!-- Item atual do breadcrumb marcado com aria-current="page",
+             como o próprio documento ensina na seção de Breadcrumb. -->
+        <li aria-current="page">{{ d.section.title }}</li>
+      </ol>
+    </nav>
+
+    <!-- tabindex="-1": alvo do foco a cada navegação de rota. -->
+    <h1 class="section__title" tabindex="-1">{{ d.section.title }}</h1>
+
+    <p class="section__lead prose">{{ d.section.summary }}</p>
+
+    <app-block-render [blocks]="d.section.blocks" [context]="d.section.title" />
+
+    <!-- Sem isto, uma URL por seção transforma o site em 156 becos sem saída. -->
+    <nav class="section__pager" [attr.aria-label]="locale.strings().nav">
+      @if (around().prev; as prev) {
+        <a class="section__pager-link" [routerLink]="locale.path(prev.part.id, prev.section.id)">
+          <span class="section__pager-dir">← {{ locale.strings().previous }}</span>
+          <span class="section__pager-title">{{ prev.section.title }}</span>
+        </a>
+      } @else {
+        <span></span>
+      }
+
+      @if (around().next; as next) {
+        <a
+          class="section__pager-link section__pager-link--next"
+          [routerLink]="locale.path(next.part.id, next.section.id)"
+        >
+          <span class="section__pager-dir">{{ locale.strings().next }} →</span>
+          <span class="section__pager-title">{{ next.section.title }}</span>
+        </a>
+      }
+    </nav>
+  </article>
+}

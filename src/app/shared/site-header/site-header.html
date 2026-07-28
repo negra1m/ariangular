@@ -1,0 +1,103 @@
+<header class="header">
+  <div class="header__bar container">
+    <a class="header__brand" [routerLink]="locale.path()">
+      <app-brand-mark />
+    </a>
+
+    <!--
+      aria-expanded via binding, não valor fixo: o documento lista
+      "aria-expanded desatualizado" como um dos erros mais comuns com ARIA.
+    -->
+    <button
+      type="button"
+      class="header__toggle"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="nav-principal"
+      [attr.aria-label]="menuOpen() ? locale.strings().closeMenu : locale.strings().openMenu"
+      (click)="toggleMenu()"
+    >
+      <span class="header__toggle-icon" aria-hidden="true">
+        {{ menuOpen() ? '✕' : '☰' }}
+      </span>
+    </button>
+
+    <div class="header__actions">
+      <!--
+        Toggle de tema com aria-pressed refletindo o estado real: é um botão de
+        alternância, não um link. O rótulo textual acompanha o ícone.
+      -->
+      <button
+        type="button"
+        class="header__action"
+        [attr.aria-pressed]="theme.isDark()"
+        [attr.aria-label]="locale.strings().theme"
+        (click)="theme.toggle()"
+      >
+        <span aria-hidden="true">{{ theme.isDark() ? '☾' : '☀' }}</span>
+      </button>
+
+      <!--
+        Seletor de idioma: lista de botões, não <select>, para que cada idioma
+        seja um alvo direto e o estado atual seja anunciado por aria-current.
+      -->
+      <div class="header__locales" role="group" [attr.aria-label]="locale.strings().language">
+        @for (l of locales; track l) {
+          <button
+            type="button"
+            class="header__locale"
+            [class.header__locale--active]="locale.locale() === l"
+            [attr.aria-current]="locale.locale() === l ? 'true' : null"
+            [attr.lang]="l === 'zh' ? 'zh-Hans' : l"
+            (click)="switchLocale(l)"
+          >
+            {{ localeLabel[l] }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <nav
+    id="nav-principal"
+    class="header__nav"
+    [class.header__nav--open]="menuOpen()"
+    [attr.aria-label]="locale.strings().nav"
+  >
+    <ul class="header__nav-list container">
+      @for (part of parts(); track part.id) {
+        <li>
+          <a
+            [routerLink]="locale.path(part.id)"
+            routerLinkActive="is-active"
+            #rla="routerLinkActive"
+            [attr.aria-current]="rla.isActive ? 'page' : null"
+            (click)="closeMenu()"
+          >
+            <span class="header__numeral" aria-hidden="true">{{ part.numeral }}</span>
+            {{ part.title }}
+          </a>
+        </li>
+      }
+      <li>
+        <a
+          [routerLink]="locale.path('checklists')"
+          routerLinkActive="is-active"
+          #rlc="routerLinkActive"
+          [attr.aria-current]="rlc.isActive ? 'page' : null"
+          (click)="closeMenu()"
+          >{{ locale.strings().checklists }}</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="locale.path('auditor')"
+          routerLinkActive="is-active"
+          #rla2="routerLinkActive"
+          [attr.aria-current]="rla2.isActive ? 'page' : null"
+          (click)="closeMenu()"
+          >{{ locale.strings().auditor }}</a
+        >
+      </li>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,51 @@
+<footer class="footer">
+  <div class="container footer__inner">
+    <nav class="footer__links" [attr.aria-label]="locale.strings().navFooter">
+      <ul>
+        <li>
+          <a [routerLink]="locale.path()">{{ locale.strings().home }}</a>
+        </li>
+        <li>
+          <a [routerLink]="locale.path('checklists')">{{ locale.strings().checklists }}</a>
+        </li>
+        <li>
+          <a [routerLink]="locale.path('auditor')">{{ locale.strings().auditor }}</a>
+        </li>
+        <li>
+          <!--
+            Link externo avisa que abre em nova aba. Mudança de contexto sem
+            aviso é falha de WCAG 3.2.5 — e o aviso precisa chegar ao leitor de
+            tela, por isso vai em texto, não só num ícone.
+          -->
+          <a [href]="repo" target="_blank" rel="noopener noreferrer">
+            GitHub<span class="sr-only"> ({{ locale.strings().opensNewTab }})</span>
+          </a>
+        </li>
+        <li>
+          <a [href]="linkedin" target="_blank" rel="noopener noreferrer">
+            LinkedIn<span class="sr-only"> ({{ locale.strings().opensNewTab }})</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!--
+      Disclaimer de não-afiliação. Texto real, com contraste AA — não cinza
+      claro escondido. Num site sobre acessibilidade, aviso ilegível seria
+      contradição. Ver plano/MARCA-E-LICENCA.md.
+    -->
+    <p class="footer__disclaimer">
+      {{ locale.strings().disclaimer }}
+    </p>
+
+    <p class="footer__credit">
+      © {{ year }} · Vinícius Negrão ·
+      <a [href]="repo + '/blob/main/LICENSE'" target="_blank" rel="noopener noreferrer">
+        MIT<span class="sr-only"> ({{ locale.strings().opensNewTab }})</span> </a
+      >&nbsp;/&nbsp;
+      <a [href]="repo + '/blob/main/LICENSE-CONTENT'" target="_blank" rel="noopener noreferrer">
+        CC BY 4.0<span class="sr-only"> ({{ locale.strings().opensNewTab }})</span>
+      </a>
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,82 @@
+@if (checklist(); as c) {
+  <article class="container cl">
+    <h1 tabindex="-1">{{ c.title }}</h1>
+
+    <p class="cl__source">
+      <a [routerLink]="locale.path(c.sourcePartId, c.sourceSectionId)">
+        {{ locale.strings().sourceSection }}
+      </a>
+    </p>
+
+    <!-- <progress> nativo: role, valor e leitura vêm de graça e corretos. -->
+    <div class="cl__progress">
+      <progress class="cl__bar" [value]="done()" [max]="total()" [attr.aria-label]="c.title">
+      </progress>
+      <p class="cl__count">
+        {{ done() }} / {{ total() }} {{ locale.strings().progressDone }}
+      </p>
+    </div>
+
+    @if (progress.persistenceFailed()) {
+      <p class="cl__warn" role="status">
+        Não foi possível salvar o progresso neste navegador. Use o botão de exportar para
+        não perder o que marcou.
+      </p>
+    }
+
+    <div class="cl__actions">
+      <button type="button" class="cl__btn" (click)="checkAll()">
+        {{ locale.strings().checkAll }}
+      </button>
+      <button type="button" class="cl__btn" (click)="exportMarkdown()">
+        {{ copied() ? locale.strings().copied : locale.strings().export }}
+      </button>
+      <button type="button" class="cl__btn cl__btn--danger" (click)="openReset($event)">
+        {{ locale.strings().reset }}
+      </button>
+    </div>
+
+    <!--
+      <input type="checkbox"> NATIVO com <label for> associado.
+      Nada de role="checkbox" em <div>: o documento inteiro argumenta
+      "HTML primeiro", e um checkbox custom aqui seria contradizer o produto
+      na página mais visível dele.
+    -->
+    <fieldset class="cl__set">
+      <legend class="sr-only">{{ c.title }}</legend>
+
+      <ul class="cl__items">
+        @for (item of c.items; track item.id) {
+          <li class="cl__item">
+            <input
+              type="checkbox"
+              class="cl__check"
+              [id]="item.id"
+              [checked]="isChecked(item.id)"
+              (change)="toggle(item.id)"
+            />
+            <label [for]="item.id">{{ item.text }}</label>
+          </li>
+        }
+      </ul>
+    </fieldset>
+  </article>
+
+  <!--
+    <dialog> nativo com showModal(): role=dialog, aria-modal, foco preso e ESC
+    fechando já vêm implementados e testados pelo navegador.
+    O retorno de foco é nosso — está em onDialogClose().
+  -->
+  <dialog #resetDialog class="cl__dialog" (close)="onDialogClose()" aria-labelledby="reset-titulo">
+    <h2 id="reset-titulo">{{ locale.strings().resetTitle }}</h2>
+    <p>{{ locale.strings().resetConfirm }}</p>
+    <div class="cl__dialog-actions">
+      <button type="button" class="cl__btn" (click)="closeReset()">
+        {{ locale.strings().cancel }}
+      </button>
+      <button type="button" class="cl__btn cl__btn--danger" (click)="confirmReset()">
+        {{ locale.strings().confirm }}
+      </button>
+    </div>
+  </dialog>
+}

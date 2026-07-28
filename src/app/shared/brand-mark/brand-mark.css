@@ -1,0 +1,43 @@
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.brand__shield {
+  width: 1.75rem;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.brand__shield-body {
+  fill: var(--color-accent);
+}
+
+/* O anel de foco do logo usa a cor de foco do próprio site — a marca conta
+   a mesma história que o produto. */
+.brand__focus-ring {
+  fill: none;
+  stroke: var(--color-on-accent);
+  stroke-width: 3;
+}
+
+.brand__focus-dot {
+  fill: var(--color-on-accent);
+}
+
+.brand__word {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+/* Destaque de "ARIA" dentro de "AngulARIA".
+   É <b> e não <strong>: a diferença é visual, não de ênfase semântica —
+   <strong> faria alguns leitores mudarem a entonação sem motivo. */
+.brand__word-aria {
+  color: var(--color-accent);
+  font-weight: 700;
+}

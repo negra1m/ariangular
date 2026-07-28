@@ -5,7 +5,7 @@
     "ng": "ng",
     "dev": "ng serve",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && node scripts/generate-sitemap.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
@@ -19,11 +19,13 @@
     "content:extract": "node scripts/extract-content.js",
     "i18n:strings": "node scripts/extract-strings.js",
     "i18n:build": "node scripts/build-locale.js en && node scripts/build-locale.js zh",
-    "content:all": "npm run content:extract && npm run i18n:strings"
+    "content:all": "npm run content:extract && npm run i18n:strings",
+    "sitemap": "node scripts/generate-sitemap.js"
   },
   "private": true,
   "packageManager": "npm@11.16.0",
   "dependencies": {
+    "@angular/cdk": "^22.0.6",
     "@angular/common": "^22.0.0",
     "@angular/compiler": "^22.0.0",
     "@angular/core": "^22.0.0",

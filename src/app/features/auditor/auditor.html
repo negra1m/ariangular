@@ -1,0 +1,136 @@
+<article class="container auditor">
+  <h1 tabindex="-1">{{ locale.strings().auditor }}</h1>
+
+  <p class="auditor__lead prose">
+    Cole um trecho de template Angular. O que dá para corrigir com segurança já volta
+    corrigido; o que depende de você fica marcado com uma pergunta.
+  </p>
+
+  <!--
+    Limite declarado em voz alta, na página, não escondido num rodapé.
+    Um auditor que finge ser completo cria falsa confiança — pior que não ter.
+  -->
+  <aside class="auditor__limit" aria-label="Limites desta ferramenta">
+    <p class="auditor__limit-label">O que esta ferramenta não faz</p>
+    <p>
+      São {{ ruleCount }} regras sobre markup estático. Ela não executa o seu código, não vê o
+      CSS aplicado e não sabe o que <code>[attr.aria-label]="descricao"</code> vale em
+      tempo de execução. Não substitui axe, Lighthouse nem teste com TalkBack e VoiceOver
+      de verdade. Revise antes de colar no projeto.
+    </p>
+  </aside>
+
+  <div class="auditor__panels">
+    <section class="auditor__panel" aria-labelledby="entrada-titulo">
+      <h2 id="entrada-titulo">Seu código</h2>
+
+      <!-- <label> real, associado. Usar placeholder como rótulo seria cometer
+           a regra 'campo-sem-label' que este próprio auditor detecta. -->
+      <label class="sr-only" for="snippet">Cole seu template Angular aqui</label>
+      <textarea
+        id="snippet"
+        class="auditor__input"
+        rows="16"
+        spellcheck="false"
+        [ngModel]="source()"
+        (ngModelChange)="source.set($event)"
+      ></textarea>
+
+      <div class="auditor__actions">
+        <button type="button" class="auditor__btn auditor__btn--primary" (click)="analyze()">
+          Analisar
+        </button>
+        <button type="button" class="auditor__btn" (click)="loadExample()">
+          Carregar exemplo
+        </button>
+      </div>
+    </section>
+
+    <section class="auditor__panel" aria-labelledby="saida-titulo">
+      <h2 id="saida-titulo">Corrigido</h2>
+
+      @if (output()) {
+        <pre class="auditor__output"><code>{{ output() }}</code></pre>
+        <div class="auditor__actions">
+          <button type="button" class="auditor__btn" (click)="copyOutput()">
+            {{ copied() ? locale.strings().copied : locale.strings().copy }}
+          </button>
+        </div>
+      } @else {
+        <p class="auditor__empty">O resultado aparece aqui depois de analisar.</p>
+      }
+    </section>
+  </div>
+
+  @if (result(); as r) {
+    <section class="auditor__result" aria-labelledby="resultado-titulo">
+      <h2 id="resultado-titulo" tabindex="-1">Resultado</h2>
+
+      @if (r.error) {
+        <p class="auditor__error" role="alert">{{ r.error }}</p>
+      } @else if (!r.findings.length) {
+        <p class="auditor__clean">
+          Nenhuma violação encontrada nas {{ ruleCount }} regras. Isso não substitui teste
+          com TalkBack e VoiceOver — a pergunta que importa é se uma pessoa consegue
+          concluir a jornada sozinha.
+        </p>
+      } @else {
+        <p class="auditor__summary">
+          <strong>{{ counts().fixed }}</strong> corrigidos automaticamente ·
+          <strong>{{ counts().pending }}</strong> precisam de você
+        </p>
+
+        <!-- Perguntas primeiro: é o que bloqueia o código de ficar pronto. -->
+        @if (r.pending.length) {
+          <div class="auditor__ask">
+            <h3>Só você sabe responder</h3>
+            <p class="auditor__ask-why">
+              Chutar um <code>aria-label</code> aqui faria o leitor de tela anunciar
+              informação falsa com confiança. Sem ARIA é melhor que ARIA errada.
+            </p>
+
+            @for (p of r.pending; track p.placeholder) {
+              <div class="auditor__field">
+                <label [for]="'ask-' + p.placeholder">{{ p.question }}</label>
+                <input
+                  type="text"
+                  [id]="'ask-' + p.placeholder"
+                  class="auditor__field-input"
+                  (input)="setAnswer(p.placeholder, $any($event.target).value)"
+                />
+              </div>
+            }
+          </div>
+        }
+
+        <ul class="auditor__findings">
+          @for (f of r.findings; track $index) {
+            <li class="auditor__finding" [attr.data-severity]="f.severity">
+              <p class="auditor__finding-head">
+                <!-- Severidade com rótulo textual + ícone, nunca só cor. -->
+                <span class="auditor__badge">
+                  <span aria-hidden="true">{{ f.fixed ? '✓' : '?' }}</span>
+                  {{ severityLabel(f.severity) }}
+                </span>
+                <span class="auditor__finding-title">{{ f.title }}</span>
+              </p>
+
+              <p class="auditor__finding-impact">{{ f.impact }}</p>
+
+              <pre class="auditor__finding-code"><code>{{ f.snippet }}</code></pre>
+
+              <p class="auditor__finding-meta">
+                @if (f.wcag.length) {
+                  <span>WCAG {{ f.wcag.join(', ') }}</span>
+                }
+                <a [routerLink]="locale.path(f.docPart, f.docSection)">
+                  Ver a explicação na documentação
+                </a>
+              </p>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+  }
+</article>

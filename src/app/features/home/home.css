@@ -1,44 +1,103 @@
-.home {
-  padding-block: var(--space-2xl) var(--space-3xl);
-}
-
-.home__eyebrow {
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin-bottom: var(--space-sm);
+.home__hero {
+  padding-block: var(--space-2xl) var(--space-xl);
 }
 
 .home__title {
   font-size: var(--text-hero);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
   margin-bottom: var(--space-md);
+}
+
+.home__title-aria {
+  color: var(--color-accent);
 }
 
 .home__lead {
   font-size: var(--text-lg);
   color: var(--color-muted);
-}
-
-.home__status {
-  margin-top: var(--space-xl);
-  padding: var(--space-md) var(--space-lg);
-  background-color: var(--color-surface);
-  border-left: 5px solid var(--color-accent);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
   max-width: var(--measure);
 }
 
-.home__status h2 {
-  font-size: var(--text-sm);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin-bottom: var(--space-2xs);
+.home__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  margin-top: var(--space-lg);
 }
 
-.home__status ul {
-  padding-left: var(--space-sm);
+.home__button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline: var(--space-md);
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home__button:hover {
+  filter: brightness(1.08);
+}
+
+.home__button--ghost {
+  background-color: transparent;
+  color: var(--color-text);
+  border: var(--border-thick) solid var(--color-border);
+}
+
+.home__button--ghost:hover {
+  border-color: var(--color-accent);
+  filter: none;
+}
+
+/* ---------- Grid das partes ---------- */
+
+.home__parts {
+  padding-bottom: var(--space-2xl);
+}
+
+.home__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--space-2xs);
+  list-style: none;
+}
+
+.home__card {
+  display: grid;
+  gap: 0.3rem;
+  height: 100%;
+  padding: var(--space-md);
+  border: var(--border-thin) solid var(--color-rule);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.home__card:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-surface);
+}
+
+.home__card-numeral {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.home__card-title {
+  font-weight: 700;
+  font-size: var(--text-lg);
+  line-height: 1.25;
+}
+
+.home__card-count {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
 }

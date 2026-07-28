@@ -1,0 +1,147 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background-color: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: var(--border-thin) solid var(--color-rule);
+}
+
+.header__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: var(--header-height);
+}
+
+.header__brand {
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+/* Alvo de toque de no mínimo 24x24 CSS px — WCAG 2.5.8.
+   44px aqui porque é confortável de verdade, não só conforme. */
+.header__action,
+.header__toggle,
+.header__locale {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+}
+
+.header__action:hover,
+.header__toggle:hover,
+.header__locale:hover {
+  background-color: var(--color-surface);
+}
+
+.header__locales {
+  display: flex;
+  gap: 2px;
+}
+
+.header__locale {
+  padding-inline: var(--space-2xs);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.header__locale--active {
+  color: var(--color-accent);
+  background-color: var(--color-surface);
+}
+
+.header__toggle {
+  display: none;
+}
+
+.header__toggle-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* ---------- Navegação ---------- */
+
+.header__nav {
+  border-top: var(--border-thin) solid var(--color-rule);
+  overflow-x: auto;
+}
+
+.header__nav-list {
+  display: flex;
+  gap: var(--space-xs);
+  list-style: none;
+  padding-block: var(--space-3xs);
+  white-space: nowrap;
+}
+
+.header__nav-list a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.6rem var(--space-2xs);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-muted);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+}
+
+.header__nav-list a:hover {
+  color: var(--color-text);
+}
+
+/* Estado ativo com cor E borda: cor sozinha não comunica (WCAG 1.4.1).
+   O aria-current="page" cobre o leitor de tela. */
+.header__nav-list a.is-active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.header__numeral {
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.65;
+}
+
+@media (max-width: 60rem) {
+  .header__toggle {
+    display: inline-flex;
+    order: 3;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .header__nav--open {
+    display: block;
+  }
+
+  .header__nav-list {
+    flex-direction: column;
+    white-space: normal;
+    padding-block: var(--space-2xs) var(--space-sm);
+  }
+
+  .header__nav-list a {
+    border-bottom: none;
+    border-left: 3px solid transparent;
+    padding-inline: var(--space-2xs);
+  }
+
+  .header__nav-list a.is-active {
+    border-left-color: var(--color-accent);
+  }
+}

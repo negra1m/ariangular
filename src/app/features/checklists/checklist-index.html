@@ -1,0 +1,29 @@
+<article class="container cl-index">
+  <h1 tabindex="-1">{{ locale.strings().checklists }}</h1>
+
+  <p class="cl-index__lead prose">
+    {{ all().length }} checklists tirados da documentação, agrupados pelo momento em que
+    você usa cada um.
+  </p>
+
+  @for (stage of stages; track stage.id) {
+    @if (byStage(stage.id).length) {
+      <section class="cl-index__stage" [attr.aria-labelledby]="'stage-' + stage.id">
+        <h2 [id]="'stage-' + stage.id">{{ stage.label }}</h2>
+
+        <ul class="cl-index__list">
+          @for (c of byStage(stage.id); track c.id) {
+            <li>
+              <a class="cl-index__card" [routerLink]="locale.path('checklists', c.id)">
+                <span class="cl-index__card-title">{{ c.title }}</span>
+                <span class="cl-index__card-meta">
+                  {{ c.items.length }} {{ locale.locale() === 'en' ? 'items' : 'itens' }}
+                </span>
+              </a>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+  }
+</article>

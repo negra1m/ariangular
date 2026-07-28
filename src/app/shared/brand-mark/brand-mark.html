@@ -1,0 +1,27 @@
+<!--
+  O SVG é decorativo: aria-hidden. O nome acessível vem do texto do wordmark,
+  que é lido uma vez só. Se o SVG tivesse title e o texto também, o leitor
+  anunciaria a marca duas vezes.
+-->
+<span class="brand">
+  <svg
+    class="brand__shield"
+    viewBox="0 0 48 52"
+    aria-hidden="true"
+    focusable="false"
+    role="presentation"
+  >
+    <!-- Escudo: silhueta adaptada do Angular v17+ -->
+    <path
+      class="brand__shield-body"
+      d="M24 0 47 8.2 43.5 42.3 24 52 4.5 42.3 1 8.2Z"
+    />
+    <!-- Conteúdo próprio: anel de foco, o tema do projeto -->
+    <circle class="brand__focus-ring" cx="24" cy="24.5" r="10.5" />
+    <circle class="brand__focus-dot" cx="24" cy="24.5" r="3.6" />
+  </svg>
+
+  @if (!compact()) {
+    <span class="brand__word">Angul<b class="brand__word-aria">ARIA</b></span>
+  }
+</span>
