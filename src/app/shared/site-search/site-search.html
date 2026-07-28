@@ -1,0 +1,96 @@
+<button
+  type="button"
+  class="search__trigger"
+  [attr.aria-label]="locale.strings().searchOpen"
+  (click)="openPanel()"
+>
+  <span aria-hidden="true">⌕</span>
+  <span class="search__trigger-hint" aria-hidden="true">/</span>
+</button>
+
+@if (open()) {
+  <!-- Clique fora fecha. É <button> e não <div (click)>: precisa ser
+       alcançável e anunciado, não um alvo invisível só para mouse. -->
+  <button
+    type="button"
+    class="search__scrim"
+    [attr.aria-label]="locale.strings().closeMenu"
+    (click)="close()"
+  ></button>
+
+  <div class="search__panel">
+    <!--
+      Padrão combobox do WAI-ARIA. O input mantém o foco o tempo todo; a opção
+      ativa é apontada por aria-activedescendant.
+    -->
+    <label class="sr-only" for="site-search-input">{{ locale.strings().search }}</label>
+    <input
+      #input
+      id="site-search-input"
+      type="text"
+      class="search__input"
+      role="combobox"
+      autocomplete="off"
+      aria-autocomplete="list"
+      aria-controls="search-results"
+      [attr.aria-expanded]="results().length > 0"
+      [attr.aria-activedescendant]="activeId()"
+      [attr.placeholder]="locale.strings().searchPlaceholder"
+      [value]="query()"
+      (input)="onInput($any($event.target).value)"
+      (keydown)="onKeydown($event)"
+    />
+
+    <ul id="search-results" class="search__results" role="listbox" [attr.aria-label]="locale.strings().search">
+      @for (hit of results(); track hit.entry.id; let i = $index) {
+        <!--
+          Exceção deliberada às regras click-events-have-key-events e
+          interactive-supports-focus.
+
+          No padrão combobox do WAI-ARIA, a opção NÃO pode ser focável: o foco
+          permanece no input e a opção ativa é apontada por
+          aria-activedescendant. Dar tabindex aqui quebraria a digitação para
+          quem usa leitor de tela, que é justamente o que o padrão evita.
+
+          O teclado ESTÁ tratado — em (keydown) no input: setas movem a opção
+          ativa, Enter navega, Esc limpa e fecha. O (click) abaixo serve o
+          mouse e o toque.
+
+          O axe, que conhece o padrão, não acusa nada nesta lista.
+        -->
+        <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+        <li
+          role="option"
+          [id]="'search-opt-' + i"
+          class="search__option"
+          [class.is-active]="activeIndex() === i"
+          [attr.aria-selected]="activeIndex() === i"
+          (click)="go(hit.entry.partId, hit.entry.sectionId)"
+        >
+          <span class="search__option-title">
+            @for (chunk of highlight(hit.entry.sectionTitle); track $index) {
+              @if (chunk.hit) {
+                <mark>{{ chunk.part }}</mark>
+              } @else {
+                {{ chunk.part }}
+              }
+            }
+          </span>
+          <span class="search__option-part">{{ hit.entry.partTitle }}</span>
+        </li>
+      }
+    </ul>
+
+    @if (query().trim().length >= 2 && !results().length) {
+      <p class="search__empty">{{ locale.strings().searchEmpty }}</p>
+    }
+
+    <p class="search__hint">{{ locale.strings().searchHint }}</p>
+  </div>
+}
+
+<!--
+  Região viva com a contagem. O anúncio é disparado com debounce no componente —
+  aria-live sem debounce num campo de busca vira ruído a cada tecla.
+-->
+<div class="sr-only" aria-live="polite" aria-atomic="true"></div>

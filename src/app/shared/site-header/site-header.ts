@@ -5,10 +5,11 @@ import { ThemeService } from '../../core/theme/theme.service';
 import { partsOf } from '../../../content';
 import { LOCALES, LOCALE_LABEL, type Locale } from '../../../content/types';
 import { BrandMark } from '../brand-mark/brand-mark';
+import { SiteSearch } from '../site-search/site-search';
 
 @Component({
   selector: 'app-site-header',
-  imports: [RouterLink, RouterLinkActive, BrandMark],
+  imports: [RouterLink, RouterLinkActive, BrandMark, SiteSearch],
   templateUrl: './site-header.html',
   styleUrl: './site-header.css',
 })

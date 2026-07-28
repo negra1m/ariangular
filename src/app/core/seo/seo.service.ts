@@ -53,6 +53,56 @@ export class SeoService {
 
     this.setCanonical(url);
     this.setHreflang(path);
+    this.setJsonLd({ title, description, url, path });
+  }
+
+  /**
+   * Structured data.
+   *
+   * TechArticle nas páginas de seção e WebSite na home. É o que permite ao
+   * buscador entender que cada URL é um artigo técnico sobre um tema, e não
+   * mais uma página de um site genérico — o que muda como o resultado aparece.
+   */
+  private setJsonLd({ title, description, url, path }: SeoInput & { url: string }): void {
+    const isHome = path === '';
+    const locale = this.locale.locale();
+
+    const data = isHome
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: SITE,
+          url,
+          description,
+          inLanguage: LOCALE_TAG[locale],
+          author: { '@type': 'Person', name: 'Vinícius Negrão' },
+        }
+      : {
+          '@context': 'https://schema.org',
+          '@type': 'TechArticle',
+          headline: title,
+          description,
+          url,
+          inLanguage: LOCALE_TAG[locale],
+          isAccessibleForFree: true,
+          author: { '@type': 'Person', name: 'Vinícius Negrão' },
+          about: [
+            { '@type': 'Thing', name: 'Web accessibility' },
+            { '@type': 'Thing', name: 'Angular' },
+            { '@type': 'Thing', name: 'WCAG 2.2' },
+            { '@type': 'Thing', name: 'WAI-ARIA' },
+          ],
+          license: 'https://creativecommons.org/licenses/by/4.0/',
+        };
+
+    let el = this.doc.getElementById('ld-json');
+    if (!el) {
+      el = this.doc.createElement('script');
+      el.setAttribute('type', 'application/ld+json');
+      el.id = 'ld-json';
+      this.doc.head.appendChild(el);
+    }
+    el.textContent = JSON.stringify(data);
   }
 
   private setCanonical(url: string): void {
