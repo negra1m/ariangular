@@ -6,11 +6,11 @@ import { ThemeService } from '../../core/theme/theme.service';
 import { partsOf } from '../../../content';
 import { LOCALES, LOCALE_LABEL, type Locale } from '../../../content/types';
 import { SiteSearch } from '../site-search/site-search';
-import { AsciiArt } from '../ascii-art/ascii-art';
+import { BrandMark } from '../brand-mark/brand-mark';
 
 @Component({
   selector: 'app-site-header',
-  imports: [RouterLink, RouterLinkActive, SiteSearch, AsciiArt, A11yModule],
+  imports: [RouterLink, RouterLinkActive, SiteSearch, BrandMark, A11yModule],
   templateUrl: './site-header.html',
   styleUrl: './site-header.css',
 })

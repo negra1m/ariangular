@@ -1,180 +1,200 @@
-/* ---------------- Header flutuante ---------------- */
+/* ---------------- Header ---------------- */
 
 .hdr {
-  position: fixed;
-  top: var(--frame-inset);
-  left: 0;
-  right: 0;
+  position: sticky;
+  top: 0;
   z-index: var(--z-header);
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.hdr__bar {
-  pointer-events: auto;
-  display: flex;
-  align-items: center;
-  gap: var(--space-2xs);
-  height: var(--header-height);
-  padding-inline: var(--space-2xs);
-  background-color: var(--color-surface);
-  border: var(--border-thin) solid var(--color-rule);
-  min-width: min(24rem, calc(100vw - 2rem));
-  justify-content: space-between;
-}
-
-.hdr__home,
-.hdr__menu {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.5rem;
-  min-width: 2.75rem;
-  padding-inline: var(--space-2xs);
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  letter-spacing: 0.12em;
-  color: var(--color-text);
-  text-decoration: none;
-}
-
-.hdr__home:hover,
-.hdr__menu:hover {
-  color: var(--color-accent-text);
-}
-
-.hdr__glyph {
-  font-weight: 700;
-  letter-spacing: 0;
-}
-
-.hdr__dots {
-  color: var(--color-accent);
-  letter-spacing: 0.25em;
-  font-size: var(--text-2xs);
-}
-
-/* ---------------- Menu overlay ---------------- */
-
-.menu {
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-overlay);
-  background-color: color-mix(in srgb, var(--color-bg) 92%, transparent);
-  backdrop-filter: blur(6px);
-  display: grid;
-  place-items: start center;
-  padding-top: calc(var(--header-height) + var(--frame-inset) + var(--space-2xs));
-  padding-inline: var(--space-sm);
-  overflow-y: auto;
-}
-
-.menu__panel {
-  width: min(32rem, 100%);
-  background-color: var(--color-surface);
-  border: var(--border-thin) solid var(--color-rule);
-}
-
-.menu__list {
-  list-style: none;
-}
-
-.menu__row {
+  background-color: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  backdrop-filter: blur(12px);
   border-bottom: var(--border-thin) solid var(--color-rule);
 }
 
-.menu__link {
-  display: grid;
-  grid-template-columns: auto 1fr;
+.hdr__bar {
+  display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-xs) var(--space-sm);
-  text-decoration: none;
-  color: var(--color-text);
+  gap: var(--space-md);
+  min-height: var(--header-height);
+  padding-inline: var(--space-md);
 }
 
-/* Hover e foco recebem o mesmo tratamento: quem usa teclado enxerga o mesmo
-   que quem usa mouse. */
-.menu__link:hover,
-.menu__link:focus-visible {
-  background-color: var(--color-accent);
-  color: var(--color-on-accent);
+.hdr__brand {
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+
+.hdr__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  flex-shrink: 0;
+}
+
+.hdr__icon,
+.hdr__burger,
+.hdr__locale {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.hdr__icon:hover,
+.hdr__burger:hover,
+.hdr__locale:hover {
+  color: var(--color-text);
+  background-color: var(--color-surface);
+}
+
+.hdr__locales {
+  display: flex;
+  border: var(--border-thin) solid var(--color-rule);
+}
+
+.hdr__locale {
+  min-width: 2.25rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.hdr__locale.is-active {
+  color: var(--color-accent-text);
+  background-color: var(--color-surface);
+}
+
+/* Sempre visível, com rótulo textual: ícone sozinho vira adivinhação.
+   O aria-label cobre o leitor de tela; o texto cobre todo mundo. */
+.hdr__burger {
+  gap: 0.45rem;
+  padding-inline: var(--space-2xs);
+  border: var(--border-thin) solid var(--color-rule);
+}
+
+.hdr__burger-text {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hdr__burger-icon {
+  font-size: 0.95rem;
+}
+
+/* ---------------- Drawer ---------------- */
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background-color: rgb(0 0 0 / 55%);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.drawer__panel {
+  width: min(21rem, 88vw);
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--color-surface);
+  border-left: var(--border-thin) solid var(--color-rule);
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer__nav {
+  flex: 1;
+  padding-block: var(--space-sm);
+}
+
+.drawer__group {
+  padding: var(--space-sm) var(--space-md) var(--space-3xs);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.drawer__nav ul {
+  list-style: none;
+}
+
+.drawer__nav a {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+}
+
+.drawer__nav a:hover,
+.drawer__nav a:focus-visible {
+  background-color: var(--color-surface-2);
   outline-offset: -3px;
 }
 
-.menu__link:hover .menu__num,
-.menu__link:focus-visible .menu__num {
-  color: var(--color-on-accent);
-}
-
-/* Estado atual com cor E marcador — cor sozinha não comunica (WCAG 1.4.1).
-   O aria-current cobre o leitor de tela. */
-.menu__link.is-active .menu__name::after {
-  content: ' ⁘';
+.drawer__nav a.is-active {
+  border-left-color: var(--color-accent);
   color: var(--color-accent-text);
 }
 
-.menu__num {
+.drawer__num,
+.drawer__count {
   font-family: var(--font-mono);
   font-size: var(--text-2xs);
   color: var(--color-muted);
 }
 
-.menu__name {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: 400;
-  letter-spacing: var(--tracking-tight);
-  text-transform: uppercase;
-  text-align: center;
+.drawer__foot {
+  border-top: var(--border-thin) solid var(--color-rule);
 }
 
-.menu__art {
-  border-bottom: var(--border-thin) solid var(--color-rule);
-  padding-block: var(--space-2xs);
-  opacity: 0.55;
-  overflow: hidden;
-}
-
-.menu__footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-}
-
-.menu__locales {
+.drawer__locales {
   display: flex;
 }
 
-.menu__locale,
-.menu__theme {
+.drawer__locale {
+  flex: 1;
   min-height: 2.75rem;
-  padding-inline: var(--space-sm);
   font-family: var(--font-mono);
   font-size: var(--text-2xs);
-  letter-spacing: 0.1em;
   color: var(--color-muted);
   border-right: var(--border-thin) solid var(--color-rule);
 }
 
-.menu__theme {
+.drawer__locale:last-child {
   border-right: none;
-  border-left: var(--border-thin) solid var(--color-rule);
 }
 
-.menu__locale:hover,
-.menu__theme:hover {
-  background-color: var(--color-accent);
-  color: var(--color-on-accent);
+.drawer__locale:hover {
+  background-color: var(--color-surface-2);
+  color: var(--color-text);
 }
 
-.menu__locale.is-active {
+.drawer__locale.is-active {
   color: var(--color-accent-text);
 }
 
+/* ---------------- Responsivo ---------------- */
+
 @media (max-width: 48rem) {
+  .hdr__locales,
+  .hdr__burger-text {
+    display: none;
+  }
+
   .hdr__bar {
-    min-width: calc(100vw - 1rem);
+    padding-inline: var(--space-sm);
   }
 }

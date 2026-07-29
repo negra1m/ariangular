@@ -1,93 +1,110 @@
 <!--
-  Header flutuante, pequeno e centralizado — não uma barra que atravessa a tela.
-  Continua sendo o landmark de banner e o primeiro grupo de controles do DOM.
+  Header enxuto: marca, busca e ações. Sem lista de seções com scroll
+  horizontal — item fora da vista é item que ninguém descobre, e que o Tab
+  alcança sem mostrar onde está.
+  A navegação completa fica no rodapé, em grade, e no drawer.
 -->
 <header class="hdr">
   <div class="hdr__bar">
-    <a class="hdr__home" [routerLink]="locale.path()" [attr.aria-label]="locale.strings().home">
-      <span class="hdr__glyph" aria-hidden="true">&gt;|&lt;</span>
+    <a class="hdr__brand" [routerLink]="locale.path()">
+      <app-brand-mark />
     </a>
 
-    <span class="hdr__dots" aria-hidden="true">•••••</span>
+    <div class="hdr__actions">
+      <app-site-search />
 
-    <app-site-search />
+      <button
+        type="button"
+        class="hdr__icon"
+        [attr.aria-pressed]="theme.isDark()"
+        [attr.aria-label]="locale.strings().theme"
+        (click)="theme.toggle()"
+      >
+        <span aria-hidden="true">{{ theme.isDark() ? '☾' : '☀' }}</span>
+      </button>
 
-    <button
-      type="button"
-      class="hdr__menu"
-      [attr.aria-expanded]="menuOpen()"
-      aria-controls="menu-principal"
-      [attr.aria-label]="menuOpen() ? locale.strings().closeMenu : locale.strings().openMenu"
-      (click)="toggleMenu()"
-    >
-      {{ menuOpen() ? 'FECHAR' : 'MENU' }}
-    </button>
+      <div class="hdr__locales" role="group" [attr.aria-label]="locale.strings().language">
+        @for (l of locales; track l) {
+          <button
+            type="button"
+            class="hdr__locale"
+            [class.is-active]="locale.locale() === l"
+            [attr.aria-current]="locale.locale() === l ? 'true' : null"
+            [attr.lang]="l === 'zh' ? 'zh-Hans' : l"
+            (click)="switchLocale(l)"
+          >
+            {{ l }}
+          </button>
+        }
+      </div>
+
+      <button
+        type="button"
+        class="hdr__burger"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="menu-lateral"
+        [attr.aria-label]="menuOpen() ? locale.strings().closeMenu : locale.strings().openMenu"
+        (click)="toggleMenu($event)"
+      >
+        <span class="hdr__burger-icon" aria-hidden="true">{{ menuOpen() ? '✕' : '☰' }}</span>
+        <span class="hdr__burger-text" aria-hidden="true">{{ locale.strings().nav }}</span>
+      </button>
+    </div>
   </div>
 </header>
 
 <!--
-  Menu em overlay, no padrão da referência: lista numerada com divisórias.
-  É um modal na prática — foco preso, ESC fecha, foco volta ao botão.
+  Drawer lateral. É um modal na prática: foco preso, ESC fecha, foco volta ao
+  botão, conteúdo de trás inerte.
 -->
 @if (menuOpen()) {
-  <div class="menu" id="menu-principal" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
-    <nav class="menu__panel" [attr.aria-label]="locale.strings().nav">
-      <ul class="menu__list">
-        @for (part of parts(); track part.id) {
-          <li class="menu__row">
-            <a
-              class="menu__link"
-              [routerLink]="locale.path(part.id)"
-              routerLinkActive="is-active"
-              #rla="routerLinkActive"
-              [attr.aria-current]="rla.isActive ? 'page' : null"
-              (click)="closeMenu()"
-            >
-              <span class="menu__num" aria-hidden="true">{{ part.numeral }}</span>
-              <span class="menu__name">{{ part.title }}</span>
+  <div class="drawer" id="menu-lateral" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+    <div class="drawer__panel">
+      <nav class="drawer__nav" [attr.aria-label]="locale.strings().nav">
+        <p class="drawer__group">{{ locale.strings().nav }}</p>
+        <ul>
+          @for (part of parts(); track part.id) {
+            <li>
+              <a
+                [routerLink]="locale.path(part.id)"
+                routerLinkActive="is-active"
+                #rlp="routerLinkActive"
+                [attr.aria-current]="rlp.isActive ? 'page' : null"
+                (click)="closeMenu()"
+              >
+                <span class="drawer__num" aria-hidden="true">{{ part.numeral }}</span>
+                <span>{{ part.title }}</span>
+                <span class="drawer__count" aria-hidden="true">{{ part.sections.length }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+
+        <p class="drawer__group">
+          {{ locale.strings().checklists }} · {{ locale.strings().auditor }}
+        </p>
+        <ul>
+          <li>
+            <a [routerLink]="locale.path('checklists')" (click)="closeMenu()">
+              <span class="drawer__num" aria-hidden="true">—</span>
+              <span>{{ locale.strings().checklists }}</span>
             </a>
           </li>
-        }
+          <li>
+            <a [routerLink]="locale.path('auditor')" (click)="closeMenu()">
+              <span class="drawer__num" aria-hidden="true">—</span>
+              <span>{{ locale.strings().auditor }}</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-        <li class="menu__row">
-          <a
-            class="menu__link"
-            [routerLink]="locale.path('checklists')"
-            routerLinkActive="is-active"
-            #rlc="routerLinkActive"
-            [attr.aria-current]="rlc.isActive ? 'page' : null"
-            (click)="closeMenu()"
-          >
-            <span class="menu__num" aria-hidden="true">08</span>
-            <span class="menu__name">{{ locale.strings().checklists }}</span>
-          </a>
-        </li>
-
-        <li class="menu__row">
-          <a
-            class="menu__link"
-            [routerLink]="locale.path('auditor')"
-            routerLinkActive="is-active"
-            #rlau="routerLinkActive"
-            [attr.aria-current]="rlau.isActive ? 'page' : null"
-            (click)="closeMenu()"
-          >
-            <span class="menu__num" aria-hidden="true">09</span>
-            <span class="menu__name">{{ locale.strings().auditor }}</span>
-          </a>
-        </li>
-      </ul>
-
-      <div class="menu__art" aria-hidden="true">
-        <app-ascii-art motif="sound-wave" [cols]="64" [rows]="12" />
-      </div>
-
-      <div class="menu__footer">
-        <div class="menu__locales" role="group" [attr.aria-label]="locale.strings().language">
+      <div class="drawer__foot">
+        <div class="drawer__locales" role="group" [attr.aria-label]="locale.strings().language">
           @for (l of locales; track l) {
             <button
               type="button"
-              class="menu__locale"
+              class="drawer__locale"
               [class.is-active]="locale.locale() === l"
               [attr.aria-current]="locale.locale() === l ? 'true' : null"
               [attr.lang]="l === 'zh' ? 'zh-Hans' : l"
@@ -97,16 +114,7 @@
             </button>
           }
         </div>
-
-        <button
-          type="button"
-          class="menu__theme"
-          [attr.aria-pressed]="theme.isDark()"
-          (click)="theme.toggle()"
-        >
-          {{ theme.isDark() ? 'ESCURO' : 'CLARO' }}
-        </button>
       </div>
-    </nav>
+    </div>
   </div>
 }

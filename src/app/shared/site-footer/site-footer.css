@@ -1,47 +1,139 @@
 .footer {
   margin-top: var(--space-3xl);
   border-top: var(--border-thin) solid var(--color-rule);
-  background-color: var(--color-surface);
 }
 
-.footer__inner {
-  padding-block: var(--space-lg) var(--space-xl);
+/* ---------------- Mapa das partes ---------------- */
+
+.footer__grid {
   display: grid;
-  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  list-style: none;
+  border-bottom: var(--border-thin) solid var(--color-rule);
 }
 
-.footer__links ul {
+.footer__part {
+  display: grid;
+  gap: 0.2rem;
+  align-content: start;
+  height: 100%;
+  padding: var(--space-md);
+  text-decoration: none;
+  color: var(--color-text);
+  border-right: var(--border-thin) solid var(--color-rule);
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease);
+}
+
+.footer__part:hover,
+.footer__part:focus-visible {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  outline-offset: -3px;
+}
+
+.footer__part:hover .footer__num,
+.footer__part:focus-visible .footer__num,
+.footer__part:hover .footer__count,
+.footer__part:focus-visible .footer__count {
+  color: var(--color-on-accent);
+}
+
+/* Estado atual com cor E barra lateral — cor sozinha não comunica (1.4.1).
+   O aria-current cobre o leitor de tela. */
+.footer__part.is-active {
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+.footer__num {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.14em;
+  color: var(--color-muted);
+}
+
+.footer__name {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+.footer__count {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--color-muted);
+}
+
+/* ---------------- Ferramentas ---------------- */
+
+.footer__tools {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-xs) var(--space-md);
-  list-style: none;
+  border-bottom: var(--border-thin) solid var(--color-rule);
 }
 
-.footer__links a {
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--color-text);
+.footer__tool {
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
   text-decoration: none;
+  border-right: var(--border-thin) solid var(--color-rule);
 }
 
-.footer__links a:hover {
-  text-decoration: underline;
+.footer__tool:hover,
+.footer__tool:focus-visible {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  outline-offset: -3px;
 }
 
-/* Contraste AA obrigatório. O texto de não-afiliação é o que separa homenagem
-   de confusão de origem — esconder em cinza fraco anularia o propósito. */
+/* ---------------- Legal ---------------- */
+
+.footer__legal {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-md) var(--space-2xl);
+}
+
+/* Contraste AA obrigatório: o texto de não-afiliação é o que separa homenagem
+   de confusão de origem. Esconder em cinza fraco anularia o propósito. */
 .footer__disclaimer {
   max-width: var(--measure);
   font-size: var(--text-sm);
-  color: var(--color-muted);
   line-height: 1.6;
+  color: var(--color-muted);
 }
 
 .footer__credit {
-  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.06em;
   color: var(--color-muted);
 }
 
 .footer__credit a {
   color: var(--color-muted);
+}
+
+.footer__credit a:hover {
+  color: var(--color-accent-text);
+}
+
+@media (max-width: 48rem) {
+  .footer__part,
+  .footer__tool {
+    border-right: none;
+    border-bottom: var(--border-thin) solid var(--color-rule);
+  }
+
+  .footer__legal {
+    padding-inline: var(--space-sm);
+  }
 }

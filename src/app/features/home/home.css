@@ -89,7 +89,7 @@
    por teclado enxerga exatamente o que quem usa mouse enxerga. */
 .home__link {
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto 1fr auto;
   align-items: baseline;
   gap: var(--space-md);
   padding: clamp(0.6rem, 1.6vw, 1.2rem) var(--space-md);
@@ -116,13 +116,11 @@
 .home__link:hover .home__num,
 .home__link:focus-visible .home__num,
 .home__link:hover .home__meta,
-.home__link:focus-visible .home__meta,
-.home__link:hover .home__reg,
-.home__link:focus-visible .home__reg {
+.home__link:focus-visible .home__meta {
   color: var(--color-on-accent);
 }
 
-/* Serif de display, um item por linha — o padrão Spotlight da referência. */
+/* Serif de display, um item por linha. */
 .home__name {
   font-family: var(--font-serif);
   font-size: clamp(1.5rem, 4.4vw, 3.5rem);
@@ -137,11 +135,6 @@
   text-transform: uppercase;
   color: var(--color-muted);
   white-space: nowrap;
-}
-
-.home__reg {
-  color: var(--color-accent-text);
-  font-size: var(--text-sm);
 }
 
 /* ---------------- Ferramentas ---------------- */
@@ -216,9 +209,6 @@
   }
   .home__meta {
     grid-area: meta;
-  }
-  .home__reg {
-    display: none;
   }
 
   .home__index-head,

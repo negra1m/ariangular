@@ -1,42 +1,53 @@
 <footer class="footer">
-  <div class="container footer__inner">
-    <nav class="footer__links" [attr.aria-label]="locale.strings().navFooter">
-      <ul>
+  <!--
+    Navegação principal do site, em grade: as 7 partes visíveis de uma vez,
+    sem scroll e sem esconder nada. Num site de documentação a pessoa chega por
+    busca ou por link — o rodapé é onde ela procura "o que mais tem aqui".
+  -->
+  <nav class="footer__map" [attr.aria-label]="locale.strings().nav">
+    <ol class="footer__grid">
+      @for (part of parts(); track part.id) {
         <li>
-          <a [routerLink]="locale.path()">{{ locale.strings().home }}</a>
-        </li>
-        <li>
-          <a [routerLink]="locale.path('checklists')">{{ locale.strings().checklists }}</a>
-        </li>
-        <li>
-          <a [routerLink]="locale.path('auditor')">{{ locale.strings().auditor }}</a>
-        </li>
-        <li>
-          <!--
-            Link externo avisa que abre em nova aba. Mudança de contexto sem
-            aviso é falha de WCAG 3.2.5 — e o aviso precisa chegar ao leitor de
-            tela, por isso vai em texto, não só num ícone.
-          -->
-          <a [href]="repo" target="_blank" rel="noopener noreferrer">
-            GitHub<span class="sr-only"> ({{ locale.strings().opensNewTab }})</span>
+          <a
+            class="footer__part"
+            [routerLink]="locale.path(part.id)"
+            routerLinkActive="is-active"
+            #rlp="routerLinkActive"
+            [attr.aria-current]="rlp.isActive ? 'page' : null"
+          >
+            <span class="footer__num" aria-hidden="true">{{ part.numeral }}</span>
+            <span class="footer__name">{{ part.title }}</span>
+            <span class="footer__count" aria-hidden="true">
+              {{ part.sections.length }} {{ locale.strings().sections }}
+            </span>
           </a>
         </li>
-        <li>
-          <a [href]="linkedin" target="_blank" rel="noopener noreferrer">
-            LinkedIn<span class="sr-only"> ({{ locale.strings().opensNewTab }})</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+      }
+    </ol>
+  </nav>
 
+  <div class="footer__tools">
+    <a class="footer__tool" [routerLink]="locale.path('checklists')">
+      {{ locale.strings().checklists }}
+    </a>
+    <a class="footer__tool" [routerLink]="locale.path('auditor')">
+      {{ locale.strings().auditor }}
+    </a>
+    <a class="footer__tool" [href]="repo" target="_blank" rel="noopener noreferrer">
+      GitHub<span class="sr-only"> ({{ locale.strings().opensNewTab }})</span>
+    </a>
+    <a class="footer__tool" [href]="linkedin" target="_blank" rel="noopener noreferrer">
+      LinkedIn<span class="sr-only"> ({{ locale.strings().opensNewTab }})</span>
+    </a>
+  </div>
+
+  <div class="footer__legal">
     <!--
       Disclaimer de não-afiliação. Texto real, com contraste AA — não cinza
       claro escondido. Num site sobre acessibilidade, aviso ilegível seria
       contradição. Ver plano/MARCA-E-LICENCA.md.
     -->
-    <p class="footer__disclaimer">
-      {{ locale.strings().disclaimer }}
-    </p>
+    <p class="footer__disclaimer">{{ locale.strings().disclaimer }}</p>
 
     <p class="footer__credit">
       © {{ year }} · Vinícius Negrão ·

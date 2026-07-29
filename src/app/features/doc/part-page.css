@@ -17,11 +17,10 @@ app-section-header {
   border-bottom: var(--border-thin) solid var(--color-rule);
 }
 
-/* Grade de 4 colunas como na referência:
-   título | resumo | índice | marca de registro */
+/* título | resumo | índice */
 .part__link {
   display: grid;
-  grid-template-columns: minmax(12rem, 22rem) 1fr auto auto;
+  grid-template-columns: minmax(12rem, 22rem) 1fr auto;
   align-items: baseline;
   gap: var(--space-md);
   padding: var(--space-sm) var(--space-md);
@@ -42,9 +41,7 @@ app-section-header {
 .part__link:hover .part__summary,
 .part__link:focus-visible .part__summary,
 .part__link:hover .part__index,
-.part__link:focus-visible .part__index,
-.part__link:hover .part__reg,
-.part__link:focus-visible .part__reg {
+.part__link:focus-visible .part__index {
   color: var(--color-on-accent);
 }
 
@@ -65,16 +62,11 @@ app-section-header {
   color: var(--color-muted);
 }
 
-.part__index,
-.part__reg {
+.part__index {
   font-family: var(--font-mono);
   font-size: var(--text-2xs);
   letter-spacing: 0.08em;
   color: var(--color-muted);
-}
-
-.part__reg {
-  color: var(--color-accent-text);
 }
 
 @media (max-width: 60rem) {
@@ -95,9 +87,6 @@ app-section-header {
   }
   .part__index {
     grid-area: index;
-  }
-  .part__reg {
-    display: none;
   }
 
   app-section-header {
