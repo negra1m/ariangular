@@ -29,7 +29,10 @@
         {{ locale.strings().checkAll }}
       </button>
       <button type="button" class="cl__btn" (click)="exportMarkdown()">
-        {{ copied() ? locale.strings().copied : locale.strings().export }}
+        {{ copied() ? locale.strings().copied : locale.strings().export }} · Markdown
+      </button>
+      <button type="button" class="cl__btn" (click)="exportText()">
+        {{ copied() ? locale.strings().copied : locale.strings().export }} · TXT
       </button>
       <button type="button" class="cl__btn cl__btn--danger" (click)="openReset($event)">
         {{ locale.strings().reset }}

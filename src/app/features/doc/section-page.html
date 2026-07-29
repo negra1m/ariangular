@@ -1,5 +1,5 @@
 @if (data(); as d) {
-  <article class="sec">
+  <div class="sec">
     <nav class="sec__crumb" aria-label="Breadcrumb">
       <ol>
         <li><a [routerLink]="locale.path()">{{ locale.strings().home }}</a></li>
@@ -12,17 +12,26 @@
       </ol>
     </nav>
 
-    <app-section-header
-      [numeral]="d.part.numeral + '.' + d.section.order"
-      [label]="'SEC—' + d.part.numeral"
-      [title]="d.section.title"
-      [lead]="d.section.summary"
-    />
+    <div class="sec__cols">
+      <!-- A barra lateral vem DEPOIS do artigo no DOM, e é reposicionada por
+           CSS. Assim o Tab chega no conteúdo antes da lista de 30 links, e a
+           ordem de leitura do leitor de tela é a que faz sentido. -->
+      <article class="sec__main">
+        <app-section-header
+          [numeral]="d.part.numeral + '.' + d.section.order"
+          [label]="'SEC—' + d.part.numeral"
+          [title]="d.section.title"
+          [lead]="d.section.summary"
+        />
 
-    <!-- Corpo de leitura: sans, coluna limitada. A serif de alto contraste
-         fica nas aberturas; aqui se lê de verdade. -->
-    <div class="sec__body">
-      <app-block-render [blocks]="d.section.blocks" [context]="d.section.title" />
+        <div class="sec__body">
+          <app-block-render [blocks]="d.section.blocks" [context]="d.section.title" />
+        </div>
+      </article>
+
+      <aside class="sec__aside">
+        <app-part-sidebar [part]="d.part" [currentId]="d.section.id" />
+      </aside>
     </div>
 
     <!-- Sem isto, uma URL por seção vira 160 becos sem saída. -->
@@ -46,5 +55,5 @@
         </a>
       }
     </nav>
-  </article>
+  </div>
 }

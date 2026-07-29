@@ -4,6 +4,7 @@ import { LocaleService } from '../../core/i18n/locale.service';
 import { SeoService } from '../../core/seo/seo.service';
 import { BlockRender } from '../../shared/block-render/block-render';
 import { SectionHeader } from '../../shared/section-header/section-header';
+import { PartSidebar } from '../../shared/part-sidebar/part-sidebar';
 import { findSection, neighbours } from '../../../content';
 
 /**
@@ -15,7 +16,7 @@ import { findSection, neighbours } from '../../../content';
  */
 @Component({
   selector: 'app-section-page',
-  imports: [RouterLink, BlockRender, SectionHeader],
+  imports: [RouterLink, BlockRender, SectionHeader, PartSidebar],
   templateUrl: './section-page.html',
   styleUrl: './section-page.css',
 })

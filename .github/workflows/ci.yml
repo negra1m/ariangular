@@ -30,6 +30,9 @@ jobs:
       - name: Contraste WCAG AA nos dois temas
         run: npm run contrast
 
+      - name: Testes (regras do auditor, incluindo os de falso positivo)
+        run: npm test
+
       - name: Validar o documento de origem
         run: npm run fonte:validate
 

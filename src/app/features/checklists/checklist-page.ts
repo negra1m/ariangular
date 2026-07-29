@@ -4,6 +4,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { SeoService } from '../../core/seo/seo.service';
 import { ProgressService } from '../../core/progress/progress.service';
+import { signature, header, progressBar } from '../../core/export/signature';
 import { findChecklist } from '../../../content';
 
 @Component({
@@ -127,19 +128,58 @@ export class ChecklistPage {
 
   /* ---------- Export ---------- */
 
-  protected async exportMarkdown(): Promise<void> {
+  /** Markdown, para colar direto num PR ou numa issue. */
+  protected exportMarkdown(): Promise<void> {
     const c = this.checklist();
-    if (!c) return;
+    if (!c) return Promise.resolve();
+
     const checked = this.progress.checkedOf(c.id)();
-    const lines = [
+    const date = new Date().toLocaleDateString(
+      this.locale.locale() === 'en' ? 'en-US' : this.locale.locale() === 'zh' ? 'zh-CN' : 'pt-BR',
+    );
+
+    const text = [
       `## ${c.title}`,
       '',
-      `${this.done()}/${this.total()}`,
+      `**${this.done()}/${this.total()}** · ${date}`,
       '',
       ...c.items.map((i) => `- [${checked.has(i.id) ? 'x' : ' '}] ${i.text}`),
-    ];
+      '',
+      '---',
+      '',
+      // A assinatura vai em bloco de código para o markdown preservar o
+      // alinhamento dos caracteres de caixa.
+      '```',
+      signature().trim(),
+      '```',
+    ].join('\n');
+
+    return this.copy(text);
+  }
+
+  /** Texto puro, para story, comentário de ticket ou e-mail. */
+  protected exportText(): Promise<void> {
+    const c = this.checklist();
+    if (!c) return Promise.resolve();
+
+    const checked = this.progress.checkedOf(c.id)();
+
+    const text = [
+      header(c.title, this.done(), this.total(), this.locale.locale()),
+      progressBar(this.done(), this.total()),
+      '',
+      ...c.items.map((i) => `  ${checked.has(i.id) ? '[x]' : '[ ]'}  ${i.text}`),
+      '',
+      '─'.repeat(48),
+      signature(),
+    ].join('\n');
+
+    return this.copy(text);
+  }
+
+  private async copy(text: string): Promise<void> {
     try {
-      await navigator.clipboard.writeText(lines.join('\n'));
+      await navigator.clipboard.writeText(text);
       this.copied.set(true);
       this.announcer.announce(this.locale.strings().copied, 'polite');
       setTimeout(() => this.copied.set(false), 2000);

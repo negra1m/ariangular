@@ -112,15 +112,41 @@ export class AuditService {
   private preprocess(src: string): string {
     let out = src;
     // {{ expr }} vira marcador: as chaves atrapalham a leitura de texto.
-    out = out.replace(/\{\{([\s\S]*?)\}\}/g, (_, e) => `${AuditService.INTERP}${btoa(unescape(encodeURIComponent(e)))}`);
+    out = out.replace(
+      /\{\{([\s\S]*?)\}\}/g,
+      (_, e) => `${AuditService.INTERP}${btoa(unescape(encodeURIComponent(e)))}`,
+    );
     // Blocos de controle @if/@for/@switch: mantém o conteúdo, tira a sintaxe.
-    out = out.replace(/@(if|else if|for|switch|case|default|empty|defer|placeholder|loading|error)\b[^{]*\{/g, '');
+    out = out.replace(
+      /@(if|else if|for|switch|case|default|empty|defer|placeholder|loading|error)\b[^{]*\{/g,
+      '',
+    );
     out = out.replace(/^\s*\}\s*$/gm, '');
+
+    // O ponto crítico: `(click)`, `[attr.x]`, `*ngIf` e `#ref` NÃO são nomes de
+    // atributo válidos. O DOMParser os descarta em silêncio — e sem eles o
+    // auditor fica cego, porque metade das regras existe para detectar
+    // justamente um `(click)` num `<div>`.
+    // Traduz para `data-*` válidos; o postprocess reverte.
+    out = out.replace(/\[\(\s*([\w.$]+)\s*\)\]\s*=\s*"([^"]*)"/g, 'data-ngmodel-$1="$2"');
+    out = out.replace(/\(([\w.$]+)\)\s*=\s*"([^"]*)"/g, 'data-ngon-$1="$2"');
+    out = out.replace(/\[([\w.$]+)\]\s*=\s*"([^"]*)"/g, 'data-ngbind-$1="$2"');
+    out = out.replace(/\*([\w$]+)\s*=\s*"([^"]*)"/g, 'data-ngstar-$1="$2"');
+    out = out.replace(/\s#([\w$]+)(?=[\s>])/g, ' data-ngref="$1"');
+
     return out;
   }
 
   private postprocess(html: string): string {
     let out = html;
+
+    // Reverte a tradução de sintaxe feita no preprocess.
+    out = out.replace(/data-ngmodel-([\w.$]+)="([^"]*)"/g, '[($1)]="$2"');
+    out = out.replace(/data-ngon-([\w.$]+)="([^"]*)"/g, '($1)="$2"');
+    out = out.replace(/data-ngbind-([\w.$]+)="([^"]*)"/g, '[$1]="$2"');
+    out = out.replace(/data-ngstar-([\w$]+)="([^"]*)"/g, '*$1="$2"');
+    out = out.replace(/\s?data-ngref="([\w$]+)"/g, ' #$1');
+
     out = out.replace(new RegExp(`${AuditService.INTERP}([A-Za-z0-9+/=]+)`, 'g'), (_, b64) => {
       try {
         return `{{${decodeURIComponent(escape(atob(b64)))}}}`;
@@ -142,7 +168,12 @@ export class AuditService {
         if (!line) return '';
         if (/^<\//.test(line)) depth = Math.max(0, depth - 1);
         const out = '  '.repeat(depth) + line;
-        if (/^<[a-zA-Z]/.test(line) && !/\/>$/.test(line) && !VOID.test(line) && !/<\/[a-zA-Z-]+>$/.test(line))
+        if (
+          /^<[a-zA-Z]/.test(line) &&
+          !/\/>$/.test(line) &&
+          !VOID.test(line) &&
+          !/<\/[a-zA-Z-]+>$/.test(line)
+        )
           depth++;
         return out;
       })

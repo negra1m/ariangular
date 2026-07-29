@@ -61,7 +61,7 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] Cabeçalho com nome do checklist e contagem (2026-07-28)
 - [x] Copiar para área de transferência (2026-07-28)
 - [x] Confirmação da cópia anunciada (2026-07-28)
-- [ ] **Export em texto simples** — não implementado
+- [ ] **Export em texto simples** — não implementado -- colocar assinatura em ASCII para ARIANGULAR - VINI NEGRAO -- faça mais bonito
 - [ ] Data no cabeçalho do export
 - [ ] Markdown gerado colado num PR e conferido
 

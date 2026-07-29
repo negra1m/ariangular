@@ -1,0 +1,21 @@
+<nav class="side" [attr.aria-label]="part().title">
+  <p class="side__head">
+    <span class="side__num" aria-hidden="true">{{ part().numeral }}</span>
+    <a class="side__part" [routerLink]="locale.path(part().id)">{{ part().title }}</a>
+  </p>
+
+  <ol class="side__list">
+    @for (section of part().sections; track section.id) {
+      <li>
+        <a
+          class="side__link"
+          [class.is-current]="section.id === currentId()"
+          [attr.aria-current]="section.id === currentId() ? 'page' : null"
+          [routerLink]="locale.path(part().id, section.id)"
+        >
+          {{ section.title }}
+        </a>
+      </li>
+    }
+  </ol>
+</nav>

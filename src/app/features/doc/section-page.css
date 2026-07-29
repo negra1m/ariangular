@@ -34,9 +34,28 @@
   color: var(--color-accent-text);
 }
 
+/* Duas colunas: leitura à esquerda, navegação da parte à direita.
+   No DOM o artigo vem primeiro; a lateral é reposicionada por `order`, para
+   o Tab e o leitor de tela alcançarem o conteúdo antes de 30 links. */
+.sec__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 16rem;
+  gap: var(--space-xl);
+  padding-inline: var(--space-md);
+  align-items: start;
+}
+
+.sec__main {
+  min-width: 0;
+}
+
+.sec__aside {
+  position: sticky;
+  top: 0;
+}
+
 app-section-header {
   display: block;
-  padding-inline: var(--space-md);
 }
 
 /* Coluna de leitura. Aqui é sans, não serif: são 160 seções de conteúdo
@@ -45,7 +64,6 @@ app-section-header {
 .sec__body {
   max-width: var(--measure);
   margin-top: var(--space-xl);
-  padding-inline: var(--space-md);
   font-family: var(--font-sans);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
@@ -103,10 +121,15 @@ app-section-header {
   line-height: 1.15;
 }
 
+@media (max-width: 64rem) {
+  .sec__cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (max-width: 48rem) {
   .sec__crumb,
-  app-section-header,
-  .sec__body {
+  .sec__cols {
     padding-inline: var(--space-sm);
   }
 

@@ -1,0 +1,73 @@
+.side {
+  position: sticky;
+  /* Fica abaixo do header fixo — senão o topo da lista nasce escondido. */
+  top: calc(var(--header-height) + var(--space-sm));
+  max-height: calc(100vh - var(--header-height) - var(--space-lg));
+  overflow-y: auto;
+  padding-right: var(--space-2xs);
+}
+
+.side__head {
+  display: grid;
+  gap: 0.15rem;
+  padding-bottom: var(--space-2xs);
+  margin-bottom: var(--space-2xs);
+  border-bottom: var(--border-thin) solid var(--color-rule);
+}
+
+.side__num {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.14em;
+  color: var(--color-accent-text);
+}
+
+.side__part {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  line-height: 1.25;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.side__part:hover {
+  color: var(--color-accent-text);
+}
+
+.side__list {
+  list-style: none;
+  counter-reset: sec;
+}
+
+.side__link {
+  display: block;
+  padding: 0.35rem var(--space-2xs);
+  font-size: var(--text-sm);
+  line-height: 1.35;
+  color: var(--color-muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+}
+
+.side__link:hover {
+  color: var(--color-text);
+  background-color: var(--color-surface);
+}
+
+/* Item atual: cor E barra lateral E peso — três sinais, porque cor sozinha não
+   comunica (WCAG 1.4.1). O aria-current cobre o leitor de tela. */
+.side__link.is-current {
+  color: var(--color-accent-text);
+  border-left-color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* A barra lateral é auxiliar. Abaixo de 64rem ela some: o conteúdo tem
+   prioridade, e a navegação continua no rodapé e no drawer. */
+@media (max-width: 64rem) {
+  :host {
+    display: none;
+  }
+}
