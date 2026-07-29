@@ -1,55 +1,106 @@
 <div class="home">
-  <section class="container home__hero">
-    <h1 class="home__title" tabindex="-1">
-      <span class="home__title-aria">aria</span>ngular
+  <!-- ---------- Hero: wordmark gigante sobre a arte ---------- -->
+  <section class="home__hero">
+    <div class="home__art" aria-hidden="true">
+      <app-ascii-art motif="focus-ring" [cols]="110" [rows]="30" />
+    </div>
+
+    <h1 class="home__wordmark" tabindex="-1">
+      <span class="home__wordmark-aria">aria</span>ngular
     </h1>
 
-    <p class="home__lead prose">
+    <p class="home__tagline">
       @switch (locale.locale()) {
         @case ('en') {
-          Accessibility for Angular teams. {{ totalSections() }} sections on ARIA, forms,
-          components, Angular CDK A11y, TalkBack, VoiceOver and WCAG 2.2 — plus checklists
-          you can actually tick and an auditor for your own templates.
+          Accessibility for Angular teams
         }
         @case ('zh') {
-          面向 Angular 团队的无障碍指南。{{ totalSections() }} 个章节，涵盖 ARIA、表单、组件、Angular
-          CDK A11y、TalkBack、VoiceOver 和 WCAG 2.2，还有可勾选的检查清单和模板审查工具。
+          面向 Angular 团队的无障碍指南
         }
         @default {
-          Acessibilidade para times Angular. {{ totalSections() }} seções sobre ARIA,
-          formulários, componentes, Angular CDK A11y, TalkBack, VoiceOver e WCAG 2.2 — com
-          checklists que dá para marcar e um auditor para os seus próprios templates.
+          Acessibilidade para times Angular
         }
       }
     </p>
-
-    <div class="home__cta">
-      <a class="home__button" [routerLink]="locale.path('checklists')">
-        {{ locale.strings().checklists }}
-      </a>
-      <a class="home__button home__button--ghost" [routerLink]="locale.path('auditor')">
-        {{ locale.strings().auditor }}
-      </a>
-    </div>
   </section>
 
-  <section class="container home__parts" aria-labelledby="partes-titulo">
-    <h2 id="partes-titulo" class="sr-only">{{ locale.strings().nav }}</h2>
+  <!-- ---------- Índice das partes, no padrão Spotlight ---------- -->
+  <section class="home__index" aria-labelledby="partes-titulo">
+    <div class="home__index-head">
+      <span class="home__index-count" aria-hidden="true">{{ totalSections() }}</span>
+      <h2 id="partes-titulo" class="home__index-title">
+        @switch (locale.locale()) {
+          @case ('en') {
+            THE GUIDE
+          }
+          @case ('zh') {
+            指南
+          }
+          @default {
+            O GUIA
+          }
+        }
+      </h2>
+    </div>
 
-    <ol class="home__grid">
+    <ol class="home__list">
       @for (part of parts(); track part.id) {
-        <li>
-          <!-- Card é <a> envolvendo o conteúdo. O documento chama o
-               <div (click)> de "Erro Mais Comum do Time Front". -->
-          <a class="home__card" [routerLink]="locale.path(part.id)">
-            <span class="home__card-numeral" aria-hidden="true">{{ part.numeral }}</span>
-            <span class="home__card-title">{{ part.title }}</span>
-            <span class="home__card-count">
+        <li class="home__row">
+          <a class="home__link" [routerLink]="locale.path(part.id)">
+            <span class="home__num" aria-hidden="true">{{ part.numeral }}</span>
+            <span class="home__name">{{ part.title }}</span>
+            <span class="home__meta" aria-hidden="true">
               {{ part.sections.length }} {{ locale.strings().sections }}
             </span>
+            <span class="home__reg" aria-hidden="true">⁘</span>
           </a>
         </li>
       }
     </ol>
+  </section>
+
+  <!-- ---------- Ferramentas ---------- -->
+  <section class="home__tools" aria-labelledby="ferramentas-titulo">
+    <h2 id="ferramentas-titulo" class="sr-only">
+      {{ locale.strings().checklists }} · {{ locale.strings().auditor }}
+    </h2>
+
+    <div class="home__tool-grid">
+      <a class="home__tool" [routerLink]="locale.path('checklists')">
+        <span class="home__tool-label" aria-hidden="true">TOOL—01</span>
+        <span class="home__tool-name">{{ locale.strings().checklists }}</span>
+        <span class="home__tool-desc">
+          @switch (locale.locale()) {
+            @case ('en') {
+              14 checklists you can actually tick, with progress that persists.
+            }
+            @case ('zh') {
+              14 份可勾选的检查清单，进度自动保存。
+            }
+            @default {
+              14 checklists que dá para marcar, com progresso salvo.
+            }
+          }
+        </span>
+      </a>
+
+      <a class="home__tool" [routerLink]="locale.path('auditor')">
+        <span class="home__tool-label" aria-hidden="true">TOOL—02</span>
+        <span class="home__tool-name">{{ locale.strings().auditor }}</span>
+        <span class="home__tool-desc">
+          @switch (locale.locale()) {
+            @case ('en') {
+              Paste an Angular template. Get it back fixed where that is safe.
+            }
+            @case ('zh') {
+              粘贴 Angular 模板，安全的问题会自动修复后返回。
+            }
+            @default {
+              Cole um template Angular e receba corrigido onde é seguro.
+            }
+          }
+        </span>
+      </a>
+    </div>
   </section>
 </div>

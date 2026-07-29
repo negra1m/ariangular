@@ -1,0 +1,18 @@
+<header class="sechead">
+  @if (numeral()) {
+    <p class="sechead__numeral" aria-hidden="true">{{ numeral() }}</p>
+  }
+
+  <!-- tabindex="-1": alvo do foco a cada navegação de rota -->
+  <h1 class="sechead__title" tabindex="-1">{{ title() }}</h1>
+
+  <div class="sechead__rule">
+    @if (label()) {
+      <span class="sechead__label" aria-hidden="true">{{ label() }}</span>
+    }
+  </div>
+
+  @if (lead()) {
+    <p class="sechead__lead">{{ lead() }}</p>
+  }
+</header>

@@ -57,13 +57,14 @@ function tokensOf(selectorRe) {
   return out;
 }
 
-const light = tokensOf(':root(?!:not)(?!\\[)');
-const darkOverrides = tokensOf('\\[data-theme=[\'"]dark[\'"]\\]');
-const dark = { ...light, ...darkOverrides };
+// O tema ESCURO é o padrão e mora no :root. O claro é o override.
+const dark = tokensOf(':root(?!:not)(?!\\[)');
+const lightOverrides = tokensOf('\\[data-theme=[\'"]light[\'"]\\]');
+const light = { ...dark, ...lightOverrides };
 
-if (!Object.keys(darkOverrides).length) {
-  console.error('\n  ERRO: nenhum token do tema escuro encontrado em tokens.css.');
-  console.error('  Sem isso o tema escuro passaria testando as cores do claro.\n');
+if (!Object.keys(lightOverrides).length) {
+  console.error('\n  ERRO: nenhum token do tema claro encontrado em tokens.css.');
+  console.error('  Sem isso o tema claro passaria testando as cores do escuro.\n');
   process.exit(1);
 }
 
@@ -76,9 +77,12 @@ const PAIRS = [
   ['--color-text', '--color-surface', 4.5, 'texto principal sobre superfície'],
   ['--color-muted', '--color-bg', 4.5, 'texto secundário sobre fundo'],
   ['--color-muted', '--color-surface', 4.5, 'texto secundário sobre superfície'],
-  ['--color-accent', '--color-bg', 4.5, 'acento em texto (link) sobre fundo'],
-  ['--color-accent', '--color-surface', 4.5, 'acento em texto sobre superfície'],
-  ['--color-on-accent', '--color-accent', 4.5, 'texto dentro de botão de acento'],
+  // Dois acentos, de propósito: #E40035 sobre preto dá 4.35:1, que passa para
+  // texto grande mas reprova para texto normal. O `-text` é a versão clareada.
+  ['--color-accent-text', '--color-bg', 4.5, 'acento em texto sobre fundo'],
+  ['--color-accent-text', '--color-surface', 4.5, 'acento em texto sobre superfície'],
+  ['--color-accent', '--color-bg', 3, 'acento em display grande e superfície'],
+  ['--color-on-accent', '--color-accent', 4.5, 'texto dentro de superfície de acento'],
   ['--color-border', '--color-bg', 3, 'borda de componente sobre fundo'],
   ['--color-focus', '--color-bg', 3, 'anel de foco sobre fundo'],
   ['--color-focus', '--color-surface', 3, 'anel de foco sobre superfície'],

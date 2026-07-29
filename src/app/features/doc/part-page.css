@@ -1,82 +1,106 @@
 .part {
-  padding-block: var(--space-xl) var(--space-2xl);
+  padding-bottom: var(--space-2xl);
 }
 
-.part__header {
-  margin-bottom: var(--space-xl);
+app-section-header {
+  padding-inline: var(--space-md);
+  display: block;
 }
 
-/* Numeral grande, no espírito das seções numeradas da referência visual.
-   Decorativo para o leitor de tela: o título é que carrega o significado. */
-.part__numeral {
-  font-size: var(--text-numeral);
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.05em;
-  color: var(--color-accent);
-  opacity: 0.18;
-  margin-bottom: -0.15em;
+.part__list {
+  list-style: none;
+  margin-top: var(--space-xl);
+  border-top: var(--border-thin) solid var(--color-rule);
+}
+
+.part__row {
+  border-bottom: var(--border-thin) solid var(--color-rule);
+}
+
+/* Grade de 4 colunas como na referência:
+   título | resumo | índice | marca de registro */
+.part__link {
+  display: grid;
+  grid-template-columns: minmax(12rem, 22rem) 1fr auto auto;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  color: var(--color-text);
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease);
+}
+
+.part__link:hover,
+.part__link:focus-visible {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  outline-offset: -3px;
+}
+
+.part__link:hover .part__summary,
+.part__link:focus-visible .part__summary,
+.part__link:hover .part__index,
+.part__link:focus-visible .part__index,
+.part__link:hover .part__reg,
+.part__link:focus-visible .part__reg {
+  color: var(--color-on-accent);
 }
 
 .part__title {
-  font-size: var(--text-3xl);
-  letter-spacing: -0.03em;
-  margin-bottom: var(--space-xs);
-}
-
-.part__lead {
-  font-size: var(--text-lg);
-  color: var(--color-muted);
-}
-
-.part__count {
-  margin-top: var(--space-xs);
-  font-size: var(--text-sm);
-  color: var(--color-muted);
-  font-variant-numeric: tabular-nums;
-}
-
-.part__sections {
-  display: grid;
-  gap: var(--space-2xs);
-  list-style: none;
-  counter-reset: none;
-}
-
-.part__card {
-  display: flex;
-  gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
-  border: var(--border-thin) solid var(--color-rule);
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  color: var(--color-text);
-}
-
-.part__card:hover {
-  border-color: var(--color-accent);
-  background-color: var(--color-surface);
-}
-
-.part__card-index {
-  font-variant-numeric: tabular-nums;
+  font-family: var(--font-sans);
   font-weight: 700;
-  color: var(--color-muted);
-  min-width: 2ch;
-  text-align: right;
+  font-size: var(--text-base);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
 }
 
-.part__card-body {
-  display: grid;
-  gap: 0.15rem;
-}
-
-.part__card-title {
-  font-weight: 700;
-}
-
-.part__card-summary {
+/* Serif no resumo, como na referência — é texto curto de apoio, não corpo. */
+.part__summary {
+  font-family: var(--font-serif);
   font-size: var(--text-sm);
+  line-height: 1.4;
   color: var(--color-muted);
-  max-width: var(--measure);
+}
+
+.part__index,
+.part__reg {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.part__reg {
+  color: var(--color-accent-text);
+}
+
+@media (max-width: 60rem) {
+  .part__link {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'title index'
+      'summary summary';
+    gap: var(--space-2xs) var(--space-sm);
+    padding-inline: var(--space-sm);
+  }
+
+  .part__title {
+    grid-area: title;
+  }
+  .part__summary {
+    grid-area: summary;
+  }
+  .part__index {
+    grid-area: index;
+  }
+  .part__reg {
+    display: none;
+  }
+
+  app-section-header {
+    padding-inline: var(--space-sm);
+  }
 }

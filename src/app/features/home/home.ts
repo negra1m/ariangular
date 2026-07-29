@@ -2,11 +2,12 @@ import { Component, inject, computed, effect } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { SeoService } from '../../core/seo/seo.service';
+import { AsciiArt } from '../../shared/ascii-art/ascii-art';
 import { partsOf } from '../../../content';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, AsciiArt],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { SeoService } from '../../core/seo/seo.service';
 import { BlockRender } from '../../shared/block-render/block-render';
+import { SectionHeader } from '../../shared/section-header/section-header';
 import { findSection, neighbours } from '../../../content';
 
 /**
@@ -14,7 +15,7 @@ import { findSection, neighbours } from '../../../content';
  */
 @Component({
   selector: 'app-section-page',
-  imports: [RouterLink, BlockRender],
+  imports: [RouterLink, BlockRender, SectionHeader],
   templateUrl: './section-page.html',
   styleUrl: './section-page.css',
 })

@@ -1,179 +1,191 @@
 # Identidade Visual
 
-Decisões do PO em 2026-07-28. Este documento manda no visual — as fases implementam o que
-está aqui.
+Decisões do PO. **Reescrito em 2026-07-28** — a versão anterior descrevia a referência
+errado, porque eu tinha lido uma descrição em texto do dragonfly.xyz em vez de ver o
+site. A descrição dizia "fundo branco dominante, muito whitespace". O site é preto,
+denso e dramático. Este documento foi refeito a partir de capturas reais.
 
 ---
 
 ## 1. Posicionamento
 
 **Ferramenta social.** Não é doc interna. É um site público, para compartilhar, mandar
-no grupo do time, linkar num PR, postar no LinkedIn. Isso tem consequência de projeto:
+no grupo do time, linkar num PR. Consequências de projeto:
 
-- Cada seção precisa ser linkável e fazer sentido aberta sozinha
-- OG image por rota, não uma genérica para o site todo
-- Home tem que explicar em 5 segundos o que é, para quem nunca ouviu falar
-- O site precisa ser bonito o suficiente para alguém querer mostrar
+- Cada seção linkável e coerente aberta sozinha
+- OG image por rota
+- A home explica em 5 segundos o que é
+- Precisa ser bonito o suficiente para alguém querer mostrar
 
-Acessibilidade normalmente é apresentada como obrigação e checklist chato. A aposta aqui
-é o contrário: apresentar como cuidado. Daí o "carinho" pedido pelo PO — não é decoração,
-é a tese do produto.
-
----
-
-## 2. Referência
-
-**[dragonfly.xyz](https://www.dragonfly.xyz/)**, trocando o acento laranja pela cor do Angular.
-
-O que se aproveita da referência:
-
-| Elemento | Como aplicar |
-|----------|--------------|
-| Seções numeradas (`01`, `02`…) | As 7 partes viram `01` a `07`. Número grande, visível, é a espinha do site |
-| Alto contraste, fundo claro dominante | Base clara, preto quase puro no texto, acento usado com parcimônia |
-| Muito whitespace | Respiro generoso entre blocos; a doc não pode parecer denso |
-| Tipografia grande nos títulos | Títulos de parte em escala bem maior que o corpo |
-| Âncoras sticky de seção | Vira o índice lateral da Fase 4 |
-| Grid de cards | Home (7 partes) e índice de checklists |
-
-O que **não** se aproveita: é um site de fundo de investimento. Nada do tom corporativo,
-nada de foto de time, nada de linguagem institucional.
+Acessibilidade costuma ser apresentada como obrigação e checklist chato. A aposta aqui é
+o contrário: apresentar como cuidado, com peso visual.
 
 ---
 
-## 3. Cores
+## 2. Referência — [dragonfly.xyz](https://www.dragonfly.xyz/)
 
-### Base oficial Angular
+O que o site realmente é, visto nas capturas:
 
-| Token | Hex | Origem |
-|-------|-----|--------|
-| `--angular-red` | `#E40035` | Red Ribbon — cor primária oficial |
-| `--angular-ink` | `#151517` | Woodsmoke — preto oficial |
-| `--angular-white` | `#FFFFFF` | Branco oficial |
+| Elemento | Como é |
+|----------|--------|
+| **Fundo** | Preto absoluto. Não é dark mode, é preto |
+| **Acento** | Um único laranja vivo, usado com parcimônia e com força |
+| **Arte** | ASCII animada — libélula, espirais, globo. É a alma, não enfeite |
+| **Display** | Grotesca pesada em caixa alta, gigantesca, ocupando a largura |
+| **Serif** | Alto contraste tipo Didot, branca, para frases de impacto e resumos |
+| **Mono** | Minúscula, para labels técnicos: `SEC-01`, `ETHOS`, `TENET` |
+| **Cabeçalho de seção** | `01` em laranja centralizado, título gigante, linha atravessando a tela, `SEC-01` colado na linha à esquerda |
+| **Listagem** | Linhas com divisória. No hover, **a linha inteira vira chapada no acento** |
+| **Spotlight** | Serif gigante, um item por linha, label mono alinhado na base |
+| **Moldura** | `D` `F` `L` `Y` fixos nos quatro cantos da viewport, alguns espelhados |
+| **Marcas de registro** | `+` nas bordas e `⁘` no canto dos cards, como marca de corte de gráfica |
+| **Header** | Flutuante, pequeno, centralizado. Não atravessa a tela |
+| **Menu** | Overlay com lista numerada e divisórias |
 
-**Tarefa da Fase 1:** extrair os stops exatos do gradiente do logo (rosa → roxo) dos
-arquivos oficiais do [press kit](https://angular.dev/press-kit). O gradiente é a
-assinatura visual do Angular pós-v17 e o site deve usá-lo — mas só em superfície
-decorativa, nunca atrás de texto.
+### O que traduzimos
 
-### Alerta de contraste — ler antes de usar a cor da marca
-
-Medições feitas:
-
-| Combinação | Contraste | Veredito |
-|------------|-----------|----------|
-| `#E40035` sobre branco | **4.83:1** | Passa AA para texto normal. **Não** passa AAA (7:1) |
-| `#E40035` sobre `#151517` | **3.79:1** | **Reprova** AA para texto normal no tema escuro |
-
-Consequência direta: **no tema escuro a cor da marca não pode ser usada em texto sem ser
-clareada.** Definir um `--accent-dark` derivado, mais claro, e medir antes de usar.
-
-Este site não tem o direito de errar contraste. A cor da marca se subordina ao critério,
-não o contrário. Onde não couber, usa-se a cor em borda, fundo de badge ou detalhe
-gráfico — não em texto.
-
-### Estrutura de tokens
-
-- Neutros: escala de cinza do branco ao `#151517`
-- Acento: `--accent` (claro) e `--accent-dark` (escuro), ambos verificados
-- Semânticos dos callouts: info / atenção / boa prática — derivados, cada um verificado
-  nos dois temas
-- Gradiente Angular: só em superfície decorativa
-
-**Tema claro é o padrão** (a referência é clara), com toggle para escuro.
+| Deles | Nosso |
+|-------|-------|
+| Laranja | `#E40035`, o vermelho oficial do Angular |
+| `D` `F` `L` `Y` nos cantos | `a` `r` `i` `a` |
+| Libélula em ASCII | Anel de foco, onda de som, teclado, escudo — o tema deste projeto |
+| `SEC-01` | `SEC—01` |
+| Numeração 01–07 das seções | Numeração 01–07 das partes |
+| Spotlight de empresas | Índice das 7 partes, em serif gigante |
+| Listagem de conteúdo | Índice das seções dentro de cada parte |
 
 ---
 
-## 4. Tipografia
+## 3. Onde a referência conflita com acessibilidade
 
-- **Títulos:** sans-serif geométrica, peso alto, escala grande. Contraste forte com o corpo
-- **Corpo:** sans-serif de leitura, tamanho base 17–18px, altura de linha ~1.7
-- **Código:** monoespaçada
-- **Números de seção:** o maior elemento tipográfico da página depois do título
+O dragonfly não precisa ser acessível. Nós precisamos. Três ajustes conscientes:
 
-Regra dura: **nada de fonte externa bloqueante.** Fonte de sistema ou self-hosted com
-`font-display: swap`. Um guia de acessibilidade não pode ter texto invisível esperando
-download — isso exclui quem tem conexão ruim.
+### 3.1 Serif de alto contraste só em display
 
-Corpo de texto limitado a ~68 caracteres por linha (WCAG 1.4.8).
+Didot e similares têm traço fino e contraste extremo entre hastes. Bonito em título,
+**ruim em corpo de texto** para dislexia e baixa visão. No dragonfly funciona porque são
+três parágrafos por tela.
+
+Nós temos 160 seções de leitura técnica. Regra: **serif em abertura, resumo e display.
+Sans no corpo.**
+
+### 3.2 Arte animada é opt-in do sistema
+
+A arte em caracteres só anima sob `prefers-reduced-motion: no-preference`. Quem pediu
+menos movimento recebe um quadro estático — não uma versão degradada, o mesmo desenho
+parado.
+
+Toda arte leva `aria-hidden` e `role="presentation"`. Um campo de 110×30 caracteres lido
+em voz alta seria tortura, e não carrega informação.
+
+### 3.3 Dois acentos, não um
+
+Medido: `#E40035` sobre preto dá **4.35:1**. Passa para texto grande (3:1), **reprova**
+para texto normal (4.5:1).
+
+```
+--color-accent        #E40035   display, numerais, superfície chapada
+--color-accent-text   #FF5470   qualquer texto de tamanho normal
+```
+
+A marca se subordina ao critério. Onde não couber, a cor vai em superfície ou borda, não
+em texto pequeno.
 
 ---
 
-## 5. Ilustrações — "carinho por todo ele"
+## 4. Cores
 
-Pedido explícito do PO. Ilustrações sobre acessibilidade espalhadas pelo site, com tom
-afetuoso, não clínico.
+**Escuro é o padrão.** O claro é uma alternativa completa, não um remendo — quem tem
+sensibilidade a fundo escuro precisa da mesma qualidade.
 
-### Direção
+| Token | Escuro | Claro |
+|-------|--------|-------|
+| `--color-bg` | `#000000` | `#ffffff` |
+| `--color-surface` | `#0c0c0e` | `#f4f4f6` |
+| `--color-text` | `#ffffff` | `#0a0a0c` |
+| `--color-muted` | `#9b9ba4` | `#56565f` |
+| `--color-border` | `#5c5c66` | `#8b8b95` |
+| `--color-accent` | `#e40035` | `#c4002c` |
+| `--color-accent-text` | `#ff5470` | `#c4002c` |
+| `--color-focus` | `#7fb2ff` | `#0b4fd6` |
 
-Não usar o repertório batido: nada de cadeira de rodas genérica, nada do símbolo
-internacional de acesso como enfeite, nada de ícone de olho cortado. Acessibilidade não
-é só deficiência permanente — o próprio documento abre listando "pessoa com braço
-machucado usando uma mão só" e "pessoa usando zoom".
+**38 pares verificados, zero falha nos dois temas.** `npm run contrast` roda no CI e
+quebra o build. Sobre preto absoluto a borda precisa de um cinza mais claro do que a
+intuição sugere — `#55555f` reprovava com 2.85:1.
 
-O que ilustrar, seguindo o que o conteúdo já diz:
+---
 
-- Mão navegando por teclado
-- Onda de som saindo de um botão (o leitor anunciando "Salvar, botão")
-- Dedo em alvo de toque grande
-- Foco como um anel que abraça o elemento
-- Alguém usando o celular no sol, apertando os olhos
-- Uma mão só segurando o telefone
+## 5. Tipografia
 
-### Requisitos técnicos
+Quatro papéis, como na referência. **Nenhuma fonte externa** — bloquear a renderização
+exclui quem tem conexão ruim.
 
-- **SVG inline**, não PNG — escala, herda `currentColor`, pesa pouco
-- Decorativa: `aria-hidden="true"` e `alt=""`. Ilustração não deve ser lida
-- Informativa (se houver): `<title>` no SVG e descrição no texto
-- Precisa funcionar nos dois temas — usar `currentColor` e tokens, não hex fixo
-- Animação apenas com `prefers-reduced-motion: no-preference`
-- Nenhuma ilustração pode carregar significado sozinha (WCAG 1.4.1)
+| Papel | Onde | Stack |
+|-------|------|-------|
+| **Display** | Wordmark, títulos de seção, nomes de card | Arial Black, Helvetica Neue, Inter |
+| **Serif** | Aberturas, resumos, índice em destaque | Didot, Bodoni MT, Georgia |
+| **Mono** | Labels técnicos, numerais, breadcrumb | ui-monospace, Cascadia Code |
+| **Sans** | Corpo de texto — onde se lê | system-ui |
+
+Display em `clamp()` de viewport: o texto **é** o gráfico.
+Corpo limitado a 68 caracteres por linha (WCAG 1.4.8).
+
+---
+
+## 6. Motivos recorrentes
+
+- **Moldura de cantos** — `a` `r` `i` `a` fixos, decorativos, some no mobile e em zoom alto
+- **Marcas de registro** — `+` nas bordas, `⁘` no fim das linhas de lista
+- **Linha atravessando a tela** sob o título de seção, com label mono colado
+- **Hover chapado** — a linha inteira vira acento. **O foco recebe o mesmo tratamento**,
+  para quem usa teclado enxergar o que quem usa mouse enxerga
+- **Numeração em toda parte** — `01`, `SEC—01`, `TOOL—01`, `01.4`
+
+---
+
+## 7. Ilustrações
+
+Arte em caracteres, gerada por função de intensidade. Quatro motivos, todos do tema:
+
+| Motivo | O que mostra |
+|--------|--------------|
+| `focus-ring` | Anéis concêntricos pulsando — o foco abraçando o elemento |
+| `sound-wave` | Ondas saindo de um ponto — o leitor de tela anunciando |
+| `keyboard` | Malha de teclas com um brilho percorrendo — o Tab caminhando |
+| `shield` | Escudo com o anel dentro |
+
+Não usar o repertório batido: nada de cadeira de rodas genérica nem símbolo internacional
+de acesso como enfeite. O próprio conteúdo abre listando "pessoa com braço machucado
+usando uma mão só" — acessibilidade não é só deficiência permanente.
 
 ### Mascote
 
-Ver [MARCA-E-LICENCA.md §5](MARCA-E-LICENCA.md). Recomendação: **não** usar a Angie como
-mascote do produto. As ilustrações próprias cobrem o papel e são mais alinhadas ao tema.
+Ver [MARCA-E-LICENCA.md §5](MARCA-E-LICENCA.md). Recomendação: **não** usar a Angie.
 Decisão do PO pendente.
 
 ---
 
-## 5.1 Logo do produto
+## 8. Logo
 
-**Adaptação do escudo Angular atual (v17+)** — silhueta reconhecível, conteúdo interno
-próprio ligado a acessibilidade, dentro da família cromática Angular.
+Escudo adaptado do Angular v17+, com um anel de foco dentro. Wordmark `aria` + `ngular`
+com sobreposição no `a`, destaque só visual.
 
-Isso é explicitamente permitido e encorajado pelo press kit oficial, que licencia os
-logos sob CC BY 4.0 e convida a comunidade a adaptar cor e forma. É o que entrega "cara
-de ecossistema Angular" sem afirmar nada falso.
-
-Regras: usar o escudo **atual**, nunca o de 2016 nem o do AngularJS; atribuição CC BY 4.0
-no site e no repo; nunca o escudo oficial intacto como logo do produto.
-
-Detalhes e limites em [MARCA-E-LICENCA.md](MARCA-E-LICENCA.md).
+O nome **não** começa com "Angular" de propósito: `@angular/aria` é pacote oficial, e um
+nome que começasse igual criaria confusão de origem. Detalhes em
+[MARCA-E-LICENCA.md](MARCA-E-LICENCA.md).
 
 ---
 
-## 6. Aplicação por área
+## 9. Regras que não se negociam
 
-| Área | Direção |
-|------|---------|
-| **Home** | Landing curta: hero com a tese, 7 cards numerados `01`–`07`, atalho para checklists e auditor. Ilustração no hero. Uma tela e meia |
-| **Doc** | Coluna de leitura confortável, número da parte grande no topo, índice lateral sticky, ilustração pontual abrindo cada parte |
-| **Checklists** | Cara de ferramenta: progresso visível, denso, funcional. Menos ilustração, mais utilidade |
-| **Auditor** | Duas colunas — cola à esquerda, resultado à direita. Severidade com rótulo textual e cor, nunca só cor |
-| **Footer** | Enxuto. Crédito, LinkedIn, repositório, licença e **disclaimer de não-afiliação legível** |
-
----
-
-## 7. Regras que não se negociam
-
-1. Contraste AA verificado em **todo** par de cor, nos dois temas, antes de commitar
-2. Foco visível sempre, com contraste próprio verificado
+1. Contraste AA verificado em todo par, nos dois temas, antes de commitar
+2. Foco visível sempre, com o **mesmo peso** do hover
 3. Nenhuma informação transmitida só por cor
 4. Toda animação desligável por `prefers-reduced-motion`
 5. Nenhuma fonte externa bloqueante
-6. Ilustração decorativa é invisível para leitor de tela
-7. Layout íntegro em 320px e em zoom 200%
+6. Arte decorativa invisível para leitor de tela
+7. Serif nunca em corpo de texto longo
+8. Layout íntegro em 320px e em zoom 200%
 
 O visual serve o conteúdo. Onde o bonito conflitar com o acessível, o acessível ganha —
 e quase sempre dá para ter os dois com mais trabalho.

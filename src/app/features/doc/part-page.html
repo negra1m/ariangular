@@ -1,25 +1,24 @@
 @if (part(); as p) {
-  <article class="container part">
-    <header class="part__header">
-      <p class="part__numeral" aria-hidden="true">{{ p.numeral }}</p>
-      <h1 class="part__title" tabindex="-1">{{ p.title }}</h1>
-      <p class="part__lead prose">{{ p.summary }}</p>
-      <p class="part__count">{{ p.sections.length }} {{ locale.strings().sections }}</p>
-    </header>
+  <article class="part">
+    <app-section-header
+      [numeral]="p.numeral"
+      [label]="'SEC—' + p.numeral"
+      [title]="p.title"
+      [lead]="p.summary"
+    />
 
-    <!-- Lista de verdade: o leitor de tela anuncia "lista com N itens", que é
-         a informação que orienta quem não vê a página. -->
-    <ol class="part__sections">
+    <!-- Listagem no padrão da referência: linha com divisória, e no hover a
+         linha inteira vira chapada na cor de acento. -->
+    <ol class="part__list">
       @for (section of p.sections; track section.id) {
-        <li>
-          <a class="part__card" [routerLink]="locale.path(p.id, section.id)">
-            <span class="part__card-index" aria-hidden="true">
-              {{ $index + 1 }}
+        <li class="part__row">
+          <a class="part__link" [routerLink]="locale.path(p.id, section.id)">
+            <span class="part__title">{{ section.title }}</span>
+            <span class="part__summary">{{ section.summary }}</span>
+            <span class="part__index" aria-hidden="true">
+              {{ p.numeral }}.{{ $index + 1 }}
             </span>
-            <span class="part__card-body">
-              <span class="part__card-title">{{ section.title }}</span>
-              <span class="part__card-summary">{{ section.summary }}</span>
-            </span>
+            <span class="part__reg" aria-hidden="true">⁘</span>
           </a>
         </li>
       }

@@ -1,105 +1,112 @@
-<header class="header">
-  <div class="header__bar container">
-    <a class="header__brand" [routerLink]="locale.path()">
-      <app-brand-mark />
+<!--
+  Header flutuante, pequeno e centralizado — não uma barra que atravessa a tela.
+  Continua sendo o landmark de banner e o primeiro grupo de controles do DOM.
+-->
+<header class="hdr">
+  <div class="hdr__bar">
+    <a class="hdr__home" [routerLink]="locale.path()" [attr.aria-label]="locale.strings().home">
+      <span class="hdr__glyph" aria-hidden="true">&gt;|&lt;</span>
     </a>
 
-    <!--
-      aria-expanded via binding, não valor fixo: o documento lista
-      "aria-expanded desatualizado" como um dos erros mais comuns com ARIA.
-    -->
+    <span class="hdr__dots" aria-hidden="true">•••••</span>
+
+    <app-site-search />
+
     <button
       type="button"
-      class="header__toggle"
+      class="hdr__menu"
       [attr.aria-expanded]="menuOpen()"
-      aria-controls="nav-principal"
+      aria-controls="menu-principal"
       [attr.aria-label]="menuOpen() ? locale.strings().closeMenu : locale.strings().openMenu"
       (click)="toggleMenu()"
     >
-      <span class="header__toggle-icon" aria-hidden="true">
-        {{ menuOpen() ? '✕' : '☰' }}
-      </span>
+      {{ menuOpen() ? 'FECHAR' : 'MENU' }}
     </button>
-
-    <div class="header__actions">
-      <app-site-search />
-
-      <!--
-        Toggle de tema com aria-pressed refletindo o estado real: é um botão de
-        alternância, não um link. O rótulo textual acompanha o ícone.
-      -->
-      <button
-        type="button"
-        class="header__action"
-        [attr.aria-pressed]="theme.isDark()"
-        [attr.aria-label]="locale.strings().theme"
-        (click)="theme.toggle()"
-      >
-        <span aria-hidden="true">{{ theme.isDark() ? '☾' : '☀' }}</span>
-      </button>
-
-      <!--
-        Seletor de idioma: lista de botões, não <select>, para que cada idioma
-        seja um alvo direto e o estado atual seja anunciado por aria-current.
-      -->
-      <div class="header__locales" role="group" [attr.aria-label]="locale.strings().language">
-        @for (l of locales; track l) {
-          <button
-            type="button"
-            class="header__locale"
-            [class.header__locale--active]="locale.locale() === l"
-            [attr.aria-current]="locale.locale() === l ? 'true' : null"
-            [attr.lang]="l === 'zh' ? 'zh-Hans' : l"
-            (click)="switchLocale(l)"
-          >
-            {{ localeLabel[l] }}
-          </button>
-        }
-      </div>
-    </div>
   </div>
+</header>
 
-  <nav
-    id="nav-principal"
-    class="header__nav"
-    [class.header__nav--open]="menuOpen()"
-    [attr.aria-label]="locale.strings().nav"
-  >
-    <ul class="header__nav-list container">
-      @for (part of parts(); track part.id) {
-        <li>
+<!--
+  Menu em overlay, no padrão da referência: lista numerada com divisórias.
+  É um modal na prática — foco preso, ESC fecha, foco volta ao botão.
+-->
+@if (menuOpen()) {
+  <div class="menu" id="menu-principal" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+    <nav class="menu__panel" [attr.aria-label]="locale.strings().nav">
+      <ul class="menu__list">
+        @for (part of parts(); track part.id) {
+          <li class="menu__row">
+            <a
+              class="menu__link"
+              [routerLink]="locale.path(part.id)"
+              routerLinkActive="is-active"
+              #rla="routerLinkActive"
+              [attr.aria-current]="rla.isActive ? 'page' : null"
+              (click)="closeMenu()"
+            >
+              <span class="menu__num" aria-hidden="true">{{ part.numeral }}</span>
+              <span class="menu__name">{{ part.title }}</span>
+            </a>
+          </li>
+        }
+
+        <li class="menu__row">
           <a
-            [routerLink]="locale.path(part.id)"
+            class="menu__link"
+            [routerLink]="locale.path('checklists')"
             routerLinkActive="is-active"
-            #rla="routerLinkActive"
-            [attr.aria-current]="rla.isActive ? 'page' : null"
+            #rlc="routerLinkActive"
+            [attr.aria-current]="rlc.isActive ? 'page' : null"
             (click)="closeMenu()"
           >
-            <span class="header__numeral" aria-hidden="true">{{ part.numeral }}</span>
-            {{ part.title }}
+            <span class="menu__num" aria-hidden="true">08</span>
+            <span class="menu__name">{{ locale.strings().checklists }}</span>
           </a>
         </li>
-      }
-      <li>
-        <a
-          [routerLink]="locale.path('checklists')"
-          routerLinkActive="is-active"
-          #rlc="routerLinkActive"
-          [attr.aria-current]="rlc.isActive ? 'page' : null"
-          (click)="closeMenu()"
-          >{{ locale.strings().checklists }}</a
+
+        <li class="menu__row">
+          <a
+            class="menu__link"
+            [routerLink]="locale.path('auditor')"
+            routerLinkActive="is-active"
+            #rlau="routerLinkActive"
+            [attr.aria-current]="rlau.isActive ? 'page' : null"
+            (click)="closeMenu()"
+          >
+            <span class="menu__num" aria-hidden="true">09</span>
+            <span class="menu__name">{{ locale.strings().auditor }}</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="menu__art" aria-hidden="true">
+        <app-ascii-art motif="sound-wave" [cols]="64" [rows]="12" />
+      </div>
+
+      <div class="menu__footer">
+        <div class="menu__locales" role="group" [attr.aria-label]="locale.strings().language">
+          @for (l of locales; track l) {
+            <button
+              type="button"
+              class="menu__locale"
+              [class.is-active]="locale.locale() === l"
+              [attr.aria-current]="locale.locale() === l ? 'true' : null"
+              [attr.lang]="l === 'zh' ? 'zh-Hans' : l"
+              (click)="switchLocale(l)"
+            >
+              {{ localeLabel[l] }}
+            </button>
+          }
+        </div>
+
+        <button
+          type="button"
+          class="menu__theme"
+          [attr.aria-pressed]="theme.isDark()"
+          (click)="theme.toggle()"
         >
-      </li>
-      <li>
-        <a
-          [routerLink]="locale.path('auditor')"
-          routerLinkActive="is-active"
-          #rla2="routerLinkActive"
-          [attr.aria-current]="rla2.isActive ? 'page' : null"
-          (click)="closeMenu()"
-          >{{ locale.strings().auditor }}</a
-        >
-      </li>
-    </ul>
-  </nav>
-</header>
+          {{ theme.isDark() ? 'ESCURO' : 'CLARO' }}
+        </button>
+      </div>
+    </nav>
+  </div>
+}

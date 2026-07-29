@@ -1,103 +1,228 @@
+/* ---------------- Hero ---------------- */
+
 .home__hero {
-  padding-block: var(--space-2xl) var(--space-xl);
-}
-
-.home__title {
-  font-size: var(--text-hero);
-  letter-spacing: -0.045em;
-  line-height: 0.95;
-  margin-bottom: var(--space-md);
-}
-
-.home__title-aria {
-  color: var(--color-accent);
-}
-
-.home__lead {
-  font-size: var(--text-lg);
-  color: var(--color-muted);
-  max-width: var(--measure);
-}
-
-.home__cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2xs);
-  margin-top: var(--space-lg);
-}
-
-.home__button {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  padding-inline: var(--space-md);
-  border-radius: var(--radius-full);
-  background-color: var(--color-accent);
-  color: var(--color-on-accent);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.home__button:hover {
-  filter: brightness(1.08);
-}
-
-.home__button--ghost {
-  background-color: transparent;
-  color: var(--color-text);
-  border: var(--border-thick) solid var(--color-border);
-}
-
-.home__button--ghost:hover {
-  border-color: var(--color-accent);
-  filter: none;
-}
-
-/* ---------- Grid das partes ---------- */
-
-.home__parts {
-  padding-bottom: var(--space-2xl);
-}
-
-.home__grid {
+  position: relative;
+  min-height: min(88vh, 46rem);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  gap: var(--space-2xs);
+  place-items: center;
+  align-content: center;
+  overflow: hidden;
+  padding-inline: var(--space-md);
+}
+
+.home__art {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+/* Wordmark ocupando a largura, como na referência: o texto é o gráfico. */
+.home__wordmark {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 400;
+  line-height: 0.85;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-accent);
+  text-transform: lowercase;
+  text-align: center;
+  mix-blend-mode: normal;
+}
+
+.home__wordmark-aria {
+  color: var(--color-text);
+}
+
+.home__tagline {
+  position: relative;
+  margin-top: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+/* ---------------- Índice ---------------- */
+
+.home__index {
+  margin-top: var(--space-2xl);
+  border-top: var(--border-thin) solid var(--color-rule);
+}
+
+.home__index-head {
+  position: relative;
+  padding: var(--space-2xs) var(--space-md);
+  border-bottom: var(--border-thin) solid var(--color-rule);
+}
+
+.home__index-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--color-muted);
+  letter-spacing: 0.1em;
+}
+
+.home__index-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+}
+
+.home__list {
   list-style: none;
 }
 
-.home__card {
-  display: grid;
-  gap: 0.3rem;
-  height: 100%;
-  padding: var(--space-md);
-  border: var(--border-thin) solid var(--color-rule);
-  border-radius: var(--radius-lg);
-  text-decoration: none;
-  color: var(--color-text);
+.home__row {
+  border-bottom: var(--border-thin) solid var(--color-rule);
 }
 
-.home__card:hover {
+/* Linha inteira é o alvo do link — e no hover a linha vira chapada na cor de
+   acento, como na referência. O foco recebe o MESMO tratamento: quem navega
+   por teclado enxerga exatamente o que quem usa mouse enxerga. */
+.home__link {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: clamp(0.6rem, 1.6vw, 1.2rem) var(--space-md);
+  text-decoration: none;
+  color: var(--color-text);
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease);
+}
+
+.home__link:hover,
+.home__link:focus-visible {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  outline-offset: -3px;
+}
+
+.home__num {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+.home__link:hover .home__num,
+.home__link:focus-visible .home__num,
+.home__link:hover .home__meta,
+.home__link:focus-visible .home__meta,
+.home__link:hover .home__reg,
+.home__link:focus-visible .home__reg {
+  color: var(--color-on-accent);
+}
+
+/* Serif de display, um item por linha — o padrão Spotlight da referência. */
+.home__name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4.4vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.home__meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.home__reg {
+  color: var(--color-accent-text);
+  font-size: var(--text-sm);
+}
+
+/* ---------------- Ferramentas ---------------- */
+
+.home__tools {
+  margin-top: var(--space-2xl);
+  padding-inline: var(--space-md);
+}
+
+.home__tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--space-2xs);
+}
+
+.home__tool {
+  display: grid;
+  gap: var(--space-2xs);
+  align-content: start;
+  padding: var(--space-md);
+  border: var(--border-thin) solid var(--color-border);
+  text-decoration: none;
+  color: var(--color-text);
+  min-height: 11rem;
+}
+
+.home__tool:hover,
+.home__tool:focus-visible {
   border-color: var(--color-accent);
   background-color: var(--color-surface);
 }
 
-.home__card-numeral {
+.home__tool-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.14em;
+  color: var(--color-accent-text);
+}
+
+.home__tool-name {
+  font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: var(--color-accent);
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
+  font-weight: 400;
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
 }
 
-.home__card-title {
-  font-weight: 700;
-  font-size: var(--text-lg);
-  line-height: 1.25;
-}
-
-.home__card-count {
-  font-size: var(--text-sm);
+.home__tool-desc {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
   color: var(--color-muted);
+  line-height: 1.4;
+}
+
+/* ---------------- Responsivo ---------------- */
+
+@media (max-width: 48rem) {
+  .home__link {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'num name'
+      '.   meta';
+    gap: var(--space-2xs) var(--space-sm);
+    padding-inline: var(--space-sm);
+  }
+
+  .home__num {
+    grid-area: num;
+  }
+  .home__name {
+    grid-area: name;
+  }
+  .home__meta {
+    grid-area: meta;
+  }
+  .home__reg {
+    display: none;
+  }
+
+  .home__index-head,
+  .home__tools {
+    padding-inline: var(--space-sm);
+  }
 }
