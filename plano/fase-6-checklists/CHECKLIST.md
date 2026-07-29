@@ -1,9 +1,9 @@
 # Fase 6 — Checklists Interativos · Checklist
 
-Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
+Estado em 2026-07-29. Marcar concluído com data: `(YYYY-MM-DD)`
 
-> **Nenhum item foi marcado num navegador.** Persistência, dialog e export estão
-> implementados e nunca foram exercitados.
+> Tudo implementado; marcação e dialog cobertos por teste com axe.
+> **Persistência e export nunca foram exercitados num navegador.**
 
 ## Página de índice `/:locale/checklists`
 
@@ -11,8 +11,8 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] Agrupados por momento de uso, não por ordem alfabética (2026-07-28)
 - [x] Cards são `<a>` reais (2026-07-28)
 - [x] Contagem de itens por checklist (2026-07-28)
-- [ ] **Progresso de cada um visível na lista** — não implementado
-- [ ] **Reset global** com confirmação — não implementado
+- [x] **Progresso de cada um visível na lista** (2026-07-28)
+- [x] **Reset global** com confirmação (2026-07-28)
 
 ## Página de checklist `/:locale/checklists/:id`
 
@@ -44,9 +44,9 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] Falha de escrita tratada com try/catch (2026-07-28)
 - [x] Aviso na interface quando o progresso não puder ser salvo (2026-07-28)
 - [x] `id` de item estável, nunca índice de array (2026-07-28)
+- [x] Escrita com debounce (2026-07-28)
 - [ ] **Progresso sobrevive a recarga** — por verificar
 - [ ] **Progresso sobrevive a fechar o navegador** — por verificar
-- [ ] Escrita com debounce (hoje grava a cada toggle)
 
 ## Anúncio
 
@@ -61,8 +61,10 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] Cabeçalho com nome do checklist e contagem (2026-07-28)
 - [x] Copiar para área de transferência (2026-07-28)
 - [x] Confirmação da cópia anunciada (2026-07-28)
-- [ ] **Export em texto simples** — não implementado -- colocar assinatura em ASCII para ARIANGULAR - VINI NEGRAO -- faça mais bonito
-- [ ] Data no cabeçalho do export
+- [x] **Export em texto simples**, com assinatura em ASCII (2026-07-28)
+- [x] Data no cabeçalho do export, no formato do idioma (2026-07-28)
+- [x] Assinatura em bloco de código no Markdown, para preservar o alinhamento
+      dos caracteres de caixa (2026-07-28)
 - [ ] Markdown gerado colado num PR e conferido
 
 ## Reset
@@ -72,13 +74,16 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
       vêm implementados e testados pelo navegador (2026-07-28)
 - [x] `aria-labelledby` apontando para o título do dialog (2026-07-28)
 - [x] Foco devolvido a quem abriu, no evento `close` (2026-07-28)
-- [ ] **Comportamento do dialog verificado** — abre, prende foco, ESC, devolve foco
-- [ ] Reset global na página de índice
+- [x] Reset global na página de índice (2026-07-28)
+- [x] axe com o dialog aberto — zero violação (2026-07-29)
+- [ ] **Comportamento do dialog verificado à mão** — abre, prende foco, ESC,
+      devolve foco
 
 ## Fechamento
 
-- [x] axe sem violação nas rotas de checklist (2026-07-28)
-- [x] `ng lint` e `ng build` passando (2026-07-28)
-- [x] Commit e push feitos (2026-07-28)
-- [ ] Toda interação operável só com teclado
-- [ ] Fase fechada — bloqueada por verificação e pelos itens não implementados
+- [x] axe sem violação nas rotas de checklist (2026-07-29)
+- [x] axe com itens parcialmente marcados (2026-07-29)
+- [x] `ng lint` e `ng build` passando (2026-07-29)
+- [x] Commit e push feitos (2026-07-29)
+- [ ] Toda interação operável só com teclado, num navegador
+- [ ] Fase fechada — falta a verificação humana

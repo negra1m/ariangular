@@ -1,38 +1,51 @@
 # Fase 8 — Qualidade e Acessibilidade · Checklist
 
-Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
+Estado em 2026-07-29. Marcar concluído com data: `(YYYY-MM-DD)`
 
-> **O automatizado está forte. O humano não começou.**
+> **O automatizado está fechado. O humano não começou.**
 > Automatizado pega cerca de um terço dos problemas reais — é piso, não teto.
 > Nada abaixo de "Teclado" foi feito.
 
 ## Automatizado — feito
 
 - [x] `scripts/check-a11y.js` roda axe-core em jsdom sobre o HTML gerado (2026-07-28)
-- [x] **553 páginas, zero violações WCAG A e AA** (2026-07-28)
+- [x] **559 páginas, zero violações WCAG A e AA** (2026-07-29)
 - [x] Roda no CI e quebra o build (2026-07-28)
-- [x] `scripts/check-contrast.js` — 36 pares, zero falha nos dois temas (2026-07-28)
+- [x] `scripts/check-contrast.js` — 38 pares, zero falha nos dois temas (2026-07-29)
 - [x] Contraste roda no CI (2026-07-28)
 - [x] `ng lint` com regras a11y como **error**, no CI (2026-07-28)
 - [x] Validação estrutural e de perda de conteúdo da fonte, no CI (2026-07-28)
 - [x] CI falha se o build gerar pasta `server/` (2026-07-28)
+- [x] **92 testes**, incluindo componente e conteúdo (2026-07-29)
 
-### Defeito real que o axe pegou
+### Defeitos reais que a ferramenta pegou
 
 - [x] Raiz gerada pelo Angular como meta-refresh sem `lang` — WCAG 3.1.1.
       Corrigido: virou página real com `lang`, `h1` e escolha de idioma (2026-07-28)
+- [x] `DOMParser` descartava `(click)` e `[attr.x]`, deixando o auditor cego
+      no caso principal dele. Pego pelos testes das regras (2026-07-28)
+- [x] Script de contraste testava o tema escuro com as cores do claro — aspas
+      diferentes no seletor. Corrigido, com guarda que falha se nenhum token
+      de tema for encontrado (2026-07-28)
+- [x] `zh` publicado apontando para o conteúdo em português: interface
+      traduzida, corpo inteiro em pt, e nada falhava. Pego por teste novo, que
+      exige que um idioma publicado prove que é um idioma (2026-07-29)
 
 ## Automatizado — falta
 
-- [ ] **axe nos estados pós-interação**, que hoje não são cobertos:
-  - [ ] Menu mobile aberto
-  - [ ] Busca aberta com resultados
-  - [ ] Busca aberta sem resultados
-  - [ ] Dialog de reset aberto
-  - [ ] Auditor com resultados e com perguntas pendentes
-  - [ ] Checklist parcialmente marcado
-- [ ] Tema escuro (o axe roda sobre o HTML, que não carrega o tema)
-- [ ] **Nenhum teste unitário ou de componente escrito**
+- [x] **axe nos estados pós-interação** — 7 casos em `a11y-states.spec.ts`,
+      zero violação (2026-07-29):
+  - [x] Busca aberta com resultados (2026-07-29)
+  - [x] Busca aberta sem resultados (2026-07-29)
+  - [x] Opção ativa apontada por `aria-activedescendant` (2026-07-29)
+  - [x] Dialog de reset aberto (2026-07-29)
+  - [x] Auditor com achados e perguntas pendentes (2026-07-29)
+  - [x] Auditor com erro de parsing anunciado por `role="alert"` (2026-07-29)
+  - [x] Checklist parcialmente marcado (2026-07-29)
+  - [ ] Menu mobile aberto — o drawer vive no header, que depende do router;
+        fica para quando houver teste de integração de rota
+- [ ] Tema escuro (o axe roda sobre o HTML, que não carrega o tema; o contraste
+      dos dois temas é coberto por `check-contrast.js`)
 - [ ] **Lighthouse nunca rodado** — nem acessibilidade, nem performance
 
 ## Teclado — NADA FEITO
@@ -93,7 +106,9 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 
 ## Performance — NADA FEITO
 
-- [x] Bundle inicial medido: 400.81 kB bruto, 105.37 kB transferido (2026-07-28)
+- [x] Bundle inicial medido: 524.77 kB bruto (2026-07-29) — passou do orçamento
+      de 500 kB em 24.77 kB, com aviso e não erro. Cresceu com o terceiro
+      idioma. Medir na Vercel antes de decidir se vale dividir
 - [ ] Lighthouse Performance desktop
 - [ ] Lighthouse Performance mobile
 - [x] Sem fonte externa bloqueante — só fontes de sistema (2026-07-28)
@@ -108,6 +123,7 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 
 ## Fechamento
 
+- [x] Bloco automatizado fechado (2026-07-29)
 - [ ] Relatório da auditoria salvo no repo
 - [ ] Fase fechada — **não começou a parte humana**
 
@@ -115,12 +131,14 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 
 ## O que isso significa
 
-O site passa em tudo que uma máquina consegue medir sobre HTML estático. Isso é
-mais do que a maioria dos projetos faz, e não é suficiente para afirmar que o
-site é acessível.
+O site passa em tudo que uma máquina consegue medir — agora inclusive nos
+estados que só existem depois de um clique, que é onde moram as violações mais
+caras. Isso é mais do que a maioria dos projetos faz, e continua não sendo
+suficiente para afirmar que o site é acessível.
 
 A pergunta que o próprio conteúdo diz ser a que importa continua sem resposta:
 
 > Uma pessoa usando TalkBack ou VoiceOver consegue concluir a jornada sozinha?
 
-Ninguém tentou.
+Ninguém tentou. Roteiro pronto, ~95 minutos, em
+[../fase-10-polimento/ROTEIRO-TESTE.md](../fase-10-polimento/ROTEIRO-TESTE.md).

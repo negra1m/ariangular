@@ -61,7 +61,7 @@ Marcar concluído com data: `(YYYY-MM-DD)`
       — usando aproximação; os stops exatos só estão nos arquivos do Google Drive
 - [x] Gradiente usado só em superfície decorativa, nunca atrás de texto (2026-07-28)
 - [x] `--accent-dark` derivado e medido (2026-07-28)
-- [x] Tema **claro** como padrão (2026-07-28)
+- [x] Tema **escuro** como padrão, claro como alternativa completa (2026-07-29)
 - [x] Tokens definidos para light e dark via `prefers-color-scheme` (2026-07-28)
 - [x] Tokens sobrescritíveis por `[data-theme="light"]` e `[data-theme="dark"]` (2026-07-28)
 - [x] `src/styles/reset.css` sem zerar `outline` (2026-07-28)
@@ -70,7 +70,9 @@ Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] `src/styles/motion.css` com `@media (prefers-reduced-motion: reduce)` (2026-07-28)
 - [x] Contraste verificado: 4.5:1 texto normal nos dois temas (2026-07-28)
 - [x] Contraste verificado: 3:1 borda de componente e foco nos dois temas (2026-07-28)
-- [x] `scripts/check-contrast.js` automatiza a verificação — 36 pares, 0 falhas (2026-07-28)
+- [x] `scripts/check-contrast.js` automatiza a verificação — 38 pares, 0 falhas (2026-07-29)
+- [x] Acento duplo por medição: `--color-accent` (3:1, display) e
+      `--color-accent-text` (4.5:1, texto normal) (2026-07-28)
 
 ## Tipografia
 
@@ -80,18 +82,19 @@ Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] **Nenhuma fonte externa bloqueante** — só fontes de sistema (2026-07-28)
 - [x] Corpo limitado a 68 caracteres por linha (`--measure`) (2026-07-28)
 
-## Ilustrações base — NADA FEITO
+## Ilustrações base
 
-O pedido do PO era "figuras de acessibilidade e carinho por todo ele". Não foi
-entregue nada disso. É a maior lacuna de identidade visual do projeto.
+O pedido do PO era "figuras de acessibilidade e carinho por todo ele".
+Entregues sete, uma por parte, em `shared/part-art/`.
 
-- [ ] Direção validada contra `IDENTIDADE-VISUAL.md` §5
-- [ ] PO decidiu sobre a mascote Angie do press kit Angular
-- [ ] Primeiras ilustrações em SVG inline
-- [ ] SVGs herdam `currentColor` e funcionam nos dois temas
-- [ ] Decorativas com `aria-hidden="true"`
-- [ ] Nenhuma ilustração carrega significado sozinha
-- [ ] Animação só sob `prefers-reduced-motion: no-preference`
+- [x] Direção validada contra `IDENTIDADE-VISUAL.md` §5 (2026-07-29)
+- [x] Ilustrações em SVG inline (2026-07-29)
+- [x] SVGs herdam os tokens de tema e funcionam nos dois (2026-07-29)
+- [x] Decorativas com `aria-hidden="true"` e `role="presentation"` (2026-07-29)
+- [x] Nenhuma ilustração carrega significado sozinha (2026-07-29)
+- [x] Sem animação — não há o que degradar sob `prefers-reduced-motion` (2026-07-29)
+- [ ] PO decidiu sobre a mascote Angie do press kit Angular — *não usada; o
+      escudo próprio já cobre a identidade*
 
 ## Logo e marca
 
@@ -103,14 +106,18 @@ entregue nada disso. É a maior lacuna de identidade visual do projeto.
 - [x] Conteúdo interno do escudo é próprio: um anel de foco (2026-07-28)
 - [x] Wordmark com sobreposição `aria` + `angular`, destaque só visual (2026-07-28)
 - [x] SVG decorativo com `aria-hidden`, nome acessível vindo do texto (2026-07-28)
-- [ ] **Favicon e ícones derivados do logo** — ainda o padrão do Angular CLI
-- [ ] Logo conferido renderizado num navegador
+- [x] **Favicon e ícones derivados do logo** — `favicon.svg` + `.ico` +
+      `apple-touch-icon` (2026-07-28)
 - [x] Atribuição CC BY 4.0 preparada em `NOTICE.md` (2026-07-28)
+- [ ] Logo conferido renderizado num navegador
 
-## Watermark — NÃO APLICADO
+## Watermark
 
-- [ ] Watermark zero-width (U+200B / U+200D) no shell
-- [ ] Fora do fluxo de leitura, com `aria-hidden="true"`
+- [x] Watermark zero-width (U+200B / U+200D) no shell (2026-07-28)
+- [x] Fora do fluxo de leitura, com `aria-hidden="true"` (2026-07-28)
+- [x] Escrito com escapes Unicode, não literais — o ESLint acusa literal como
+      `no-irregular-whitespace` e editor limpa caractere invisível (2026-07-28)
+- [x] Coberto por teste (2026-07-28)
 - [ ] Verificado em TalkBack e VoiceOver (Fase 8)
 
 ## Estrutura de pastas
@@ -137,17 +144,17 @@ entregue nada disso. É a maior lacuna de identidade visual do projeto.
 
 ## Estrutura
 
-- [ ] `src/app/core/` criado
-- [ ] `src/app/shared/` criado
+- [x] `src/app/core/` criado (2026-07-28)
+- [x] `src/app/shared/` criado (2026-07-28)
 - [x] `src/app/features/` criado (2026-07-28)
-- [ ] `src/content/` criado (Fase 2)
+- [x] `src/content/` criado (2026-07-28)
 - [x] `src/styles/` criado (2026-07-28)
 
 ## Fechamento da fase
 
 - [x] `ng build` passa e prerenderiza (2026-07-28)
-- [x] `npm run verify` (lint + contraste + build) verde (2026-07-28)
+- [x] `npm run verify` (lint + contraste + testes + build + axe) verde (2026-07-29)
 - [x] Conteúdo presente no HTML estático, não só shell (2026-07-28)
-- [ ] Página inicial passa em axe sem violação (axe entra na Fase 8)
+- [x] Página inicial passa em axe sem violação (2026-07-28)
+- [x] Commit com gitmoji feito e `git push` executado (2026-07-29)
 - [ ] Tabular na página inicial mostra foco visível (verificar no navegador)
-- [x] Commit com gitmoji feito e `git push` executado (2026-07-28)

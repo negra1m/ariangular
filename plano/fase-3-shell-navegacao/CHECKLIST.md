@@ -54,14 +54,16 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] `<nav aria-label>` com `<ul>`/`<li>` (2026-07-28)
 - [x] Parte atual com `aria-current="page"` (2026-07-28)
 - [x] Estado ativo com cor **e** borda, não só cor (2026-07-28)
-- [ ] **Painel mobile não prende o foco**
-- [ ] **Painel mobile não fecha com ESC**
-- [ ] **Painel mobile não devolve o foco ao botão que abriu**
-- [ ] Navegação lateral por seção dentro da parte (hoje só a lista de partes)
+- [x] Painel mobile prende o foco (2026-07-28)
+- [x] Painel mobile fecha com ESC (2026-07-28)
+- [x] Painel mobile devolve o foco ao botão que abriu (2026-07-28)
+- [x] `inert` no conteúdo de trás enquanto aberto (2026-07-28)
+- [x] Navegação lateral por seção dentro da parte (2026-07-28)
+- [x] Índice dos tópicos da seção aberta (2026-07-29)
 
-> As três lacunas acima são exatamente o que o "Checklist Modal" do próprio conteúdo
-> exige. O menu mobile sobreposto é um modal na prática — e hoje o site não cumpre
-> o que publica.
+> O menu mobile sobreposto é um modal na prática. Os quatro itens acima são
+> exatamente o que o "Checklist Modal" do próprio conteúdo exige — o site
+> cumpre o que publica.
 
 ## Footer
 
@@ -100,7 +102,8 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 ## Fechamento
 
 - [x] `ng lint` e `ng build` passando (2026-07-28)
-- [x] axe sem violação nas páginas geradas (2026-07-28)
-- [x] Commit e push feitos (2026-07-28)
+- [x] axe sem violação nas páginas geradas (2026-07-29)
+- [x] Commit e push feitos (2026-07-29)
+- [x] Menu mobile cumprindo o Checklist Modal do próprio conteúdo (2026-07-28)
 - [ ] Jornada entre as partes só com teclado
-- [ ] Fase fechada — bloqueada pelo menu mobile e pela verificação em navegador
+- [ ] Fase fechada — falta a verificação em navegador

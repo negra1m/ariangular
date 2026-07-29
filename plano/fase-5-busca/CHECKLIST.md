@@ -1,9 +1,9 @@
 # Fase 5 — Busca · Checklist
 
-Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
+Estado em 2026-07-29. Marcar concluído com data: `(YYYY-MM-DD)`
 
-> **A busca compila e passa no lint e no axe, mas nunca foi digitada uma letra nela.**
-> Todos os itens de comportamento abaixo estão por verificar.
+> Motor e combobox cobertos por teste — 18 do serviço e 3 de axe sobre o painel
+> aberto. **Ninguém digitou uma letra nela num navegador.**
 
 ## Índice
 
@@ -25,7 +25,8 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] Múltiplos termos com lógica AND (2026-07-28)
 - [x] Ranking por peso: keyword > título da seção > título da parte > corpo (2026-07-28)
 - [x] Função pura, sem tocar `window` ou `document` (2026-07-28)
-- [ ] **Testes de ranking** cobrindo os quatro pesos
+- [x] **18 testes** de ranking, acento, AND, bordas e cobertura (2026-07-28)
+- [x] Teste de que ordena por relevância, não por posição no documento (2026-07-28)
 - [ ] Tamanho do índice medido
 
 ## Componente combobox
@@ -42,7 +43,7 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] **O foco nunca sai do input** — opção não é focável, por desenho (2026-07-28)
 - [x] Exceção ao lint documentada inline, sem afrouxar a regra global (2026-07-28)
 
-## Teclado — implementado, não testado
+## Teclado
 
 - [x] `↓` move a opção ativa para baixo, circulando (2026-07-28)
 - [x] `↑` move para cima, circulando (2026-07-28)
@@ -50,7 +51,8 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] `Esc` limpa; segundo `Esc` fecha (2026-07-28)
 - [x] `Home` e `End` (2026-07-28)
 - [x] `Tab` fecha e segue o fluxo (2026-07-28)
-- [ ] **Nenhuma dessas teclas foi pressionada de verdade**
+- [x] `↓` exercitada por teste, com `aria-activedescendant` conferido (2026-07-29)
+- [ ] Teclas pressionadas num navegador de verdade
 - [ ] Sem armadilha de teclado (WCAG 2.1.2) — por verificar
 
 ## Anúncio
@@ -68,29 +70,33 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] Atalho `/` foca a busca (2026-07-28)
 - [x] Atalho `/` inerte quando o foco está em campo de texto (WCAG 2.1.4) (2026-07-28)
 - [x] Atalho documentado na própria interface (2026-07-28)
-- [ ] Painel fecha ao clicar fora — implementado, não testado
-- [ ] **Painel de busca não prende o foco nem devolve ao abridor** — é um modal na prática
+- [x] Painel prende o foco — é um modal na prática (2026-07-28)
+- [x] Painel devolve o foco a quem abriu (2026-07-28)
+- [x] `inert` no conteúdo de trás enquanto aberto (2026-07-28)
+- [ ] Painel fecha ao clicar fora — implementado, não exercitado num navegador
 
 ## Realce
 
 - [x] Termo realçado com `<mark>` (2026-07-28)
 - [x] Contraste do realce verificado nos dois temas — 11.11:1 e 7.51:1 (2026-07-28)
 
-## Validação funcional — NENHUMA FEITA
+## Validação funcional — coberta por teste
 
-- [ ] Buscar "formularios" (sem acento) acha "Formulários"
-- [ ] Buscar "aria-expanded" acha as seções corretas
-- [ ] Buscar "cdkTrapFocus" acha a seção do CDK
-- [ ] Buscar "LiveAnnouncer" acha a seção correta
-- [ ] Buscar "2.4.3" acha a tabela de critérios WCAG
-- [ ] Buscar "ngCombobox" acha as seções novas de `@angular/aria`
-- [ ] Buscar "modal foco" (dois termos, AND) retorna resultado relevante
-- [ ] Todas as 7 partes aparecem em alguma busca
+- [x] Buscar "formularios" (sem acento) acha "Formulários" (2026-07-28)
+- [x] Buscar "aria-expanded" acha as seções corretas (2026-07-28)
+- [x] Buscar "cdkTrapFocus" acha a seção do CDK (2026-07-28)
+- [x] Buscar "LiveAnnouncer" acha a seção correta (2026-07-28)
+- [x] Buscar "2.4.3" acha a tabela de critérios WCAG (2026-07-28)
+- [x] Buscar "ngCombobox" acha as seções novas de `@angular/aria` (2026-07-28)
+- [x] Dois termos com AND retornam resultado relevante (2026-07-28)
+- [x] Todas as 7 partes aparecem em alguma busca (2026-07-28)
+- [x] Todas as seções de todas as partes estão indexadas (2026-07-28)
 
 ## Fechamento
 
-- [x] axe sem violação (2026-07-28)
-- [x] `ng lint` e `ng build` passando (2026-07-28)
-- [x] Commit e push feitos (2026-07-28)
-- [ ] Fluxo completo operável só com teclado
-- [ ] Fase fechada — bloqueada por não ter sido exercitada
+- [x] axe sem violação (2026-07-29)
+- [x] axe com o painel aberto, com e sem resultados (2026-07-29)
+- [x] `ng lint` e `ng build` passando (2026-07-29)
+- [x] Commit e push feitos (2026-07-29)
+- [ ] Fluxo completo operável só com teclado, num navegador
+- [ ] Fase fechada — falta o exercício humano

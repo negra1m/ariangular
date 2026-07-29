@@ -67,41 +67,43 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] `@angular/aria` — os 13 padrões (2026-07-28)
 - [x] `@angular/aria` vs Material vs CDK (2026-07-28)
 - [x] O que o `@angular/aria` **não** resolve (2026-07-28)
-- [ ] European Accessibility Act — tema quente de 2026, não coberto
-- [ ] UX cognitiva — idem
+- [x] European Accessibility Act — tema quente de 2026 (2026-07-28)
+- [x] Acessibilidade cognitiva (2026-07-28)
 
-## Tradução — NÃO FEITA
+## Tradução
 
 - [x] `scripts/extract-strings.js` gera o catálogo (2026-07-28)
 - [x] `scripts/build-locale.js` aplica tradução sobre a estrutura do pt (2026-07-28)
 - [x] Rótulos de interface traduzidos nos 3 idiomas em `core/i18n/ui-strings.ts` (2026-07-28)
-- [x] Fallback: `en` e `zh` caem no pt em vez de quebrar (2026-07-28)
-- [ ] **`i18n/strings.en.json`** — 1.174 strings, 4.601 palavras
-- [ ] **`i18n/strings.zh.json`** — idem
-- [ ] Rodar `npm run i18n:build` e conferir a cobertura
-- [ ] **Consequência atual: `/en` e `/zh` servem texto em português.** Estrutura,
-      URLs, hreflang e metadados corretos; corpo não traduzido. Publicar assim tem
-      custo de SEO — o descasamento entre `lang` e o idioma do corpo é detectável
+- [x] **`i18n/strings.en.json`** — 1.246 strings, 100% (2026-07-28)
+- [x] **`i18n/strings.zh.json`** — 1.246 strings, 100% (2026-07-29)
+- [x] `npm run i18n:build` com cobertura de 100% nos dois (2026-07-29)
+- [x] Conteúdo de cada idioma ligado no registro de `content/index.ts` (2026-07-29)
+- [x] `merge-i18n.js` falha em chave desconhecida, valor vazio ou cobertura parcial (2026-07-28)
+- [ ] Revisão por falante nativo — declarada como pendência no README
 
-### Ordem de prioridade quando for traduzir
-
-1. 181 títulos de seção — viram `<title>`, é o que rankeia
-2. 167 resumos — viram `<meta description>`, é o texto do resultado de busca
-3. 826 do corpo — sustentam relevância e permanência
+A ordem de prioridade foi respeitada: títulos de seção primeiro (viram
+`<title>`), resumos depois (viram `<meta description>`), corpo por último.
 
 ## Resumos
 
 - [x] Gerados por heurística do primeiro parágrafo (2026-07-28)
-- [ ] **167 resumos reescritos à mão** — meta description gerada converte mal
+- [x] **169 resumos escritos à mão em pt** (2026-07-29)
+- [x] **169 resumos escritos à mão em en** (2026-07-28)
+- [x] **169 resumos escritos à mão em zh** (2026-07-29)
+- [x] `i18n/summaries.pt.json` sobrevive a uma re-extração (2026-07-29)
+- [x] Extração falha em chave de resumo sem seção correspondente (2026-07-29)
 
 ## Validação
 
-- [x] Contagem de seções bate com a fonte: 160 (2026-07-28)
-- [ ] Teste que falha se alguma seção estiver sem `id`, título ou blocos
-- [ ] Teste que falha se houver `id` duplicado
+- [x] Contagem de seções bate com a fonte: 162 (2026-07-28)
+- [x] Teste que falha se alguma seção estiver sem título ou resumo (2026-07-29)
+- [x] Teste que falha se houver `id` duplicado (2026-07-29)
+- [x] Teste que falha se um idioma publicado repetir o texto do pt (2026-07-29)
+- [x] Teste que falha se os ids divergirem entre idiomas (2026-07-29)
 
 ## Fechamento
 
 - [x] `ng lint` e `ng build` passando (2026-07-28)
-- [x] Commit e push feitos (2026-07-28)
-- [ ] Fase fechada — bloqueada pela tradução
+- [x] Commit e push feitos (2026-07-29)
+- [x] Fase fechada (2026-07-29)

@@ -1,10 +1,10 @@
 # Fase 7 — Auditor de Snippet · Checklist
 
-Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
+Estado em 2026-07-29. Marcar concluído com data: `(YYYY-MM-DD)`
 
-> **16 das 24 regras. Nenhum teste. Nunca executado com um snippet real.**
-> É a fase com maior distância entre "escrito" e "verificado" — e a mais perigosa,
-> porque uma regra errada corrige código para pior.
+> **24 regras, 55 testes, cada uma nos dois sentidos.** Era a fase com maior
+> distância entre "escrito" e "verificado", e a mais perigosa, porque uma regra
+> errada corrige código para pior. Os testes acharam o bug que provava isso.
 
 ## Decisão do PO (2026-07-28)
 
@@ -19,8 +19,14 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] `DOMParser` com guard de plataforma — não roda no prerender (2026-07-28)
 - [x] Falha de parse mostra mensagem clara, sem erro cru (2026-07-28)
 - [x] Reindentação da saída (2026-07-28)
-- [ ] **Confirmado por teste** que `*ngIf`, `[attr.x]`, `(click)` e `#ref` sobrevivem
+- [x] **Confirmado por teste** que `*ngIf`, `[attr.x]`, `(click)` e `#ref`
+      sobrevivem (2026-07-28)
 - [ ] Testado com template real de projeto Angular
+
+> **Bug que os testes acharam:** `(click)`, `[attr.x]`, `*ngIf` e `#ref` não são
+> nomes de atributo válidos. O `DOMParser` descartava todos em silêncio — e sem
+> eles o auditor ficava cego no caso principal dele, a div clicável. Corrigido
+> traduzindo a sintaxe Angular para `data-*` antes do parse.
 
 ## Regras implementadas — 16
 
@@ -41,27 +47,35 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] `aria-redundante` — role repetindo a semântica nativa · Baixo · **corrige** (2026-07-28)
 - [x] `autofocus` · Baixo · **corrige** (2026-07-28)
 
-## Regras faltando — 8
+## Regras restantes — 8, entregues
 
-- [ ] `input-so-placeholder` — placeholder como único rótulo
-- [ ] `link-sem-texto` — `<a>` sem conteúdo nem rótulo
-- [ ] `aria-describedby-id-inexistente` — referência quebrada
-- [ ] `tabela-com-div` — grid de divs com aparência de tabela
-- [ ] `salto-de-heading` — h1 seguido de h4
-- [ ] `role-invalido` — role inexistente ou `aria-*` que não existe
-- [ ] `listbox-custom-sem-teclado`
-- [ ] `mouse-sem-teclado` — `(mouseover)` sem `(focus)` equivalente
+- [x] `input-so-placeholder` — placeholder como único rótulo (2026-07-28)
+- [x] `link-sem-texto` — `<a>` sem conteúdo nem rótulo (2026-07-28)
+- [x] `aria-referencia-quebrada` — `aria-describedby`/`labelledby` apontando
+      para id inexistente (2026-07-28)
+- [x] `tabela-com-div` — grid de divs com aparência de tabela (2026-07-28)
+- [x] `salto-de-heading` — h1 seguido de h4 (2026-07-28)
+- [x] `aria-inexistente` — role ou `aria-*` que não existe na especificação (2026-07-28)
+- [x] `listbox-sem-teclado` (2026-07-28)
+- [x] `mouse-sem-teclado` — `(mouseover)` sem `(focus)` equivalente (2026-07-28)
 
-## Testes — NENHUM ESCRITO
+## Testes — 55
 
-- [ ] **Cada regra com teste de "dispara"**
-- [ ] **Cada regra com teste de "não dispara"** (o que evita falso positivo)
-- [ ] Teste de que o auto-fix produz markup válido
-- [ ] Teste de que nenhuma regra aponta para seção inexistente da doc
-- [ ] Teste de round-trip: preprocess → postprocess preserva o código
+- [x] **Cada uma das 24 regras com teste de "dispara"** (2026-07-28)
+- [x] **Cada uma das 24 regras com teste de "não dispara"** (2026-07-28)
+- [x] Teste de que o auto-fix troca o div por button de verdade (2026-07-28)
+- [x] Teste de que nenhuma regra aponta para seção inexistente da doc (2026-07-28)
+- [x] Teste de que a interpolação `{{ … }}` sobrevive ao round-trip (2026-07-28)
+- [x] Teste de que não inventa nome acessível, deixa ponto a preencher (2026-07-28)
+- [x] Teste de que a resposta da pessoa entra no lugar marcado (2026-07-28)
+- [x] Teste de que não acusa nada num template correto e completo (2026-07-28)
+- [x] Teste de que o registro cobre todas as regras (2026-07-28)
+- [x] axe sobre o resultado, com achados e com erro de parsing (2026-07-29)
 
 > Sem os testes de "não dispara", o auditor acumula falso positivo e as pessoas
-> param de confiar nele. É o risco número um desta fase.
+> param de confiar nele. Era o risco número um desta fase — e foi um teste
+> desses que expôs duas regras se sobrepondo no mesmo elemento, onde a genérica
+> ganhava por rodar primeiro.
 
 ## Metadados de cada achado
 
@@ -70,7 +84,7 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] Explicação do impacto no leitor de tela (2026-07-28)
 - [x] Link para a seção da documentação (2026-07-28)
 - [x] Trecho ofensor (2026-07-28)
-- [ ] **Número da linha** — não implementado
+- [x] **Número da linha** (2026-07-28)
 
 ## Interface — entrada
 
@@ -79,7 +93,8 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] Botão "Analisar" explícito (2026-07-28)
 - [x] **Sem** análise automática a cada tecla (2026-07-28)
 - [x] Botão de carregar snippet de exemplo (2026-07-28)
-- [ ] **Limite de tamanho** com aviso antes de travar
+- [x] **Limite de tamanho** com contador antes do limite, não depois — avisar
+      quando já travou é inútil (2026-07-28)
 
 ## Interface — resultado
 
@@ -105,17 +120,22 @@ Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] Foco move para o cabeçalho do resultado após analisar (2026-07-28)
 - [ ] Verificado com leitor de tela
 
-## Validação funcional — NENHUMA FEITA
+## Validação funcional — coberta por teste
 
-- [ ] Snippet de exemplo dispara exatamente os achados esperados
-- [ ] Nenhum falso positivo num template correto
-- [ ] O código corrigido é HTML/template válido
-- [ ] Preencher uma resposta injeta no lugar certo
-- [ ] Colar template Angular real não quebra o parser
+- [x] Snippet de exemplo dispara achados dos dois tipos: corrigidos e
+      pendentes de resposta (2026-07-29)
+- [x] Nenhum falso positivo num template correto (2026-07-28)
+- [x] O código corrigido troca o div por button de verdade (2026-07-28)
+- [x] Preencher uma resposta injeta no lugar certo (2026-07-28)
+- [x] Sintaxe Angular real sobrevive ao parser (2026-07-28)
+- [ ] Colado um template de projeto Angular de verdade
 
 ## Fechamento
 
-- [x] axe sem violação na rota `/auditor` (2026-07-28)
-- [x] `ng lint` e `ng build` passando (2026-07-28)
-- [x] Commit e push feitos (2026-07-28)
-- [ ] Fase fechada — bloqueada por testes, 8 regras e verificação
+- [x] axe sem violação na rota `/auditor` (2026-07-29)
+- [x] axe com achados, perguntas pendentes e erro de parsing (2026-07-29)
+- [x] `ng lint` e `ng build` passando (2026-07-29)
+- [x] Commit e push feitos (2026-07-29)
+- [x] 24 regras e 55 testes entregues (2026-07-28)
+- [ ] Verificado com leitor de tela — *fase 8*
+- [ ] Fase fechada — falta a verificação humana

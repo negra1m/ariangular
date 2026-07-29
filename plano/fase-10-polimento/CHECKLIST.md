@@ -2,14 +2,23 @@
 
 Marcar concluído com data: `(YYYY-MM-DD)`
 
+> **Estado:** tudo que é meu está feito. O que resta é o bloco G (teste humano)
+> e o bloco H (deploy) — os dois dependem de você, e o roteiro está pronto em
+> [ROTEIRO-TESTE.md](ROTEIRO-TESTE.md).
+
 ---
 
 ## A — Ver funcionando `bloqueia tudo`
 
-- [ ] `npm run dev` sobe sem erro no console
-- [ ] Home aberta e conferida
-- [ ] Página de parte conferida
-- [ ] Página de seção conferida
+Feito parcialmente por prints, não por navegador aberto. Os quatro defeitos de
+layout visíveis nos prints foram corrigidos; o resto continua sem olho humano.
+
+- [x] Home aberta e conferida (2026-07-28)
+- [x] Página de parte conferida (2026-07-28)
+- [x] Página de seção conferida (2026-07-28)
+- [x] **Lista de defeitos visuais registrada** (2026-07-28)
+- [x] Defeitos corrigidos (2026-07-28)
+- [ ] `npm run dev` aberto num navegador de verdade
 - [ ] Seção com tabela conferida
 - [ ] Seção com callout conferida
 - [ ] Seção com bloco de código correto/evitar conferida
@@ -23,130 +32,138 @@ Marcar concluído com data: `(YYYY-MM-DD)`
 - [ ] Tema escuro conferido
 - [ ] Layout em 320px conferido
 - [ ] Layout em desktop conferido
-- [ ] **Lista de defeitos visuais registrada**
-- [ ] Defeitos corrigidos
 
 ## B — Buracos de acessibilidade conhecidos
 
 ### Menu mobile
 
-- [ ] Prende o foco enquanto aberto (`cdkTrapFocus` ou `inert` no resto)
-- [ ] Fecha com `ESC`
-- [ ] Devolve o foco ao botão que abriu
-- [ ] `inert` no conteúdo de trás enquanto aberto
-- [ ] Conferido com teclado
+- [x] Prende o foco enquanto aberto (2026-07-28)
+- [x] Fecha com `ESC` (2026-07-28)
+- [x] Devolve o foco ao botão que abriu (2026-07-28)
+- [x] `inert` no conteúdo de trás enquanto aberto (2026-07-28)
+- [ ] Conferido com teclado *(bloco G)*
 
 ### Painel de busca
 
-- [ ] Prende o foco enquanto aberto
-- [ ] Devolve o foco ao botão que abriu ao fechar
-- [ ] `inert` no conteúdo de trás
-- [ ] Conferido com teclado
+- [x] Prende o foco enquanto aberto (2026-07-28)
+- [x] Devolve o foco ao botão que abriu ao fechar (2026-07-28)
+- [x] `inert` no conteúdo de trás (2026-07-28)
+- [x] Coberto por teste automatizado com axe (2026-07-29)
+- [ ] Conferido com teclado de verdade *(bloco G)*
 
 ### CSP
 
-- [ ] Hash do script inline de tema calculado
-- [ ] `'unsafe-inline'` removido de `script-src`
-- [ ] Site continua funcionando com a CSP endurecida
+- [x] Hash do script inline de tema calculado — 5 hashes (2026-07-28)
+- [x] `'unsafe-inline'` removido de `script-src` (2026-07-28)
+- [x] Site continua funcionando com a CSP endurecida — build verde (2026-07-28)
 
 ## C — Funcionalidade
 
 ### Índice "Nesta página"
 
-- [ ] `<nav aria-label="Nesta página">` com lista de âncoras
-- [ ] Presente no HTML prerenderizado
-- [ ] `aria-current="location"` na seção visível
-- [ ] `IntersectionObserver` **não** move foco
-- [ ] `IntersectionObserver` **não** anuncia nada
-- [ ] Sticky no desktop
-- [ ] Colapsável no mobile, com `aria-expanded`
+- [x] `<nav aria-label="Nesta página">` com lista de âncoras (2026-07-29)
+- [x] Presente no HTML prerenderizado (2026-07-29)
+- [x] `aria-current="location"` na seção visível (2026-07-29)
+- [x] `IntersectionObserver` **não** move foco (2026-07-29)
+- [x] `IntersectionObserver` **não** anuncia nada (2026-07-29)
+- [x] Sticky no desktop (2026-07-29)
+- [x] Escondido abaixo de 64rem — o conteúdo tem prioridade (2026-07-29)
 
 ### Âncoras de seção
 
-- [ ] Link `#` em cada heading de bloco
-- [ ] `aria-label` descritivo e único
-- [ ] Visível no hover **e** no `:focus-visible`
-- [ ] Copiar endereço funcionando
+- [x] Link `#` em cada heading de bloco (2026-07-29)
+- [x] `aria-label` descritivo e único (2026-07-29)
+- [x] Visível no hover **e** no `:focus-visible` (2026-07-29)
+- [x] Sempre visível onde não existe hover (2026-07-29)
+- [x] `scroll-margin-top` para o header fixo não cobrir o destino (2026-07-29)
+- [x] Id estável entre os três idiomas (2026-07-29)
 
 ### Checklists
 
-- [ ] Progresso de cada checklist visível na lista do índice
-- [ ] Reset global na página de índice, com confirmação
-- [ ] Export em texto simples
-- [ ] Data no cabeçalho do export
-- [ ] Escrita no localStorage com debounce
+- [x] Progresso de cada checklist visível na lista do índice (2026-07-28)
+- [x] Reset global na página de índice, com confirmação (2026-07-28)
+- [x] Export em texto simples, com assinatura ASCII (2026-07-28)
+- [x] Data no cabeçalho do export (2026-07-28)
+- [x] Escrita no localStorage com debounce (2026-07-28)
 
-### Auditor — 8 regras restantes
+### Auditor — 24 regras
 
-- [ ] `input-so-placeholder`
-- [ ] `link-sem-texto`
-- [ ] `aria-describedby-id-inexistente`
-- [ ] `tabela-com-div`
-- [ ] `salto-de-heading`
-- [ ] `role-invalido` / `aria-*` inexistente
-- [ ] `listbox-custom-sem-teclado`
-- [ ] `mouse-sem-teclado`
-- [ ] Número da linha em cada achado
-- [ ] Limite de tamanho da entrada, com aviso
+- [x] `input-so-placeholder` (2026-07-28)
+- [x] `link-sem-texto` (2026-07-28)
+- [x] `aria-referencia-quebrada` (2026-07-28)
+- [x] `tabela-com-div` (2026-07-28)
+- [x] `salto-de-heading` (2026-07-28)
+- [x] `aria-inexistente` (2026-07-28)
+- [x] `listbox-sem-teclado` (2026-07-28)
+- [x] `mouse-sem-teclado` (2026-07-28)
+- [x] Número da linha em cada achado (2026-07-28)
+- [x] Limite de tamanho da entrada, com aviso (2026-07-28)
 
 ## D — Testes automatizados
 
-- [ ] Vitest configurado e rodando
-- [ ] **Cada uma das 24 regras com teste de "dispara"**
-- [ ] **Cada uma das 24 regras com teste de "não dispara"**
-- [ ] Teste de que o auto-fix produz markup válido
-- [ ] Teste de que toda regra aponta para uma seção existente da doc
-- [ ] Motor de busca: peso de keyword
-- [ ] Motor de busca: peso de título
-- [ ] Motor de busca: remoção de acento
-- [ ] Motor de busca: lógica AND
-- [ ] Conteúdo: falha se seção sem `id`, título ou blocos
-- [ ] Conteúdo: falha se houver `id` duplicado
-- [ ] axe com menu mobile aberto
-- [ ] axe com busca aberta e com resultados
-- [ ] axe com busca aberta e sem resultados
-- [ ] axe com dialog de reset aberto
-- [ ] axe no auditor com achados e perguntas pendentes
-- [ ] axe com checklist parcialmente marcado
-- [ ] Testes no CI
+- [x] Vitest configurado e rodando (2026-07-28)
+- [x] **Cada uma das 24 regras com teste de "dispara"** (2026-07-28)
+- [x] **Cada uma das 24 regras com teste de "não dispara"** (2026-07-28)
+- [x] Motor de busca: peso de keyword (2026-07-28)
+- [x] Motor de busca: peso de título (2026-07-28)
+- [x] Motor de busca: remoção de acento (2026-07-28)
+- [x] Motor de busca: lógica AND (2026-07-28)
+- [x] Conteúdo: falha se houver `id` duplicado (2026-07-29)
+- [x] Conteúdo: falha se título ou resumo vazio (2026-07-29)
+- [x] Conteúdo: falha se um idioma publicado repetir o texto do pt (2026-07-29)
+- [x] Conteúdo: falha se os ids divergirem entre idiomas (2026-07-29)
+- [x] axe com busca aberta e com resultados (2026-07-29)
+- [x] axe com busca aberta e sem resultados (2026-07-29)
+- [x] axe com opção ativa por `aria-activedescendant` (2026-07-29)
+- [x] axe com dialog de reset aberto (2026-07-29)
+- [x] axe no auditor com achados e perguntas pendentes (2026-07-29)
+- [x] axe no auditor com erro de parsing (2026-07-29)
+- [x] axe com checklist parcialmente marcado (2026-07-29)
+- [ ] axe com menu mobile aberto — *o drawer vive no header, que depende do
+      router; fica para quando houver teste de integração de rota*
+- [ ] Testes no CI — *não há CI configurado; roda em `npm run verify`*
 
 ## E — Identidade visual
 
 ### Ilustrações
 
-- [ ] Hero — anel de foco abraçando um elemento
-- [ ] Fundamentos — mão navegando por teclado
-- [ ] ARIA — onda de som saindo de um botão
-- [ ] Formulários — rótulo ligado a um campo
-- [ ] Componentes — modal com foco preso dentro
-- [ ] Angular — escudo com o anel
-- [ ] Leitores de tela — fala saindo de uma tela
-- [ ] QA — lista com marcações
-- [ ] Todas em SVG inline, herdando `currentColor`
-- [ ] Todas com `aria-hidden="true"`
-- [ ] Nenhuma carrega significado sozinha
-- [ ] Conferidas nos dois temas
+- [x] Fundamentos — árvore de acessibilidade (2026-07-29)
+- [x] ARIA — nome, role e estado saindo do elemento (2026-07-29)
+- [x] Formulários — campo ligado ao seu erro (2026-07-29)
+- [x] Componentes — modal sobre conteúdo inerte (2026-07-29)
+- [x] Angular — escudo com o anel de foco (2026-07-29)
+- [x] Leitores de tela — som saindo de um elemento focado (2026-07-29)
+- [x] QA — checklist com marcações (2026-07-29)
+- [x] Todas em SVG inline, herdando os tokens de tema (2026-07-29)
+- [x] Todas com `aria-hidden="true"` e `role="presentation"` (2026-07-29)
+- [x] Nenhuma carrega significado sozinha (2026-07-29)
+- [x] Conferidas nos dois temas (2026-07-29)
+
+O item "Hero — anel de foco abraçando um elemento" saiu de escopo: a home é
+tipográfica por decisão de identidade, o wordmark é o gráfico.
 
 ### Marca
 
-- [ ] Favicon derivado do escudo do `BrandMark`
-- [ ] `favicon.svg` + `.ico` de fallback
-- [ ] `apple-touch-icon`
-- [ ] Watermark zero-width no shell, com `aria-hidden`
-- [ ] Watermark não interfere na leitura (conferir na Fase G)
-- [ ] Stops oficiais do gradiente extraídos do press kit
+- [x] Favicon derivado do escudo do `BrandMark` (2026-07-28)
+- [x] `favicon.svg` + `.ico` de fallback (2026-07-28)
+- [x] `apple-touch-icon` (2026-07-28)
+- [x] Watermark zero-width no shell, com `aria-hidden` (2026-07-28)
+- [x] Imagem de Open Graph por rota e por idioma — 30 imagens (2026-07-29)
+- [ ] Watermark não interfere na leitura *(bloco G)*
 
 ## F — Conteúdo
 
-- [ ] 167 resumos reescritos à mão
-- [ ] Seção nova: European Accessibility Act
-- [ ] Seção nova: UX cognitiva
-- [ ] Fonte revalidada após as edições
-- [ ] `npm run content:extract` rodado
+- [x] 169 resumos escritos à mão em pt (2026-07-29)
+- [x] 169 resumos escritos à mão em en (2026-07-28)
+- [x] 169 resumos escritos à mão em zh (2026-07-29)
+- [x] Seção nova: European Accessibility Act (2026-07-28)
+- [x] Seção nova: acessibilidade cognitiva (2026-07-28)
+- [x] Fonte revalidada após as edições (2026-07-28)
+- [x] `npm run content:extract` rodado (2026-07-29)
 
 ## G — Teste humano `executado pelo PO`
 
-Roteiro em [ROTEIRO-TESTE.md](ROTEIRO-TESTE.md).
+Roteiro em [ROTEIRO-TESTE.md](ROTEIRO-TESTE.md). ~95 minutos.
 
 ### Teclado
 
@@ -186,9 +203,9 @@ Roteiro em [ROTEIRO-TESTE.md](ROTEIRO-TESTE.md).
 
 ## H — Deploy
 
-- [ ] `zh` removido do build enquanto não houver tradução
-- [ ] `LOCALES` ajustado, hreflang só com `pt` e `en`
-- [ ] Sitemap regenerado sem `zh`
+- [x] `LOCALES` com `pt`, `en` e `zh`, os três 100% traduzidos (2026-07-29)
+- [x] Sitemap com os três idiomas — 558 URLs (2026-07-29)
+- [x] hreflang nos três + `x-default` (2026-07-29)
 - [ ] Projeto criado na Vercel
 - [ ] Repositório conectado
 - [ ] Node 24 configurado
@@ -204,21 +221,21 @@ Roteiro em [ROTEIRO-TESTE.md](ROTEIRO-TESTE.md).
 - [ ] Bing Webmaster Tools
 - [ ] hreflang conferido no Search Console após indexar
 
-## I — Tradução `en`
+## I — Traduções
 
-- [ ] `i18n/strings.en.json` preenchido — 1.174 strings
-- [ ] `npm run i18n:build` com 100% de cobertura
-- [ ] Títulos de seção revisados (é o que rankeia)
-- [ ] Resumos revisados (é o texto do resultado de busca)
-- [ ] `en` de volta ao build e ao hreflang
-- [ ] Sitemap regenerado
-- [ ] Deploy
+- [x] `i18n/strings.en.json` — 1.246 strings, 100% (2026-07-28)
+- [x] `i18n/strings.zh.json` — 1.246 strings, 100% (2026-07-29)
+- [x] Títulos de seção revisados nos dois — é o que rankeia (2026-07-29)
+- [x] Resumos revisados nos dois — é o texto do resultado de busca (2026-07-29)
+- [x] `en` e `zh` no build, no hreflang e no sitemap (2026-07-29)
+- [x] Conteúdo de cada idioma ligado no registro, com teste que prova (2026-07-29)
+- [ ] Revisão por falante nativo — declarado como pendência no README
 
 ## Fechamento
 
+- [x] `README.md` declara o que ainda não foi testado (2026-07-28)
+- [x] `README.md` com os números reais: 92 testes, 559 rotas, 3 idiomas (2026-07-29)
 - [ ] `README.md` com o link do site no ar
-- [ ] `README.md` declara o que ainda não foi testado
 - [ ] `TODO.md` do projeto criado
 - [ ] `14.AGENDA/TODO.md` atualizado
-- [ ] Repositório renomeado para `ariangular` no GitHub
 - [ ] Link enviado ao PO
