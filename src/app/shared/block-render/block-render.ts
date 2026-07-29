@@ -1,6 +1,8 @@
-import { Component, input, inject, signal } from '@angular/core';
+import { Component, input, inject, signal, computed } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { LocaleService } from '../../core/i18n/locale.service';
+import { headingsOf } from './headings';
 import type { Block } from '../../../content/types';
 
 /**
@@ -18,6 +20,7 @@ import type { Block } from '../../../content/types';
  */
 @Component({
   selector: 'app-block-render',
+  imports: [NgTemplateOutlet],
   templateUrl: './block-render.html',
   styleUrl: './block-render.css',
 })
@@ -32,6 +35,25 @@ export class BlockRender {
   private readonly announcer = inject(LiveAnnouncer);
 
   protected readonly copiedIndex = signal<number | null>(null);
+
+  /**
+   * Id de âncora por posição do bloco.
+   *
+   * Calculado aqui e no índice lateral a partir da MESMA função: um link do
+   * índice apontando para um id que o corpo não gerou é um link quebrado que
+   * nenhum teste de rota pega.
+   *
+   * Vazio quando os blocos estão aninhados num callout — âncora dentro de
+   * callout aponta para um trecho que o índice não lista.
+   */
+  private readonly anchors = computed(() => {
+    if (this.headingOffset()) return new Map<number, string>();
+    return new Map(headingsOf(this.blocks()).map((h) => [h.index, h.id]));
+  });
+
+  protected anchorFor(index: number): string | null {
+    return this.anchors().get(index) ?? null;
+  }
 
   protected headingTag(level: 1 | 2): string {
     return `h${Math.min(6, 2 + level + this.headingOffset())}`;

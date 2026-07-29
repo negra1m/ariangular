@@ -9,6 +9,35 @@
 .blk-h {
   margin-block: var(--space-lg) var(--space-2xs);
   font-size: var(--text-lg);
+  /* scroll-margin: sem isto a âncora encosta o tópico no topo da janela e o
+     header fixo cobre a linha que a pessoa acabou de pedir para ver. */
+  scroll-margin-top: calc(var(--header-height) + var(--space-md));
+}
+
+/* Aparece no hover E no :focus-visible. Só no hover, ela não existiria para
+   quem navega por teclado — que é justamente quem mais usa link direto. */
+.blk-h__anchor {
+  margin-left: 0.4em;
+  font-family: var(--font-mono);
+  font-size: 0.75em;
+  font-weight: 400;
+  color: var(--color-accent-text);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease);
+}
+
+.blk-h:hover .blk-h__anchor,
+.blk-h__anchor:focus-visible {
+  opacity: 1;
+}
+
+/* Alvo de toque: no mobile não há hover, então a âncora fica sempre visível.
+   Escondida para sempre num aparelho sem mouse é o mesmo que não existir. */
+@media (hover: none) {
+  .blk-h__anchor {
+    opacity: 1;
+  }
 }
 
 .blk-list {

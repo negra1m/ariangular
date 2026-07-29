@@ -32,6 +32,9 @@
       </article>
 
       <aside class="sec__aside">
+        <!-- Índice desta seção antes do índice da parte: é o mais próximo do
+             que a pessoa está lendo agora. -->
+        <app-page-toc [blocks]="d.section.blocks" />
         <app-part-sidebar [part]="d.part" [currentId]="d.section.id" />
       </aside>
     </div>

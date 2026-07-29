@@ -22,6 +22,7 @@ export const UI_STRINGS = {
     nav: 'Documentação',
     navFooter: 'Links do rodapé',
     onThisPage: 'Nesta página',
+    linkTo: (title: string) => `Link direto para "${title}"`,
     openMenu: 'Abrir menu de navegação',
     closeMenu: 'Fechar menu de navegação',
     theme: 'Alternar tema claro e escuro',
@@ -72,6 +73,7 @@ export const UI_STRINGS = {
     nav: 'Documentation',
     navFooter: 'Footer links',
     onThisPage: 'On this page',
+    linkTo: (title: string) => `Direct link to "${title}"`,
     openMenu: 'Open navigation menu',
     closeMenu: 'Close navigation menu',
     theme: 'Toggle light and dark theme',
@@ -122,6 +124,7 @@ export const UI_STRINGS = {
     nav: '文档',
     navFooter: '页脚链接',
     onThisPage: '本页目录',
+    linkTo: (title: string) => `直接链接到“${title}”`,
     openMenu: '打开导航菜单',
     closeMenu: '关闭导航菜单',
     theme: '切换浅色和深色主题',
@@ -160,4 +163,6 @@ export const UI_STRINGS = {
     disclaimer:
       '独立项目，与 Google 及 Angular 团队无关联。Angular 是 Open Usage Commons 的商标。标识改编自 Angular Press Kit，遵循 CC BY 4.0 许可。',
   },
-} satisfies Record<Locale, Record<string, string | ((n: number) => string)>>;
+  // `satisfies` e não `:` — o tipo declarado apagaria as chaves concretas e o
+  // template perderia a checagem de nome de string.
+} satisfies Record<Locale, Record<string, string | ((arg: never) => string)>>;

@@ -1,3 +1,16 @@
+<!--
+  Âncora de tópico. Visível no hover E no :focus-visible — só no hover ela não
+  existe para quem navega por teclado, que é justamente quem mais usa link
+  direto para um trecho.
+-->
+<ng-template #anchor let-i let-text="text">
+  @if (anchorFor(i); as id) {
+    <a class="blk-h__anchor" [href]="'#' + id" [attr.aria-label]="locale.strings().linkTo(text)">
+      <span aria-hidden="true">#</span>
+    </a>
+  }
+</ng-template>
+
 @for (block of blocks(); track $index; let i = $index) {
   @switch (block.kind) {
     @case ('paragraph') {
@@ -6,13 +19,26 @@
 
     @case ('heading') {
       <!-- Nível calculado, nunca fixo: pular de h2 para h4 quebra a árvore de
-           navegação por headings, que é como quem usa leitor de tela se move. -->
+           navegação por headings, que é como quem usa leitor de tela se move.
+
+           A âncora fica DENTRO do heading para o link herdar o contexto na
+           lista de links do leitor de tela, e leva aria-label próprio porque
+           "#" sozinho não é nome acessível de nada. -->
       @if (headingTag(block.level) === 'h3') {
-        <h3 class="blk-h">{{ block.text }}</h3>
+        <h3 class="blk-h" [id]="anchorFor(i)">
+          {{ block.text }}
+          <ng-container *ngTemplateOutlet="anchor; context: { $implicit: i, text: block.text }" />
+        </h3>
       } @else if (headingTag(block.level) === 'h4') {
-        <h4 class="blk-h">{{ block.text }}</h4>
+        <h4 class="blk-h" [id]="anchorFor(i)">
+          {{ block.text }}
+          <ng-container *ngTemplateOutlet="anchor; context: { $implicit: i, text: block.text }" />
+        </h4>
       } @else {
-        <h5 class="blk-h">{{ block.text }}</h5>
+        <h5 class="blk-h" [id]="anchorFor(i)">
+          {{ block.text }}
+          <ng-container *ngTemplateOutlet="anchor; context: { $implicit: i, text: block.text }" />
+        </h5>
       }
     }
 

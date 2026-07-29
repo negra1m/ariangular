@@ -1,0 +1,31 @@
+@if (visible()) {
+  <!--
+    <nav> rotulado: quem navega por landmarks encontra o índice pelo nome, sem
+    precisar percorrer a página até tropeçar nele.
+  -->
+  <nav class="toc" [attr.aria-label]="locale.strings().onThisPage">
+    <p class="toc__label">{{ locale.strings().onThisPage }}</p>
+
+    <ol class="toc__list">
+      @for (h of headings(); track h.id) {
+        <li class="toc__item" [attr.data-level]="h.level">
+          <!--
+            aria-current="location" e não "page": a pessoa continua na mesma
+            página, mudou só o trecho. É o valor que o próprio conteúdo
+            documenta para este caso.
+
+            O estado tem cor E barra lateral — cor sozinha não comunica (1.4.1).
+          -->
+          <a
+            class="toc__link"
+            [href]="'#' + h.id"
+            [class.is-active]="activeId() === h.id"
+            [attr.aria-current]="activeId() === h.id ? 'location' : null"
+          >
+            {{ h.text }}
+          </a>
+        </li>
+      }
+    </ol>
+  </nav>
+}

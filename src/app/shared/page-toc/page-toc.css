@@ -1,0 +1,49 @@
+:host {
+  display: block;
+}
+
+.toc {
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  border-bottom: var(--border-thin) solid var(--color-rule);
+}
+
+.toc__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-2xs);
+}
+
+.toc__list {
+  list-style: none;
+}
+
+.toc__link {
+  display: block;
+  padding: 0.3rem var(--space-2xs);
+  font-size: var(--text-sm);
+  line-height: 1.35;
+  color: var(--color-muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+}
+
+/* Subtópico recuado, para a hierarquia aparecer sem depender de leitura. */
+.toc__item[data-level='2'] .toc__link {
+  padding-left: var(--space-sm);
+}
+
+.toc__link:hover {
+  color: var(--color-text);
+  background-color: var(--color-surface);
+}
+
+/* Trecho atual: cor E barra lateral, porque cor sozinha não comunica
+   (WCAG 1.4.1). O aria-current="location" cobre o leitor de tela. */
+.toc__link.is-active {
+  color: var(--color-accent-text);
+  border-left-color: var(--color-accent);
+}
