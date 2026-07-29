@@ -20,7 +20,10 @@ const DIST = path.join(ROOT, 'dist', 'ariangular');
 const BROWSER = path.join(DIST, 'browser');
 const ORIGIN = process.env.SITE_ORIGIN || 'https://ariangular.vercel.app';
 
-const LOCALES = ['pt', 'en', 'zh'];
+// Espelha src/content/types.ts. Só entram os locales com conteúdo traduzido:
+// anunciar no sitemap uma página em inglês com corpo em português custa
+// indexação e confiança de domínio.
+const LOCALES = ['pt'];
 const TAG = { pt: 'pt-BR', en: 'en', zh: 'zh-Hans' };
 const DEFAULT = 'pt';
 

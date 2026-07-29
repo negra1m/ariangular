@@ -1,19 +1,59 @@
 # ariangular
 
 Guia interativo de acessibilidade para times Angular — fundamentos, ARIA, formulários,
-componentes, Angular CDK A11y, TalkBack, VoiceOver e WCAG 2.2.
+componentes, Angular CDK A11y, `@angular/aria`, TalkBack, VoiceOver e WCAG 2.2.
 
 Três camadas de uso:
 
-1. **Ler** — 156 seções em 7 partes, com busca
-2. **Aplicar** — os 14 checklists da documentação viram listas marcáveis com progresso
-3. **Verificar** — um auditor que recebe um trecho de template Angular e aponta as
-   violações mais comuns
+1. **Ler** — 162 seções em 7 partes, com busca
+2. **Aplicar** — 14 checklists marcáveis, com progresso salvo e export
+3. **Verificar** — um auditor que recebe um template Angular e devolve corrigido no que
+   é seguro, perguntando o que depende de você
 
 > **Projeto independente.** Sem afiliação, patrocínio ou endosso do Google ou do time
 > Angular. Angular é marca da [Open Usage Commons](https://openusage.org/). O logo é
 > adaptado do [Angular Press Kit](https://angular.dev/press-kit), sob CC BY 4.0 —
 > ver [NOTICE.md](NOTICE.md).
+
+---
+
+## Estado
+
+**Não está no ar ainda.** Ver [plano/fase-10-polimento](plano/fase-10-polimento/CHECKLIST.md).
+
+### O que está verificado
+
+| | |
+|---|---|
+| Testes | 77 passando |
+| Lint | limpo, regras de acessibilidade como **erro** |
+| Contraste | 38 pares, WCAG AA nos dois temas |
+| axe | **zero violações A/AA** em todas as páginas geradas |
+| Build | 187 rotas prerenderizadas, saída estática |
+
+Tudo isso roda no CI e quebra o build.
+
+### O que ainda NÃO foi verificado
+
+Um guia de acessibilidade não pode omitir o que não testou:
+
+- **Nunca foi aberto num navegador.** Todas as garantias acima vêm de ferramenta sobre
+  HTML, não de uso
+- **Teclado, TalkBack e VoiceOver: não testados.** Existe roteiro pronto em
+  [plano/fase-10-polimento/ROTEIRO-TESTE.md](plano/fase-10-polimento/ROTEIRO-TESTE.md)
+- **Lighthouse: nunca rodado**
+
+A pergunta que o próprio conteúdo diz ser a única que importa — *uma pessoa usando
+TalkBack consegue concluir a jornada sozinha?* — ainda não tem resposta.
+
+### Idiomas
+
+Só **português** está publicado. A infraestrutura de i18n está completa (catálogo de
+strings, builder por locale, rótulos de UI em pt/en/zh, hreflang, troca de idioma
+preservando a página) — falta traduzir 1.246 strings.
+
+Publicar `/en` com o corpo em português seria pior que não publicar: o descasamento
+entre `lang` e o texto é detectável e custa indexação.
 
 ---
 
@@ -26,9 +66,13 @@ Onde estética e acessibilidade conflitarem, acessibilidade ganha. Na prática:
 
 - Lint de acessibilidade quebra o build, não emite warning
 - Contraste é verificado por script em todo par de cor, nos dois temas
+- axe roda em todas as páginas geradas, no CI
 - Nenhuma informação é transmitida só por cor
-- Foco sempre visível, nunca perdido, nunca escondido atrás do header
+- Foco sempre visível, com o **mesmo peso** do hover
 - Toda animação desligável por `prefers-reduced-motion`
+
+O CI já pegou defeitos reais: raiz gerada sem `lang`, borda em 2.85:1, e o auditor cego
+ao próprio caso principal porque o `DOMParser` descartava `(click)`.
 
 ---
 
@@ -38,7 +82,7 @@ Onde estética e acessibilidade conflitarem, acessibilidade ganha. Na prática:
 |---|---|
 | Framework | Angular 22, standalone, zoneless, signals |
 | Renderização | SSG — todas as rotas prerenderizadas, sem servidor |
-| Estilo | CSS puro com custom properties |
+| Estilo | CSS puro com custom properties, dark-first |
 | Hospedagem | Vercel (estático) |
 | Node | 24 (fixado em `.node-version`) |
 
@@ -50,8 +94,8 @@ delegar acessibilidade a uma biblioteca.
 
 ## Rodando
 
-Requer Node 24. Com [fnm](https://github.com/Schniz/fnm) instalado, a versão é trocada
-automaticamente ao entrar na pasta (`.node-version`).
+Requer Node 24. Com [fnm](https://github.com/Schniz/fnm), a versão troca sozinha ao
+entrar na pasta.
 
 ```bash
 npm install
@@ -63,33 +107,51 @@ npm run dev      # http://localhost:4200
 | Comando | O que faz |
 |---------|-----------|
 | `npm run dev` | Servidor de desenvolvimento |
-| `npm run build` | Build de produção, prerenderizando todas as rotas |
-| `npm run lint` | ESLint, com as regras de acessibilidade como erro |
-| `npm run contrast` | Verifica contraste WCAG AA de todos os tokens, nos dois temas |
-| `npm run verify` | lint + contraste + build |
-| `npm run format` | Prettier |
-| `npm run fonte:fix` | Regenera `fonte/ARIA.html` a partir do original |
-| `npm run fonte:validate` | Valida aninhamento e acessibilidade estrutural da fonte |
-| `npm run fonte:diff` | Compara a fonte corrigida com a original, procurando perda |
+| `npm run build` | Build + sitemap + hashes da CSP |
+| `npm test` | 77 testes (regras do auditor, busca, watermark) |
+| `npm run lint` | ESLint com regras de acessibilidade como erro |
+| `npm run contrast` | Contraste WCAG AA de todos os tokens, nos dois temas |
+| `npm run a11y` | axe em todas as páginas geradas |
+| `npm run verify` | Tudo acima, em sequência |
+| `npm run content:extract` | Regenera o conteúdo a partir de `fonte/ARIA.html` |
+| `npm run i18n:strings` | Regenera o catálogo de tradução |
+| `npm run i18n:build` | Monta o conteúdo de en e zh |
 
 ---
 
 ## Estrutura
 
 ```
-plano/      planejamento por fase, identidade visual, marca e licença
-fonte/      documento de origem — corrigido e validado (ver fonte/README.md)
-scripts/    ferramentas de verificação (contraste, HTML, perda de conteúdo)
-src/        aplicação Angular
+plano/      planejamento por fase, identidade visual, marca, licença, SEO
+fonte/      documento de origem — corrigido e validado
+scripts/    verificação: contraste, axe, HTML, perda de conteúdo, CSP, sitemap
+i18n/       catálogo de strings para tradução
+src/        aplicação
 ```
 
-O planejamento completo está em [plano/PLANO.md](plano/PLANO.md).
+Planejamento completo em [plano/PLANO.md](plano/PLANO.md).
 
 ---
 
-## Estado
+## Deploy
 
-Fase 1 (Fundação) em andamento. Ver [plano/CHECKLIST-FASES.md](plano/CHECKLIST-FASES.md).
+Configuração pronta em `vercel.json`. Falta conectar o projeto:
+
+```bash
+npx vercel        # preview
+npx vercel --prod # produção
+```
+
+- Output: `dist/ariangular/browser`
+- CSP sem `unsafe-inline` — os hashes dos scripts inline são calculados no build
+- Sitemap e `robots.txt` gerados das rotas que o build realmente produziu
+
+---
+
+## Contribuindo
+
+Ver [CONTRIBUTING.md](CONTRIBUTING.md). A regra curta: **PR que quebra acessibilidade não
+entra**, e `npm run verify` precisa passar.
 
 ---
 

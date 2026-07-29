@@ -16,8 +16,33 @@
  * português não rankeia, e o objetivo declarado é ser encontrável nos três
  * índices de busca.
  */
-export const LOCALES = ['pt', 'en', 'zh'] as const;
-export type Locale = (typeof LOCALES)[number];
+/**
+ * Todos os idiomas que a estrutura suporta.
+ *
+ * `zh` está aqui e **não** está em `LOCALES` de propósito: enquanto não houver
+ * tradução revisada, publicar 162 páginas em chinês com o corpo em português
+ * custa indexação e credibilidade. Melhor não existir do que existir errado.
+ * Para publicar, basta incluir 'zh' em LOCALES.
+ */
+export const ALL_LOCALES = ['pt', 'en', 'zh'] as const;
+export type Locale = (typeof ALL_LOCALES)[number];
+
+/**
+ * Idiomas efetivamente publicados: rotas, hreflang e sitemap.
+ *
+ * Só `pt` por enquanto. A infraestrutura de i18n está completa — catálogo de
+ * strings, builder por locale, rótulos de UI nos três idiomas, hreflang,
+ * troca de idioma preservando a página. O que falta é a tradução do conteúdo:
+ * 1.246 strings, 5.091 palavras.
+ *
+ * Publicar `/en` com o corpo em português seria pior que não publicar: o
+ * descasamento entre `lang="en"` e o texto é detectável, custa indexação, e
+ * quem clica sai da página em segundos.
+ *
+ * Para publicar, traduza `i18n/strings.en.json`, rode `npm run i18n:build` e
+ * inclua 'en' aqui.
+ */
+export const LOCALES: readonly Locale[] = ['pt'];
 
 export const DEFAULT_LOCALE: Locale = 'pt';
 

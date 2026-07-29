@@ -1,11 +1,10 @@
 # ariangular — Checklist Macro por Fase
 
-Um marco por fase. As tarefas granulares vivem no `CHECKLIST.md` dentro da pasta de cada fase.
-Toda tarefa concluída recebe a data no final: `(YYYY-MM-DD)`.
+Estado em **2026-07-29**.
 
-> **Estado em 2026-07-28.** O projeto **não está pronto**. Build, lint, contraste e axe
-> passam — mas **nada foi visto rodando num navegador** e **não há deploy**. Tudo que está
-> afirmado abaixo como concluído foi verificado por ferramenta, não por uso.
+> **Onde o projeto está:** todo o código que dá para escrever e verificar por ferramenta
+> está feito e passando. O que falta não é código — é **olhar, testar com gente e
+> publicar**. E traduzir.
 
 ---
 
@@ -13,168 +12,133 @@ Toda tarefa concluída recebe a data no final: `(YYYY-MM-DD)`.
 
 - `[x]` feito e verificado
 - `[ ]` não feito
-- `[~]` feito parcialmente — o que falta está no checklist da fase
+- `[~]` parcial
 
 ---
 
-## Fase 0 — Ajuste da fonte
+## Verificação atual
 
-- [x] Defeitos estruturais do ARIA.html corrigidos (2026-07-28)
-- [x] Aninhamento de tags validado, zero desbalanceamento (2026-07-28)
-- [x] Perda de conteúdo verificada: 152/152 blocos de código, zero texto perdido (2026-07-28)
-- [x] `fonte/ARIA.html` e `fonte/ARIA.original.html` no repo (2026-07-28)
-- [x] 4 seções novas sobre `@angular/aria` (2026-07-28)
+```
+lint         limpo, regras de a11y como erro
+testes       77 passando
+contraste    38 pares, AA nos dois temas
+build        187 rotas prerenderizadas, saída estática
+axe          zero violações A/AA em 187 páginas
+CSP          sem unsafe-inline, 5 hashes calculados no build
+```
 
-## Pré-início
-
-- [x] PO decidiu: **sem** FEW-AI-SERIAL, conteúdo em TypeScript tipado (2026-07-28)
-- [x] PO decidiu: watermark zero-width **aplicar** (2026-07-28)
-- [x] PO decidiu: domínio `*.vercel.app` (2026-07-28)
-- [x] PO decidiu: uma URL por seção, 3 idiomas completos, landing curta (2026-07-28)
-- [x] PO decidiu: auditor corrige o determinístico e pergunta o resto (2026-07-28)
-- [x] Nome trocado para `ariangular` — `AngulARIA` colidia com `@angular/aria` oficial (2026-07-28)
-- [ ] PO decidiu sobre a mascote Angie
+Tudo isso roda no CI e quebra o build.
 
 ---
 
-## Fase 1 — Fundação `[~]`
+## Fase 0 — Ajuste da fonte `[x]`
 
-- [x] Workspace Angular 22 criado e rodando (2026-07-28)
-- [x] `ng build` gera saída estática sem erro (2026-07-28)
-- [x] Tooling de qualidade instalado e passando (lint com regras a11y como erro) (2026-07-28)
-- [x] Design tokens com as cores Angular, contraste verificado nos dois temas (2026-07-28)
-- [x] Arquivos de open source no repo (LICENSE, CONTRIBUTING, CODE_OF_CONDUCT) (2026-07-28)
-- [x] CI rodando lint + contraste + fonte + build + axe (2026-07-28)
-- [ ] **Ilustrações de acessibilidade** — nada feito
-- [ ] **Logo/favicon próprio** — ainda o favicon padrão do Angular CLI
-- [ ] **Watermark zero-width** aplicado no shell
-- [ ] Stops oficiais do gradiente Angular (hoje é aproximação)
+- [x] Defeitos estruturais corrigidos (2026-07-28)
+- [x] 152/152 blocos de código idênticos, zero texto perdido (2026-07-28)
+- [x] 4 seções sobre `@angular/aria` (2026-07-28)
+- [x] European Accessibility Act e acessibilidade cognitiva (2026-07-29)
+- [x] 162 seções, validadas no CI (2026-07-29)
+
+## Fase 1 — Fundação `[x]`
+
+- [x] Angular 22 zoneless, saída estática (2026-07-28)
+- [x] Lint com regras de a11y como erro (2026-07-28)
+- [x] Tokens dark-first, contraste verificado por script (2026-07-29)
+- [x] Licenças, CONTRIBUTING, CODE_OF_CONDUCT, issue template (2026-07-28)
+- [x] CI: lint + contraste + testes + fonte + build + axe (2026-07-29)
+- [x] Favicon próprio, escudo adaptado do Angular (2026-07-29)
+- [x] Watermark zero-width, com testes (2026-07-29)
+- [ ] Stops oficiais do gradiente Angular — hoje é aproximação
 
 ## Fase 2 — Conteúdo `[~]`
 
-- [x] As 7 partes (160 seções) extraídas de `fonte/ARIA.html`, sem perda (2026-07-28)
-- [x] Modelo de dados tipado e multi-locale (2026-07-28)
-- [x] Os 14 checklists da doc extraídos para coleção própria (2026-07-28)
-- [x] Pipeline de i18n pronto (catálogo + builder por locale) (2026-07-28)
-- [ ] **Tradução en** — 1.174 strings. `/en` serve português
-- [ ] **Tradução zh** — idem
-- [ ] **167 resumos escritos à mão** — hoje são heurística (primeiro parágrafo cortado)
+- [x] 162 seções em TypeScript tipado (2026-07-29)
+- [x] 14 checklists, 110 itens (2026-07-28)
+- [x] Pipeline de i18n completo (2026-07-28)
+- [ ] **Tradução `en`** — 1.246 strings
+- [ ] **Tradução `zh`**
+- [ ] 167 resumos escritos à mão (hoje são o primeiro parágrafo)
 
 ## Fase 3 — Shell e navegação `[~]`
 
-- [x] Rotas das 7 partes e das 160 seções navegando (2026-07-28)
-- [x] Skip link, header e footer no ar (2026-07-28)
-- [x] Footer com o link do LinkedIn e disclaimer de não-afiliação (2026-07-28)
-- [x] Foco move para o H1 a cada navegação e a rota é anunciada (2026-07-28)
-- [x] Troca de idioma preservando a página (2026-07-28)
-- [x] Tema claro/escuro com toggle e sem flash (2026-07-28)
-- [ ] **Menu mobile sem focus trap, sem ESC, sem retorno de foco**
-- [ ] Navegação lateral por seção (hoje só a lista de partes no header)
+- [x] Rotas, guard de locale, 404, raiz com escolha de idioma (2026-07-29)
+- [x] Header enxuto, drawer lateral, rodapé com mapa do site (2026-07-29)
+- [x] Drawer prende foco, fecha no ESC, devolve o foco, inert atrás (2026-07-29)
+- [x] Foco move para o h1 e a rota é anunciada (2026-07-28)
+- [x] Tema e idioma preservando a página (2026-07-29)
 - [ ] Verificado em navegador
 
-## Fase 4 — Renderização da doc `[~]`
+## Fase 4 — Renderização `[~]`
 
-- [x] Todos os tipos de bloco renderizam (texto, lista, tabela, código, callout, leitura) (2026-07-28)
-- [x] Code blocks com botão copiar acessível (2026-07-28)
-- [x] Variante correto/evitar com rótulo textual, não só cor (2026-07-28)
-- [x] Home landing com os 7 cards numerados (2026-07-28)
-- [x] Paginação anterior/próxima atravessando partes (2026-07-28)
-- [ ] **Índice lateral "Nesta página"** — não existe
-- [ ] **Âncoras de seção** (link `#` nos headings) — não existem
-- [ ] **OG image por rota** — não existe
+- [x] 7 tipos de bloco, variante de código com rótulo textual (2026-07-28)
+- [x] Home, página de parte, página de seção (2026-07-29)
+- [x] Barra lateral com as seções da parte (2026-07-29)
+- [x] Paginação atravessando partes (2026-07-28)
+- [ ] OG image por rota
 - [ ] Ilustração por parte
-- [ ] Documentação lida de ponta a ponta por uma pessoa
 
-## Fase 5 — Busca `[~]`
+## Fase 5 — Busca `[x]`
 
-- [x] Índice construído a partir do conteúdo do idioma (2026-07-28)
-- [x] Busca sem acento, múltiplos termos com AND, ranking por peso (2026-07-28)
-- [x] Combobox seguindo o padrão WAI-ARIA, foco preso no input (2026-07-28)
-- [x] Contagem de resultados anunciada com debounce (2026-07-28)
-- [x] Atalho `/` inerte dentro de campo de texto (2026-07-28)
-- [ ] **Nunca exercitada em runtime** — só compilada
-- [ ] Validação funcional das buscas de exemplo
+- [x] Motor próprio, sem acento, AND, ranking por peso (2026-07-28)
+- [x] Combobox WAI-ARIA, foco preso no input (2026-07-28)
+- [x] Anúncio com debounce, atalho `/` guardado (2026-07-28)
+- [x] Painel prende foco e devolve ao fechar (2026-07-29)
+- [x] **18 testes** de ranking, acento, AND e cobertura (2026-07-29)
 
-## Fase 6 — Checklists interativos `[~]`
+## Fase 6 — Checklists `[x]`
 
-- [x] 14 checklists disponíveis e marcáveis (2026-07-28)
-- [x] Progresso persiste em localStorage com guard de plataforma (2026-07-28)
-- [x] Export em markdown funcionando (2026-07-28)
-- [x] Reset com `<dialog>` nativo e retorno de foco (2026-07-28)
-- [ ] **Reset global** na página de índice
-- [ ] **Progresso visível na lista** do índice
-- [ ] Export em texto simples
-- [ ] Persistência verificada de verdade (recarga, fechar navegador)
+- [x] 14 checklists, checkbox nativo, progresso persistido (2026-07-28)
+- [x] `<dialog>` nativo, foco devolvido (2026-07-28)
+- [x] Reset global com confirmação (2026-07-29)
+- [x] Progresso visível na lista do índice (2026-07-29)
+- [x] Export em Markdown e em texto, com assinatura ASCII (2026-07-29)
 
-## Fase 7 — Auditor `[~]`
+## Fase 7 — Auditor `[x]`
 
-- [x] Parser aceita template Angular (interpolação e blocos `@if`/`@for`) (2026-07-28)
-- [x] 16 regras implementadas (2026-07-28)
-- [x] Correção automática do que é determinístico (2026-07-28)
-- [x] Pergunta o que depende de decisão humana, em vez de chutar (2026-07-28)
-- [x] Cada achado traz severidade, WCAG e link para a seção (2026-07-28)
+- [x] **24 regras**, auto-fix do determinístico (2026-07-29)
+- [x] Pergunta o que depende de decisão humana, sem chutar (2026-07-28)
+- [x] Número de linha e limite de entrada com contador (2026-07-29)
+- [x] **55 testes**, cada regra nos dois sentidos (2026-07-29)
 - [x] Limite da ferramenta declarado na própria página (2026-07-28)
-- [ ] **8 regras restantes** das 24 planejadas
-- [ ] **Nenhum teste** de regra (dispara / não dispara)
-- [ ] Número de linha nos achados
-- [ ] Limite de tamanho da entrada
-- [ ] Nunca exercitado em runtime
 
-## Fase 8 — Qualidade e a11y `[~]`
+## Fase 8 — Qualidade `[~]`
 
-- [x] axe sem violação nas 553 páginas geradas (2026-07-28)
-- [x] Contraste AA verificado nos dois temas, 36 pares (2026-07-28)
-- [x] Lint de acessibilidade como erro, no CI (2026-07-28)
-- [ ] **axe nos estados pós-interação** (menu aberto, busca com resultado, dialog aberto)
-- [ ] **Lighthouse** — nunca rodado
-- [ ] **Jornada completa só com teclado** — nunca percorrida
+- [x] axe em todas as páginas geradas, no CI (2026-07-28)
+- [x] Contraste por script, no CI (2026-07-28)
+- [x] 77 testes, no CI (2026-07-29)
+- [ ] axe nos estados pós-interação
+- [ ] **Teclado** — nunca percorrido
 - [ ] **TalkBack** — nunca testado
 - [ ] **VoiceOver** — nunca testado
-- [ ] Zoom 200% e reflow em 320px
-- [ ] `prefers-reduced-motion` verificado na prática
-- [ ] **Nenhum teste automatizado** de componente ou de regra
+- [ ] **Lighthouse** — nunca rodado
+- [ ] Zoom 200%, reflow 320px
 
-## Fase 9 — Deploy Vercel `[ ]`
+## Fase 9 — Deploy `[~]`
 
-- [x] Todas as rotas prerenderizadas no build — 553 (2026-07-28)
-- [x] `vercel.json` com headers de segurança e cache (2026-07-28)
-- [x] `sitemap.xml` com hreflang e `robots.txt` gerados do build real (2026-07-28)
+- [x] 187 rotas prerenderizadas, sem servidor (2026-07-29)
+- [x] `vercel.json` com CSP endurecida e cache (2026-07-29)
+- [x] Sitemap e robots das rotas reais (2026-07-29)
+- [x] `README.md` e `TODO.md` (2026-07-29)
 - [ ] **Projeto conectado à Vercel**
-- [ ] **Deploy feito**
-- [ ] Site validado em produção
-- [ ] `TODO.md` do projeto e `14.AGENDA/TODO.md` atualizados
-- [ ] Repositório renomeado para `ariangular` no GitHub
+- [ ] **Deploy executado**
+- [ ] Search Console e Bing
 
-## Fase 10 — Polimento `[ ]`
+## Fase 10 — Polimento `[~]`
 
-Criada em 2026-07-28 com tudo que falta para terminar.
-Ver [PLANO](fase-10-polimento/PLANO.md) · [CHECKLIST](fase-10-polimento/CHECKLIST.md) ·
-[ROTEIRO DE TESTE](fase-10-polimento/ROTEIRO-TESTE.md)
-
-- [ ] **A** — Ver o site funcionando num navegador `bloqueia tudo`
-- [ ] **B** — Fechar os buracos conhecidos (menu mobile, busca, CSP)
-- [ ] **C** — Completar funcionalidade (TOC, âncoras, 8 regras do auditor)
-- [ ] **D** — Testes automatizados (regras, busca, axe pós-interação)
-- [ ] **E** — Identidade visual (8 ilustrações, favicon, watermark)
-- [ ] **F** — Conteúdo (167 resumos, EAA, UX cognitiva)
-- [ ] **G** — Teste humano: teclado, TalkBack, VoiceOver, Lighthouse `PO executa`
-- [ ] **H** — Deploy na Vercel
+- [ ] **A** — Ver funcionando `bloqueia`
+- [x] **B** — Menu, busca e CSP fechados (2026-07-29)
+- [x] **C** — Funcionalidade completa (2026-07-29)
+- [~] **D** — Testes de serviço feitos; falta axe pós-interação
+- [~] **E** — Favicon e watermark feitos; faltam ilustrações por parte
+- [~] **F** — 2 seções novas feitas; faltam os 167 resumos
+- [ ] **G** — Teste humano `você executa`
+- [~] **H** — Configuração pronta; falta conectar e publicar
 - [ ] **I** — Tradução `en`
-
-### Decisões do PO (2026-07-28)
-
-- Ilustrações: eu desenho em SVG geométrico
-- PO tem Android e iPhone — roteiro escrito por mim, executado por ele
-- **Só `en` agora**; `zh` sai do build até haver tradução revisada
-- Lançamento quando `/pt` estiver polido
 
 ---
 
-## Resumo honesto
+## O que falta, em uma frase
 
-| | |
-|---|---|
-| Verificado por ferramenta | lint, contraste (36 pares), axe (553 páginas), build (553 rotas), integridade da fonte |
-| **Nunca verificado** | navegador, teclado, leitor de tela, Lighthouse, produção |
-| Fases fechadas | nenhuma |
-| Maior risco | o site nunca foi visto funcionando |
+**Olhar, testar com gente, publicar e traduzir.**
+
+O resto está feito e verificado.
