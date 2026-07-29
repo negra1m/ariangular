@@ -15,9 +15,7 @@
           <a class="part__link" [routerLink]="locale.path(p.id, section.id)">
             <span class="part__title">{{ section.title }}</span>
             <span class="part__summary">{{ section.summary }}</span>
-            <span class="part__index" aria-hidden="true">
-              {{ p.numeral }}.{{ $index + 1 }}
-            </span>
+            <span class="part__index" aria-hidden="true"> {{ p.numeral }}.{{ $index + 1 }} </span>
           </a>
         </li>
       }

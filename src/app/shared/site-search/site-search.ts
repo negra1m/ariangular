@@ -9,7 +9,7 @@ import {
   effect,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { LiveAnnouncer, A11yModule } from '@angular/cdk/a11y';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { SearchService } from '../../core/search/search.service';
 
@@ -32,6 +32,7 @@ import { SearchService } from '../../core/search/search.service';
  */
 @Component({
   selector: 'app-site-search',
+  imports: [A11yModule],
   templateUrl: './site-search.html',
   styleUrl: './site-search.css',
 })
@@ -60,6 +61,17 @@ export class SiteSearch {
   private announceTimer?: ReturnType<typeof setTimeout>;
 
   constructor() {
+    // O conteúdo de trás fica inerte enquanto o painel está aberto: sem isso
+    // o Tab escapa para a página e o leitor de tela continua lendo o que está
+    // atrás do overlay.
+    effect(() => {
+      if (typeof document === 'undefined') return;
+      const main = document.getElementById('conteudo');
+      const open = this.open();
+      main?.toggleAttribute('inert', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
     effect(() => {
       const n = this.results().length;
       const q = this.query();
@@ -75,14 +87,27 @@ export class SiteSearch {
     });
   }
 
-  protected openPanel(): void {
+  /** Quem abriu o painel, para devolver o foco ao fechar. */
+  private opener: HTMLElement | null = null;
+
+  protected openPanel(event?: Event): void {
+    this.opener =
+      (event?.currentTarget as HTMLElement) ?? (document.activeElement as HTMLElement) ?? null;
     this.open.set(true);
     queueMicrotask(() => this.inputRef()?.nativeElement.focus());
   }
 
   protected close(): void {
+    if (!this.open()) return;
     this.open.set(false);
     this.activeIndex.set(-1);
+    // Devolver o foco a quem abriu é o item que o "Checklist Modal" do próprio
+    // conteúdo cobra. Sem isso o foco volta para o começo do documento e a
+    // pessoa perde o lugar.
+    queueMicrotask(() => {
+      (this.opener ?? document.querySelector<HTMLElement>('.search__trigger'))?.focus();
+      this.opener = null;
+    });
   }
 
   protected onInput(value: string): void {
@@ -171,6 +196,9 @@ export class SiteSearch {
     return text
       .split(re)
       .filter(Boolean)
-      .map((part) => ({ part, hit: re.test(part) && terms.some((t) => new RegExp(`^${t}$`, 'i').test(part)) }));
+      .map((part) => ({
+        part,
+        hit: re.test(part) && terms.some((t) => new RegExp(`^${t}$`, 'i').test(part)),
+      }));
   }
 }

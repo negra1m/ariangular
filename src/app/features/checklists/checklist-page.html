@@ -10,17 +10,19 @@
 
     <!-- <progress> nativo: role, valor e leitura vêm de graça e corretos. -->
     <div class="cl__progress">
-      <progress class="cl__bar" [value]="done()" [max]="total()" [attr.aria-label]="c.title">
-      </progress>
-      <p class="cl__count">
-        {{ done() }} / {{ total() }} {{ locale.strings().progressDone }}
-      </p>
+      <progress
+        class="cl__bar"
+        [value]="done()"
+        [max]="total()"
+        [attr.aria-label]="c.title"
+      ></progress>
+      <p class="cl__count">{{ done() }} / {{ total() }} {{ locale.strings().progressDone }}</p>
     </div>
 
     @if (progress.persistenceFailed()) {
       <p class="cl__warn" role="status">
-        Não foi possível salvar o progresso neste navegador. Use o botão de exportar para
-        não perder o que marcou.
+        Não foi possível salvar o progresso neste navegador. Use o botão de exportar para não perder
+        o que marcou.
       </p>
     }
 

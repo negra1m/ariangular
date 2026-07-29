@@ -2,7 +2,7 @@
   type="button"
   class="search__trigger"
   [attr.aria-label]="locale.strings().searchOpen"
-  (click)="openPanel()"
+  (click)="openPanel($event)"
 >
   <span aria-hidden="true">⌕</span>
   <span class="search__trigger-hint" aria-hidden="true">/</span>
@@ -18,7 +18,8 @@
     (click)="close()"
   ></button>
 
-  <div class="search__panel">
+  <!-- Foco preso no painel: é um modal na prática. -->
+  <div class="search__panel" cdkTrapFocus [cdkTrapFocusAutoCapture]="false">
     <!--
       Padrão combobox do WAI-ARIA. O input mantém o foco o tempo todo; a opção
       ativa é apontada por aria-activedescendant.
@@ -41,7 +42,12 @@
       (keydown)="onKeydown($event)"
     />
 
-    <ul id="search-results" class="search__results" role="listbox" [attr.aria-label]="locale.strings().search">
+    <ul
+      id="search-results"
+      class="search__results"
+      role="listbox"
+      [attr.aria-label]="locale.strings().search"
+    >
       @for (hit of results(); track hit.entry.id; let i = $index) {
         <!--
           Exceção deliberada às regras click-events-have-key-events e

@@ -44,7 +44,9 @@
         <table>
           @if (block.caption) {
             <caption>
-              {{ block.caption }}
+              {{
+                block.caption
+              }}
             </caption>
           }
           <thead>
@@ -76,9 +78,7 @@
             <span class="blk-code__icon" aria-hidden="true">
               {{ block.variant === 'correct' ? '✓' : '✕' }}
             </span>
-            {{
-              block.variant === 'correct' ? locale.strings().correct : locale.strings().wrong
-            }}
+            {{ block.variant === 'correct' ? locale.strings().correct : locale.strings().wrong }}
           </figcaption>
         }
 
@@ -164,7 +164,9 @@
               <pre class="blk-callout__code"><code>{{ inner.code }}</code></pre>
             }
             @case ('heading') {
-              <p class="blk-callout__heading"><strong>{{ inner.text }}</strong></p>
+              <p class="blk-callout__heading">
+                <strong>{{ inner.text }}</strong>
+              </p>
             }
           }
         }

@@ -2,6 +2,8 @@ import { Injectable, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RULES, type Finding } from './rules';
 
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 export interface AuditResult {
   findings: Finding[];
   /** Código com as correções determinísticas já aplicadas. */
@@ -26,9 +28,21 @@ export class AuditService {
   /** Marcador usado no lugar de {{ ... }} durante o parse. */
   private static readonly INTERP = 'INTERP';
 
+  /** Acima disto o parse fica lento e o resultado, difícil de ler. */
+  static readonly MAX_CHARS = 60_000;
+
   analyze(source: string): AuditResult {
     if (!this.isBrowser) {
       return { findings: [], fixedCode: source, pending: [] };
+    }
+
+    if (source.length > AuditService.MAX_CHARS) {
+      return {
+        findings: [],
+        fixedCode: source,
+        pending: [],
+        error: `Trecho grande demais: ${source.length.toLocaleString('pt-BR')} caracteres, o limite é ${AuditService.MAX_CHARS.toLocaleString('pt-BR')}. Analise um componente por vez — o resultado também fica mais fácil de agir.`,
+      };
     }
 
     const prepared = this.preprocess(source);
@@ -75,6 +89,7 @@ export class AuditService {
           docPart: rule.docPart,
           docSection: rule.docSection,
           snippet: this.snippetOf(hit.el),
+          line: this.lineOf(hit.el, source),
           fixed: hit.fixed,
           question: hit.fixed ? undefined : rule.question,
           placeholder: hit.placeholder,
@@ -179,6 +194,32 @@ export class AuditService {
       })
       .filter(Boolean)
       .join('\n');
+  }
+
+  /**
+   * Linha aproximada do elemento no código original.
+   *
+   * Aproximada de propósito: o auto-fix já alterou a árvore, e o parser não
+   * guarda posição. Procura pela abertura da tag com o primeiro atributo
+   * distintivo — erra em elementos idênticos repetidos, e é melhor do que não
+   * dar referência nenhuma num template de 200 linhas.
+   */
+  private lineOf(el: Element, source: string): number | undefined {
+    const tag = el.tagName.toLowerCase();
+
+    // Um atributo que identifique este elemento entre os da mesma tag.
+    const distinctive = Array.from(el.attributes).find(
+      (a) =>
+        !a.name.startsWith('data-ng') && a.name !== 'type' && a.value && !a.value.startsWith('ASK'),
+    );
+
+    const needle = distinctive
+      ? new RegExp(`<${tag}\\b[^>]*${escapeRe(distinctive.value)}`, 'i')
+      : new RegExp(`<${tag}\\b`, 'i');
+
+    const index = source.search(needle);
+    if (index < 0) return undefined;
+    return source.slice(0, index).split('\n').length;
   }
 
   private snippetOf(el: Element): string {

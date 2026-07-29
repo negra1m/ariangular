@@ -43,6 +43,8 @@ export class Auditor {
   protected readonly copied = signal(false);
 
   protected readonly ruleCount = RULES.length;
+  protected readonly maxChars = AuditService.MAX_CHARS;
+  protected readonly overLimit = computed(() => this.source().length > AuditService.MAX_CHARS);
 
   protected readonly output = computed(() => {
     const r = this.result();

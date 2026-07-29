@@ -1,63 +1,160 @@
 .cl-index {
-  padding-block: var(--space-xl) var(--space-2xl);
+  padding: 0 var(--space-md) var(--space-2xl);
 }
 
-.cl-index h1 {
-  font-size: var(--text-3xl);
-  letter-spacing: -0.03em;
-  margin-bottom: var(--space-xs);
+app-section-header {
+  display: block;
 }
 
-.cl-index__lead {
+/* ---------------- Barra de reset global ---------------- */
+
+.cl-index__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-top: var(--space-lg);
+  padding: var(--space-2xs) var(--space-sm);
+  border: var(--border-thin) solid var(--color-rule);
+}
+
+.cl-index__started {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--color-muted);
-  font-size: var(--text-lg);
-  margin-bottom: var(--space-xl);
 }
+
+.cl-index__reset,
+.cl-index__btn {
+  min-height: 2.5rem;
+  padding-inline: var(--space-sm);
+  border: var(--border-thin) solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.cl-index__reset:hover,
+.cl-index__btn:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-surface);
+}
+
+.cl-index__btn--danger {
+  color: var(--color-warning);
+}
+
+/* ---------------- Etapas ---------------- */
 
 .cl-index__stage {
-  margin-bottom: var(--space-xl);
+  margin-top: var(--space-xl);
 }
 
 .cl-index__stage h2 {
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 400;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--color-accent-text);
   padding-bottom: var(--space-3xs);
   border-bottom: var(--border-thin) solid var(--color-rule);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-2xs);
 }
 
 .cl-index__list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  gap: var(--space-2xs);
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: var(--space-3xs);
   list-style: none;
 }
 
 .cl-index__card {
   display: grid;
-  gap: 0.2rem;
+  gap: var(--space-2xs);
+  align-content: space-between;
   height: 100%;
   padding: var(--space-sm) var(--space-md);
   border: var(--border-thin) solid var(--color-rule);
-  border-radius: var(--radius-md);
   text-decoration: none;
   color: var(--color-text);
 }
 
-.cl-index__card:hover {
+.cl-index__card:hover,
+.cl-index__card:focus-visible {
   border-color: var(--color-accent);
   background-color: var(--color-surface);
 }
 
 .cl-index__card-title {
+  font-family: var(--font-sans);
   font-weight: 700;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  line-height: 1.25;
 }
 
 .cl-index__card-meta {
-  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.cl-index__bar-el {
+  flex: 1;
+  height: 0.35rem;
+  accent-color: var(--color-accent);
+}
+
+.cl-index__card-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
   color: var(--color-muted);
-  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------------- Dialog ---------------- */
+
+.cl-index__dialog {
+  border: var(--border-thin) solid var(--color-border);
+  padding: var(--space-md) var(--space-lg);
+  max-width: 32rem;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-lg);
+}
+
+.cl-index__dialog::backdrop {
+  background-color: rgb(0 0 0 / 70%);
+}
+
+.cl-index__dialog h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-2xs);
+}
+
+.cl-index__dialog p {
+  color: var(--color-muted);
+  margin-bottom: var(--space-md);
+}
+
+.cl-index__dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2xs);
+}
+
+@media (max-width: 48rem) {
+  .cl-index {
+    padding-inline: var(--space-sm);
+  }
 }

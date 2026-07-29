@@ -1,4 +1,13 @@
-import { Component, inject, computed, input, effect, signal, viewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  inject,
+  computed,
+  input,
+  effect,
+  signal,
+  viewChild,
+  ElementRef,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { LocaleService } from '../../core/i18n/locale.service';

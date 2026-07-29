@@ -123,6 +123,22 @@
   background-color: var(--color-accent);
 }
 
+.auditor__count {
+  align-self: center;
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Estado de limite excedido: cor E o próprio número, que já diz o que houve.
+   Nunca só a cor (WCAG 1.4.1). */
+.auditor__count.is-over {
+  color: var(--color-warning);
+  font-weight: 700;
+}
+
 /* ---------- Resultado ---------- */
 
 .auditor__result {

@@ -31,11 +31,7 @@ const CHARS = ' .:-=+*#%@';
  */
 @Component({
   selector: 'app-ascii-art',
-  template: `<pre
-    class="ascii"
-    aria-hidden="true"
-    role="presentation"
-  >{{ frame() }}</pre>`,
+  template: `<pre class="ascii" aria-hidden="true" role="presentation">{{ frame() }}</pre>`,
   styles: `
     .ascii {
       font-family: var(--font-mono);

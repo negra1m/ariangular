@@ -1,10 +1,24 @@
-<article class="container cl-index">
-  <h1 tabindex="-1">{{ locale.strings().checklists }}</h1>
+<article class="cl-index">
+  <app-section-header
+    label="TOOL—01"
+    [title]="locale.strings().checklists"
+    [lead]="
+      all().length +
+      ' checklists tirados da documentação, agrupados pelo momento em que você usa cada um.'
+    "
+  />
 
-  <p class="cl-index__lead prose">
-    {{ all().length }} checklists tirados da documentação, agrupados pelo momento em que
-    você usa cada um.
-  </p>
+  @if (started() > 0) {
+    <div class="cl-index__bar">
+      <p class="cl-index__started">
+        {{ started() }}
+        {{ started() === 1 ? 'checklist iniciado' : 'checklists iniciados' }}
+      </p>
+      <button type="button" class="cl-index__reset" (click)="openResetAll($event)">
+        {{ locale.strings().reset }}
+      </button>
+    </div>
+  }
 
   @for (stage of stages; track stage.id) {
     @if (byStage(stage.id).length) {
@@ -16,8 +30,20 @@
             <li>
               <a class="cl-index__card" [routerLink]="locale.path('checklists', c.id)">
                 <span class="cl-index__card-title">{{ c.title }}</span>
+
+                <!-- Progresso na lista: <progress> nativo, com rótulo próprio.
+                     Sem ele a pessoa precisa abrir cada checklist para saber
+                     onde parou. -->
                 <span class="cl-index__card-meta">
-                  {{ c.items.length }} {{ locale.locale() === 'en' ? 'items' : 'itens' }}
+                  <progress
+                    class="cl-index__bar-el"
+                    [value]="doneOf(c.id)"
+                    [max]="c.items.length"
+                    [attr.aria-label]="c.title"
+                  ></progress>
+                  <span class="cl-index__card-count">
+                    {{ doneOf(c.id) }}/{{ c.items.length }}
+                  </span>
                 </span>
               </a>
             </li>
@@ -27,3 +53,25 @@
     }
   }
 </article>
+
+<!-- Confirmação do reset global. Mais forte que a de um checklist só: apaga tudo. -->
+<dialog
+  #resetAllDialog
+  class="cl-index__dialog"
+  (close)="onDialogClose()"
+  aria-labelledby="reset-all-titulo"
+>
+  <h2 id="reset-all-titulo">{{ locale.strings().resetTitle }}</h2>
+  <p>
+    Isso apaga o progresso de <strong>todos os {{ all().length }} checklists</strong>. Não dá para
+    desfazer.
+  </p>
+  <div class="cl-index__dialog-actions">
+    <button type="button" class="cl-index__btn" (click)="closeResetAll()">
+      {{ locale.strings().cancel }}
+    </button>
+    <button type="button" class="cl-index__btn cl-index__btn--danger" (click)="confirmResetAll()">
+      {{ locale.strings().confirm }}
+    </button>
+  </div>
+</dialog>

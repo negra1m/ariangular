@@ -2,8 +2,8 @@
   <h1 tabindex="-1">{{ locale.strings().auditor }}</h1>
 
   <p class="auditor__lead prose">
-    Cole um trecho de template Angular. O que dá para corrigir com segurança já volta
-    corrigido; o que depende de você fica marcado com uma pergunta.
+    Cole um trecho de template Angular. O que dá para corrigir com segurança já volta corrigido; o
+    que depende de você fica marcado com uma pergunta.
   </p>
 
   <!--
@@ -13,10 +13,10 @@
   <aside class="auditor__limit" aria-label="Limites desta ferramenta">
     <p class="auditor__limit-label">O que esta ferramenta não faz</p>
     <p>
-      São {{ ruleCount }} regras sobre markup estático. Ela não executa o seu código, não vê o
-      CSS aplicado e não sabe o que <code>[attr.aria-label]="descricao"</code> vale em
-      tempo de execução. Não substitui axe, Lighthouse nem teste com TalkBack e VoiceOver
-      de verdade. Revise antes de colar no projeto.
+      São {{ ruleCount }} regras sobre markup estático. Ela não executa o seu código, não vê o CSS
+      aplicado e não sabe o que <code>[attr.aria-label]="descricao"</code> vale em tempo de
+      execução. Não substitui axe, Lighthouse nem teste com TalkBack e VoiceOver de verdade. Revise
+      antes de colar no projeto.
     </p>
   </aside>
 
@@ -40,9 +40,12 @@
         <button type="button" class="auditor__btn auditor__btn--primary" (click)="analyze()">
           Analisar
         </button>
-        <button type="button" class="auditor__btn" (click)="loadExample()">
-          Carregar exemplo
-        </button>
+        <button type="button" class="auditor__btn" (click)="loadExample()">Carregar exemplo</button>
+        <!-- Contador antes do limite, não depois: avisar quando já travou é
+             inútil. `role="status"` para o leitor de tela acompanhar. -->
+        <p class="auditor__count" [class.is-over]="overLimit()" role="status">
+          {{ source().length.toLocaleString('pt-BR') }} / {{ maxChars.toLocaleString('pt-BR') }}
+        </p>
       </div>
     </section>
 
@@ -70,9 +73,9 @@
         <p class="auditor__error" role="alert">{{ r.error }}</p>
       } @else if (!r.findings.length) {
         <p class="auditor__clean">
-          Nenhuma violação encontrada nas {{ ruleCount }} regras. Isso não substitui teste
-          com TalkBack e VoiceOver — a pergunta que importa é se uma pessoa consegue
-          concluir a jornada sozinha.
+          Nenhuma violação encontrada nas {{ ruleCount }} regras. Isso não substitui teste com
+          TalkBack e VoiceOver — a pergunta que importa é se uma pessoa consegue concluir a jornada
+          sozinha.
         </p>
       } @else {
         <p class="auditor__summary">
@@ -85,8 +88,8 @@
           <div class="auditor__ask">
             <h3>Só você sabe responder</h3>
             <p class="auditor__ask-why">
-              Chutar um <code>aria-label</code> aqui faria o leitor de tela anunciar
-              informação falsa com confiança. Sem ARIA é melhor que ARIA errada.
+              Chutar um <code>aria-label</code> aqui faria o leitor de tela anunciar informação
+              falsa com confiança. Sem ARIA é melhor que ARIA errada.
             </p>
 
             @for (p of r.pending; track p.placeholder) {
@@ -120,6 +123,9 @@
               <pre class="auditor__finding-code"><code>{{ f.snippet }}</code></pre>
 
               <p class="auditor__finding-meta">
+                @if (f.line) {
+                  <span>linha {{ f.line }}</span>
+                }
                 @if (f.wcag.length) {
                   <span>WCAG {{ f.wcag.join(', ') }}</span>
                 }

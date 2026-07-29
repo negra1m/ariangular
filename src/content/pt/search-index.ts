@@ -1648,6 +1648,36 @@ export const searchIndex: SearchEntry[] = [
     "keywords": []
   },
   {
+    "id": "qa-wcag/european-accessibility-act",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "european-accessibility-act",
+    "sectionTitle": "European Accessibility Act",
+    "text": "Desde 28 de junho de 2025 o European Accessibility Act é exigível em todos os países da União Europeia. Ele deixou de ser assunto só de quem vende para a Europa. Empresas brasileiras que atendem clientes europeus, ou que fazem parte da cadeia de fornecimento de uma empresa europeia, entram no escopo. Categoria Exemplos Comércio eletrônico Loja, checkout, área do cliente. Serviços bancários Internet banking, aplicativo, autenticação. Transporte Venda de passagem, informação de viagem. Comunicação Telefonia, mensagens, chamada de emergência. Livros e mídia Leitores digitais, streaming. A norma técnica A conformidade é avaliada pela EN 301 549, que incorpora a WCAG. A versão 4.1.1 está prevista para 2026. Na prática, atender WCAG 2.2 nível AA cobre a maior parte do que a norma exige para conteúdo web. É o mesmo alvo que este guia inteiro persegue. O que muda no dia a dia Acessibilidade deixa de ser melhoria e passa a ser requisito de entrada. Exige documentação de conformidade, não só o site funcionando. Pode ser cobrada em contrato e em processo de compra. Aplica-se a produto novo e a atualização de produto existente. O que fazer Levantar se o produto atende clientes na União Europeia. Auditar contra WCAG 2.2 AA. Registrar os resultados, inclusive o que ainda não está conforme. Colocar acessibilidade no Definition of Done. Testar com pessoas usando tecnologia assistiva de verdade.",
+    "keywords": [
+      "4.1.1"
+    ]
+  },
+  {
+    "id": "qa-wcag/acessibilidade-cognitiva",
+    "partId": "qa-wcag",
+    "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
+    "sectionId": "acessibilidade-cognitiva",
+    "sectionTitle": "Acessibilidade cognitiva",
+    "text": "Boa parte do esforço de acessibilidade vai para deficiência visual e motora. Deficiência cognitiva afeta mais pessoas e recebe menos atenção. Entram aqui dislexia, TDAH, autismo, ansiedade, declínio cognitivo por idade — e também estados temporários: cansaço, pressa, estresse, uso do celular no meio da rua. Interface que funciona para quem está exausto funciona melhor para todo mundo. Este é o caso mais claro de que acessibilidade não é caso de exceção. O que ajuda Linguagem direta, frase curta, sem jargão desnecessário. Uma tarefa principal por tela. Passo a passo visível em fluxo longo. Erro que diz o que fazer, não só o que está errado. Ação destrutiva com confirmação e com desfazer. Sem limite de tempo, ou com opção de estender. Padrão consistente entre telas. Não depender de memória entre etapas. O que atrapalha Movimento automático, carrossel que gira sozinho. Formulário longo sem divisão nem salvamento parcial. Mensagem de erro genérica. Sessão que expira sem aviso. Excesso de informação simultânea. Ícone sem rótulo textual. Critérios WCAG relacionados Critério Tema 2.2.1 Tempo ajustável. 2.2.2 Pausar, parar, ocultar movimento. 3.2.3 Navegação consistente. 3.2.4 Identificação consistente. 3.3.3 Sugestão de correção de erro. 3.3.4 Prevenção de erro em ação importante. 3.3.7 Entrada redundante. 3.3.8 Autenticação acessível. Em Angular Anunciar o erro é metade. A outra metade é a mensagem dizer o que fazer.",
+    "keywords": [
+      "aria-live",
+      "2.2.1",
+      "2.2.2",
+      "3.2.3",
+      "3.2.4",
+      "3.3.3",
+      "3.3.4",
+      "3.3.7",
+      "3.3.8"
+    ]
+  },
+  {
     "id": "qa-wcag/ferramentas-recomendadas",
     "partId": "qa-wcag",
     "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 52" role="img" aria-label="ariangular">
+  <!--
+    Escudo adaptado do Angular v17+, com um anel de foco dentro.
+    Adaptação permitida e encorajada pelo Angular Press Kit, que licencia os
+    logos sob CC BY 4.0. Atribuição em NOTICE.md.
+  -->
+  <path fill="#E40035" d="M24 0 47 8.2 43.5 42.3 24 52 4.5 42.3 1 8.2Z"/>
+  <circle cx="24" cy="24.5" r="10.5" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="24" cy="24.5" r="3.6" fill="#fff"/>
+</svg>

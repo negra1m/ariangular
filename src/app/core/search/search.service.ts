@@ -88,7 +88,11 @@ export class SearchService {
       if (matchedAll && score > 0) hits.push({ entry, score });
     }
 
-    return hits.sort((a, b) => b.score - a.score || a.entry.sectionTitle.length - b.entry.sectionTitle.length).slice(0, limit);
+    return hits
+      .sort(
+        (a, b) => b.score - a.score || a.entry.sectionTitle.length - b.entry.sectionTitle.length,
+      )
+      .slice(0, limit);
   }
 }
 
@@ -96,11 +100,7 @@ export class SearchService {
 
 /** Minúsculas e sem acento, dos dois lados da comparação. */
 function normalize(s: string): string {
-  return s
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
-    .trim();
+  return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 }
 
 function flatten(blocks: Block[]): string {

@@ -23,6 +23,9 @@ export class ProgressService {
 
   private readonly store = signal<Store>(this.load());
 
+  /** Estado completo, para os componentes reagirem a qualquer mudança. */
+  readonly snapshot = this.store.asReadonly();
+
   /** Sinaliza que a persistência falhou, para a UI poder avisar. */
   readonly persistenceFailed = signal(false);
 
@@ -80,5 +83,16 @@ export class ProgressService {
 
   countOf(checklistId: string): number {
     return (this.store()[checklistId] ?? []).length;
+  }
+
+  /** Apaga o progresso de todos os checklists. */
+  clearAll(): void {
+    this.store.set({});
+    this.persist();
+  }
+
+  /** Quantos checklists têm ao menos um item marcado. */
+  startedCount(): number {
+    return Object.values(this.store()).filter((v) => v.length > 0).length;
   }
 }

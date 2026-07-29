@@ -34,9 +34,7 @@ export const serverRoutes: ServerRoute[] = [
     path: ':locale/checklists/:checklistId',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: async () =>
-      LOCALES.flatMap((locale) =>
-        checklistsOf(locale).map((c) => ({ locale, checklistId: c.id })),
-      ),
+      LOCALES.flatMap((locale) => checklistsOf(locale).map((c) => ({ locale, checklistId: c.id }))),
   },
   {
     path: ':locale/auditor',
