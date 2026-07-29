@@ -20,12 +20,10 @@ const DIST = path.join(ROOT, 'dist', 'ariangular');
 const BROWSER = path.join(DIST, 'browser');
 const ORIGIN = process.env.SITE_ORIGIN || 'https://ariangular.vercel.app';
 
-// Espelha src/content/types.ts. Só entram os locales com conteúdo traduzido:
+// Lido de src/content/types.ts. Só entram os locales com conteúdo traduzido:
 // anunciar no sitemap uma página em inglês com corpo em português custa
 // indexação e confiança de domínio.
-const LOCALES = ['pt', 'en'];
-const TAG = { pt: 'pt-BR', en: 'en', zh: 'zh-Hans' };
-const DEFAULT = 'pt';
+const { LOCALES, TAG, LABEL, DEFAULT } = require('./lib/locales');
 
 const routesFile = path.join(DIST, 'prerendered-routes.json');
 if (!fs.existsSync(routesFile)) {
@@ -36,9 +34,7 @@ if (!fs.existsSync(routesFile)) {
 // O Angular grava { "routes": { "/pt/aria": {}, ... } }; versões anteriores
 // gravavam um array. Aceita os dois para não quebrar num upgrade.
 const raw = JSON.parse(fs.readFileSync(routesFile, 'utf8'));
-const routes = Array.isArray(raw)
-  ? raw
-  : Object.keys(raw.routes ?? raw);
+const routes = Array.isArray(raw) ? raw : Object.keys(raw.routes ?? raw);
 
 /** Caminho sem o prefixo de idioma. Só entra no sitemap o que tem idioma. */
 function stripLocale(route) {
@@ -141,7 +137,7 @@ a{color:#d1002f}
 <p>Guia de acessibilidade para times Angular.</p>
 <nav aria-label="Idioma">
 <ul>
-${LOCALES.map((l) => `<li><a href="/${l}" lang="${TAG[l]}" hreflang="${TAG[l]}">${{ pt: 'Português', en: 'English', zh: '简体中文' }[l]}</a></li>`).join('\n')}
+${LOCALES.map((l) => `<li><a href="/${l}" lang="${TAG[l]}" hreflang="${TAG[l]}">${LABEL[l]}</a></li>`).join('\n')}
 </ul>
 </nav>
 </body>

@@ -25,12 +25,12 @@ Três camadas de uso:
 
 | | |
 |---|---|
-| Testes | 77 passando |
+| Testes | 84 passando, incluindo axe nos estados pós-interação |
 | Lint | limpo, regras de acessibilidade como **erro** |
 | Contraste | 38 pares, WCAG AA nos dois temas |
 | axe | **zero violações A/AA** em todas as páginas geradas |
-| Build | 373 rotas prerenderizadas, saída estática |
-| Idiomas | português e inglês, 100% traduzidos |
+| Build | 559 rotas prerenderizadas, saída estática |
+| Idiomas | português, inglês e chinês, 100% traduzidos |
 
 Tudo isso roda no CI e quebra o build.
 
@@ -49,16 +49,20 @@ TalkBack consegue concluir a jornada sozinha?* — ainda não tem resposta.
 
 ### Idiomas
 
-**Português e inglês**, ambos completos — 1.246 strings traduzidas, com hreflang
-ligando as duas versões e troca de idioma que preserva a página.
+**Português, inglês e chinês simplificado**, os três completos — 1.246 strings cada,
+com hreflang ligando as versões e troca de idioma que preserva a página. Os slugs de
+URL são os mesmos nos três (`/pt/aria/aria-label`, `/en/aria/aria-label`,
+`/zh/aria/aria-label`): o termo técnico não muda de idioma, e slug estável é o que faz
+o hreflang casar sem tabela de-para.
 
-**Chinês** fica fora do build até haver tradução. Publicar 162 páginas em chinês com o
-corpo em português custaria indexação e credibilidade. A estrutura está pronta: traduzir
-`i18n/zh/*.json`, rodar `npm run i18n:build` e incluir `'zh'` em `LOCALES`.
+Um idioma só entra no build com 100% traduzido — `merge-i18n.js` falha abaixo disso.
+Publicar metade custa indexação e credibilidade: página com metadado traduzido e corpo
+em português não rankeia em nenhum dos dois idiomas.
 
-Ressalva honesta sobre a tradução: foi feita por mim, sem revisão de falante nativo. Em
-inglês a confiança é alta, mas termo técnico de acessibilidade tem convenção própria e
-uma segunda leitura seria bem-vinda.
+Ressalva honesta: a tradução foi feita por mim, sem revisão de falante nativo em
+nenhum dos três. Em inglês a confiança é alta. Em chinês ela é menor — a terminologia
+de acessibilidade tem convenção estabelecida (无障碍, 屏幕阅读器, 无障碍名称) e uma
+revisão nativa seria bem-vinda antes de divulgar para esse público.
 
 ---
 
@@ -121,6 +125,7 @@ npm run dev      # http://localhost:4200
 | `npm run content:extract` | Regenera o conteúdo a partir de `fonte/ARIA.html` |
 | `npm run i18n:strings` | Regenera o catálogo de tradução |
 | `npm run i18n:build` | Monta o conteúdo de en e zh |
+| `npm run og` | Regenera as imagens de Open Graph em `public/og/` |
 
 ---
 

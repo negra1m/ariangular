@@ -16,28 +16,21 @@
  * português não rankeia, e o objetivo declarado é ser encontrável nos três
  * índices de busca.
  */
-/**
- * Todos os idiomas que a estrutura suporta.
- *
- * `zh` está aqui e **não** está em `LOCALES` de propósito: enquanto não houver
- * tradução revisada, publicar 162 páginas em chinês com o corpo em português
- * custa indexação e credibilidade. Melhor não existir do que existir errado.
- * Para publicar, basta incluir 'zh' em LOCALES.
- */
+/** Todos os idiomas que a estrutura suporta. */
 export const ALL_LOCALES = ['pt', 'en', 'zh'] as const;
 export type Locale = (typeof ALL_LOCALES)[number];
 
 /**
  * Idiomas efetivamente publicados: rotas, hreflang e sitemap.
  *
- * `zh` fica de fora até haver tradução: publicar 162 páginas em chinês com o
- * corpo em português custa indexação e credibilidade. Melhor não existir do
- * que existir errado.
+ * Um idioma só entra aqui com as 1.246 strings traduzidas — `merge-i18n.js`
+ * falha abaixo de 100%. Publicar metade custa indexação e credibilidade:
+ * página com metadado traduzido e corpo em português não rankeia em nenhum
+ * dos dois idiomas.
  *
- * Para publicar, traduza `i18n/zh/*.json`, rode `npm run i18n:build` e inclua
- * 'zh' aqui.
+ * Nenhum dos três teve revisor nativo. Está declarado no README.
  */
-export const LOCALES: readonly Locale[] = ['pt', 'en'];
+export const LOCALES: readonly Locale[] = ['pt', 'en', 'zh'];
 
 export const DEFAULT_LOCALE: Locale = 'pt';
 

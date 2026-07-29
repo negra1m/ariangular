@@ -18,7 +18,7 @@
     "fonte:diff": "node scripts/diff-content.js fonte/ARIA.original.html fonte/ARIA.html",
     "content:extract": "node scripts/extract-content.js",
     "i18n:strings": "node scripts/extract-strings.js",
-    "i18n:build": "node scripts/merge-i18n.js en && node scripts/build-locale.js en",
+    "i18n:build": "node scripts/merge-i18n.js en && node scripts/build-locale.js en && node scripts/merge-i18n.js zh && node scripts/build-locale.js zh",
     "content:all": "npm run content:extract && npm run i18n:strings",
     "sitemap": "node scripts/generate-sitemap.js",
     "a11y": "node scripts/check-a11y.js",

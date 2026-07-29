@@ -1,0 +1,183 @@
+{
+  "part.componentes.title": "交互组件与复杂结构",
+  "part.componentes.summary": "最容易产生无障碍缺陷的组件：模态框、选项卡、折叠面板、菜单、组合框、表格和轮播。",
+
+  "sec.componentes.botoes.title": "按钮",
+  "sec.componentes.botoes.summary": "用真正的 button。可点击的 div 会同时失去角色、键盘、状态和语义。",
+  "sec.componentes.botoes.0.str.0": "继续",
+  "sec.componentes.botoes.1.text": "继续，按钮",
+  "sec.componentes.botoes.2.str.0": "继续",
+
+  "sec.componentes.botao-apenas-com-icone.title": "纯图标按钮",
+  "sec.componentes.botao-apenas-com-icone.summary": "没有标签时，屏幕阅读器只会朗读“按钮”。用户知道这里有个控件，却不知道它是做什么的。",
+  "sec.componentes.botao-apenas-com-icone.0.str.0": "编辑地址",
+  "sec.componentes.botao-apenas-com-icone.0.str.1": "编辑",
+  "sec.componentes.botao-apenas-com-icone.1.text": "编辑地址，按钮",
+
+  "sec.componentes.links.title": "链接",
+  "sec.componentes.links.summary": "链接用于跳转，按钮用于执行。两者混用会让依赖角色播报来判断后果的人无所适从。",
+  "sec.componentes.links.0.str.0": "查看账户",
+  "sec.componentes.links.1.str.0": "保存",
+  "sec.componentes.links.2.text": "链接用于跳转。按钮用于执行操作。",
+
+  "sec.componentes.cards-clicaveis.title": "可点击卡片",
+  "sec.componentes.cards-clicaveis.summary": "把卡片包在真正的 button 或 a 里。带点击事件的 div 对键盘来说是不存在的。",
+  "sec.componentes.cards-clicaveis.0.str.0": "活期账户",
+  "sec.componentes.cards-clicaveis.1.text": "替代写法",
+  "sec.componentes.cards-clicaveis.2.str.0": "活期账户",
+
+  "sec.componentes.accordion.title": "折叠面板",
+  "sec.componentes.accordion.summary": "触发器需要 aria-expanded 和 aria-controls，这样状态才会和名称一起被朗读出来。",
+  "sec.componentes.accordion.0.str.0": "它是怎么运作的？",
+  "sec.componentes.accordion.0.str.1": "内容",
+  "sec.componentes.accordion.1.text": "它是怎么运作的？\n按钮\n已收起",
+
+  "sec.componentes.accordion-com-angular.title": "Angular 中的折叠面板",
+  "sec.componentes.accordion-com-angular.summary": "把 aria-expanded 绑定到真实状态。写死的值会永远朗读“已收起”，哪怕面板是打开的。",
+  "sec.componentes.accordion-com-angular.0.str.0": "问题",
+  "sec.componentes.accordion-com-angular.1.text": "aria-expanded 必须反映真实状态。",
+
+  "sec.componentes.tabs.title": "选项卡",
+  "sec.componentes.tabs.summary": "用 role=tablist，并在每个选项卡上加 aria-selected。没有它，屏幕阅读器只说“选项卡”，却不说哪个是当前项。",
+  "sec.componentes.tabs.0.str.0": "详情",
+  "sec.componentes.tabs.0.str.1": "地址",
+
+  "sec.componentes.tab-panel.title": "选项卡面板",
+  "sec.componentes.tab-panel.summary": "承载所选选项卡内容的面板，与选项卡相互关联，屏幕阅读器才能在两者之间来回移动。",
+  "sec.componentes.tab-panel.0.str.0": "选项卡内容。",
+
+  "sec.componentes.modal.title": "模态框",
+  "sec.componentes.modal.summary": "role=dialog、aria-modal，再加一个标签。没有 aria-modal，屏幕阅读器会继续朗读后面的内容。",
+  "sec.componentes.modal.0.str.0": "确认支付",
+
+  "sec.componentes.checklist-modal.title": "模态框检查清单",
+  "sec.componentes.checklist-modal.summary": "每个模态框都必须做到的六件事：角色、aria-modal、接收焦点、锁住焦点、ESC 关闭、归还焦点。",
+  "sec.componentes.checklist-modal.0.item.0": "有 role=\"dialog\" 吗？",
+  "sec.componentes.checklist-modal.0.item.1": "有 aria-modal 吗？",
+  "sec.componentes.checklist-modal.0.item.2": "打开时会接收焦点吗？",
+  "sec.componentes.checklist-modal.0.item.3": "焦点被锁在里面了吗？",
+  "sec.componentes.checklist-modal.0.item.4": "按 ESC 会关闭吗？",
+  "sec.componentes.checklist-modal.0.item.5": "关闭时会把焦点还回去吗？",
+
+  "sec.componentes.bottom-sheet.title": "底部弹出面板",
+  "sec.componentes.bottom-sheet.summary": "它就是一个从底部滑上来的模态框。同样的规则，一条都不能少。",
+  "sec.componentes.bottom-sheet.0.text": "把它当作模态框来对待。",
+
+  "sec.componentes.menu.title": "菜单",
+  "sec.componentes.menu.summary": "触发器通过 aria-haspopup 和 aria-expanded 告知用户它会打开一个菜单。",
+  "sec.componentes.menu.0.str.0": "操作",
+
+  "sec.componentes.itens-de-menu.title": "菜单项",
+  "sec.componentes.itens-de-menu.summary": "每一项都带 role=menuitem，并且整组必须能用方向键到达。",
+  "sec.componentes.itens-de-menu.0.str.0": "编辑",
+  "sec.componentes.itens-de-menu.0.str.1": "删除",
+
+  "sec.componentes.dropdown.title": "下拉选择",
+  "sec.componentes.dropdown.summary": "只要可能就优先用原生 select。它自带正确的键盘操作、状态和移动端行为。",
+  "sec.componentes.dropdown.0.text": "只要可能，就优先使用原生 select。",
+
+  "sec.componentes.combobox.title": "组合框",
+  "sec.componentes.combobox.summary": "最难做对的模式之一。从 Angular v22 起有了官方答案：@angular/aria 里的 ngCombobox。",
+  "sec.componentes.combobox.1.text": "实现复杂。不要手写——参见 Angular Aria。",
+
+  "sec.componentes.lista.title": "列表",
+  "sec.componentes.lista.summary": "真正的 ul 或 ol 会让屏幕阅读器朗读“列表，共 N 项”，用户由此知道后面还有多少内容。",
+  "sec.componentes.lista.0.str.0": "第 1 项",
+  "sec.componentes.lista.0.str.1": "第 2 项",
+  "sec.componentes.lista.1.text": "列表，共 2 项",
+
+  "sec.componentes.breadcrumb.title": "面包屑",
+  "sec.componentes.breadcrumb.summary": "一个带标签的 nav，在当前项上加 aria-current=\"page\"，它才会被朗读为“你所在的位置”。",
+  "sec.componentes.breadcrumb.0.str.0": "面包屑导航",
+  "sec.componentes.breadcrumb.1.text": "当前项",
+
+  "sec.componentes.stepper.title": "步骤条",
+  "sec.componentes.stepper.summary": "aria-current=\"step\" 标出当前步骤，用户看不到高亮也能知道自己走到了哪里。",
+  "sec.componentes.stepper.0.str.0": "支付",
+  "sec.componentes.stepper.1.text": "支付\n当前步骤",
+
+  "sec.componentes.tabela-simples.title": "简单表格",
+  "sec.componentes.tabela-simples.summary": "caption、th 和 scope 让屏幕阅读器能把每个单元格和它的表头对应起来，而不是读出一串孤立的数字。",
+  "sec.componentes.tabela-simples.0.str.0": "对账单",
+  "sec.componentes.tabela-simples.0.str.1": "日期",
+  "sec.componentes.tabela-simples.0.str.2": "金额",
+
+  "sec.componentes.tabela-boas-praticas.title": "表格最佳实践",
+  "sec.componentes.tabela-boas-praticas.summary": "使用 caption、th 和 scope，绝对不要用 div 拼表格——那会摧毁单元格与表头之间的关系。",
+  "sec.componentes.tabela-boas-praticas.0.item.0": "使用 caption。",
+  "sec.componentes.tabela-boas-praticas.0.item.1": "使用 th。",
+  "sec.componentes.tabela-boas-praticas.0.item.2": "使用 scope。",
+  "sec.componentes.tabela-boas-praticas.0.item.3": "避免用 div 拼表格。",
+
+  "sec.componentes.tooltip.title": "工具提示",
+  "sec.componentes.tooltip.summary": "用 aria-describedby 绑定，并且让它在获得焦点时也显示——只响应悬停的提示对键盘用户等于不存在。",
+  "sec.componentes.tooltip.1.str.0": "补充信息",
+
+  "sec.componentes.toast.title": "轻提示",
+  "sec.componentes.toast.summary": "role=status 会朗读消息但不抢走焦点，这正是确认类提示应有的行为。",
+  "sec.componentes.toast.0.str.0": "支付已完成",
+
+  "sec.componentes.snackbar.title": "消息条",
+  "sec.componentes.snackbar.summary": "一个有礼貌的实时区域：它会在停顿时朗读，而不是打断正在读的内容。",
+  "sec.componentes.snackbar.0.str.0": "已添加",
+
+  "sec.componentes.alertas-criticos.title": "紧急警告",
+  "sec.componentes.alertas-criticos.summary": "role=alert 会立即打断。只留给真的等不了的内容——其余的都是噪音。",
+  "sec.componentes.alertas-criticos.0.str.0": "交易失败",
+  "sec.componentes.alertas-criticos.1.text": "立即朗读。",
+
+  "sec.componentes.loading.title": "加载中",
+  "sec.componentes.loading.summary": "aria-busy 告诉辅助技术该区域仍在更新，避免朗读一个只完成了一半的状态。",
+  "sec.componentes.loading.0.str.0": "加载中",
+
+  "sec.componentes.progress-bar.title": "进度条",
+  "sec.componentes.progress-bar.summary": "role=progressbar 需要 valuemin、valuemax 和 valuenow，否则朗读出的进度条不带任何数值。",
+  "sec.componentes.progress-bar.1.text": "30%",
+
+  "sec.componentes.skeleton-loading.title": "骨架屏",
+  "sec.componentes.skeleton-loading.summary": "占位形状不携带任何信息。用 aria-hidden 藏起来，别让屏幕阅读器读出一整面的空白。",
+  "sec.componentes.skeleton-loading.0.text": "视觉占位应当被屏幕阅读器忽略。",
+
+  "sec.componentes.carrossel.title": "轮播",
+  "sec.componentes.carrossel.summary": "需要上一张、下一张和暂停按钮，幻灯片也要可识别。自动轮播且无法暂停，本身就是一条 WCAG 失败项。",
+  "sec.componentes.carrossel.0.item.0": "上一张按钮。",
+  "sec.componentes.carrossel.0.item.1": "下一张按钮。",
+  "sec.componentes.carrossel.0.item.2": "暂停按钮。",
+  "sec.componentes.carrossel.0.item.3": "可识别的幻灯片。",
+
+  "sec.componentes.infinite-scroll.title": "无限滚动",
+  "sec.componentes.infinite-scroll.summary": "朗读新加载的内容，把焦点留在原处，避免页面在用户脚下突然跳动。",
+  "sec.componentes.infinite-scroll.0.item.0": "朗读新加载的项目。",
+  "sec.componentes.infinite-scroll.0.item.1": "保持焦点位置。",
+  "sec.componentes.infinite-scroll.0.item.2": "避免突兀的位移。",
+
+  "sec.componentes.drag-and-drop.title": "拖放",
+  "sec.componentes.drag-and-drop.summary": "永远不要只依赖手势。必须有一条通过点击或键盘达到同样结果的路径。",
+  "sec.componentes.drag-and-drop.0.text": "永远不要只依赖手势。",
+  "sec.componentes.drag-and-drop.1.text": "始终提供点击或键盘的替代方式。",
+
+  "sec.componentes.upload-de-arquivo.title": "文件上传",
+  "sec.componentes.upload-de-arquivo.summary": "使用带真实标签的原生 file input。自定义上传控件是最常见的“把键盘彻底弄丢”的地方。",
+  "sec.componentes.upload-de-arquivo.0.str.0": "文件",
+
+  "sec.componentes.mensagens-dinamicas.title": "动态消息",
+  "sec.componentes.mensagens-dinamicas.summary": "所有不刷新页面就发生变化的内容都需要实时区域：轻提示、筛选生效、搜索完成、支付成功。",
+  "sec.componentes.mensagens-dinamicas.1.text": "常见用途：",
+  "sec.componentes.mensagens-dinamicas.2.item.0": "轻提示。",
+  "sec.componentes.mensagens-dinamicas.2.item.1": "筛选已生效。",
+  "sec.componentes.mensagens-dinamicas.2.item.2": "搜索已完成。",
+  "sec.componentes.mensagens-dinamicas.2.item.3": "支付已通过。",
+  "sec.componentes.mensagens-dinamicas.2.item.4": "上传已完成。",
+
+  "sec.componentes.checklist-de-componentes.title": "组件检查清单",
+  "sec.componentes.checklist-de-componentes.summary": "在认为任何组件做完之前先过一遍这九个问题——名称、角色、状态、键盘、焦点和播报。",
+  "sec.componentes.checklist-de-componentes.0.item.0": "它有无障碍名称吗？",
+  "sec.componentes.checklist-de-componentes.0.item.1": "它的角色正确吗？",
+  "sec.componentes.checklist-de-componentes.0.item.2": "它的状态正确吗？",
+  "sec.componentes.checklist-de-componentes.0.item.3": "它能用键盘操作吗？",
+  "sec.componentes.checklist-de-componentes.0.item.4": "焦点看得见吗？",
+  "sec.componentes.checklist-de-componentes.0.item.5": "它在 TalkBack 下能用吗？",
+  "sec.componentes.checklist-de-componentes.0.item.6": "它在 VoiceOver 下能用吗？",
+  "sec.componentes.checklist-de-componentes.0.item.7": "重要变化会被朗读出来吗？",
+  "sec.componentes.checklist-de-componentes.0.item.8": "焦点顺序合理吗？"
+}
