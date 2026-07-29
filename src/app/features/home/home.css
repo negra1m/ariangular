@@ -2,15 +2,31 @@
 
 .home__hero {
   position: relative;
-  /* Alto o bastante para o wordmark respirar, baixo o bastante para o índice
-     aparecer sem rolagem — o índice é a razão de a home existir. */
-  min-height: min(72vh, 34rem);
+  /* Tela cheia, descontando o header sticky.
+
+     `dvh` e não `vh`: no celular, `vh` é medido com a barra de endereço
+     recolhida, então o hero nasce mais alto que a tela e empurra o índice para
+     fora mesmo depois de rolar. `vh` fica como fallback.
+
+     `min-height` e nunca `height`: com zoom ou fonte maior o bloco precisa
+     crescer em vez de cortar o wordmark (WCAG 1.4.4 e 1.4.10). */
+  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100dvh - var(--header-height));
   display: grid;
   place-items: center;
   align-content: center;
   overflow: hidden;
   padding-block: var(--space-xl);
   padding-inline: var(--space-md);
+}
+
+/* Tela baixa — celular deitado, janela achatada. A tela cheia aqui viraria
+   uma faixa em que só o wordmark cabe, e ele já é grande por si. */
+@media (max-height: 34rem) {
+  .home__hero {
+    min-height: auto;
+    padding-block: var(--space-2xl);
+  }
 }
 
 .home__art {
