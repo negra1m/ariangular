@@ -131,6 +131,7 @@ Nada pendente. As fases podem rodar de ponta a ponta.
 | 7 | [Auditor de snippet](fase-7-auditor/PLANO.md) | Cola template Angular, recebe violações + WCAG |
 | 8 | [Qualidade e a11y](fase-8-qualidade-a11y/PLANO.md) | axe, Lighthouse, teclado, TalkBack, VoiceOver |
 | 9 | [Deploy Vercel](fase-9-deploy-vercel/PLANO.md) | Site no ar, prerender completo, headers |
+| 10 | [Polimento](fase-10-polimento/PLANO.md) | Ver funcionando, fechar buracos, testar com gente, publicar |
 
 Ordem é sequencial com uma exceção: **Fase 7 não bloqueia Fase 8**. Se o auditor esticar,
 o site sobe sem ele e a rota `/auditor` entra depois.

@@ -145,6 +145,29 @@ Toda tarefa concluída recebe a data no final: `(YYYY-MM-DD)`.
 - [ ] `TODO.md` do projeto e `14.AGENDA/TODO.md` atualizados
 - [ ] Repositório renomeado para `ariangular` no GitHub
 
+## Fase 10 — Polimento `[ ]`
+
+Criada em 2026-07-28 com tudo que falta para terminar.
+Ver [PLANO](fase-10-polimento/PLANO.md) · [CHECKLIST](fase-10-polimento/CHECKLIST.md) ·
+[ROTEIRO DE TESTE](fase-10-polimento/ROTEIRO-TESTE.md)
+
+- [ ] **A** — Ver o site funcionando num navegador `bloqueia tudo`
+- [ ] **B** — Fechar os buracos conhecidos (menu mobile, busca, CSP)
+- [ ] **C** — Completar funcionalidade (TOC, âncoras, 8 regras do auditor)
+- [ ] **D** — Testes automatizados (regras, busca, axe pós-interação)
+- [ ] **E** — Identidade visual (8 ilustrações, favicon, watermark)
+- [ ] **F** — Conteúdo (167 resumos, EAA, UX cognitiva)
+- [ ] **G** — Teste humano: teclado, TalkBack, VoiceOver, Lighthouse `PO executa`
+- [ ] **H** — Deploy na Vercel
+- [ ] **I** — Tradução `en`
+
+### Decisões do PO (2026-07-28)
+
+- Ilustrações: eu desenho em SVG geométrico
+- PO tem Android e iPhone — roteiro escrito por mim, executado por ele
+- **Só `en` agora**; `zh` sai do build até haver tradução revisada
+- Lançamento quando `/pt` estiver polido
+
 ---
 
 ## Resumo honesto
