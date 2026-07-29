@@ -1,7 +1,19 @@
-# aria-angular — Checklist Macro por Fase
+# ariangular — Checklist Macro por Fase
 
 Um marco por fase. As tarefas granulares vivem no `CHECKLIST.md` dentro da pasta de cada fase.
 Toda tarefa concluída recebe a data no final: `(YYYY-MM-DD)`.
+
+> **Estado em 2026-07-28.** O projeto **não está pronto**. Build, lint, contraste e axe
+> passam — mas **nada foi visto rodando num navegador** e **não há deploy**. Tudo que está
+> afirmado abaixo como concluído foi verificado por ferramenta, não por uso.
+
+---
+
+## Legenda
+
+- `[x]` feito e verificado
+- `[ ]` não feito
+- `[~]` feito parcialmente — o que falta está no checklist da fase
 
 ---
 
@@ -11,87 +23,135 @@ Toda tarefa concluída recebe a data no final: `(YYYY-MM-DD)`.
 - [x] Aninhamento de tags validado, zero desbalanceamento (2026-07-28)
 - [x] Perda de conteúdo verificada: 152/152 blocos de código, zero texto perdido (2026-07-28)
 - [x] `fonte/ARIA.html` e `fonte/ARIA.original.html` no repo (2026-07-28)
+- [x] 4 seções novas sobre `@angular/aria` (2026-07-28)
 
 ## Pré-início
 
 - [x] PO decidiu: **sem** FEW-AI-SERIAL, conteúdo em TypeScript tipado (2026-07-28)
 - [x] PO decidiu: watermark zero-width **aplicar** (2026-07-28)
 - [x] PO decidiu: domínio `*.vercel.app` (2026-07-28)
+- [x] PO decidiu: uma URL por seção, 3 idiomas completos, landing curta (2026-07-28)
+- [x] PO decidiu: auditor corrige o determinístico e pergunta o resto (2026-07-28)
+- [x] Nome trocado para `ariangular` — `AngulARIA` colidia com `@angular/aria` oficial (2026-07-28)
+- [ ] PO decidiu sobre a mascote Angie
 
 ---
 
-## Fase 1 — Fundação
+## Fase 1 — Fundação `[~]`
 
-- [ ] Workspace Angular 22 criado e rodando em `ng serve`
-- [ ] `ng build` gera saída estática sem erro nem warning
-- [ ] Tooling de qualidade instalado e passando (lint com regras a11y, format)
-- [ ] Design tokens com as cores Angular, contraste verificado nos dois temas
-- [ ] Primeiras ilustrações de acessibilidade em SVG
-- [ ] Watermark zero-width aplicado no shell
-- [ ] Logo adaptado do escudo Angular v17+, com atribuição CC BY 4.0
-- [ ] Arquivos de open source no repo (LICENSE, CONTRIBUTING, CODE_OF_CONDUCT)
-- [ ] PO decidiu sobre a mascote Angie
-- [ ] PO confirmou origem/titularidade do conteúdo
+- [x] Workspace Angular 22 criado e rodando (2026-07-28)
+- [x] `ng build` gera saída estática sem erro (2026-07-28)
+- [x] Tooling de qualidade instalado e passando (lint com regras a11y como erro) (2026-07-28)
+- [x] Design tokens com as cores Angular, contraste verificado nos dois temas (2026-07-28)
+- [x] Arquivos de open source no repo (LICENSE, CONTRIBUTING, CODE_OF_CONDUCT) (2026-07-28)
+- [x] CI rodando lint + contraste + fonte + build + axe (2026-07-28)
+- [ ] **Ilustrações de acessibilidade** — nada feito
+- [ ] **Logo/favicon próprio** — ainda o favicon padrão do Angular CLI
+- [ ] **Watermark zero-width** aplicado no shell
+- [ ] Stops oficiais do gradiente Angular (hoje é aproximação)
 
-## Fase 2 — Conteúdo
+## Fase 2 — Conteúdo `[~]`
 
-- [ ] As 7 partes (156 seções) extraídas de `fonte/ARIA.html`, sem perda
-- [ ] Modelo de dados tipado e validado
-- [ ] Os 14 checklists da doc extraídos para coleção própria
+- [x] As 7 partes (160 seções) extraídas de `fonte/ARIA.html`, sem perda (2026-07-28)
+- [x] Modelo de dados tipado e multi-locale (2026-07-28)
+- [x] Os 14 checklists da doc extraídos para coleção própria (2026-07-28)
+- [x] Pipeline de i18n pronto (catálogo + builder por locale) (2026-07-28)
+- [ ] **Tradução en** — 1.174 strings. `/en` serve português
+- [ ] **Tradução zh** — idem
+- [ ] **167 resumos escritos à mão** — hoje são heurística (primeiro parágrafo cortado)
 
-## Fase 3 — Shell e navegação
+## Fase 3 — Shell e navegação `[~]`
 
-- [ ] Rotas das 7 partes navegando
-- [ ] Skip link, header, sidebar e footer no ar
-- [ ] Footer com o link do LinkedIn
-- [ ] Foco move para o H1 a cada navegação e a rota é anunciada
+- [x] Rotas das 7 partes e das 160 seções navegando (2026-07-28)
+- [x] Skip link, header e footer no ar (2026-07-28)
+- [x] Footer com o link do LinkedIn e disclaimer de não-afiliação (2026-07-28)
+- [x] Foco move para o H1 a cada navegação e a rota é anunciada (2026-07-28)
+- [x] Troca de idioma preservando a página (2026-07-28)
+- [x] Tema claro/escuro com toggle e sem flash (2026-07-28)
+- [ ] **Menu mobile sem focus trap, sem ESC, sem retorno de foco**
+- [ ] Navegação lateral por seção (hoje só a lista de partes no header)
+- [ ] Verificado em navegador
 
-## Fase 4 — Renderização da doc
+## Fase 4 — Renderização da doc `[~]`
 
-- [ ] Todos os tipos de bloco renderizam (texto, lista, tabela, código, callout)
-- [ ] Code blocks com botão copiar acessível
-- [ ] Índice lateral da página com âncoras funcionando
-- [ ] Documentação inteira legível de ponta a ponta
-- [ ] Home landing com os 7 cards numerados
-- [ ] OG image por rota, gerada no build
+- [x] Todos os tipos de bloco renderizam (texto, lista, tabela, código, callout, leitura) (2026-07-28)
+- [x] Code blocks com botão copiar acessível (2026-07-28)
+- [x] Variante correto/evitar com rótulo textual, não só cor (2026-07-28)
+- [x] Home landing com os 7 cards numerados (2026-07-28)
+- [x] Paginação anterior/próxima atravessando partes (2026-07-28)
+- [ ] **Índice lateral "Nesta página"** — não existe
+- [ ] **Âncoras de seção** (link `#` nos headings) — não existem
+- [ ] **OG image por rota** — não existe
+- [ ] Ilustração por parte
+- [ ] Documentação lida de ponta a ponta por uma pessoa
 
-## Fase 5 — Busca
+## Fase 5 — Busca `[~]`
 
-- [ ] Índice de busca gerado no build
-- [ ] Busca retorna resultado relevante em todas as partes
-- [ ] Combobox segue o padrão WAI-ARIA e funciona só com teclado
-- [ ] Contagem de resultados anunciada por leitor de tela
+- [x] Índice construído a partir do conteúdo do idioma (2026-07-28)
+- [x] Busca sem acento, múltiplos termos com AND, ranking por peso (2026-07-28)
+- [x] Combobox seguindo o padrão WAI-ARIA, foco preso no input (2026-07-28)
+- [x] Contagem de resultados anunciada com debounce (2026-07-28)
+- [x] Atalho `/` inerte dentro de campo de texto (2026-07-28)
+- [ ] **Nunca exercitada em runtime** — só compilada
+- [ ] Validação funcional das buscas de exemplo
 
-## Fase 6 — Checklists interativos
+## Fase 6 — Checklists interativos `[~]`
 
-- [ ] 14 checklists disponíveis e marcáveis
-- [ ] Progresso persiste entre sessões
-- [ ] Export do resultado funcionando
-- [ ] Reset por checklist com confirmação
+- [x] 14 checklists disponíveis e marcáveis (2026-07-28)
+- [x] Progresso persiste em localStorage com guard de plataforma (2026-07-28)
+- [x] Export em markdown funcionando (2026-07-28)
+- [x] Reset com `<dialog>` nativo e retorno de foco (2026-07-28)
+- [ ] **Reset global** na página de índice
+- [ ] **Progresso visível na lista** do índice
+- [ ] Export em texto simples
+- [ ] Persistência verificada de verdade (recarga, fechar navegador)
 
-## Fase 7 — Auditor de snippet
+## Fase 7 — Auditor `[~]`
 
-- [ ] Parser aceita template Angular sem quebrar
-- [ ] Conjunto de regras implementado e testado
-- [ ] Cada achado traz severidade, critério WCAG e link para a seção da doc
-- [ ] Resultado da análise anunciado por leitor de tela
+- [x] Parser aceita template Angular (interpolação e blocos `@if`/`@for`) (2026-07-28)
+- [x] 16 regras implementadas (2026-07-28)
+- [x] Correção automática do que é determinístico (2026-07-28)
+- [x] Pergunta o que depende de decisão humana, em vez de chutar (2026-07-28)
+- [x] Cada achado traz severidade, WCAG e link para a seção (2026-07-28)
+- [x] Limite da ferramenta declarado na própria página (2026-07-28)
+- [ ] **8 regras restantes** das 24 planejadas
+- [ ] **Nenhum teste** de regra (dispara / não dispara)
+- [ ] Número de linha nos achados
+- [ ] Limite de tamanho da entrada
+- [ ] Nunca exercitado em runtime
 
-## Fase 8 — Qualidade e a11y
+## Fase 8 — Qualidade e a11y `[~]`
 
-- [ ] axe sem violação em todas as rotas
-- [ ] Lighthouse Accessibility 100 em todas as rotas
-- [ ] Jornada completa só com teclado
-- [ ] Validado no TalkBack
-- [ ] Validado no VoiceOver
-- [ ] Contraste AA verificado nos dois temas
-- [ ] `prefers-reduced-motion` respeitado
+- [x] axe sem violação nas 553 páginas geradas (2026-07-28)
+- [x] Contraste AA verificado nos dois temas, 36 pares (2026-07-28)
+- [x] Lint de acessibilidade como erro, no CI (2026-07-28)
+- [ ] **axe nos estados pós-interação** (menu aberto, busca com resultado, dialog aberto)
+- [ ] **Lighthouse** — nunca rodado
+- [ ] **Jornada completa só com teclado** — nunca percorrida
+- [ ] **TalkBack** — nunca testado
+- [ ] **VoiceOver** — nunca testado
+- [ ] Zoom 200% e reflow em 320px
+- [ ] `prefers-reduced-motion` verificado na prática
+- [ ] **Nenhum teste automatizado** de componente ou de regra
 
-## Fase 9 — Deploy Vercel
+## Fase 9 — Deploy Vercel `[ ]`
 
-- [ ] Todas as rotas prerenderizadas no build
-- [ ] Projeto conectado e deploy verde
-- [ ] Headers de segurança e cache configurados
-- [ ] Site validado em produção (a11y + performance)
-- [ ] Conformidade de marca e licença conferida
-- [ ] Repositório público com licenças e CI verde
-- [ ] `git push` feito e TODOs atualizados
+- [x] Todas as rotas prerenderizadas no build — 553 (2026-07-28)
+- [x] `vercel.json` com headers de segurança e cache (2026-07-28)
+- [x] `sitemap.xml` com hreflang e `robots.txt` gerados do build real (2026-07-28)
+- [ ] **Projeto conectado à Vercel**
+- [ ] **Deploy feito**
+- [ ] Site validado em produção
+- [ ] `TODO.md` do projeto e `14.AGENDA/TODO.md` atualizados
+- [ ] Repositório renomeado para `ariangular` no GitHub
+
+---
+
+## Resumo honesto
+
+| | |
+|---|---|
+| Verificado por ferramenta | lint, contraste (36 pares), axe (553 páginas), build (553 rotas), integridade da fonte |
+| **Nunca verificado** | navegador, teclado, leitor de tela, Lighthouse, produção |
+| Fases fechadas | nenhuma |
+| Maior risco | o site nunca foi visto funcionando |

@@ -1,91 +1,96 @@
 # Fase 5 — Busca · Checklist
 
-Marcar concluído com data: `(YYYY-MM-DD)`
+Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
+
+> **A busca compila e passa no lint e no axe, mas nunca foi digitada uma letra nela.**
+> Todos os itens de comportamento abaixo estão por verificar.
 
 ## Índice
 
-- [ ] Tipo `SearchEntry` definido
-- [ ] Índice gerado em build time a partir das coleções da Fase 2
-- [ ] Índice **não** é montado percorrendo o DOM
-- [ ] Uma entrada por seção (156)
-- [ ] Texto da seção achatado sem markup
-- [ ] `keywords` com atributos ARIA citados na seção
-- [ ] `keywords` com roles citadas na seção
-- [ ] `keywords` com APIs do CDK/Material citadas
-- [ ] `keywords` com critérios WCAG citados (ex: `2.4.3`)
-- [ ] Tamanho do índice medido e registrado
+- [x] Montado a partir do conteúdo do idioma corrente (2026-07-28)
+- [x] Uma entrada por seção — 160 (2026-07-28)
+- [x] Texto achatado sem markup (2026-07-28)
+- [x] `keywords` com atributos ARIA citados (2026-07-28)
+- [x] `keywords` com roles citadas (2026-07-28)
+- [x] `keywords` com APIs do CDK, Material e `@angular/aria` (2026-07-28)
+- [x] `keywords` com critérios WCAG (`2.4.3` e afins) (2026-07-28)
+- [x] Keywords técnicas não traduzidas — `aria-label` é igual em qualquer idioma (2026-07-28)
+- [x] `computed` — recalcula ao trocar de idioma (2026-07-28)
 
 ## Motor
 
-- [ ] Busca implementada sem biblioteca externa
-- [ ] Normalização para minúsculas
-- [ ] Remoção de acento na consulta e no índice
-- [ ] Múltiplos termos com lógica AND
-- [ ] Ranking por peso: keywords > título da seção > título da parte > corpo
-- [ ] Motor é função pura, sem tocar `window` ou `document`
-- [ ] Testes de ranking cobrindo os quatro pesos
+- [x] Implementado sem biblioteca (2026-07-28)
+- [x] Normalização para minúsculas (2026-07-28)
+- [x] Remoção de acento na consulta e no índice (2026-07-28)
+- [x] Múltiplos termos com lógica AND (2026-07-28)
+- [x] Ranking por peso: keyword > título da seção > título da parte > corpo (2026-07-28)
+- [x] Função pura, sem tocar `window` ou `document` (2026-07-28)
+- [ ] **Testes de ranking** cobrindo os quatro pesos
+- [ ] Tamanho do índice medido
 
 ## Componente combobox
 
-- [ ] `role="combobox"` no input
-- [ ] `aria-expanded` refletindo o estado real
-- [ ] `aria-controls` apontando para a listbox
-- [ ] `aria-autocomplete="list"`
-- [ ] `aria-activedescendant` apontando para a opção ativa
-- [ ] `aria-label` no input
-- [ ] `role="listbox"` no container de resultados
-- [ ] `role="option"` com `id` único em cada resultado
-- [ ] `aria-selected` correto na opção ativa
-- [ ] **O foco nunca sai do input**
+- [x] `role="combobox"` no input (2026-07-28)
+- [x] `aria-expanded` refletindo o estado real (2026-07-28)
+- [x] `aria-controls` apontando para a listbox (2026-07-28)
+- [x] `aria-autocomplete="list"` (2026-07-28)
+- [x] `aria-activedescendant` apontando para a opção ativa (2026-07-28)
+- [x] `<label>` real associado, não placeholder como rótulo (2026-07-28)
+- [x] `role="listbox"` no container (2026-07-28)
+- [x] `role="option"` com `id` único em cada resultado (2026-07-28)
+- [x] `aria-selected` na opção ativa (2026-07-28)
+- [x] **O foco nunca sai do input** — opção não é focável, por desenho (2026-07-28)
+- [x] Exceção ao lint documentada inline, sem afrouxar a regra global (2026-07-28)
 
-## Teclado
+## Teclado — implementado, não testado
 
-- [ ] `↓` move a opção ativa para baixo
-- [ ] `↑` move a opção ativa para cima
-- [ ] Navegação circula (ou para) de forma previsível nas pontas
-- [ ] `Enter` navega para a opção ativa
-- [ ] `Esc` fecha a lista
-- [ ] Segundo `Esc` limpa o campo
-- [ ] `Home` vai para a primeira opção
-- [ ] `End` vai para a última opção
-- [ ] `Tab` fecha a lista e segue o fluxo
-- [ ] Sem armadilha de teclado (WCAG 2.1.2)
+- [x] `↓` move a opção ativa para baixo, circulando (2026-07-28)
+- [x] `↑` move para cima, circulando (2026-07-28)
+- [x] `Enter` navega para a opção ativa (2026-07-28)
+- [x] `Esc` limpa; segundo `Esc` fecha (2026-07-28)
+- [x] `Home` e `End` (2026-07-28)
+- [x] `Tab` fecha e segue o fluxo (2026-07-28)
+- [ ] **Nenhuma dessas teclas foi pressionada de verdade**
+- [ ] Sem armadilha de teclado (WCAG 2.1.2) — por verificar
 
 ## Anúncio
 
-- [ ] `aria-live="polite"` com contagem de resultados
-- [ ] `aria-atomic="true"`
-- [ ] Debounce de ~300ms antes de anunciar
-- [ ] Sem anúncio a cada tecla digitada
-- [ ] Nunca `assertive`
-- [ ] Estado vazio com texto útil
+- [x] `aria-live="polite"` com `aria-atomic="true"` (2026-07-28)
+- [x] Debounce de 400ms antes de anunciar (2026-07-28)
+- [x] Nunca `assertive` (2026-07-28)
+- [x] Estado vazio com texto útil, não só "nada encontrado" (2026-07-28)
+- [ ] Anúncio verificado com leitor de tela
+- [ ] Confirmar que não anuncia a cada tecla
 
 ## Abertura
 
-- [ ] Botão de busca no header
-- [ ] Atalho `/` foca a busca
-- [ ] Atalho `/` desativado quando o foco está em campo de texto
-- [ ] Atalho documentado na interface
+- [x] Botão de busca no header (2026-07-28)
+- [x] Atalho `/` foca a busca (2026-07-28)
+- [x] Atalho `/` inerte quando o foco está em campo de texto (WCAG 2.1.4) (2026-07-28)
+- [x] Atalho documentado na própria interface (2026-07-28)
+- [ ] Painel fecha ao clicar fora — implementado, não testado
+- [ ] **Painel de busca não prende o foco nem devolve ao abridor** — é um modal na prática
 
 ## Realce
 
-- [ ] Termo realçado com `<mark>`
-- [ ] Contraste do realce verificado no tema claro
-- [ ] Contraste do realce verificado no tema escuro
+- [x] Termo realçado com `<mark>` (2026-07-28)
+- [x] Contraste do realce verificado nos dois temas — 11.11:1 e 7.51:1 (2026-07-28)
 
-## Validação funcional
+## Validação funcional — NENHUMA FEITA
 
 - [ ] Buscar "formularios" (sem acento) acha "Formulários"
 - [ ] Buscar "aria-expanded" acha as seções corretas
 - [ ] Buscar "cdkTrapFocus" acha a seção do CDK
 - [ ] Buscar "LiveAnnouncer" acha a seção correta
 - [ ] Buscar "2.4.3" acha a tabela de critérios WCAG
-- [ ] Buscar "modal foco" (dois termos) retorna resultado relevante
+- [ ] Buscar "ngCombobox" acha as seções novas de `@angular/aria`
+- [ ] Buscar "modal foco" (dois termos, AND) retorna resultado relevante
 - [ ] Todas as 7 partes aparecem em alguma busca
 
-## Fechamento da fase
+## Fechamento
 
+- [x] axe sem violação (2026-07-28)
+- [x] `ng lint` e `ng build` passando (2026-07-28)
+- [x] Commit e push feitos (2026-07-28)
 - [ ] Fluxo completo operável só com teclado
-- [ ] axe sem violação na busca
-- [ ] `ng lint` e `ng build` passando
-- [ ] Commit com gitmoji feito e `git push` executado
+- [ ] Fase fechada — bloqueada por não ter sido exercitada

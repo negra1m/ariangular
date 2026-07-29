@@ -1,96 +1,121 @@
 # Fase 7 — Auditor de Snippet · Checklist
 
-Marcar concluído com data: `(YYYY-MM-DD)`
+Estado em 2026-07-28. Marcar concluído com data: `(YYYY-MM-DD)`
+
+> **16 das 24 regras. Nenhum teste. Nunca executado com um snippet real.**
+> É a fase com maior distância entre "escrito" e "verificado" — e a mais perigosa,
+> porque uma regra errada corrige código para pior.
+
+## Decisão do PO (2026-07-28)
+
+- [x] Corrige o determinístico automaticamente e pergunta o que depende de decisão
+      humana. Não chuta nome acessível: `aria-label` errado faz o leitor anunciar
+      informação falsa com confiança, e isso é pior que ausência
 
 ## Parser
 
-- [ ] Pré-processamento substitui `{{ … }}` por placeholder
-- [ ] Blocos `@if` neutralizados mantendo conteúdo
-- [ ] Blocos `@for` neutralizados mantendo conteúdo
-- [ ] Blocos `@switch` neutralizados mantendo conteúdo
-- [ ] Blocos `@defer` neutralizados mantendo conteúdo
-- [ ] `*ngIf` / `*ngFor` sobrevivem ao parse
-- [ ] Atributos `[x]`, `(x)`, `#ref` sobrevivem ao parse (confirmado por teste)
-- [ ] `DOMParser` não roda no prerender (guard de plataforma)
-- [ ] Falha de parse mostra mensagem clara, sem erro cru
-- [ ] Teste com template real de projeto Angular
+- [x] `{{ … }}` protegido durante o parse e restaurado depois (2026-07-28)
+- [x] Blocos `@if`/`@for`/`@switch`/`@defer` neutralizados mantendo o conteúdo (2026-07-28)
+- [x] `DOMParser` com guard de plataforma — não roda no prerender (2026-07-28)
+- [x] Falha de parse mostra mensagem clara, sem erro cru (2026-07-28)
+- [x] Reindentação da saída (2026-07-28)
+- [ ] **Confirmado por teste** que `*ngIf`, `[attr.x]`, `(click)` e `#ref` sobrevivem
+- [ ] Testado com template real de projeto Angular
 
-## Regras — implementação e teste (dispara / não dispara)
+## Regras implementadas — 16
 
-- [ ] 1. `<div>`/`<span>` com `(click)` sem role e tabindex — Crítico
-- [ ] 2. `(click)` sem handler de teclado equivalente — Crítico
-- [ ] 3. `<button>` só com ícone sem rótulo acessível — Crítico
-- [ ] 4. Campo de formulário sem rótulo acessível — Crítico
-- [ ] 5. `<input>` só com `placeholder` como rótulo — Crítico
-- [ ] 6. `<img>` sem `alt` — Crítico
-- [ ] 7. `<a>` com `(click)` sem `href`/`routerLink` — Alto
-- [ ] 8. `<a>` sem texto e sem rótulo acessível — Alto
-- [ ] 9. `tabindex` positivo — Alto
-- [ ] 10. `aria-hidden="true"` em elemento focável — Crítico
-- [ ] 11. `aria-describedby`/`labelledby` com `id` inexistente — Médio
-- [ ] 12. ARIA redundante (`role="button"` em `<button>`) — Baixo
-- [ ] 13. `aria-expanded` literal em vez de binding — Médio
-- [ ] 14. `role="tab"` sem `aria-selected` — Médio
-- [ ] 15. `role="dialog"` sem `aria-modal` ou sem rótulo — Alto
-- [ ] 16. `role="checkbox"`/`switch` sem `aria-checked` — Médio
-- [ ] 17. `role="progressbar"` sem `aria-valuenow`/`min`/`max` — Médio
-- [ ] 18. Tabela feita com `<div>` — Médio
-- [ ] 19. `<table>` sem `<th>` ou `<th>` sem `scope` — Médio
-- [ ] 20. Salto de nível de heading — Médio
-- [ ] 21. `outline: none` inline sem substituto — Alto
-- [ ] 22. `autofocus` presente — Baixo
-- [ ] 23. `role` inválido ou `aria-*` inexistente — Médio
-- [ ] 24. Listbox custom sem gestão de teclado aparente — Médio
+- [x] `div-clicavel` — `<div>`/`<span>` com `(click)` · Crítico · **corrige** (2026-07-28)
+- [x] `botao-icone-sem-nome` — só ícone, sem nome · Crítico · **pergunta** (2026-07-28)
+- [x] `campo-sem-label` — campo sem rótulo · Crítico · **pergunta** (2026-07-28)
+- [x] `img-sem-alt` — `<img>` sem alt · Crítico · **pergunta** (2026-07-28)
+- [x] `aria-hidden-focavel` — aria-hidden em focável · Crítico · **corrige** (2026-07-28)
+- [x] `link-sem-href` — `<a>` com `(click)` sem destino · Alto · **corrige** (2026-07-28)
+- [x] `tabindex-positivo` · Alto · **corrige** (2026-07-28)
+- [x] `dialog-sem-rotulo` — sem aria-modal ou sem rótulo · Alto · **corrige** (2026-07-28)
+- [x] `outline-none` — inline sem substituto · Alto · **corrige** (2026-07-28)
+- [x] `aria-expanded-literal` — valor fixo em vez de binding · Médio · sinaliza (2026-07-28)
+- [x] `tab-sem-selected` · Médio · **corrige** (2026-07-28)
+- [x] `checkbox-sem-checked` · Médio · **corrige** (2026-07-28)
+- [x] `progressbar-incompleto` · Médio · **corrige** (2026-07-28)
+- [x] `th-sem-scope` · Médio · **corrige** (2026-07-28)
+- [x] `aria-redundante` — role repetindo a semântica nativa · Baixo · **corrige** (2026-07-28)
+- [x] `autofocus` · Baixo · **corrige** (2026-07-28)
+
+## Regras faltando — 8
+
+- [ ] `input-so-placeholder` — placeholder como único rótulo
+- [ ] `link-sem-texto` — `<a>` sem conteúdo nem rótulo
+- [ ] `aria-describedby-id-inexistente` — referência quebrada
+- [ ] `tabela-com-div` — grid de divs com aparência de tabela
+- [ ] `salto-de-heading` — h1 seguido de h4
+- [ ] `role-invalido` — role inexistente ou `aria-*` que não existe
+- [ ] `listbox-custom-sem-teclado`
+- [ ] `mouse-sem-teclado` — `(mouseover)` sem `(focus)` equivalente
+
+## Testes — NENHUM ESCRITO
+
+- [ ] **Cada regra com teste de "dispara"**
+- [ ] **Cada regra com teste de "não dispara"** (o que evita falso positivo)
+- [ ] Teste de que o auto-fix produz markup válido
+- [ ] Teste de que nenhuma regra aponta para seção inexistente da doc
+- [ ] Teste de round-trip: preprocess → postprocess preserva o código
+
+> Sem os testes de "não dispara", o auditor acumula falso positivo e as pessoas
+> param de confiar nele. É o risco número um desta fase.
 
 ## Metadados de cada achado
 
-- [ ] Toda regra tem severidade
-- [ ] Toda regra tem critério WCAG (ou "—" explícito)
-- [ ] Toda regra tem explicação do impacto no leitor de tela
-- [ ] Toda regra tem exemplo de correção
-- [ ] Toda regra aponta para uma seção existente da doc
-- [ ] Teste que falha se alguma regra apontar para seção inexistente
+- [x] Severidade (2026-07-28)
+- [x] Critério WCAG (2026-07-28)
+- [x] Explicação do impacto no leitor de tela (2026-07-28)
+- [x] Link para a seção da documentação (2026-07-28)
+- [x] Trecho ofensor (2026-07-28)
+- [ ] **Número da linha** — não implementado
 
 ## Interface — entrada
 
-- [ ] `<label>` real associado ao `<textarea>`
-- [ ] Sem usar placeholder como rótulo
-- [ ] Botão "Analisar" explícito
-- [ ] **Sem** análise automática a cada tecla
-- [ ] Botão de carregar snippet de exemplo
-- [ ] Limite de tamanho com aviso antes de travar
+- [x] `<label>` real associado ao `<textarea>` (2026-07-28)
+- [x] Sem usar placeholder como rótulo (2026-07-28)
+- [x] Botão "Analisar" explícito (2026-07-28)
+- [x] **Sem** análise automática a cada tecla (2026-07-28)
+- [x] Botão de carregar snippet de exemplo (2026-07-28)
+- [ ] **Limite de tamanho** com aviso antes de travar
 
 ## Interface — resultado
 
-- [ ] Contagem por severidade no topo
-- [ ] Achados ordenados por severidade
-- [ ] Trecho ofensor exibido
-- [ ] Número da linha, quando disponível
-- [ ] Explicação do impacto
-- [ ] Exemplo de correção
-- [ ] Critério WCAG exibido
-- [ ] Link para a seção da doc
-- [ ] Severidade com rótulo textual, não só cor
-- [ ] Ícone de severidade com `aria-hidden="true"`
-- [ ] Estado sem violações com mensagem que também relembra o limite
+- [x] Contagem: corrigidos automaticamente vs precisam de resposta (2026-07-28)
+- [x] Achados ordenados por severidade (2026-07-28)
+- [x] Campo de resposta para cada pergunta pendente (2026-07-28)
+- [x] Resposta injetada no código de saída (2026-07-28)
+- [x] Severidade com rótulo textual, não só cor (2026-07-28)
+- [x] Ícone de severidade com `aria-hidden="true"` (2026-07-28)
+- [x] Código corrigido em painel próprio, com botão copiar (2026-07-28)
+- [x] Estado sem violações relembra o limite da ferramenta (2026-07-28)
 
 ## Limite declarado
 
-- [ ] Aviso visível na página de que o auditor não substitui axe, Lighthouse nem teste real
-- [ ] Aviso presente também no estado "nenhuma violação"
-- [ ] Número de regras informado ao usuário
+- [x] Aviso visível na página: lê markup estático, não executa o código, não
+      substitui axe, Lighthouse nem teste real (2026-07-28)
+- [x] Número de regras informado (2026-07-28)
+- [x] Aviso repetido no estado "nenhuma violação" (2026-07-28)
 
 ## Anúncio e foco
 
-- [ ] Resultado anunciado via `aria-live="polite"`
-- [ ] Anúncio inclui contagem por severidade
-- [ ] Foco move para o cabeçalho do resultado após analisar
-- [ ] Resultado navegável só com teclado
+- [x] Resultado anunciado via `LiveAnnouncer` com a contagem (2026-07-28)
+- [x] Foco move para o cabeçalho do resultado após analisar (2026-07-28)
+- [ ] Verificado com leitor de tela
 
-## Fechamento da fase
+## Validação funcional — NENHUMA FEITA
 
 - [ ] Snippet de exemplo dispara exatamente os achados esperados
-- [ ] Nenhum falso positivo nos testes de "não dispara"
-- [ ] axe sem violação na rota `/auditor`
-- [ ] `ng lint` e `ng build` passando
-- [ ] Commit com gitmoji feito e `git push` executado
+- [ ] Nenhum falso positivo num template correto
+- [ ] O código corrigido é HTML/template válido
+- [ ] Preencher uma resposta injeta no lugar certo
+- [ ] Colar template Angular real não quebra o parser
+
+## Fechamento
+
+- [x] axe sem violação na rota `/auditor` (2026-07-28)
+- [x] `ng lint` e `ng build` passando (2026-07-28)
+- [x] Commit e push feitos (2026-07-28)
+- [ ] Fase fechada — bloqueada por testes, 8 regras e verificação

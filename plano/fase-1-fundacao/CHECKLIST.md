@@ -80,7 +80,10 @@ Marcar concluído com data: `(YYYY-MM-DD)`
 - [x] **Nenhuma fonte externa bloqueante** — só fontes de sistema (2026-07-28)
 - [x] Corpo limitado a 68 caracteres por linha (`--measure`) (2026-07-28)
 
-## Ilustrações base
+## Ilustrações base — NADA FEITO
+
+O pedido do PO era "figuras de acessibilidade e carinho por todo ele". Não foi
+entregue nada disso. É a maior lacuna de identidade visual do projeto.
 
 - [ ] Direção validada contra `IDENTIDADE-VISUAL.md` §5
 - [ ] PO decidiu sobre a mascote Angie do press kit Angular
@@ -93,19 +96,32 @@ Marcar concluído com data: `(YYYY-MM-DD)`
 ## Logo e marca
 
 - [x] `MARCA-E-LICENCA.md` escrito, com os limites levantados nas fontes (2026-07-28)
-- [ ] Logo é adaptação do escudo Angular **atual (v17+)**
-- [ ] **Não** usa o escudo de 2016 (v3–v16)
-- [ ] **Não** usa o logo AngularJS
-- [ ] **Não** usa o escudo oficial intacto como logo do produto
-- [ ] Conteúdo interno do escudo é próprio, ligado a acessibilidade
-- [ ] Favicon e ícones derivados do mesmo logo (ainda o favicon padrão do Angular CLI)
+- [x] Logo é adaptação do escudo Angular **atual (v17+)** — `BrandMark` (2026-07-28)
+- [x] **Não** usa o escudo de 2016 (v3–v16) (2026-07-28)
+- [x] **Não** usa o logo AngularJS (2026-07-28)
+- [x] **Não** usa o escudo oficial intacto como logo do produto (2026-07-28)
+- [x] Conteúdo interno do escudo é próprio: um anel de foco (2026-07-28)
+- [x] Wordmark com sobreposição `aria` + `angular`, destaque só visual (2026-07-28)
+- [x] SVG decorativo com `aria-hidden`, nome acessível vindo do texto (2026-07-28)
+- [ ] **Favicon e ícones derivados do logo** — ainda o padrão do Angular CLI
+- [ ] Logo conferido renderizado num navegador
 - [x] Atribuição CC BY 4.0 preparada em `NOTICE.md` (2026-07-28)
 
-## Watermark
+## Watermark — NÃO APLICADO
 
 - [ ] Watermark zero-width (U+200B / U+200D) no shell
 - [ ] Fora do fluxo de leitura, com `aria-hidden="true"`
 - [ ] Verificado em TalkBack e VoiceOver (Fase 8)
+
+## Estrutura de pastas
+
+- [x] `src/app/core/` — i18n, a11y, seo, theme, progress, search (2026-07-28)
+- [x] `src/app/shared/` — header, footer, busca, blocos, marca (2026-07-28)
+- [x] `src/app/features/` — home, doc, checklists, auditor, not-found (2026-07-28)
+- [x] `src/content/` — tipos e conteúdo por locale (2026-07-28)
+- [x] `src/styles/` — tokens, reset, focus, motion (2026-07-28)
+- [x] `scripts/` — 7 ferramentas de verificação e geração (2026-07-28)
+- [x] `i18n/` — catálogo de tradução (2026-07-28)
 
 ## Open source
 
