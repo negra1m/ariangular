@@ -24,7 +24,8 @@
     "a11y": "node scripts/check-a11y.js",
     "a11y:sample": "node scripts/check-a11y.js --sample",
     "csp": "node scripts/csp-hash.js",
-    "i18n:merge": "node scripts/merge-i18n.js en"
+    "i18n:merge": "node scripts/merge-i18n.js en",
+    "og": "node scripts/generate-og.js"
   },
   "private": true,
   "packageManager": "npm@11.16.0",
@@ -53,6 +54,7 @@
     "eslint": "^10.6.0",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
+    "sharp": "^0.35.3",
     "typescript": "~6.0.2",
     "typescript-eslint": "8.62.1",
     "vitest": "^4.0.8"

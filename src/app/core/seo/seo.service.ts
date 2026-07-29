@@ -15,6 +15,25 @@ export interface SeoInput {
 }
 
 /**
+ * Rotas com imagem própria em public/og/. Uma seção usa a imagem da sua parte:
+ * o primeiro segmento do caminho já é o id da parte.
+ *
+ * Gerar uma imagem por seção daria 468 arquivos com o mesmo desenho e o título
+ * trocado — e o título já viaja no og:title, exibido ao lado da imagem.
+ */
+const OG_KEYS = new Set([
+  'fundamentos',
+  'aria',
+  'formularios',
+  'componentes',
+  'angular',
+  'leitores-de-tela',
+  'qa-wcag',
+  'auditor',
+  'checklists',
+]);
+
+/**
  * Metadados por rota.
  *
  * O site tem 468 páginas em três idiomas. Sem título, descrição e hreflang
@@ -36,6 +55,7 @@ export class SeoService {
     const locale = this.locale.locale();
     const full = `${title} | ${SITE}`;
     const url = `${ORIGIN}/${locale}${path ? '/' + path : ''}`;
+    const image = this.ogImage(path);
 
     this.title.setTitle(full);
     this.meta.updateTag({ name: 'description', content: description });
@@ -47,13 +67,34 @@ export class SeoService {
     this.meta.updateTag({ property: 'og:site_name', content: SITE });
     this.meta.updateTag({ property: 'og:locale', content: LOCALE_TAG[locale].replace('-', '_') });
 
+    this.meta.updateTag({ property: 'og:image', content: image });
+    this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+    this.meta.updateTag({ property: 'og:image:height', content: '630' });
+    // O texto alternativo da prévia é o título: a imagem não carrega informação
+    // além dele, e descrever o desenho ("fundo preto, barra vermelha") seria
+    // descrever decoração para quem pediu conteúdo.
+    this.meta.updateTag({ property: 'og:image:alt', content: full });
+
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: full });
     this.meta.updateTag({ name: 'twitter:description', content: description });
+    this.meta.updateTag({ name: 'twitter:image', content: image });
+    this.meta.updateTag({ name: 'twitter:image:alt', content: full });
 
     this.setCanonical(url);
     this.setHreflang(path);
     this.setJsonLd({ title, description, url, path });
+  }
+
+  /**
+   * URL absoluta, não relativa: Facebook, LinkedIn e Slack não resolvem
+   * caminho relativo em og:image — a prévia simplesmente sai sem imagem.
+   */
+  private ogImage(path: string): string {
+    const locale = this.locale.locale();
+    const key = path.split('/')[0];
+    const name = OG_KEYS.has(key) ? key : 'home';
+    return `${ORIGIN}/og/${locale}/${name}.png`;
   }
 
   /**
