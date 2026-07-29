@@ -182,7 +182,11 @@ function toBlocks(container, state = { variant: 'neutral', expectReading: false 
       // O primeiro <p> é o rótulo do tom, que a UI recria — não é conteúdo.
       const inner = node.cloneNode(true);
       inner.querySelector('.callout__label')?.remove();
-      blocks.push({ kind: 'callout', tone, blocks: toBlocks(inner, { variant: 'neutral', expectReading: false }) });
+      blocks.push({
+        kind: 'callout',
+        tone,
+        blocks: toBlocks(inner, { variant: 'neutral', expectReading: false }),
+      });
       continue;
     }
   }
@@ -193,6 +197,32 @@ function toBlocks(container, state = { variant: 'neutral', expectReading: false 
 /* ------------------------------------------------------------------ */
 /* Resumo da seção (meta description)                                  */
 /* ------------------------------------------------------------------ */
+
+/**
+ * Resumos escritos à mão vencem a heurística.
+ *
+ * A heurística abaixo é um fallback: ela pega o primeiro parágrafo, e quando
+ * não há parágrafo cai para "Título — acessibilidade em Angular". Isso vira
+ * <meta description> e o texto do resultado de busca, então em 103 das 169
+ * seções o snippet não dizia nada. As versões à mão vivem em
+ * i18n/summaries.pt.json e sobrevivem a uma re-extração.
+ */
+const HAND_WRITTEN = (() => {
+  const file = path.join(ROOT, 'i18n', 'summaries.pt.json');
+  if (!fs.existsSync(file)) return {};
+  const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
+  return Object.fromEntries(Object.entries(raw).filter(([k]) => !k.startsWith('_')));
+})();
+
+/** Chaves consumidas, para acusar as que não casaram com nenhuma seção. */
+const usedOverrides = new Set();
+
+function override(key, fallback) {
+  const hand = HAND_WRITTEN[key];
+  if (!hand) return fallback;
+  usedOverrides.add(key);
+  return hand;
+}
 
 function summarize(title, blocks) {
   const p = blocks.find((b) => b.kind === 'paragraph' && b.text.length > 30);
@@ -226,30 +256,31 @@ for (const [i, partEl] of [...doc.querySelectorAll('section.parte')].entries()) 
     }
   }
 
-  const sections = [...partEl.querySelectorAll(':scope > section.secao')].map(
-    (secEl, j) => {
-      const sid = secEl.id;
-      const stitle = cleanTitle(txt(secEl.querySelector(':scope > h3')));
-      const body = secEl.cloneNode(true);
-      body.querySelector(':scope > h3')?.remove();
-      const blocks = toBlocks(body);
-      return {
-        id: sid,
-        partId: id,
-        order: j + 1,
-        title: stitle,
-        summary: summarize(stitle, blocks),
-        blocks,
-      };
-    },
-  );
+  const sections = [...partEl.querySelectorAll(':scope > section.secao')].map((secEl, j) => {
+    const sid = secEl.id;
+    const stitle = cleanTitle(txt(secEl.querySelector(':scope > h3')));
+    const body = secEl.cloneNode(true);
+    body.querySelector(':scope > h3')?.remove();
+    const blocks = toBlocks(body);
+    return {
+      id: sid,
+      partId: id,
+      order: j + 1,
+      title: stitle,
+      summary: override(`sec.${id}.${sid}.summary`, summarize(stitle, blocks)),
+      blocks,
+    };
+  });
 
   parts.push({
     id,
     order: i + 1,
     numeral: String(i + 1).padStart(2, '0'),
     title,
-    summary: introParas.join(' ') || `${title} — acessibilidade em Angular.`,
+    summary: override(
+      `part.${id}.summary`,
+      introParas.join(' ') || `${title} — acessibilidade em Angular.`,
+    ),
     sections,
   });
 }
@@ -448,5 +479,25 @@ console.log('  table:     ', countKind('table'));
 console.log('  code:      ', countKind('code'));
 console.log('  reading:   ', countKind('reading'));
 console.log('  callout:   ', countKind('callout'));
-console.log('Checklists:  ', checklists.length, `(${checklists.reduce((a, c) => a + c.items.length, 0)} itens)`);
+console.log(
+  'Checklists:  ',
+  checklists.length,
+  `(${checklists.reduce((a, c) => a + c.items.length, 0)} itens)`,
+);
 console.log('Busca:       ', searchIndex.length, 'entradas');
+
+/* Uma chave que não casou é quase sempre um id de seção digitado errado — o
+   resumo à mão some em silêncio e a heurística ruim volta sem ninguém notar. */
+const orphans = Object.keys(HAND_WRITTEN).filter((k) => !usedOverrides.has(k));
+console.log(
+  'Resumos:     ',
+  usedOverrides.size,
+  'à mão,',
+  totalSections + parts.length - usedOverrides.size,
+  'heurísticos',
+);
+if (orphans.length) {
+  console.error('\nChaves em i18n/summaries.pt.json sem seção correspondente:');
+  for (const k of orphans) console.error('  ', k);
+  process.exit(1);
+}

@@ -9,14 +9,14 @@ export const qaWcag: Part = {
   "order": 7,
   "numeral": "07",
   "title": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
-  "summary": "Esta seção serve como guia operacional para desenvolvimento, QA, refinamentos, stories, PRs e releases. O objetivo não é decorar a WCAG, mas aplicá-la diariamente.",
+  "summary": "Guia operacional para story, desenvolvimento, PR, QA e release — com os critérios WCAG que mais geram bug.",
   "sections": [
     {
       "id": "o-que-significa-uma-tela-acessivel",
       "partId": "qa-wcag",
       "order": 1,
       "title": "O que significa uma tela acessível?",
-      "summary": "Uma tela acessível não é apenas uma tela sem erros de WCAG.",
+      "summary": "Não é só uma tela sem erro de WCAG. É uma tela onde a pessoa entende, navega sozinha, age, recebe retorno e conclui a jornada.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -44,7 +44,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 2,
       "title": "Principais Critérios WCAG para Angular",
-      "summary": "Principais Critérios WCAG para Angular — acessibilidade em Angular.",
+      "summary": "Treze critérios que cobrem a maior parte do que uma aplicação Angular erra, de texto alternativo a name, role e value.",
       "blocks": [
         {
           "kind": "table",
@@ -114,7 +114,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 3,
       "title": "Critérios que Mais Geram Bugs",
-      "summary": "Critérios que Mais Geram Bugs: 2.4.3 Ordem de foco.; 4.1.2 Name Role Value.; 3.3.1 Identificação de erros.",
+      "summary": "Ordem de foco, name-role-value, identificação de erro, navegação por teclado e relacionamentos — nessa ordem.",
       "blocks": [
         {
           "kind": "list",
@@ -134,7 +134,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 4,
       "title": "Checklist de Story",
-      "summary": "Toda história deveria responder:",
+      "summary": "Seis perguntas que toda história deveria responder no refinamento, antes de escrever a primeira linha.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -159,7 +159,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 5,
       "title": "Checklist de Desenvolvimento",
-      "summary": "Checklist de Desenvolvimento: Existe HTML semântico?; Existe label para todos os campos?; Existe nome acessível?",
+      "summary": "Dez perguntas para rodar durante a implementação — semântica, label, nome, role, foco, teclado, retorno e os dois leitores.",
       "blocks": [
         {
           "kind": "list",
@@ -184,7 +184,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 6,
       "title": "Checklist de Pull Request",
-      "summary": "Checklist de Pull Request: Novos componentes foram testados?; O foco continua correto?; Não houve regressão de leitor de tela?",
+      "summary": "Seis perguntas antes de abrir o PR, focadas em pegar regressão, não trabalho novo.",
       "blocks": [
         {
           "kind": "list",
@@ -205,7 +205,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 7,
       "title": "Checklist de QA",
-      "summary": "Checklist de QA: Todos os botões são anunciados?; Todos os links são anunciados?; Todos os campos possuem label?",
+      "summary": "Dez verificações sobre uma tela pronta: botões, links, labels, erros, modais, accordions, tabs, steppers e foco perdido.",
       "blocks": [
         {
           "kind": "list",
@@ -230,7 +230,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 8,
       "title": "Checklist para TalkBack",
-      "summary": "Checklist para TalkBack: Navegar a tela inteira.; Validar headings.; Validar botões.",
+      "summary": "Nove passagens para rodar num Android, terminando em se o fluxo pode de fato ser concluído.",
       "blocks": [
         {
           "kind": "list",
@@ -254,7 +254,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 9,
       "title": "Checklist para VoiceOver",
-      "summary": "Checklist para VoiceOver: Navegar tela completa.; Validar todos os elementos focáveis.; Validar formulários.",
+      "summary": "Sete passagens num iOS, incluindo alertas, menus e overlays, onde o VoiceOver difere do TalkBack.",
       "blocks": [
         {
           "kind": "list",
@@ -276,7 +276,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 10,
       "title": "Quando Abrir um Bug de Acessibilidade?",
-      "summary": "Quando Abrir um Bug de Acessibilidade?: Não conseguir concluir uma tarefa.; Não conseguir identificar um elemento.; Não conseguir navegar.",
+      "summary": "Sempre que a pessoa não conclui a tarefa, não identifica um elemento, não navega, perde o foco, não recebe retorno ou recebe informação falsa.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -301,7 +301,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 11,
       "title": "Template de Bug",
-      "summary": "Template de Bug — acessibilidade em Angular.",
+      "summary": "Título, problema, comportamento esperado, impacto e critério WCAG — o suficiente para qualquer um reproduzir e priorizar.",
       "blocks": [
         {
           "kind": "code",
@@ -315,7 +315,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 12,
       "title": "Classificação de Severidade",
-      "summary": "Classificação de Severidade — acessibilidade em Angular.",
+      "summary": "Crítico é a jornada não poder ser concluída. Todo o resto é medido contra isso.",
       "blocks": [
         {
           "kind": "table",
@@ -349,7 +349,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 13,
       "title": "Exemplos de Bugs Críticos",
-      "summary": "Exemplos de Bugs Críticos: Botão principal sem nome.; Modal inacessível.; Erro não anunciado.",
+      "summary": "Botão principal sem nome, modal inacessível, erro não anunciado, foco preso no lugar errado, campo sem label.",
       "blocks": [
         {
           "kind": "list",
@@ -369,7 +369,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 14,
       "title": "Exemplos de Bugs Médios",
-      "summary": "Exemplos de Bugs Médios: Heading incorreto.; Texto alternativo ruim.; Tooltip sem descrição.",
+      "summary": "Nível de heading errado, texto alternativo fraco, tooltip sem descrição, leitura redundante.",
       "blocks": [
         {
           "kind": "list",
@@ -388,7 +388,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 15,
       "title": "Definition of Done Acessível",
-      "summary": "Definition of Done Acessível: WCAG AA atendida.; Teclado funcionando.; TalkBack validado.",
+      "summary": "Nove condições antes de considerar qualquer coisa pronta, incluindo validação nos dois leitores de tela reais.",
       "blocks": [
         {
           "kind": "list",
@@ -412,7 +412,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 16,
       "title": "Checklist para Revisão de Tela Nova",
-      "summary": "Checklist para Revisão de Tela Nova: Existe H1?; Existe estrutura semântica?; Existe ordem lógica?",
+      "summary": "Nove perguntas para uma tela que você vê pela primeira vez, do h1 até o retorno de carregamento.",
       "blocks": [
         {
           "kind": "list",
@@ -436,7 +436,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 17,
       "title": "European Accessibility Act",
-      "summary": "Desde 28 de junho de 2025 o European Accessibility Act é exigível em todos os países da União Europeia.",
+      "summary": "Exigível em toda a União Europeia desde 28 de junho de 2025. Acessibilidade deixou de ser melhoria e virou requisito de entrada.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -532,7 +532,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 18,
       "title": "Acessibilidade cognitiva",
-      "summary": "Boa parte do esforço de acessibilidade vai para deficiência visual e motora. Deficiência cognitiva afeta mais pessoas e recebe menos atenção.",
+      "summary": "Afeta mais gente que deficiência visual ou motora e recebe uma fração da atenção. Interface que funciona para quem está exausto funciona melhor para todos.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -665,7 +665,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 19,
       "title": "Ferramentas Recomendadas",
-      "summary": "Ferramentas Recomendadas: TalkBack.; VoiceOver.; Chrome Lighthouse.",
+      "summary": "TalkBack, VoiceOver, Lighthouse, axe DevTools, Accessibility Insights e o pacote Angular CDK A11y.",
       "blocks": [
         {
           "kind": "list",
@@ -686,7 +686,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 20,
       "title": "O que Ferramentas NÃO Encontram",
-      "summary": "Ferramentas automatizadas não substituem testes reais.",
+      "summary": "Ferramenta automatizada não substitui teste real. Ela é ruim em fluxo quebrado, foco ruim, anúncio confuso e navegação complexa.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -714,7 +714,7 @@ export const qaWcag: Part = {
       "partId": "qa-wcag",
       "order": 21,
       "title": "Mentalidade Final",
-      "summary": "Se a resposta for sim, normalmente a implementação está no caminho certo.",
+      "summary": "A pergunta não é se a tela passou na WCAG. É se uma pessoa usando TalkBack ou VoiceOver consegue concluir a jornada sozinha.",
       "blocks": [
         {
           "kind": "paragraph",

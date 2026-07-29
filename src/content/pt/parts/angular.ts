@@ -9,14 +9,14 @@ export const angular: Part = {
   "order": 5,
   "numeral": "05",
   "title": "Angular, Angular Material e Angular CDK A11y",
-  "summary": "Esta seção cobre as práticas específicas para Angular, Angular Material e Angular CDK.",
+  "summary": "Foco após navegação de rota, Angular CDK A11y, o pacote oficial @angular/aria, Material e componentes customizados.",
   "sections": [
     {
       "id": "angular-e-acessivel-por-padrao",
       "partId": "angular",
       "order": 1,
       "title": "Angular é acessível por padrão?",
-      "summary": "Angular renderiza o HTML que você escreve. Se o HTML for acessível, a aplicação tende a ser acessível. Se o HTML for ruim, Angular não corrige isso.",
+      "summary": "Não. O Angular renderiza o HTML que você escreve. HTML bom tende a gerar app acessível; HTML ruim o framework não conserta.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -33,7 +33,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 2,
       "title": "Regra Principal para Angular",
-      "summary": "Regra Principal para Angular — acessibilidade em Angular.",
+      "summary": "HTML semântico primeiro, ARIA depois. Um button com handler de clique ganha de uma div com handler de clique, sempre.",
       "blocks": [
         {
           "kind": "code",
@@ -57,7 +57,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 3,
       "title": "Binding de ARIA",
-      "summary": "Binding de ARIA — acessibilidade em Angular.",
+      "summary": "Use attribute binding quando o valor ARIA for dinâmico, para ele acompanhar o estado real em vez de congelar no inicial.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -85,7 +85,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 4,
       "title": "NgIf e Foco",
-      "summary": "Quando o elemento some do DOM, o foco pode ser perdido.",
+      "summary": "Um dos bugs mais comuns: quando o elemento sai do DOM, o foco que estava nele some sem substituto.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -107,7 +107,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 5,
       "title": "NgFor e Acessibilidade",
-      "summary": "NgFor e Acessibilidade — acessibilidade em Angular.",
+      "summary": "Repita dentro de uma lista de verdade. Um loop de divs perde o \"lista com N itens\" que orienta quem não vê a tela.",
       "blocks": [
         {
           "kind": "code",
@@ -130,7 +130,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 6,
       "title": "Router Angular",
-      "summary": "Aplicações SPA não recarregam a página.",
+      "summary": "SPA não recarrega a página, então o leitor de tela não percebe que a tela mudou. É a maior lacuna de acessibilidade em app Angular.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -147,7 +147,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 7,
       "title": "Foco Após Navegação",
-      "summary": "Foco Após Navegação: Mover foco para o H1.; Ou para o conteúdo principal.",
+      "summary": "A cada troca de rota, mova o foco para o h1 ou para o conteúdo principal. Senão ele fica onde a página antiga estava.",
       "blocks": [
         {
           "kind": "code",
@@ -173,7 +173,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 8,
       "title": "Exemplo de Destino de Foco",
-      "summary": "Exemplo de Destino de Foco — acessibilidade em Angular.",
+      "summary": "Dê tabindex=\"-1\" ao heading para ele receber foco programaticamente sem entrar na ordem do Tab.",
       "blocks": [
         {
           "kind": "code",
@@ -192,7 +192,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 9,
       "title": "Anunciar Mudanças de Tela",
-      "summary": "Em aplicações Angular é comum anunciar o nome da tela.",
+      "summary": "Anuncie o nome da nova tela depois de navegar. Anuncie depois de mover o foco — na ordem inversa o anúncio é cortado.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -210,7 +210,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 10,
       "title": "Angular CDK Accessibility",
-      "summary": "O pacote mais importante para acessibilidade na stack Angular.",
+      "summary": "O pacote mais importante de acessibilidade da stack Angular: LiveAnnouncer, FocusMonitor, FocusTrap, FocusKeyManager e InteractivityChecker.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -234,7 +234,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 11,
       "title": "LiveAnnouncer",
-      "summary": "Permite criar anúncios para leitores de tela.",
+      "summary": "Anuncia uma mensagem para leitores de tela programaticamente, através de uma região viva gerenciada — sem markup próprio.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -257,7 +257,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 12,
       "title": "Quando usar LiveAnnouncer",
-      "summary": "Quando usar LiveAnnouncer: Pagamento concluído.; Filtro aplicado.; Busca concluída.",
+      "summary": "Para resultados que acontecem sem trocar de tela: pagamento concluído, filtro aplicado, busca terminada, erro importante.",
       "blocks": [
         {
           "kind": "list",
@@ -277,7 +277,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 13,
       "title": "cdkTrapFocus",
-      "summary": "cdkTrapFocus: Modal.; Bottom Sheet.; Dialog.",
+      "summary": "Mantém o Tab dentro de uma região. Essencial em modal, bottom sheet e dialog, onde o foco escapar para trás quebra tudo.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -303,7 +303,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 14,
       "title": "Exemplo cdkTrapFocus",
-      "summary": "Exemplo cdkTrapFocus — acessibilidade em Angular.",
+      "summary": "Uma diretiva no contêiner já basta para o Tab ciclar dentro dele.",
       "blocks": [
         {
           "kind": "code",
@@ -317,7 +317,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 15,
       "title": "FocusMonitor",
-      "summary": "Identifica como o foco chegou até o elemento.",
+      "summary": "Diz como o foco chegou — mouse, teclado, toque ou programaticamente. Útil para mostrar o anel de foco só quando ajuda.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -340,7 +340,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 16,
       "title": "FocusKeyManager",
-      "summary": "FocusKeyManager: Tabs.; Menus.; Listbox.",
+      "summary": "Cuida da navegação por setas dentro de um conjunto de itens — tabs, menus, listbox e combobox.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -367,7 +367,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 17,
       "title": "Angular Material",
-      "summary": "O Material já possui boa parte da acessibilidade implementada.",
+      "summary": "O Material implementa boa parte da acessibilidade — o que não significa que o resultado seja acessível sem testar.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -384,7 +384,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 18,
       "title": "MatDialog",
-      "summary": "MatDialog: Role dialog.; Gerenciamento de foco.; ESC.",
+      "summary": "Traz a role dialog, gerenciamento de foco, ESC e backdrop já implementados.",
       "blocks": [
         {
           "kind": "heading",
@@ -408,7 +408,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 19,
       "title": "Checklist MatDialog",
-      "summary": "Checklist MatDialog: Tem título?; Recebe foco?; Retorna foco?",
+      "summary": "Quatro coisas para conferir mesmo usando MatDialog: título, foco entrando, foco voltando e botão de fechar.",
       "blocks": [
         {
           "kind": "list",
@@ -427,7 +427,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 20,
       "title": "MatTabs",
-      "summary": "Implementa a estrutura de tabs.",
+      "summary": "Implementa a estrutura de tabs. Ainda assim, confirme que as setas funcionam e que os dois leitores anunciam a aba selecionada.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -453,7 +453,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 21,
       "title": "MatMenu",
-      "summary": "Preferível criar menus usando MatMenu ao invés de implementação caseira.",
+      "summary": "Prefira MatMenu a menu caseiro. Navegação por teclado em menu é fácil de errar de forma sutil.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -466,7 +466,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 22,
       "title": "MatSelect",
-      "summary": "Componente mais propenso a bugs de acessibilidade.",
+      "summary": "O componente mais propenso a bug de acessibilidade. Sempre teste abertura, fechamento, leitura da opção e estado selecionado.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -493,7 +493,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 23,
       "title": "MatExpansionPanel",
-      "summary": "MatExpansionPanel: aria-expanded.; Foco.; Anúncio do estado.",
+      "summary": "O accordion do Material. Confira aria-expanded, para onde o foco vai, e se a mudança de estado é anunciada.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -519,7 +519,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 24,
       "title": "MatTable",
-      "summary": "Não assumir que toda tabela Material é automaticamente acessível.",
+      "summary": "Não assuma que toda tabela Material é acessível. Confira caption, headers, ordenação e foco.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -546,7 +546,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 25,
       "title": "Overlay Components",
-      "summary": "Todo componente que abre sobre a tela merece atenção extra.",
+      "summary": "Tudo que abre sobre a tela merece atenção extra: modal, popover, tooltip, select, menu e datepicker.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -571,7 +571,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 26,
       "title": "Datepicker",
-      "summary": "Datepicker: Navegação por teclado.; Leitura do dia.; Leitura do mês.",
+      "summary": "Confira a navegação por teclado e como dia, mês e ano são anunciados. Datepicker falha em silêncio para quem usa teclado.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -595,7 +595,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 27,
       "title": "Loading Angular",
-      "summary": "Mudanças de estado devem ser anunciadas.",
+      "summary": "Mudança de estado precisa ser anunciada. Um spinner que só gira não diz nada a quem usa leitor de tela.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -622,7 +622,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 28,
       "title": "Lazy Loading",
-      "summary": "Quando conteúdo aparece após carregamento assíncrono, o foco e o anúncio devem ser avaliados.",
+      "summary": "Quando conteúdo aparece depois de um carregamento assíncrono, decida de propósito para onde vai o foco e o que é anunciado.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -635,7 +635,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 29,
       "title": "Signals e Acessibilidade",
-      "summary": "Signals atualizam a UI automaticamente.",
+      "summary": "Signals atualizam a UI sozinhos, mas leitores de tela não são notificados sozinhos. Use aria-live ou LiveAnnouncer.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -664,7 +664,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 30,
       "title": "Standalone Components",
-      "summary": "Não possuem diferenças específicas de acessibilidade.",
+      "summary": "Não têm diferença de acessibilidade própria. As mesmas regras continuam valendo exatamente como antes.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -681,7 +681,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 31,
       "title": "Pipes",
-      "summary": "Cuidado com formatações que prejudicam a leitura.",
+      "summary": "Formatação pode atrapalhar a leitura em voz alta. Confira como moeda, data e número são realmente anunciados.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -708,7 +708,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 32,
       "title": "Custom Components",
-      "summary": "A maior origem de bugs em Angular.",
+      "summary": "A maior fonte de bug de acessibilidade em Angular: botão, select, dropdown, stepper e menu feitos à mão.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -732,7 +732,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 33,
       "title": "Regra para Custom Components",
-      "summary": "Regra para Custom Components: Existe componente nativo?; Existe componente Material?; Existe diretiva no Angular Aria?",
+      "summary": "Quatro perguntas antes de criar do zero: existe elemento nativo, componente Material, diretiva do Angular Aria — e você precisa mesmo do seu?",
       "blocks": [
         {
           "kind": "paragraph",
@@ -755,7 +755,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 34,
       "title": "Angular Aria",
-      "summary": "Em novembro de 2025, com o Angular v22, o time Angular lançou o pacote oficial Angular Aria.",
+      "summary": "O pacote oficial @angular/aria, lançado no Angular v22: diretivas headless que implementam os padrões da WAI-ARIA.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -791,7 +791,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 35,
       "title": "Padrões do Angular Aria",
-      "summary": "Compare com a lista de componentes que mais geram bug de acessibilidade em Angular. É quase a mesma lista.",
+      "summary": "Treze padrões, de combobox a grid. Compare com a lista de componentes que mais geram bug — é quase a mesma lista.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -865,7 +865,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 36,
       "title": "Angular Aria, Material ou CDK?",
-      "summary": "Os três convivem e resolvem coisas diferentes.",
+      "summary": "Os três convivem e resolvem coisas diferentes: componente pronto, comportamento sem estilo, e utilitário de baixo nível.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -907,7 +907,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 37,
       "title": "O que o Angular Aria não resolve",
-      "summary": "A biblioteca resolve padrões de widget. A maior parte dos bugs de acessibilidade em produção não é widget complexo.",
+      "summary": "Ele cobre padrões de widget. A maioria dos bugs em produção é div clicável, ícone sem nome e foco perdido — nada disso ele toca.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -949,7 +949,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 38,
       "title": "Erro Mais Comum do Time Front",
-      "summary": "Erro Mais Comum do Time Front: Role.; Teclado.; Estado.",
+      "summary": "Uma div com handler de clique. Funciona visualmente e perde role, teclado, estado e semântica de uma vez.",
       "blocks": [
         {
           "kind": "code",
@@ -981,7 +981,7 @@ export const angular: Part = {
       "partId": "angular",
       "order": 39,
       "title": "Checklist Angular",
-      "summary": "Checklist Angular: Existe HTML semântico?; Existe nome acessível?; Existe gerenciamento de foco?",
+      "summary": "Dez perguntas cobrindo semântica, nome acessível, gerenciamento de foco, comportamento do router, Material e componentes customizados.",
       "blocks": [
         {
           "kind": "list",

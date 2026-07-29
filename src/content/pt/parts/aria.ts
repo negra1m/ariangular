@@ -9,14 +9,14 @@ export const aria: Part = {
   "order": 2,
   "numeral": "02",
   "title": "ARIA Completo para Angular",
-  "summary": "Tudo que um dev Angular normalmente usa no dia a dia para TalkBack, VoiceOver e WCAG.",
+  "summary": "Todos os atributos e roles ARIA que um dev Angular usa no dia a dia, com o que cada um faz o leitor de tela anunciar.",
   "sections": [
     {
       "id": "o-que-e-aria",
       "partId": "aria",
       "order": 1,
       "title": "O que é ARIA?",
-      "summary": "ARIA existe para complementar a semântica HTML.",
+      "summary": "ARIA existe para complementar a semântica do HTML, nunca para substituí-la. Se a tag nativa resolve, use a tag nativa.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -58,7 +58,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 2,
       "title": "Regra de Ouro",
-      "summary": "Se o HTML nativo resolve, não use ARIA desnecessariamente.",
+      "summary": "Sem ARIA é melhor que ARIA errada. Se o HTML nativo já resolve, adicionar ARIA só cria espaço para o estado desatualizar.",
       "blocks": [
         {
           "kind": "code",
@@ -76,7 +76,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 3,
       "title": "Accessible Name",
-      "summary": "Todo elemento interativo deve possuir um nome acessível.",
+      "summary": "Todo elemento interativo precisa de nome. Texto interno é a fonte mais simples, e a que menos desatualiza.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -103,7 +103,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 4,
       "title": "aria-label",
-      "summary": "aria-label: Botão apenas com ícone.; Ações sem texto visível.; Elementos customizados.",
+      "summary": "Define o nome acessível quando não há texto visível — botão só com ícone, ação sem rótulo, elemento customizado.",
       "blocks": [
         {
           "kind": "table",
@@ -155,7 +155,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 5,
       "title": "aria-labelledby",
-      "summary": "aria-labelledby — acessibilidade em Angular.",
+      "summary": "Usa outro elemento da página como nome, referenciando o id. Útil quando o rótulo já existe como texto visível.",
       "blocks": [
         {
           "kind": "table",
@@ -182,7 +182,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 6,
       "title": "aria-describedby",
-      "summary": "Adiciona descrição complementar.",
+      "summary": "Adiciona uma descrição ao lado do nome. O leitor anuncia o nome primeiro e a descrição depois.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -200,7 +200,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 7,
       "title": "aria-hidden",
-      "summary": "aria-hidden — acessibilidade em Angular.",
+      "summary": "Esconde o elemento da árvore de acessibilidade. Nunca use em algo focável — o Tab continua chegando, mas nada é anunciado.",
       "blocks": [
         {
           "kind": "table",
@@ -236,7 +236,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 8,
       "title": "aria-expanded",
-      "summary": "aria-expanded — acessibilidade em Angular.",
+      "summary": "Anuncia se o controle está expandido ou recolhido. Precisa acompanhar o estado real; um valor parado é pior que nenhum.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -258,7 +258,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 9,
       "title": "aria-controls",
-      "summary": "Relaciona um controlador a um conteúdo.",
+      "summary": "Liga um controle ao conteúdo que ele opera, permitindo ao leitor oferecer um atalho direto até lá.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -276,7 +276,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 10,
       "title": "aria-current",
-      "summary": "aria-current — acessibilidade em Angular.",
+      "summary": "Marca o item atual de um conjunto: a página atual na navegação, a etapa atual no stepper, o local atual no breadcrumb.",
       "blocks": [
         {
           "kind": "table",
@@ -316,7 +316,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 11,
       "title": "aria-selected",
-      "summary": "aria-selected — acessibilidade em Angular.",
+      "summary": "Anuncia qual item está selecionado numa lista de abas ou listbox. Sem ele o leitor diz \"aba\" e não diz qual está ativa.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -334,7 +334,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 12,
       "title": "aria-checked",
-      "summary": "aria-checked — acessibilidade em Angular.",
+      "summary": "Carrega o estado de um checkbox, radio ou switch customizado. O input nativo já faz isso sozinho.",
       "blocks": [
         {
           "kind": "code",
@@ -352,7 +352,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 13,
       "title": "aria-pressed",
-      "summary": "aria-pressed — acessibilidade em Angular.",
+      "summary": "Para botões de alternância — favoritar, silenciar, salvar. Diz ao leitor que o botão guarda um estado, não só executa uma ação.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -370,7 +370,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 14,
       "title": "aria-disabled",
-      "summary": "aria-disabled — acessibilidade em Angular.",
+      "summary": "Anuncia o controle como indisponível mantendo ele alcançável por teclado — ao contrário do disabled nativo, que o tira da ordem de foco.",
       "blocks": [
         {
           "kind": "code",
@@ -388,7 +388,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 15,
       "title": "aria-required",
-      "summary": "aria-required — acessibilidade em Angular.",
+      "summary": "Anuncia que o campo precisa ser preenchido. O required nativo já faz isso; use quando o controle não for um input nativo.",
       "blocks": [
         {
           "kind": "code",
@@ -406,7 +406,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 16,
       "title": "aria-invalid",
-      "summary": "aria-invalid — acessibilidade em Angular.",
+      "summary": "Marca o campo como reprovado na validação, para o estado ser anunciado junto com o nome quando o foco chegar nele.",
       "blocks": [
         {
           "kind": "code",
@@ -424,7 +424,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 17,
       "title": "aria-live",
-      "summary": "aria-live — acessibilidade em Angular.",
+      "summary": "Anuncia conteúdo que muda sem recarregar a página — toast, resultado, status. Use polite; assertive interrompe o que está sendo lido.",
       "blocks": [
         {
           "kind": "table",
@@ -464,7 +464,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 18,
       "title": "aria-atomic",
-      "summary": "aria-atomic — acessibilidade em Angular.",
+      "summary": "Controla quanto de uma região viva é relido quando parte dela muda: tudo, ou só o que mudou.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -482,7 +482,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 19,
       "title": "aria-busy",
-      "summary": "aria-busy — acessibilidade em Angular.",
+      "summary": "Avisa a tecnologia assistiva que a região ainda está carregando, para não anunciar um estado pela metade.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -500,7 +500,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 20,
       "title": "aria-modal",
-      "summary": "aria-modal — acessibilidade em Angular.",
+      "summary": "Diz ao leitor de tela que tudo atrás do dialog está indisponível. Sem ele, o conteúdo de baixo continua sendo lido.",
       "blocks": [
         {
           "kind": "code",
@@ -514,7 +514,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 21,
       "title": "aria-haspopup",
-      "summary": "aria-haspopup — acessibilidade em Angular.",
+      "summary": "Anuncia que o controle abre um menu, um modal ou uma lista — a pessoa sabe o que esperar antes de acionar.",
       "blocks": [
         {
           "kind": "table",
@@ -549,7 +549,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 22,
       "title": "ARIA para Progress Bar",
-      "summary": "ARIA para Progress Bar — acessibilidade em Angular.",
+      "summary": "role=progressbar precisa de valuemin, valuemax e valuenow juntos — senão o leitor anuncia uma barra sem número nenhum.",
       "blocks": [
         {
           "kind": "code",
@@ -567,7 +567,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 23,
       "title": "Principais Roles",
-      "summary": "Principais Roles — acessibilidade em Angular.",
+      "summary": "As poucas roles ARIA que cobrem quase todo caso real: button, link, dialog, alert, status, tabs, checkbox, switch, menu e listbox.",
       "blocks": [
         {
           "kind": "table",
@@ -641,7 +641,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 24,
       "title": "Roles que você quase nunca precisará",
-      "summary": "Roles que você quase nunca precisará: tree; treegrid; feed",
+      "summary": "tree, treegrid, feed, math, meter, log e marquee. Usar sem necessidade real costuma piorar a situação.",
       "blocks": [
         {
           "kind": "list",
@@ -667,7 +667,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 25,
       "title": "Angular Attribute Binding",
-      "summary": "Angular Attribute Binding — acessibilidade em Angular.",
+      "summary": "Como ligar ARIA a um valor dinâmico no Angular, para o atributo acompanhar o estado real em vez de congelar no valor inicial.",
       "blocks": [
         {
           "kind": "code",
@@ -691,7 +691,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 26,
       "title": "Erros mais comuns com ARIA",
-      "summary": "Erros mais comuns com ARIA: Adicionar role=\"button\" em botão.; Adicionar aria-label desnecessária.; aria-hidden em conteúdo importante.",
+      "summary": "Role redundante, label desnecessária, aria-hidden em conteúdo real, excesso de região viva e estado que para de acompanhar o DOM.",
       "blocks": [
         {
           "kind": "list",
@@ -713,7 +713,7 @@ export const aria: Part = {
       "partId": "aria",
       "order": 27,
       "title": "Checklist ARIA",
-      "summary": "Checklist ARIA: Possui nome acessível?; Possui role correta?; Possui estado correto?",
+      "summary": "Seis perguntas para rodar sobre qualquer elemento com ARIA antes de considerá-lo pronto.",
       "blocks": [
         {
           "kind": "list",

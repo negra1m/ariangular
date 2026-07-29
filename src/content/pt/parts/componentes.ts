@@ -9,14 +9,14 @@ export const componentes: Part = {
   "order": 4,
   "numeral": "04",
   "title": "Componentes Interativos e Estruturas Complexas",
-  "summary": "Esta seção cobre os componentes que mais geram bugs de acessibilidade em aplicações Angular.",
+  "summary": "Os componentes que mais geram bug de acessibilidade: modal, tabs, accordion, menu, combobox, tabela e carrossel.",
   "sections": [
     {
       "id": "botoes",
       "partId": "componentes",
       "order": 1,
       "title": "Botões",
-      "summary": "Botões — acessibilidade em Angular.",
+      "summary": "Use botão de verdade. Uma div clicável perde role, teclado, estado e semântica de uma vez só.",
       "blocks": [
         {
           "kind": "code",
@@ -39,7 +39,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 2,
       "title": "Botão Apenas com Ícone",
-      "summary": "Botão Apenas com Ícone — acessibilidade em Angular.",
+      "summary": "Sem rótulo, o leitor anuncia apenas \"botão\". A pessoa sabe que há um controle, mas não o que ele faz.",
       "blocks": [
         {
           "kind": "code",
@@ -57,7 +57,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 3,
       "title": "Links",
-      "summary": "Links navegam. Botões executam ações.",
+      "summary": "Links navegam, botões executam. Trocar os dois confunde quem depende da role anunciada para saber o que vai acontecer.",
       "blocks": [
         {
           "kind": "code",
@@ -80,7 +80,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 4,
       "title": "Cards Clicáveis",
-      "summary": "Cards Clicáveis — acessibilidade em Angular.",
+      "summary": "Envolva o card num botão ou âncora de verdade. Uma div com handler de clique é invisível para o teclado.",
       "blocks": [
         {
           "kind": "code",
@@ -104,7 +104,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 5,
       "title": "Accordion",
-      "summary": "Accordion — acessibilidade em Angular.",
+      "summary": "O gatilho precisa de aria-expanded e aria-controls, para o estado ser anunciado junto com o nome.",
       "blocks": [
         {
           "kind": "code",
@@ -122,7 +122,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 6,
       "title": "Accordion com Angular",
-      "summary": "aria-expanded deve refletir o estado real.",
+      "summary": "Ligue aria-expanded ao estado real. Valor fixo anuncia \"recolhido\" para sempre, mesmo com o painel aberto.",
       "blocks": [
         {
           "kind": "code",
@@ -140,7 +140,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 7,
       "title": "Tabs",
-      "summary": "Tabs — acessibilidade em Angular.",
+      "summary": "role=tablist com aria-selected em cada aba. Sem isso o leitor diz \"aba\" e não diz qual está ativa.",
       "blocks": [
         {
           "kind": "code",
@@ -154,7 +154,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 8,
       "title": "Tab Panel",
-      "summary": "Tab Panel — acessibilidade em Angular.",
+      "summary": "O painel com o conteúdo da aba selecionada, ligado a ela para o leitor conseguir ir e voltar entre os dois.",
       "blocks": [
         {
           "kind": "code",
@@ -168,7 +168,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 9,
       "title": "Modal",
-      "summary": "Modal — acessibilidade em Angular.",
+      "summary": "role=dialog, aria-modal e um rótulo. Sem aria-modal o leitor continua lendo o conteúdo de trás.",
       "blocks": [
         {
           "kind": "code",
@@ -182,7 +182,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 10,
       "title": "Checklist Modal",
-      "summary": "Checklist Modal: Possui role=\"dialog\"?; Possui aria-modal?; Recebe foco ao abrir?",
+      "summary": "Seis coisas que todo modal precisa fazer: role, aria-modal, receber foco, prender foco, fechar no ESC e devolver o foco.",
       "blocks": [
         {
           "kind": "list",
@@ -203,7 +203,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 11,
       "title": "Bottom Sheet",
-      "summary": "Bottom Sheet — acessibilidade em Angular.",
+      "summary": "É um modal que sobe de baixo. Valem as mesmas regras, sem exceção.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -221,7 +221,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 12,
       "title": "Menu",
-      "summary": "Menu — acessibilidade em Angular.",
+      "summary": "O gatilho anuncia que abre um menu, através de aria-haspopup e aria-expanded.",
       "blocks": [
         {
           "kind": "code",
@@ -235,7 +235,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 13,
       "title": "Itens de Menu",
-      "summary": "Itens de Menu — acessibilidade em Angular.",
+      "summary": "Cada item leva role=menuitem, e o conjunto todo precisa ser alcançável pelas setas.",
       "blocks": [
         {
           "kind": "code",
@@ -249,7 +249,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 14,
       "title": "Dropdown",
-      "summary": "Sempre que possível, prefira select nativo.",
+      "summary": "Prefira o select nativo sempre que der. Ele já vem com teclado, estado e comportamento mobile corretos.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -267,7 +267,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 15,
       "title": "Combobox",
-      "summary": "Implementação complexa. Evite criar manualmente.",
+      "summary": "Um dos padrões mais difíceis de acertar. Desde o Angular v22 existe resposta oficial: ngCombobox, do @angular/aria.",
       "blocks": [
         {
           "kind": "code",
@@ -285,7 +285,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 16,
       "title": "Lista",
-      "summary": "Lista — acessibilidade em Angular.",
+      "summary": "Uma ul ou ol de verdade faz o leitor anunciar \"lista com N itens\", que diz à pessoa o quanto vem pela frente.",
       "blocks": [
         {
           "kind": "code",
@@ -303,7 +303,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 17,
       "title": "Breadcrumb",
-      "summary": "Breadcrumb — acessibilidade em Angular.",
+      "summary": "Um nav rotulado, com aria-current=\"page\" no item atual para ele ser anunciado como onde você está.",
       "blocks": [
         {
           "kind": "code",
@@ -327,7 +327,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 18,
       "title": "Stepper",
-      "summary": "Stepper — acessibilidade em Angular.",
+      "summary": "aria-current=\"step\" marca a etapa atual, para a pessoa saber onde está no fluxo sem ver o destaque visual.",
       "blocks": [
         {
           "kind": "code",
@@ -345,7 +345,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 19,
       "title": "Tabela Simples",
-      "summary": "Tabela Simples — acessibilidade em Angular.",
+      "summary": "caption, th e scope são o que permite ao leitor ligar cada célula ao seu cabeçalho, em vez de ler números soltos.",
       "blocks": [
         {
           "kind": "code",
@@ -359,7 +359,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 20,
       "title": "Tabela - Boas Práticas",
-      "summary": "Tabela - Boas Práticas: Usar caption.; Usar th.; Usar scope.",
+      "summary": "Use caption, th e scope, e nunca monte tabela com div — isso destrói a relação entre célula e cabeçalho.",
       "blocks": [
         {
           "kind": "list",
@@ -378,7 +378,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 21,
       "title": "Tooltip",
-      "summary": "Tooltip — acessibilidade em Angular.",
+      "summary": "Ligue com aria-describedby e abra também no foco — tooltip que só responde ao hover não existe para o teclado.",
       "blocks": [
         {
           "kind": "code",
@@ -397,7 +397,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 22,
       "title": "Toast",
-      "summary": "Toast — acessibilidade em Angular.",
+      "summary": "role=status anuncia a mensagem sem roubar o foco, que é o comportamento certo para uma confirmação.",
       "blocks": [
         {
           "kind": "code",
@@ -411,7 +411,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 23,
       "title": "Snackbar",
-      "summary": "Snackbar — acessibilidade em Angular.",
+      "summary": "Uma região viva educada: anuncia quando houver pausa, em vez de cortar o que está sendo lido.",
       "blocks": [
         {
           "kind": "code",
@@ -425,7 +425,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 24,
       "title": "Alertas Críticos",
-      "summary": "Alertas Críticos — acessibilidade em Angular.",
+      "summary": "role=alert interrompe na hora. Reserve para o que realmente não pode esperar — o resto vira ruído.",
       "blocks": [
         {
           "kind": "code",
@@ -443,7 +443,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 25,
       "title": "Loading",
-      "summary": "Loading — acessibilidade em Angular.",
+      "summary": "aria-busy avisa a tecnologia assistiva que a região ainda está atualizando, para não anunciar um estado pela metade.",
       "blocks": [
         {
           "kind": "code",
@@ -457,7 +457,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 26,
       "title": "Progress Bar",
-      "summary": "Progress Bar — acessibilidade em Angular.",
+      "summary": "role=progressbar precisa de valuemin, valuemax e valuenow, senão a barra é anunciada sem número algum.",
       "blocks": [
         {
           "kind": "code",
@@ -475,7 +475,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 27,
       "title": "Skeleton Loading",
-      "summary": "Conteúdo visual deve ser ignorado pelo leitor de tela.",
+      "summary": "As formas de placeholder não carregam informação. Esconda com aria-hidden para o leitor não receber uma parede de nada.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -493,7 +493,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 28,
       "title": "Carrossel",
-      "summary": "Carrossel: Botão anterior.; Botão próximo.; Botão pausar.",
+      "summary": "Precisa de botão anterior, próximo e pausar, e slides identificáveis. Rotação automática sem pausa é falha de WCAG.",
       "blocks": [
         {
           "kind": "list",
@@ -512,7 +512,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 29,
       "title": "Infinite Scroll",
-      "summary": "Infinite Scroll: Anunciar novos itens carregados.; Preservar foco.; Evitar mudanças bruscas.",
+      "summary": "Anuncie os itens que chegaram, preserve o foco onde estava, e evite a página pular sob a pessoa.",
       "blocks": [
         {
           "kind": "list",
@@ -530,7 +530,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 30,
       "title": "Drag and Drop",
-      "summary": "Nunca dependa exclusivamente do gesto.",
+      "summary": "Nunca dependa só do gesto. Precisa existir um caminho por clique ou teclado para o mesmo resultado.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -547,7 +547,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 31,
       "title": "Upload de Arquivo",
-      "summary": "Upload de Arquivo — acessibilidade em Angular.",
+      "summary": "Input de arquivo nativo com label de verdade. Upload customizado é um lugar comum de perder o teclado por completo.",
       "blocks": [
         {
           "kind": "code",
@@ -561,7 +561,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 32,
       "title": "Mensagens Dinâmicas",
-      "summary": "Mensagens Dinâmicas: Toast.; Filtro aplicado.; Busca concluída.",
+      "summary": "Tudo que muda sem recarregar precisa de região viva: toast, filtro aplicado, busca concluída, pagamento aprovado.",
       "blocks": [
         {
           "kind": "code",
@@ -590,7 +590,7 @@ export const componentes: Part = {
       "partId": "componentes",
       "order": 33,
       "title": "Checklist de Componentes",
-      "summary": "Checklist de Componentes: Possui nome acessível?; Possui role correta?; Possui estado correto?",
+      "summary": "Nove perguntas para rodar sobre qualquer componente antes de considerá-lo pronto — nome, role, estado, teclado, foco e anúncio.",
       "blocks": [
         {
           "kind": "list",

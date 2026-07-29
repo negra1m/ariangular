@@ -5,14 +5,14 @@
       "order": 1,
       "numeral": "01",
       "title": "Fundamentos de Acessibilidade Angular",
-      "summary": "Primeira parte da documentação de acessibilidade para aplicações Angular, VoiceOver e TalkBack.",
+      "summary": "Os fundamentos: o que é acessibilidade, WCAG 2.2, POUR, como leitores de tela leem uma página, e os erros mais comuns em Angular.",
       "sections": [
         {
           "id": "o-que-e-acessibilidade",
           "partId": "fundamentos",
           "order": 1,
           "title": "O que é acessibilidade?",
-          "summary": "Acessibilidade é a capacidade de um produto digital ser utilizado por todas as pessoas, independentemente de limitações visuais, auditivas, motoras, cog…",
+          "summary": "É um produto digital poder ser usado por qualquer pessoa, independentemente de limitação visual, auditiva, motora, cognitiva ou temporária.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -47,7 +47,7 @@
           "partId": "fundamentos",
           "order": 2,
           "title": "WCAG 2.2",
-          "summary": "A WCAG (Web Content Accessibility Guidelines) é o conjunto mais utilizado no mundo para avaliar acessibilidade digital.",
+          "summary": "A WCAG é o padrão mais usado no mundo para avaliar acessibilidade digital. AA é o nível que a maioria das empresas persegue.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -86,7 +86,7 @@
           "partId": "fundamentos",
           "order": 3,
           "title": "POUR",
-          "summary": "Todos os critérios da WCAG derivam de quatro pilares:",
+          "summary": "Todo critério da WCAG vem de quatro pilares: Perceptível, Operável, Compreensível e Robusto.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -155,7 +155,7 @@
           "partId": "fundamentos",
           "order": 4,
           "title": "Leitores de tela",
-          "summary": "Leitor de tela nativo do Android.",
+          "summary": "TalkBack no Android, VoiceOver no iOS. Os dois precisam de três coisas: nome acessível, role correta e estado correto.",
           "blocks": [
             {
               "kind": "heading",
@@ -210,7 +210,7 @@
           "partId": "fundamentos",
           "order": 5,
           "title": "Como um leitor de tela enxerga uma página?",
-          "summary": "Usuários não enxergam a interface da mesma forma que usuários visuais.",
+          "summary": "Não do jeito que quem enxerga vê. A navegação é por títulos, botões, links, campos e landmarks — uma tela visualmente perfeita pode ser inutilizável.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -248,7 +248,7 @@
           "partId": "fundamentos",
           "order": 6,
           "title": "Regra de Ouro da Acessibilidade",
-          "summary": "Sempre prefira HTML semântico antes de usar ARIA.",
+          "summary": "HTML semântico primeiro, ARIA depois. Se existe tag nativa que resolve, ela já traz role, teclado e estado de graça.",
           "blocks": [
             {
               "kind": "heading",
@@ -286,7 +286,7 @@
           "partId": "fundamentos",
           "order": 7,
           "title": "Estrutura Semântica Básica",
-          "summary": "Estrutura Semântica Básica — acessibilidade em Angular.",
+          "summary": "header, nav, main e footer dão ao leitor de tela o mapa da página antes de qualquer linha ser lida.",
           "blocks": [
             {
               "kind": "code",
@@ -300,7 +300,7 @@
           "partId": "fundamentos",
           "order": 8,
           "title": "Landmarks",
-          "summary": "Landmarks permitem que leitores de tela naveguem rapidamente pelas regiões importantes da página.",
+          "summary": "Landmarks permitem pular direto para as regiões importantes da página, em vez de percorrer tudo.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -342,7 +342,7 @@
           "partId": "fundamentos",
           "order": 9,
           "title": "Headings",
-          "summary": "Headings criam uma árvore de navegação.",
+          "summary": "Headings formam uma árvore de navegação. Pular um nível sugere uma estrutura que não existe e desorienta.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -365,7 +365,7 @@
           "partId": "fundamentos",
           "order": 10,
           "title": "Accessible Name",
-          "summary": "Todo elemento interativo deve possuir um nome acessível.",
+          "summary": "Todo elemento interativo precisa de nome. Ele vem do texto visível, ou do aria-label quando não há texto para usar.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -406,7 +406,7 @@
           "partId": "fundamentos",
           "order": 11,
           "title": "Accessible Description",
-          "summary": "O leitor combinará o nome do campo com sua descrição.",
+          "summary": "aria-describedby acrescenta uma dica ao lado do nome. O leitor lê o nome do campo e depois a descrição.",
           "blocks": [
             {
               "kind": "code",
@@ -424,7 +424,7 @@
           "partId": "fundamentos",
           "order": 12,
           "title": "Nome + Role + Estado",
-          "summary": "Quase toda análise de leitor de tela pode ser resumida em três perguntas:",
+          "summary": "Quase todo problema de leitor de tela se resume a três perguntas: qual o nome, qual a role, qual o estado.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -472,7 +472,7 @@
           "partId": "fundamentos",
           "order": 13,
           "title": "Erros mais comuns encontrados em Angular",
-          "summary": "Erros mais comuns encontrados em Angular: Div clicável simulando botão.; Ícone clicável sem aria-label.; Input apenas com placeholder.",
+          "summary": "Div clicável, ícone sem label, input só com placeholder, falta de heading, modal sem foco e tabindex positivo.",
           "blocks": [
             {
               "kind": "list",
@@ -497,7 +497,7 @@
           "partId": "fundamentos",
           "order": 14,
           "title": "Mentalidade para o time Angular",
-          "summary": "Mentalidade para o time Angular — acessibilidade em Angular.",
+          "summary": "Cinco perguntas antes de criar qualquer componente — elas pegam a maioria dos problemas antes da primeira linha.",
           "blocks": [
             {
               "kind": "callout",
@@ -529,14 +529,14 @@
       "order": 2,
       "numeral": "02",
       "title": "ARIA Completo para Angular",
-      "summary": "Tudo que um dev Angular normalmente usa no dia a dia para TalkBack, VoiceOver e WCAG.",
+      "summary": "Todos os atributos e roles ARIA que um dev Angular usa no dia a dia, com o que cada um faz o leitor de tela anunciar.",
       "sections": [
         {
           "id": "o-que-e-aria",
           "partId": "aria",
           "order": 1,
           "title": "O que é ARIA?",
-          "summary": "ARIA existe para complementar a semântica HTML.",
+          "summary": "ARIA existe para complementar a semântica do HTML, nunca para substituí-la. Se a tag nativa resolve, use a tag nativa.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -578,7 +578,7 @@
           "partId": "aria",
           "order": 2,
           "title": "Regra de Ouro",
-          "summary": "Se o HTML nativo resolve, não use ARIA desnecessariamente.",
+          "summary": "Sem ARIA é melhor que ARIA errada. Se o HTML nativo já resolve, adicionar ARIA só cria espaço para o estado desatualizar.",
           "blocks": [
             {
               "kind": "code",
@@ -596,7 +596,7 @@
           "partId": "aria",
           "order": 3,
           "title": "Accessible Name",
-          "summary": "Todo elemento interativo deve possuir um nome acessível.",
+          "summary": "Todo elemento interativo precisa de nome. Texto interno é a fonte mais simples, e a que menos desatualiza.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -623,7 +623,7 @@
           "partId": "aria",
           "order": 4,
           "title": "aria-label",
-          "summary": "aria-label: Botão apenas com ícone.; Ações sem texto visível.; Elementos customizados.",
+          "summary": "Define o nome acessível quando não há texto visível — botão só com ícone, ação sem rótulo, elemento customizado.",
           "blocks": [
             {
               "kind": "table",
@@ -675,7 +675,7 @@
           "partId": "aria",
           "order": 5,
           "title": "aria-labelledby",
-          "summary": "aria-labelledby — acessibilidade em Angular.",
+          "summary": "Usa outro elemento da página como nome, referenciando o id. Útil quando o rótulo já existe como texto visível.",
           "blocks": [
             {
               "kind": "table",
@@ -702,7 +702,7 @@
           "partId": "aria",
           "order": 6,
           "title": "aria-describedby",
-          "summary": "Adiciona descrição complementar.",
+          "summary": "Adiciona uma descrição ao lado do nome. O leitor anuncia o nome primeiro e a descrição depois.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -720,7 +720,7 @@
           "partId": "aria",
           "order": 7,
           "title": "aria-hidden",
-          "summary": "aria-hidden — acessibilidade em Angular.",
+          "summary": "Esconde o elemento da árvore de acessibilidade. Nunca use em algo focável — o Tab continua chegando, mas nada é anunciado.",
           "blocks": [
             {
               "kind": "table",
@@ -756,7 +756,7 @@
           "partId": "aria",
           "order": 8,
           "title": "aria-expanded",
-          "summary": "aria-expanded — acessibilidade em Angular.",
+          "summary": "Anuncia se o controle está expandido ou recolhido. Precisa acompanhar o estado real; um valor parado é pior que nenhum.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -778,7 +778,7 @@
           "partId": "aria",
           "order": 9,
           "title": "aria-controls",
-          "summary": "Relaciona um controlador a um conteúdo.",
+          "summary": "Liga um controle ao conteúdo que ele opera, permitindo ao leitor oferecer um atalho direto até lá.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -796,7 +796,7 @@
           "partId": "aria",
           "order": 10,
           "title": "aria-current",
-          "summary": "aria-current — acessibilidade em Angular.",
+          "summary": "Marca o item atual de um conjunto: a página atual na navegação, a etapa atual no stepper, o local atual no breadcrumb.",
           "blocks": [
             {
               "kind": "table",
@@ -836,7 +836,7 @@
           "partId": "aria",
           "order": 11,
           "title": "aria-selected",
-          "summary": "aria-selected — acessibilidade em Angular.",
+          "summary": "Anuncia qual item está selecionado numa lista de abas ou listbox. Sem ele o leitor diz \"aba\" e não diz qual está ativa.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -854,7 +854,7 @@
           "partId": "aria",
           "order": 12,
           "title": "aria-checked",
-          "summary": "aria-checked — acessibilidade em Angular.",
+          "summary": "Carrega o estado de um checkbox, radio ou switch customizado. O input nativo já faz isso sozinho.",
           "blocks": [
             {
               "kind": "code",
@@ -872,7 +872,7 @@
           "partId": "aria",
           "order": 13,
           "title": "aria-pressed",
-          "summary": "aria-pressed — acessibilidade em Angular.",
+          "summary": "Para botões de alternância — favoritar, silenciar, salvar. Diz ao leitor que o botão guarda um estado, não só executa uma ação.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -890,7 +890,7 @@
           "partId": "aria",
           "order": 14,
           "title": "aria-disabled",
-          "summary": "aria-disabled — acessibilidade em Angular.",
+          "summary": "Anuncia o controle como indisponível mantendo ele alcançável por teclado — ao contrário do disabled nativo, que o tira da ordem de foco.",
           "blocks": [
             {
               "kind": "code",
@@ -908,7 +908,7 @@
           "partId": "aria",
           "order": 15,
           "title": "aria-required",
-          "summary": "aria-required — acessibilidade em Angular.",
+          "summary": "Anuncia que o campo precisa ser preenchido. O required nativo já faz isso; use quando o controle não for um input nativo.",
           "blocks": [
             {
               "kind": "code",
@@ -926,7 +926,7 @@
           "partId": "aria",
           "order": 16,
           "title": "aria-invalid",
-          "summary": "aria-invalid — acessibilidade em Angular.",
+          "summary": "Marca o campo como reprovado na validação, para o estado ser anunciado junto com o nome quando o foco chegar nele.",
           "blocks": [
             {
               "kind": "code",
@@ -944,7 +944,7 @@
           "partId": "aria",
           "order": 17,
           "title": "aria-live",
-          "summary": "aria-live — acessibilidade em Angular.",
+          "summary": "Anuncia conteúdo que muda sem recarregar a página — toast, resultado, status. Use polite; assertive interrompe o que está sendo lido.",
           "blocks": [
             {
               "kind": "table",
@@ -984,7 +984,7 @@
           "partId": "aria",
           "order": 18,
           "title": "aria-atomic",
-          "summary": "aria-atomic — acessibilidade em Angular.",
+          "summary": "Controla quanto de uma região viva é relido quando parte dela muda: tudo, ou só o que mudou.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -1002,7 +1002,7 @@
           "partId": "aria",
           "order": 19,
           "title": "aria-busy",
-          "summary": "aria-busy — acessibilidade em Angular.",
+          "summary": "Avisa a tecnologia assistiva que a região ainda está carregando, para não anunciar um estado pela metade.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -1020,7 +1020,7 @@
           "partId": "aria",
           "order": 20,
           "title": "aria-modal",
-          "summary": "aria-modal — acessibilidade em Angular.",
+          "summary": "Diz ao leitor de tela que tudo atrás do dialog está indisponível. Sem ele, o conteúdo de baixo continua sendo lido.",
           "blocks": [
             {
               "kind": "code",
@@ -1034,7 +1034,7 @@
           "partId": "aria",
           "order": 21,
           "title": "aria-haspopup",
-          "summary": "aria-haspopup — acessibilidade em Angular.",
+          "summary": "Anuncia que o controle abre um menu, um modal ou uma lista — a pessoa sabe o que esperar antes de acionar.",
           "blocks": [
             {
               "kind": "table",
@@ -1069,7 +1069,7 @@
           "partId": "aria",
           "order": 22,
           "title": "ARIA para Progress Bar",
-          "summary": "ARIA para Progress Bar — acessibilidade em Angular.",
+          "summary": "role=progressbar precisa de valuemin, valuemax e valuenow juntos — senão o leitor anuncia uma barra sem número nenhum.",
           "blocks": [
             {
               "kind": "code",
@@ -1087,7 +1087,7 @@
           "partId": "aria",
           "order": 23,
           "title": "Principais Roles",
-          "summary": "Principais Roles — acessibilidade em Angular.",
+          "summary": "As poucas roles ARIA que cobrem quase todo caso real: button, link, dialog, alert, status, tabs, checkbox, switch, menu e listbox.",
           "blocks": [
             {
               "kind": "table",
@@ -1161,7 +1161,7 @@
           "partId": "aria",
           "order": 24,
           "title": "Roles que você quase nunca precisará",
-          "summary": "Roles que você quase nunca precisará: tree; treegrid; feed",
+          "summary": "tree, treegrid, feed, math, meter, log e marquee. Usar sem necessidade real costuma piorar a situação.",
           "blocks": [
             {
               "kind": "list",
@@ -1187,7 +1187,7 @@
           "partId": "aria",
           "order": 25,
           "title": "Angular Attribute Binding",
-          "summary": "Angular Attribute Binding — acessibilidade em Angular.",
+          "summary": "Como ligar ARIA a um valor dinâmico no Angular, para o atributo acompanhar o estado real em vez de congelar no valor inicial.",
           "blocks": [
             {
               "kind": "code",
@@ -1211,7 +1211,7 @@
           "partId": "aria",
           "order": 26,
           "title": "Erros mais comuns com ARIA",
-          "summary": "Erros mais comuns com ARIA: Adicionar role=\"button\" em botão.; Adicionar aria-label desnecessária.; aria-hidden em conteúdo importante.",
+          "summary": "Role redundante, label desnecessária, aria-hidden em conteúdo real, excesso de região viva e estado que para de acompanhar o DOM.",
           "blocks": [
             {
               "kind": "list",
@@ -1233,7 +1233,7 @@
           "partId": "aria",
           "order": 27,
           "title": "Checklist ARIA",
-          "summary": "Checklist ARIA: Possui nome acessível?; Possui role correta?; Possui estado correto?",
+          "summary": "Seis perguntas para rodar sobre qualquer elemento com ARIA antes de considerá-lo pronto.",
           "blocks": [
             {
               "kind": "list",
@@ -1256,14 +1256,14 @@
       "order": 3,
       "numeral": "03",
       "title": "Formulários Acessíveis",
-      "summary": "Formulários são uma das áreas com mais problemas de acessibilidade. Os princípios básicos são:",
+      "summary": "Label, campo obrigatório, mensagem de ajuda e erro anunciado. Formulário é onde mais se perde gente com deficiência.",
       "sections": [
         {
           "id": "label",
           "partId": "formularios",
           "order": 1,
           "title": "Label",
-          "summary": "Label — acessibilidade em Angular.",
+          "summary": "Todo campo precisa de label associado. Sem ele o leitor anuncia só \"campo de edição\" e a pessoa não sabe o que digitar.",
           "blocks": [
             {
               "kind": "code",
@@ -1286,7 +1286,7 @@
           "partId": "formularios",
           "order": 2,
           "title": "Placeholder não é Label",
-          "summary": "Placeholder desaparece durante o preenchimento.",
+          "summary": "O placeholder some quando a digitação começa, e o suporte dos leitores é inconsistente. É dica, nunca rótulo.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -1308,7 +1308,7 @@
           "partId": "formularios",
           "order": 3,
           "title": "Campos Obrigatórios",
-          "summary": "Campos Obrigatórios — acessibilidade em Angular.",
+          "summary": "A obrigatoriedade precisa ser anunciada, não só marcada com asterisco. O required nativo já faz; aria-required reforça.",
           "blocks": [
             {
               "kind": "heading",
@@ -1341,7 +1341,7 @@
           "partId": "formularios",
           "order": 4,
           "title": "Mensagens de Ajuda",
-          "summary": "Mensagens de Ajuda — acessibilidade em Angular.",
+          "summary": "aria-describedby liga a dica ao campo, e o leitor lê o nome e em seguida a descrição.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -1359,7 +1359,7 @@
           "partId": "formularios",
           "order": 5,
           "title": "Validação de Erro",
-          "summary": "Validação de Erro — acessibilidade em Angular.",
+          "summary": "aria-invalid marca o campo como reprovado, e o estado passa a ser anunciado junto com o nome.",
           "blocks": [
             {
               "kind": "code",
@@ -1377,7 +1377,7 @@
           "partId": "formularios",
           "order": 6,
           "title": "Erro Associado ao Campo",
-          "summary": "Erro Associado ao Campo — acessibilidade em Angular.",
+          "summary": "A mensagem de erro precisa estar ligada ao campo. Texto solto na tela é invisível para quem está no campo.",
           "blocks": [
             {
               "kind": "code",
@@ -1395,7 +1395,7 @@
           "partId": "formularios",
           "order": 7,
           "title": "Erro Dinâmico com aria-live",
-          "summary": "Erro Dinâmico com aria-live — acessibilidade em Angular.",
+          "summary": "Erro que aparece depois do envio precisa de região viva, senão ninguém usando leitor de tela fica sabendo que ele existe.",
           "blocks": [
             {
               "kind": "code",
@@ -1411,14 +1411,14 @@
       "order": 4,
       "numeral": "04",
       "title": "Componentes Interativos e Estruturas Complexas",
-      "summary": "Esta seção cobre os componentes que mais geram bugs de acessibilidade em aplicações Angular.",
+      "summary": "Os componentes que mais geram bug de acessibilidade: modal, tabs, accordion, menu, combobox, tabela e carrossel.",
       "sections": [
         {
           "id": "botoes",
           "partId": "componentes",
           "order": 1,
           "title": "Botões",
-          "summary": "Botões — acessibilidade em Angular.",
+          "summary": "Use botão de verdade. Uma div clicável perde role, teclado, estado e semântica de uma vez só.",
           "blocks": [
             {
               "kind": "code",
@@ -1441,7 +1441,7 @@
           "partId": "componentes",
           "order": 2,
           "title": "Botão Apenas com Ícone",
-          "summary": "Botão Apenas com Ícone — acessibilidade em Angular.",
+          "summary": "Sem rótulo, o leitor anuncia apenas \"botão\". A pessoa sabe que há um controle, mas não o que ele faz.",
           "blocks": [
             {
               "kind": "code",
@@ -1459,7 +1459,7 @@
           "partId": "componentes",
           "order": 3,
           "title": "Links",
-          "summary": "Links navegam. Botões executam ações.",
+          "summary": "Links navegam, botões executam. Trocar os dois confunde quem depende da role anunciada para saber o que vai acontecer.",
           "blocks": [
             {
               "kind": "code",
@@ -1482,7 +1482,7 @@
           "partId": "componentes",
           "order": 4,
           "title": "Cards Clicáveis",
-          "summary": "Cards Clicáveis — acessibilidade em Angular.",
+          "summary": "Envolva o card num botão ou âncora de verdade. Uma div com handler de clique é invisível para o teclado.",
           "blocks": [
             {
               "kind": "code",
@@ -1506,7 +1506,7 @@
           "partId": "componentes",
           "order": 5,
           "title": "Accordion",
-          "summary": "Accordion — acessibilidade em Angular.",
+          "summary": "O gatilho precisa de aria-expanded e aria-controls, para o estado ser anunciado junto com o nome.",
           "blocks": [
             {
               "kind": "code",
@@ -1524,7 +1524,7 @@
           "partId": "componentes",
           "order": 6,
           "title": "Accordion com Angular",
-          "summary": "aria-expanded deve refletir o estado real.",
+          "summary": "Ligue aria-expanded ao estado real. Valor fixo anuncia \"recolhido\" para sempre, mesmo com o painel aberto.",
           "blocks": [
             {
               "kind": "code",
@@ -1542,7 +1542,7 @@
           "partId": "componentes",
           "order": 7,
           "title": "Tabs",
-          "summary": "Tabs — acessibilidade em Angular.",
+          "summary": "role=tablist com aria-selected em cada aba. Sem isso o leitor diz \"aba\" e não diz qual está ativa.",
           "blocks": [
             {
               "kind": "code",
@@ -1556,7 +1556,7 @@
           "partId": "componentes",
           "order": 8,
           "title": "Tab Panel",
-          "summary": "Tab Panel — acessibilidade em Angular.",
+          "summary": "O painel com o conteúdo da aba selecionada, ligado a ela para o leitor conseguir ir e voltar entre os dois.",
           "blocks": [
             {
               "kind": "code",
@@ -1570,7 +1570,7 @@
           "partId": "componentes",
           "order": 9,
           "title": "Modal",
-          "summary": "Modal — acessibilidade em Angular.",
+          "summary": "role=dialog, aria-modal e um rótulo. Sem aria-modal o leitor continua lendo o conteúdo de trás.",
           "blocks": [
             {
               "kind": "code",
@@ -1584,7 +1584,7 @@
           "partId": "componentes",
           "order": 10,
           "title": "Checklist Modal",
-          "summary": "Checklist Modal: Possui role=\"dialog\"?; Possui aria-modal?; Recebe foco ao abrir?",
+          "summary": "Seis coisas que todo modal precisa fazer: role, aria-modal, receber foco, prender foco, fechar no ESC e devolver o foco.",
           "blocks": [
             {
               "kind": "list",
@@ -1605,7 +1605,7 @@
           "partId": "componentes",
           "order": 11,
           "title": "Bottom Sheet",
-          "summary": "Bottom Sheet — acessibilidade em Angular.",
+          "summary": "É um modal que sobe de baixo. Valem as mesmas regras, sem exceção.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -1623,7 +1623,7 @@
           "partId": "componentes",
           "order": 12,
           "title": "Menu",
-          "summary": "Menu — acessibilidade em Angular.",
+          "summary": "O gatilho anuncia que abre um menu, através de aria-haspopup e aria-expanded.",
           "blocks": [
             {
               "kind": "code",
@@ -1637,7 +1637,7 @@
           "partId": "componentes",
           "order": 13,
           "title": "Itens de Menu",
-          "summary": "Itens de Menu — acessibilidade em Angular.",
+          "summary": "Cada item leva role=menuitem, e o conjunto todo precisa ser alcançável pelas setas.",
           "blocks": [
             {
               "kind": "code",
@@ -1651,7 +1651,7 @@
           "partId": "componentes",
           "order": 14,
           "title": "Dropdown",
-          "summary": "Sempre que possível, prefira select nativo.",
+          "summary": "Prefira o select nativo sempre que der. Ele já vem com teclado, estado e comportamento mobile corretos.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -1669,7 +1669,7 @@
           "partId": "componentes",
           "order": 15,
           "title": "Combobox",
-          "summary": "Implementação complexa. Evite criar manualmente.",
+          "summary": "Um dos padrões mais difíceis de acertar. Desde o Angular v22 existe resposta oficial: ngCombobox, do @angular/aria.",
           "blocks": [
             {
               "kind": "code",
@@ -1687,7 +1687,7 @@
           "partId": "componentes",
           "order": 16,
           "title": "Lista",
-          "summary": "Lista — acessibilidade em Angular.",
+          "summary": "Uma ul ou ol de verdade faz o leitor anunciar \"lista com N itens\", que diz à pessoa o quanto vem pela frente.",
           "blocks": [
             {
               "kind": "code",
@@ -1705,7 +1705,7 @@
           "partId": "componentes",
           "order": 17,
           "title": "Breadcrumb",
-          "summary": "Breadcrumb — acessibilidade em Angular.",
+          "summary": "Um nav rotulado, com aria-current=\"page\" no item atual para ele ser anunciado como onde você está.",
           "blocks": [
             {
               "kind": "code",
@@ -1729,7 +1729,7 @@
           "partId": "componentes",
           "order": 18,
           "title": "Stepper",
-          "summary": "Stepper — acessibilidade em Angular.",
+          "summary": "aria-current=\"step\" marca a etapa atual, para a pessoa saber onde está no fluxo sem ver o destaque visual.",
           "blocks": [
             {
               "kind": "code",
@@ -1747,7 +1747,7 @@
           "partId": "componentes",
           "order": 19,
           "title": "Tabela Simples",
-          "summary": "Tabela Simples — acessibilidade em Angular.",
+          "summary": "caption, th e scope são o que permite ao leitor ligar cada célula ao seu cabeçalho, em vez de ler números soltos.",
           "blocks": [
             {
               "kind": "code",
@@ -1761,7 +1761,7 @@
           "partId": "componentes",
           "order": 20,
           "title": "Tabela - Boas Práticas",
-          "summary": "Tabela - Boas Práticas: Usar caption.; Usar th.; Usar scope.",
+          "summary": "Use caption, th e scope, e nunca monte tabela com div — isso destrói a relação entre célula e cabeçalho.",
           "blocks": [
             {
               "kind": "list",
@@ -1780,7 +1780,7 @@
           "partId": "componentes",
           "order": 21,
           "title": "Tooltip",
-          "summary": "Tooltip — acessibilidade em Angular.",
+          "summary": "Ligue com aria-describedby e abra também no foco — tooltip que só responde ao hover não existe para o teclado.",
           "blocks": [
             {
               "kind": "code",
@@ -1799,7 +1799,7 @@
           "partId": "componentes",
           "order": 22,
           "title": "Toast",
-          "summary": "Toast — acessibilidade em Angular.",
+          "summary": "role=status anuncia a mensagem sem roubar o foco, que é o comportamento certo para uma confirmação.",
           "blocks": [
             {
               "kind": "code",
@@ -1813,7 +1813,7 @@
           "partId": "componentes",
           "order": 23,
           "title": "Snackbar",
-          "summary": "Snackbar — acessibilidade em Angular.",
+          "summary": "Uma região viva educada: anuncia quando houver pausa, em vez de cortar o que está sendo lido.",
           "blocks": [
             {
               "kind": "code",
@@ -1827,7 +1827,7 @@
           "partId": "componentes",
           "order": 24,
           "title": "Alertas Críticos",
-          "summary": "Alertas Críticos — acessibilidade em Angular.",
+          "summary": "role=alert interrompe na hora. Reserve para o que realmente não pode esperar — o resto vira ruído.",
           "blocks": [
             {
               "kind": "code",
@@ -1845,7 +1845,7 @@
           "partId": "componentes",
           "order": 25,
           "title": "Loading",
-          "summary": "Loading — acessibilidade em Angular.",
+          "summary": "aria-busy avisa a tecnologia assistiva que a região ainda está atualizando, para não anunciar um estado pela metade.",
           "blocks": [
             {
               "kind": "code",
@@ -1859,7 +1859,7 @@
           "partId": "componentes",
           "order": 26,
           "title": "Progress Bar",
-          "summary": "Progress Bar — acessibilidade em Angular.",
+          "summary": "role=progressbar precisa de valuemin, valuemax e valuenow, senão a barra é anunciada sem número algum.",
           "blocks": [
             {
               "kind": "code",
@@ -1877,7 +1877,7 @@
           "partId": "componentes",
           "order": 27,
           "title": "Skeleton Loading",
-          "summary": "Conteúdo visual deve ser ignorado pelo leitor de tela.",
+          "summary": "As formas de placeholder não carregam informação. Esconda com aria-hidden para o leitor não receber uma parede de nada.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -1895,7 +1895,7 @@
           "partId": "componentes",
           "order": 28,
           "title": "Carrossel",
-          "summary": "Carrossel: Botão anterior.; Botão próximo.; Botão pausar.",
+          "summary": "Precisa de botão anterior, próximo e pausar, e slides identificáveis. Rotação automática sem pausa é falha de WCAG.",
           "blocks": [
             {
               "kind": "list",
@@ -1914,7 +1914,7 @@
           "partId": "componentes",
           "order": 29,
           "title": "Infinite Scroll",
-          "summary": "Infinite Scroll: Anunciar novos itens carregados.; Preservar foco.; Evitar mudanças bruscas.",
+          "summary": "Anuncie os itens que chegaram, preserve o foco onde estava, e evite a página pular sob a pessoa.",
           "blocks": [
             {
               "kind": "list",
@@ -1932,7 +1932,7 @@
           "partId": "componentes",
           "order": 30,
           "title": "Drag and Drop",
-          "summary": "Nunca dependa exclusivamente do gesto.",
+          "summary": "Nunca dependa só do gesto. Precisa existir um caminho por clique ou teclado para o mesmo resultado.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -1949,7 +1949,7 @@
           "partId": "componentes",
           "order": 31,
           "title": "Upload de Arquivo",
-          "summary": "Upload de Arquivo — acessibilidade em Angular.",
+          "summary": "Input de arquivo nativo com label de verdade. Upload customizado é um lugar comum de perder o teclado por completo.",
           "blocks": [
             {
               "kind": "code",
@@ -1963,7 +1963,7 @@
           "partId": "componentes",
           "order": 32,
           "title": "Mensagens Dinâmicas",
-          "summary": "Mensagens Dinâmicas: Toast.; Filtro aplicado.; Busca concluída.",
+          "summary": "Tudo que muda sem recarregar precisa de região viva: toast, filtro aplicado, busca concluída, pagamento aprovado.",
           "blocks": [
             {
               "kind": "code",
@@ -1992,7 +1992,7 @@
           "partId": "componentes",
           "order": 33,
           "title": "Checklist de Componentes",
-          "summary": "Checklist de Componentes: Possui nome acessível?; Possui role correta?; Possui estado correto?",
+          "summary": "Nove perguntas para rodar sobre qualquer componente antes de considerá-lo pronto — nome, role, estado, teclado, foco e anúncio.",
           "blocks": [
             {
               "kind": "list",
@@ -2018,14 +2018,14 @@
       "order": 5,
       "numeral": "05",
       "title": "Angular, Angular Material e Angular CDK A11y",
-      "summary": "Esta seção cobre as práticas específicas para Angular, Angular Material e Angular CDK.",
+      "summary": "Foco após navegação de rota, Angular CDK A11y, o pacote oficial @angular/aria, Material e componentes customizados.",
       "sections": [
         {
           "id": "angular-e-acessivel-por-padrao",
           "partId": "angular",
           "order": 1,
           "title": "Angular é acessível por padrão?",
-          "summary": "Angular renderiza o HTML que você escreve. Se o HTML for acessível, a aplicação tende a ser acessível. Se o HTML for ruim, Angular não corrige isso.",
+          "summary": "Não. O Angular renderiza o HTML que você escreve. HTML bom tende a gerar app acessível; HTML ruim o framework não conserta.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2042,7 +2042,7 @@
           "partId": "angular",
           "order": 2,
           "title": "Regra Principal para Angular",
-          "summary": "Regra Principal para Angular — acessibilidade em Angular.",
+          "summary": "HTML semântico primeiro, ARIA depois. Um button com handler de clique ganha de uma div com handler de clique, sempre.",
           "blocks": [
             {
               "kind": "code",
@@ -2066,7 +2066,7 @@
           "partId": "angular",
           "order": 3,
           "title": "Binding de ARIA",
-          "summary": "Binding de ARIA — acessibilidade em Angular.",
+          "summary": "Use attribute binding quando o valor ARIA for dinâmico, para ele acompanhar o estado real em vez de congelar no inicial.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2094,7 +2094,7 @@
           "partId": "angular",
           "order": 4,
           "title": "NgIf e Foco",
-          "summary": "Quando o elemento some do DOM, o foco pode ser perdido.",
+          "summary": "Um dos bugs mais comuns: quando o elemento sai do DOM, o foco que estava nele some sem substituto.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2116,7 +2116,7 @@
           "partId": "angular",
           "order": 5,
           "title": "NgFor e Acessibilidade",
-          "summary": "NgFor e Acessibilidade — acessibilidade em Angular.",
+          "summary": "Repita dentro de uma lista de verdade. Um loop de divs perde o \"lista com N itens\" que orienta quem não vê a tela.",
           "blocks": [
             {
               "kind": "code",
@@ -2139,7 +2139,7 @@
           "partId": "angular",
           "order": 6,
           "title": "Router Angular",
-          "summary": "Aplicações SPA não recarregam a página.",
+          "summary": "SPA não recarrega a página, então o leitor de tela não percebe que a tela mudou. É a maior lacuna de acessibilidade em app Angular.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2156,7 +2156,7 @@
           "partId": "angular",
           "order": 7,
           "title": "Foco Após Navegação",
-          "summary": "Foco Após Navegação: Mover foco para o H1.; Ou para o conteúdo principal.",
+          "summary": "A cada troca de rota, mova o foco para o h1 ou para o conteúdo principal. Senão ele fica onde a página antiga estava.",
           "blocks": [
             {
               "kind": "code",
@@ -2182,7 +2182,7 @@
           "partId": "angular",
           "order": 8,
           "title": "Exemplo de Destino de Foco",
-          "summary": "Exemplo de Destino de Foco — acessibilidade em Angular.",
+          "summary": "Dê tabindex=\"-1\" ao heading para ele receber foco programaticamente sem entrar na ordem do Tab.",
           "blocks": [
             {
               "kind": "code",
@@ -2201,7 +2201,7 @@
           "partId": "angular",
           "order": 9,
           "title": "Anunciar Mudanças de Tela",
-          "summary": "Em aplicações Angular é comum anunciar o nome da tela.",
+          "summary": "Anuncie o nome da nova tela depois de navegar. Anuncie depois de mover o foco — na ordem inversa o anúncio é cortado.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2219,7 +2219,7 @@
           "partId": "angular",
           "order": 10,
           "title": "Angular CDK Accessibility",
-          "summary": "O pacote mais importante para acessibilidade na stack Angular.",
+          "summary": "O pacote mais importante de acessibilidade da stack Angular: LiveAnnouncer, FocusMonitor, FocusTrap, FocusKeyManager e InteractivityChecker.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2243,7 +2243,7 @@
           "partId": "angular",
           "order": 11,
           "title": "LiveAnnouncer",
-          "summary": "Permite criar anúncios para leitores de tela.",
+          "summary": "Anuncia uma mensagem para leitores de tela programaticamente, através de uma região viva gerenciada — sem markup próprio.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2266,7 +2266,7 @@
           "partId": "angular",
           "order": 12,
           "title": "Quando usar LiveAnnouncer",
-          "summary": "Quando usar LiveAnnouncer: Pagamento concluído.; Filtro aplicado.; Busca concluída.",
+          "summary": "Para resultados que acontecem sem trocar de tela: pagamento concluído, filtro aplicado, busca terminada, erro importante.",
           "blocks": [
             {
               "kind": "list",
@@ -2286,7 +2286,7 @@
           "partId": "angular",
           "order": 13,
           "title": "cdkTrapFocus",
-          "summary": "cdkTrapFocus: Modal.; Bottom Sheet.; Dialog.",
+          "summary": "Mantém o Tab dentro de uma região. Essencial em modal, bottom sheet e dialog, onde o foco escapar para trás quebra tudo.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2312,7 +2312,7 @@
           "partId": "angular",
           "order": 14,
           "title": "Exemplo cdkTrapFocus",
-          "summary": "Exemplo cdkTrapFocus — acessibilidade em Angular.",
+          "summary": "Uma diretiva no contêiner já basta para o Tab ciclar dentro dele.",
           "blocks": [
             {
               "kind": "code",
@@ -2326,7 +2326,7 @@
           "partId": "angular",
           "order": 15,
           "title": "FocusMonitor",
-          "summary": "Identifica como o foco chegou até o elemento.",
+          "summary": "Diz como o foco chegou — mouse, teclado, toque ou programaticamente. Útil para mostrar o anel de foco só quando ajuda.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2349,7 +2349,7 @@
           "partId": "angular",
           "order": 16,
           "title": "FocusKeyManager",
-          "summary": "FocusKeyManager: Tabs.; Menus.; Listbox.",
+          "summary": "Cuida da navegação por setas dentro de um conjunto de itens — tabs, menus, listbox e combobox.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2376,7 +2376,7 @@
           "partId": "angular",
           "order": 17,
           "title": "Angular Material",
-          "summary": "O Material já possui boa parte da acessibilidade implementada.",
+          "summary": "O Material implementa boa parte da acessibilidade — o que não significa que o resultado seja acessível sem testar.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2393,7 +2393,7 @@
           "partId": "angular",
           "order": 18,
           "title": "MatDialog",
-          "summary": "MatDialog: Role dialog.; Gerenciamento de foco.; ESC.",
+          "summary": "Traz a role dialog, gerenciamento de foco, ESC e backdrop já implementados.",
           "blocks": [
             {
               "kind": "heading",
@@ -2417,7 +2417,7 @@
           "partId": "angular",
           "order": 19,
           "title": "Checklist MatDialog",
-          "summary": "Checklist MatDialog: Tem título?; Recebe foco?; Retorna foco?",
+          "summary": "Quatro coisas para conferir mesmo usando MatDialog: título, foco entrando, foco voltando e botão de fechar.",
           "blocks": [
             {
               "kind": "list",
@@ -2436,7 +2436,7 @@
           "partId": "angular",
           "order": 20,
           "title": "MatTabs",
-          "summary": "Implementa a estrutura de tabs.",
+          "summary": "Implementa a estrutura de tabs. Ainda assim, confirme que as setas funcionam e que os dois leitores anunciam a aba selecionada.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2462,7 +2462,7 @@
           "partId": "angular",
           "order": 21,
           "title": "MatMenu",
-          "summary": "Preferível criar menus usando MatMenu ao invés de implementação caseira.",
+          "summary": "Prefira MatMenu a menu caseiro. Navegação por teclado em menu é fácil de errar de forma sutil.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2475,7 +2475,7 @@
           "partId": "angular",
           "order": 22,
           "title": "MatSelect",
-          "summary": "Componente mais propenso a bugs de acessibilidade.",
+          "summary": "O componente mais propenso a bug de acessibilidade. Sempre teste abertura, fechamento, leitura da opção e estado selecionado.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2502,7 +2502,7 @@
           "partId": "angular",
           "order": 23,
           "title": "MatExpansionPanel",
-          "summary": "MatExpansionPanel: aria-expanded.; Foco.; Anúncio do estado.",
+          "summary": "O accordion do Material. Confira aria-expanded, para onde o foco vai, e se a mudança de estado é anunciada.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2528,7 +2528,7 @@
           "partId": "angular",
           "order": 24,
           "title": "MatTable",
-          "summary": "Não assumir que toda tabela Material é automaticamente acessível.",
+          "summary": "Não assuma que toda tabela Material é acessível. Confira caption, headers, ordenação e foco.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2555,7 +2555,7 @@
           "partId": "angular",
           "order": 25,
           "title": "Overlay Components",
-          "summary": "Todo componente que abre sobre a tela merece atenção extra.",
+          "summary": "Tudo que abre sobre a tela merece atenção extra: modal, popover, tooltip, select, menu e datepicker.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2580,7 +2580,7 @@
           "partId": "angular",
           "order": 26,
           "title": "Datepicker",
-          "summary": "Datepicker: Navegação por teclado.; Leitura do dia.; Leitura do mês.",
+          "summary": "Confira a navegação por teclado e como dia, mês e ano são anunciados. Datepicker falha em silêncio para quem usa teclado.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2604,7 +2604,7 @@
           "partId": "angular",
           "order": 27,
           "title": "Loading Angular",
-          "summary": "Mudanças de estado devem ser anunciadas.",
+          "summary": "Mudança de estado precisa ser anunciada. Um spinner que só gira não diz nada a quem usa leitor de tela.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2631,7 +2631,7 @@
           "partId": "angular",
           "order": 28,
           "title": "Lazy Loading",
-          "summary": "Quando conteúdo aparece após carregamento assíncrono, o foco e o anúncio devem ser avaliados.",
+          "summary": "Quando conteúdo aparece depois de um carregamento assíncrono, decida de propósito para onde vai o foco e o que é anunciado.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2644,7 +2644,7 @@
           "partId": "angular",
           "order": 29,
           "title": "Signals e Acessibilidade",
-          "summary": "Signals atualizam a UI automaticamente.",
+          "summary": "Signals atualizam a UI sozinhos, mas leitores de tela não são notificados sozinhos. Use aria-live ou LiveAnnouncer.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2673,7 +2673,7 @@
           "partId": "angular",
           "order": 30,
           "title": "Standalone Components",
-          "summary": "Não possuem diferenças específicas de acessibilidade.",
+          "summary": "Não têm diferença de acessibilidade própria. As mesmas regras continuam valendo exatamente como antes.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2690,7 +2690,7 @@
           "partId": "angular",
           "order": 31,
           "title": "Pipes",
-          "summary": "Cuidado com formatações que prejudicam a leitura.",
+          "summary": "Formatação pode atrapalhar a leitura em voz alta. Confira como moeda, data e número são realmente anunciados.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2717,7 +2717,7 @@
           "partId": "angular",
           "order": 32,
           "title": "Custom Components",
-          "summary": "A maior origem de bugs em Angular.",
+          "summary": "A maior fonte de bug de acessibilidade em Angular: botão, select, dropdown, stepper e menu feitos à mão.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2741,7 +2741,7 @@
           "partId": "angular",
           "order": 33,
           "title": "Regra para Custom Components",
-          "summary": "Regra para Custom Components: Existe componente nativo?; Existe componente Material?; Existe diretiva no Angular Aria?",
+          "summary": "Quatro perguntas antes de criar do zero: existe elemento nativo, componente Material, diretiva do Angular Aria — e você precisa mesmo do seu?",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2764,7 +2764,7 @@
           "partId": "angular",
           "order": 34,
           "title": "Angular Aria",
-          "summary": "Em novembro de 2025, com o Angular v22, o time Angular lançou o pacote oficial Angular Aria.",
+          "summary": "O pacote oficial @angular/aria, lançado no Angular v22: diretivas headless que implementam os padrões da WAI-ARIA.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2800,7 +2800,7 @@
           "partId": "angular",
           "order": 35,
           "title": "Padrões do Angular Aria",
-          "summary": "Compare com a lista de componentes que mais geram bug de acessibilidade em Angular. É quase a mesma lista.",
+          "summary": "Treze padrões, de combobox a grid. Compare com a lista de componentes que mais geram bug — é quase a mesma lista.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2874,7 +2874,7 @@
           "partId": "angular",
           "order": 36,
           "title": "Angular Aria, Material ou CDK?",
-          "summary": "Os três convivem e resolvem coisas diferentes.",
+          "summary": "Os três convivem e resolvem coisas diferentes: componente pronto, comportamento sem estilo, e utilitário de baixo nível.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2916,7 +2916,7 @@
           "partId": "angular",
           "order": 37,
           "title": "O que o Angular Aria não resolve",
-          "summary": "A biblioteca resolve padrões de widget. A maior parte dos bugs de acessibilidade em produção não é widget complexo.",
+          "summary": "Ele cobre padrões de widget. A maioria dos bugs em produção é div clicável, ícone sem nome e foco perdido — nada disso ele toca.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -2958,7 +2958,7 @@
           "partId": "angular",
           "order": 38,
           "title": "Erro Mais Comum do Time Front",
-          "summary": "Erro Mais Comum do Time Front: Role.; Teclado.; Estado.",
+          "summary": "Uma div com handler de clique. Funciona visualmente e perde role, teclado, estado e semântica de uma vez.",
           "blocks": [
             {
               "kind": "code",
@@ -2990,7 +2990,7 @@
           "partId": "angular",
           "order": 39,
           "title": "Checklist Angular",
-          "summary": "Checklist Angular: Existe HTML semântico?; Existe nome acessível?; Existe gerenciamento de foco?",
+          "summary": "Dez perguntas cobrindo semântica, nome acessível, gerenciamento de foco, comportamento do router, Material e componentes customizados.",
           "blocks": [
             {
               "kind": "list",
@@ -3017,14 +3017,14 @@
       "order": 6,
       "numeral": "06",
       "title": "TalkBack, VoiceOver e Testes Reais",
-      "summary": "Nesta seção vamos focar em como leitores de tela realmente se comportam. Muitos componentes estão tecnicamente corretos no HTML, mas a experiência final para o usuário continua ruim.",
+      "summary": "Como TalkBack e VoiceOver realmente se comportam, o que anunciam em cada componente, e o roteiro de teste manual.",
       "sections": [
         {
           "id": "principio-fundamental",
           "partId": "leitores-de-tela",
           "order": 1,
           "title": "Princípio Fundamental",
-          "summary": "Quase todos os bugs podem ser analisados por esses três pontos.",
+          "summary": "Leitores de tela dependem de nome, role e estado. Quase todo bug pode ser diagnosticado por essas três perguntas.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -3050,7 +3050,7 @@
           "partId": "leitores-de-tela",
           "order": 2,
           "title": "Exemplo de Leitura",
-          "summary": "Exemplo de Leitura — acessibilidade em Angular.",
+          "summary": "Um botão simples anuncia o nome e a role. TalkBack e VoiceOver dizem a mesma coisa aqui.",
           "blocks": [
             {
               "kind": "code",
@@ -3072,7 +3072,7 @@
           "partId": "leitores-de-tela",
           "order": 3,
           "title": "Botão com Ícone",
-          "summary": "Botão com Ícone — acessibilidade em Angular.",
+          "summary": "Sem rótulo o anúncio é só \"botão\". Com aria-label ele vira a ação que a pessoa está prestes a executar.",
           "blocks": [
             {
               "kind": "code",
@@ -3099,7 +3099,7 @@
           "partId": "leitores-de-tela",
           "order": 4,
           "title": "Campos Obrigatórios",
-          "summary": "Campos Obrigatórios — acessibilidade em Angular.",
+          "summary": "A obrigatoriedade é anunciada junto com o campo, para a pessoa saber antes de digitar e não depois de enviar.",
           "blocks": [
             {
               "kind": "code",
@@ -3117,7 +3117,7 @@
           "partId": "leitores-de-tela",
           "order": 5,
           "title": "Campo Inválido",
-          "summary": "Campo Inválido — acessibilidade em Angular.",
+          "summary": "aria-invalid faz a falha ser parte do que o leitor diz quando o foco chega no campo.",
           "blocks": [
             {
               "kind": "code",
@@ -3135,7 +3135,7 @@
           "partId": "leitores-de-tela",
           "order": 6,
           "title": "Checkbox",
-          "summary": "Checkbox — acessibilidade em Angular.",
+          "summary": "Um checkbox nativo anuncia o rótulo, a role e o estado — e atualiza o estado sozinho quando é marcado.",
           "blocks": [
             {
               "kind": "code",
@@ -3157,7 +3157,7 @@
           "partId": "leitores-de-tela",
           "order": 7,
           "title": "Switch",
-          "summary": "Switch — acessibilidade em Angular.",
+          "summary": "role=switch com aria-checked anuncia ligado e desligado, que soa mais natural que marcado e desmarcado num toggle.",
           "blocks": [
             {
               "kind": "code",
@@ -3175,7 +3175,7 @@
           "partId": "leitores-de-tela",
           "order": 8,
           "title": "Accordion",
-          "summary": "Accordion — acessibilidade em Angular.",
+          "summary": "O anúncio precisa mudar quando o painel abre. Se disser sempre \"recolhido\", aria-expanded não está ligado ao estado real.",
           "blocks": [
             {
               "kind": "code",
@@ -3197,7 +3197,7 @@
           "partId": "leitores-de-tela",
           "order": 9,
           "title": "Tabs",
-          "summary": "Tabs — acessibilidade em Angular.",
+          "summary": "A aba selecionada é anunciada como selecionada. Sem aria-selected a pessoa ouve \"aba\" e não sabe qual está ativa.",
           "blocks": [
             {
               "kind": "code",
@@ -3215,7 +3215,7 @@
           "partId": "leitores-de-tela",
           "order": 10,
           "title": "Stepper",
-          "summary": "Stepper — acessibilidade em Angular.",
+          "summary": "aria-current=\"step\" transforma um destaque visual em algo que o leitor de tela consegue transmitir.",
           "blocks": [
             {
               "kind": "code",
@@ -3233,7 +3233,7 @@
           "partId": "leitores-de-tela",
           "order": 11,
           "title": "Mensagens Dinâmicas",
-          "summary": "O leitor anuncia automaticamente.",
+          "summary": "Uma região viva anuncia sozinha, sem mover o foco — que é exatamente o que se quer numa confirmação.",
           "blocks": [
             {
               "kind": "code",
@@ -3255,7 +3255,7 @@
           "partId": "leitores-de-tela",
           "order": 12,
           "title": "Role Alert",
-          "summary": "Utilizar apenas para mensagens importantes.",
+          "summary": "Interrompe o que está sendo lido. Reserve para o que realmente não pode esperar; o resto vira ruído.",
           "blocks": [
             {
               "kind": "code",
@@ -3277,7 +3277,7 @@
           "partId": "leitores-de-tela",
           "order": 13,
           "title": "Foco Visível",
-          "summary": "Todo elemento focável deve indicar visualmente que recebeu foco.",
+          "summary": "Todo elemento focável precisa mostrar que está com o foco. Tirar o outline sem substituto equivale a esconder o cursor do mouse.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -3300,7 +3300,7 @@
           "partId": "leitores-de-tela",
           "order": 14,
           "title": "Sequência de Foco",
-          "summary": "A ordem do DOM deve refletir a ordem visual.",
+          "summary": "A ordem do DOM tem que bater com a ordem visual. Quem usa leitor de tela navega pela estrutura, não pelo layout.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -3317,7 +3317,7 @@
           "partId": "leitores-de-tela",
           "order": 15,
           "title": "Modais",
-          "summary": "Modais: Foco vai para o modal.; Conteúdo anterior fica inacessível.; Tab navega apenas dentro dele.",
+          "summary": "Ao abrir: foco entra, o conteúdo de trás fica inalcançável, o Tab não sai. Ao fechar: o foco volta para quem abriu.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -3350,7 +3350,7 @@
           "partId": "leitores-de-tela",
           "order": 16,
           "title": "Problema Clássico",
-          "summary": "Ao fechar o modal, o foco muitas vezes desaparece.",
+          "summary": "O modal fecha e o foco desaparece para o topo do documento. Ele tem que voltar para o botão que abriu.",
           "blocks": [
             {
               "kind": "code",
@@ -3372,7 +3372,7 @@
           "partId": "leitores-de-tela",
           "order": 17,
           "title": "Loading",
-          "summary": "Evite deixar usuário sem feedback.",
+          "summary": "Anuncie que começou e que terminou. Silêncio durante a espera é indistinguível de página quebrada.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -3399,7 +3399,7 @@
           "partId": "leitores-de-tela",
           "order": 18,
           "title": "TalkBack x VoiceOver",
-          "summary": "TalkBack x VoiceOver — acessibilidade em Angular.",
+          "summary": "Os dois divergem em lugares previsíveis: formulário, tabs, modal e select. Testar em um não cobre o outro.",
           "blocks": [
             {
               "kind": "table",
@@ -3433,7 +3433,7 @@
           "partId": "leitores-de-tela",
           "order": 19,
           "title": "Roteiro de Teste Manual",
-          "summary": "Roteiro de Teste Manual: Ativar leitor de tela.; Percorrer toda tela.; Verificar títulos.",
+          "summary": "Dez passos para rodar em cada tela com leitor de tela real — a parte que nenhuma ferramenta automatizada faz por você.",
           "blocks": [
             {
               "kind": "list",
@@ -3458,7 +3458,7 @@
           "partId": "leitores-de-tela",
           "order": 20,
           "title": "Bugs Mais Comuns Encontrados em Produção",
-          "summary": "Bugs Mais Comuns Encontrados em Produção: Botão sem nome acessível.; Ícone clicável sem label.; Modal sem foco.",
+          "summary": "Botão sem nome, ícone sem label, modal sem foco, erro não anunciado e foco perdido após navegação.",
           "blocks": [
             {
               "kind": "list",
@@ -3483,7 +3483,7 @@
           "partId": "leitores-de-tela",
           "order": 21,
           "title": "Checklist Final de TalkBack e VoiceOver",
-          "summary": "Checklist Final de TalkBack e VoiceOver: Todos os elementos possuem nome?; Todos possuem role correta?; Estado é anunciado?",
+          "summary": "Nove perguntas para responder com aparelho real antes de publicar, terminando na única que realmente importa.",
           "blocks": [
             {
               "kind": "list",
@@ -3509,14 +3509,14 @@
       "order": 7,
       "numeral": "07",
       "title": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
-      "summary": "Esta seção serve como guia operacional para desenvolvimento, QA, refinamentos, stories, PRs e releases. O objetivo não é decorar a WCAG, mas aplicá-la diariamente.",
+      "summary": "Guia operacional para story, desenvolvimento, PR, QA e release — com os critérios WCAG que mais geram bug.",
       "sections": [
         {
           "id": "o-que-significa-uma-tela-acessivel",
           "partId": "qa-wcag",
           "order": 1,
           "title": "O que significa uma tela acessível?",
-          "summary": "Uma tela acessível não é apenas uma tela sem erros de WCAG.",
+          "summary": "Não é só uma tela sem erro de WCAG. É uma tela onde a pessoa entende, navega sozinha, age, recebe retorno e conclui a jornada.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -3544,7 +3544,7 @@
           "partId": "qa-wcag",
           "order": 2,
           "title": "Principais Critérios WCAG para Angular",
-          "summary": "Principais Critérios WCAG para Angular — acessibilidade em Angular.",
+          "summary": "Treze critérios que cobrem a maior parte do que uma aplicação Angular erra, de texto alternativo a name, role e value.",
           "blocks": [
             {
               "kind": "table",
@@ -3614,7 +3614,7 @@
           "partId": "qa-wcag",
           "order": 3,
           "title": "Critérios que Mais Geram Bugs",
-          "summary": "Critérios que Mais Geram Bugs: 2.4.3 Ordem de foco.; 4.1.2 Name Role Value.; 3.3.1 Identificação de erros.",
+          "summary": "Ordem de foco, name-role-value, identificação de erro, navegação por teclado e relacionamentos — nessa ordem.",
           "blocks": [
             {
               "kind": "list",
@@ -3634,7 +3634,7 @@
           "partId": "qa-wcag",
           "order": 4,
           "title": "Checklist de Story",
-          "summary": "Toda história deveria responder:",
+          "summary": "Seis perguntas que toda história deveria responder no refinamento, antes de escrever a primeira linha.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -3659,7 +3659,7 @@
           "partId": "qa-wcag",
           "order": 5,
           "title": "Checklist de Desenvolvimento",
-          "summary": "Checklist de Desenvolvimento: Existe HTML semântico?; Existe label para todos os campos?; Existe nome acessível?",
+          "summary": "Dez perguntas para rodar durante a implementação — semântica, label, nome, role, foco, teclado, retorno e os dois leitores.",
           "blocks": [
             {
               "kind": "list",
@@ -3684,7 +3684,7 @@
           "partId": "qa-wcag",
           "order": 6,
           "title": "Checklist de Pull Request",
-          "summary": "Checklist de Pull Request: Novos componentes foram testados?; O foco continua correto?; Não houve regressão de leitor de tela?",
+          "summary": "Seis perguntas antes de abrir o PR, focadas em pegar regressão, não trabalho novo.",
           "blocks": [
             {
               "kind": "list",
@@ -3705,7 +3705,7 @@
           "partId": "qa-wcag",
           "order": 7,
           "title": "Checklist de QA",
-          "summary": "Checklist de QA: Todos os botões são anunciados?; Todos os links são anunciados?; Todos os campos possuem label?",
+          "summary": "Dez verificações sobre uma tela pronta: botões, links, labels, erros, modais, accordions, tabs, steppers e foco perdido.",
           "blocks": [
             {
               "kind": "list",
@@ -3730,7 +3730,7 @@
           "partId": "qa-wcag",
           "order": 8,
           "title": "Checklist para TalkBack",
-          "summary": "Checklist para TalkBack: Navegar a tela inteira.; Validar headings.; Validar botões.",
+          "summary": "Nove passagens para rodar num Android, terminando em se o fluxo pode de fato ser concluído.",
           "blocks": [
             {
               "kind": "list",
@@ -3754,7 +3754,7 @@
           "partId": "qa-wcag",
           "order": 9,
           "title": "Checklist para VoiceOver",
-          "summary": "Checklist para VoiceOver: Navegar tela completa.; Validar todos os elementos focáveis.; Validar formulários.",
+          "summary": "Sete passagens num iOS, incluindo alertas, menus e overlays, onde o VoiceOver difere do TalkBack.",
           "blocks": [
             {
               "kind": "list",
@@ -3776,7 +3776,7 @@
           "partId": "qa-wcag",
           "order": 10,
           "title": "Quando Abrir um Bug de Acessibilidade?",
-          "summary": "Quando Abrir um Bug de Acessibilidade?: Não conseguir concluir uma tarefa.; Não conseguir identificar um elemento.; Não conseguir navegar.",
+          "summary": "Sempre que a pessoa não conclui a tarefa, não identifica um elemento, não navega, perde o foco, não recebe retorno ou recebe informação falsa.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -3801,7 +3801,7 @@
           "partId": "qa-wcag",
           "order": 11,
           "title": "Template de Bug",
-          "summary": "Template de Bug — acessibilidade em Angular.",
+          "summary": "Título, problema, comportamento esperado, impacto e critério WCAG — o suficiente para qualquer um reproduzir e priorizar.",
           "blocks": [
             {
               "kind": "code",
@@ -3815,7 +3815,7 @@
           "partId": "qa-wcag",
           "order": 12,
           "title": "Classificação de Severidade",
-          "summary": "Classificação de Severidade — acessibilidade em Angular.",
+          "summary": "Crítico é a jornada não poder ser concluída. Todo o resto é medido contra isso.",
           "blocks": [
             {
               "kind": "table",
@@ -3849,7 +3849,7 @@
           "partId": "qa-wcag",
           "order": 13,
           "title": "Exemplos de Bugs Críticos",
-          "summary": "Exemplos de Bugs Críticos: Botão principal sem nome.; Modal inacessível.; Erro não anunciado.",
+          "summary": "Botão principal sem nome, modal inacessível, erro não anunciado, foco preso no lugar errado, campo sem label.",
           "blocks": [
             {
               "kind": "list",
@@ -3869,7 +3869,7 @@
           "partId": "qa-wcag",
           "order": 14,
           "title": "Exemplos de Bugs Médios",
-          "summary": "Exemplos de Bugs Médios: Heading incorreto.; Texto alternativo ruim.; Tooltip sem descrição.",
+          "summary": "Nível de heading errado, texto alternativo fraco, tooltip sem descrição, leitura redundante.",
           "blocks": [
             {
               "kind": "list",
@@ -3888,7 +3888,7 @@
           "partId": "qa-wcag",
           "order": 15,
           "title": "Definition of Done Acessível",
-          "summary": "Definition of Done Acessível: WCAG AA atendida.; Teclado funcionando.; TalkBack validado.",
+          "summary": "Nove condições antes de considerar qualquer coisa pronta, incluindo validação nos dois leitores de tela reais.",
           "blocks": [
             {
               "kind": "list",
@@ -3912,7 +3912,7 @@
           "partId": "qa-wcag",
           "order": 16,
           "title": "Checklist para Revisão de Tela Nova",
-          "summary": "Checklist para Revisão de Tela Nova: Existe H1?; Existe estrutura semântica?; Existe ordem lógica?",
+          "summary": "Nove perguntas para uma tela que você vê pela primeira vez, do h1 até o retorno de carregamento.",
           "blocks": [
             {
               "kind": "list",
@@ -3936,7 +3936,7 @@
           "partId": "qa-wcag",
           "order": 17,
           "title": "European Accessibility Act",
-          "summary": "Desde 28 de junho de 2025 o European Accessibility Act é exigível em todos os países da União Europeia.",
+          "summary": "Exigível em toda a União Europeia desde 28 de junho de 2025. Acessibilidade deixou de ser melhoria e virou requisito de entrada.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -4032,7 +4032,7 @@
           "partId": "qa-wcag",
           "order": 18,
           "title": "Acessibilidade cognitiva",
-          "summary": "Boa parte do esforço de acessibilidade vai para deficiência visual e motora. Deficiência cognitiva afeta mais pessoas e recebe menos atenção.",
+          "summary": "Afeta mais gente que deficiência visual ou motora e recebe uma fração da atenção. Interface que funciona para quem está exausto funciona melhor para todos.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -4165,7 +4165,7 @@
           "partId": "qa-wcag",
           "order": 19,
           "title": "Ferramentas Recomendadas",
-          "summary": "Ferramentas Recomendadas: TalkBack.; VoiceOver.; Chrome Lighthouse.",
+          "summary": "TalkBack, VoiceOver, Lighthouse, axe DevTools, Accessibility Insights e o pacote Angular CDK A11y.",
           "blocks": [
             {
               "kind": "list",
@@ -4186,7 +4186,7 @@
           "partId": "qa-wcag",
           "order": 20,
           "title": "O que Ferramentas NÃO Encontram",
-          "summary": "Ferramentas automatizadas não substituem testes reais.",
+          "summary": "Ferramenta automatizada não substitui teste real. Ela é ruim em fluxo quebrado, foco ruim, anúncio confuso e navegação complexa.",
           "blocks": [
             {
               "kind": "paragraph",
@@ -4214,7 +4214,7 @@
           "partId": "qa-wcag",
           "order": 21,
           "title": "Mentalidade Final",
-          "summary": "Se a resposta for sim, normalmente a implementação está no caminho certo.",
+          "summary": "A pergunta não é se a tela passou na WCAG. É se uma pessoa usando TalkBack ou VoiceOver consegue concluir a jornada sozinha.",
           "blocks": [
             {
               "kind": "paragraph",

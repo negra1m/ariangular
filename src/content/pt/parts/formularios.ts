@@ -9,14 +9,14 @@ export const formularios: Part = {
   "order": 3,
   "numeral": "03",
   "title": "Formulários Acessíveis",
-  "summary": "Formulários são uma das áreas com mais problemas de acessibilidade. Os princípios básicos são:",
+  "summary": "Label, campo obrigatório, mensagem de ajuda e erro anunciado. Formulário é onde mais se perde gente com deficiência.",
   "sections": [
     {
       "id": "label",
       "partId": "formularios",
       "order": 1,
       "title": "Label",
-      "summary": "Label — acessibilidade em Angular.",
+      "summary": "Todo campo precisa de label associado. Sem ele o leitor anuncia só \"campo de edição\" e a pessoa não sabe o que digitar.",
       "blocks": [
         {
           "kind": "code",
@@ -39,7 +39,7 @@ export const formularios: Part = {
       "partId": "formularios",
       "order": 2,
       "title": "Placeholder não é Label",
-      "summary": "Placeholder desaparece durante o preenchimento.",
+      "summary": "O placeholder some quando a digitação começa, e o suporte dos leitores é inconsistente. É dica, nunca rótulo.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -61,7 +61,7 @@ export const formularios: Part = {
       "partId": "formularios",
       "order": 3,
       "title": "Campos Obrigatórios",
-      "summary": "Campos Obrigatórios — acessibilidade em Angular.",
+      "summary": "A obrigatoriedade precisa ser anunciada, não só marcada com asterisco. O required nativo já faz; aria-required reforça.",
       "blocks": [
         {
           "kind": "heading",
@@ -94,7 +94,7 @@ export const formularios: Part = {
       "partId": "formularios",
       "order": 4,
       "title": "Mensagens de Ajuda",
-      "summary": "Mensagens de Ajuda — acessibilidade em Angular.",
+      "summary": "aria-describedby liga a dica ao campo, e o leitor lê o nome e em seguida a descrição.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -112,7 +112,7 @@ export const formularios: Part = {
       "partId": "formularios",
       "order": 5,
       "title": "Validação de Erro",
-      "summary": "Validação de Erro — acessibilidade em Angular.",
+      "summary": "aria-invalid marca o campo como reprovado, e o estado passa a ser anunciado junto com o nome.",
       "blocks": [
         {
           "kind": "code",
@@ -130,7 +130,7 @@ export const formularios: Part = {
       "partId": "formularios",
       "order": 6,
       "title": "Erro Associado ao Campo",
-      "summary": "Erro Associado ao Campo — acessibilidade em Angular.",
+      "summary": "A mensagem de erro precisa estar ligada ao campo. Texto solto na tela é invisível para quem está no campo.",
       "blocks": [
         {
           "kind": "code",
@@ -148,7 +148,7 @@ export const formularios: Part = {
       "partId": "formularios",
       "order": 7,
       "title": "Erro Dinâmico com aria-live",
-      "summary": "Erro Dinâmico com aria-live — acessibilidade em Angular.",
+      "summary": "Erro que aparece depois do envio precisa de região viva, senão ninguém usando leitor de tela fica sabendo que ele existe.",
       "blocks": [
         {
           "kind": "code",

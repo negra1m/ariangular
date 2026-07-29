@@ -9,14 +9,14 @@ export const leitoresDeTela: Part = {
   "order": 6,
   "numeral": "06",
   "title": "TalkBack, VoiceOver e Testes Reais",
-  "summary": "Nesta seção vamos focar em como leitores de tela realmente se comportam. Muitos componentes estão tecnicamente corretos no HTML, mas a experiência final para o usuário continua ruim.",
+  "summary": "Como TalkBack e VoiceOver realmente se comportam, o que anunciam em cada componente, e o roteiro de teste manual.",
   "sections": [
     {
       "id": "principio-fundamental",
       "partId": "leitores-de-tela",
       "order": 1,
       "title": "Princípio Fundamental",
-      "summary": "Quase todos os bugs podem ser analisados por esses três pontos.",
+      "summary": "Leitores de tela dependem de nome, role e estado. Quase todo bug pode ser diagnosticado por essas três perguntas.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -42,7 +42,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 2,
       "title": "Exemplo de Leitura",
-      "summary": "Exemplo de Leitura — acessibilidade em Angular.",
+      "summary": "Um botão simples anuncia o nome e a role. TalkBack e VoiceOver dizem a mesma coisa aqui.",
       "blocks": [
         {
           "kind": "code",
@@ -64,7 +64,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 3,
       "title": "Botão com Ícone",
-      "summary": "Botão com Ícone — acessibilidade em Angular.",
+      "summary": "Sem rótulo o anúncio é só \"botão\". Com aria-label ele vira a ação que a pessoa está prestes a executar.",
       "blocks": [
         {
           "kind": "code",
@@ -91,7 +91,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 4,
       "title": "Campos Obrigatórios",
-      "summary": "Campos Obrigatórios — acessibilidade em Angular.",
+      "summary": "A obrigatoriedade é anunciada junto com o campo, para a pessoa saber antes de digitar e não depois de enviar.",
       "blocks": [
         {
           "kind": "code",
@@ -109,7 +109,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 5,
       "title": "Campo Inválido",
-      "summary": "Campo Inválido — acessibilidade em Angular.",
+      "summary": "aria-invalid faz a falha ser parte do que o leitor diz quando o foco chega no campo.",
       "blocks": [
         {
           "kind": "code",
@@ -127,7 +127,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 6,
       "title": "Checkbox",
-      "summary": "Checkbox — acessibilidade em Angular.",
+      "summary": "Um checkbox nativo anuncia o rótulo, a role e o estado — e atualiza o estado sozinho quando é marcado.",
       "blocks": [
         {
           "kind": "code",
@@ -149,7 +149,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 7,
       "title": "Switch",
-      "summary": "Switch — acessibilidade em Angular.",
+      "summary": "role=switch com aria-checked anuncia ligado e desligado, que soa mais natural que marcado e desmarcado num toggle.",
       "blocks": [
         {
           "kind": "code",
@@ -167,7 +167,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 8,
       "title": "Accordion",
-      "summary": "Accordion — acessibilidade em Angular.",
+      "summary": "O anúncio precisa mudar quando o painel abre. Se disser sempre \"recolhido\", aria-expanded não está ligado ao estado real.",
       "blocks": [
         {
           "kind": "code",
@@ -189,7 +189,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 9,
       "title": "Tabs",
-      "summary": "Tabs — acessibilidade em Angular.",
+      "summary": "A aba selecionada é anunciada como selecionada. Sem aria-selected a pessoa ouve \"aba\" e não sabe qual está ativa.",
       "blocks": [
         {
           "kind": "code",
@@ -207,7 +207,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 10,
       "title": "Stepper",
-      "summary": "Stepper — acessibilidade em Angular.",
+      "summary": "aria-current=\"step\" transforma um destaque visual em algo que o leitor de tela consegue transmitir.",
       "blocks": [
         {
           "kind": "code",
@@ -225,7 +225,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 11,
       "title": "Mensagens Dinâmicas",
-      "summary": "O leitor anuncia automaticamente.",
+      "summary": "Uma região viva anuncia sozinha, sem mover o foco — que é exatamente o que se quer numa confirmação.",
       "blocks": [
         {
           "kind": "code",
@@ -247,7 +247,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 12,
       "title": "Role Alert",
-      "summary": "Utilizar apenas para mensagens importantes.",
+      "summary": "Interrompe o que está sendo lido. Reserve para o que realmente não pode esperar; o resto vira ruído.",
       "blocks": [
         {
           "kind": "code",
@@ -269,7 +269,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 13,
       "title": "Foco Visível",
-      "summary": "Todo elemento focável deve indicar visualmente que recebeu foco.",
+      "summary": "Todo elemento focável precisa mostrar que está com o foco. Tirar o outline sem substituto equivale a esconder o cursor do mouse.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -292,7 +292,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 14,
       "title": "Sequência de Foco",
-      "summary": "A ordem do DOM deve refletir a ordem visual.",
+      "summary": "A ordem do DOM tem que bater com a ordem visual. Quem usa leitor de tela navega pela estrutura, não pelo layout.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -309,7 +309,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 15,
       "title": "Modais",
-      "summary": "Modais: Foco vai para o modal.; Conteúdo anterior fica inacessível.; Tab navega apenas dentro dele.",
+      "summary": "Ao abrir: foco entra, o conteúdo de trás fica inalcançável, o Tab não sai. Ao fechar: o foco volta para quem abriu.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -342,7 +342,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 16,
       "title": "Problema Clássico",
-      "summary": "Ao fechar o modal, o foco muitas vezes desaparece.",
+      "summary": "O modal fecha e o foco desaparece para o topo do documento. Ele tem que voltar para o botão que abriu.",
       "blocks": [
         {
           "kind": "code",
@@ -364,7 +364,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 17,
       "title": "Loading",
-      "summary": "Evite deixar usuário sem feedback.",
+      "summary": "Anuncie que começou e que terminou. Silêncio durante a espera é indistinguível de página quebrada.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -391,7 +391,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 18,
       "title": "TalkBack x VoiceOver",
-      "summary": "TalkBack x VoiceOver — acessibilidade em Angular.",
+      "summary": "Os dois divergem em lugares previsíveis: formulário, tabs, modal e select. Testar em um não cobre o outro.",
       "blocks": [
         {
           "kind": "table",
@@ -425,7 +425,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 19,
       "title": "Roteiro de Teste Manual",
-      "summary": "Roteiro de Teste Manual: Ativar leitor de tela.; Percorrer toda tela.; Verificar títulos.",
+      "summary": "Dez passos para rodar em cada tela com leitor de tela real — a parte que nenhuma ferramenta automatizada faz por você.",
       "blocks": [
         {
           "kind": "list",
@@ -450,7 +450,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 20,
       "title": "Bugs Mais Comuns Encontrados em Produção",
-      "summary": "Bugs Mais Comuns Encontrados em Produção: Botão sem nome acessível.; Ícone clicável sem label.; Modal sem foco.",
+      "summary": "Botão sem nome, ícone sem label, modal sem foco, erro não anunciado e foco perdido após navegação.",
       "blocks": [
         {
           "kind": "list",
@@ -475,7 +475,7 @@ export const leitoresDeTela: Part = {
       "partId": "leitores-de-tela",
       "order": 21,
       "title": "Checklist Final de TalkBack e VoiceOver",
-      "summary": "Checklist Final de TalkBack e VoiceOver: Todos os elementos possuem nome?; Todos possuem role correta?; Estado é anunciado?",
+      "summary": "Nove perguntas para responder com aparelho real antes de publicar, terminando na única que realmente importa.",
       "blocks": [
         {
           "kind": "list",

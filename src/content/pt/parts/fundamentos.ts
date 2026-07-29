@@ -9,14 +9,14 @@ export const fundamentos: Part = {
   "order": 1,
   "numeral": "01",
   "title": "Fundamentos de Acessibilidade Angular",
-  "summary": "Primeira parte da documentação de acessibilidade para aplicações Angular, VoiceOver e TalkBack.",
+  "summary": "Os fundamentos: o que é acessibilidade, WCAG 2.2, POUR, como leitores de tela leem uma página, e os erros mais comuns em Angular.",
   "sections": [
     {
       "id": "o-que-e-acessibilidade",
       "partId": "fundamentos",
       "order": 1,
       "title": "O que é acessibilidade?",
-      "summary": "Acessibilidade é a capacidade de um produto digital ser utilizado por todas as pessoas, independentemente de limitações visuais, auditivas, motoras, cog…",
+      "summary": "É um produto digital poder ser usado por qualquer pessoa, independentemente de limitação visual, auditiva, motora, cognitiva ou temporária.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -51,7 +51,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 2,
       "title": "WCAG 2.2",
-      "summary": "A WCAG (Web Content Accessibility Guidelines) é o conjunto mais utilizado no mundo para avaliar acessibilidade digital.",
+      "summary": "A WCAG é o padrão mais usado no mundo para avaliar acessibilidade digital. AA é o nível que a maioria das empresas persegue.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -90,7 +90,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 3,
       "title": "POUR",
-      "summary": "Todos os critérios da WCAG derivam de quatro pilares:",
+      "summary": "Todo critério da WCAG vem de quatro pilares: Perceptível, Operável, Compreensível e Robusto.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -159,7 +159,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 4,
       "title": "Leitores de tela",
-      "summary": "Leitor de tela nativo do Android.",
+      "summary": "TalkBack no Android, VoiceOver no iOS. Os dois precisam de três coisas: nome acessível, role correta e estado correto.",
       "blocks": [
         {
           "kind": "heading",
@@ -214,7 +214,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 5,
       "title": "Como um leitor de tela enxerga uma página?",
-      "summary": "Usuários não enxergam a interface da mesma forma que usuários visuais.",
+      "summary": "Não do jeito que quem enxerga vê. A navegação é por títulos, botões, links, campos e landmarks — uma tela visualmente perfeita pode ser inutilizável.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -252,7 +252,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 6,
       "title": "Regra de Ouro da Acessibilidade",
-      "summary": "Sempre prefira HTML semântico antes de usar ARIA.",
+      "summary": "HTML semântico primeiro, ARIA depois. Se existe tag nativa que resolve, ela já traz role, teclado e estado de graça.",
       "blocks": [
         {
           "kind": "heading",
@@ -290,7 +290,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 7,
       "title": "Estrutura Semântica Básica",
-      "summary": "Estrutura Semântica Básica — acessibilidade em Angular.",
+      "summary": "header, nav, main e footer dão ao leitor de tela o mapa da página antes de qualquer linha ser lida.",
       "blocks": [
         {
           "kind": "code",
@@ -304,7 +304,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 8,
       "title": "Landmarks",
-      "summary": "Landmarks permitem que leitores de tela naveguem rapidamente pelas regiões importantes da página.",
+      "summary": "Landmarks permitem pular direto para as regiões importantes da página, em vez de percorrer tudo.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -346,7 +346,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 9,
       "title": "Headings",
-      "summary": "Headings criam uma árvore de navegação.",
+      "summary": "Headings formam uma árvore de navegação. Pular um nível sugere uma estrutura que não existe e desorienta.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -369,7 +369,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 10,
       "title": "Accessible Name",
-      "summary": "Todo elemento interativo deve possuir um nome acessível.",
+      "summary": "Todo elemento interativo precisa de nome. Ele vem do texto visível, ou do aria-label quando não há texto para usar.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -410,7 +410,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 11,
       "title": "Accessible Description",
-      "summary": "O leitor combinará o nome do campo com sua descrição.",
+      "summary": "aria-describedby acrescenta uma dica ao lado do nome. O leitor lê o nome do campo e depois a descrição.",
       "blocks": [
         {
           "kind": "code",
@@ -428,7 +428,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 12,
       "title": "Nome + Role + Estado",
-      "summary": "Quase toda análise de leitor de tela pode ser resumida em três perguntas:",
+      "summary": "Quase todo problema de leitor de tela se resume a três perguntas: qual o nome, qual a role, qual o estado.",
       "blocks": [
         {
           "kind": "paragraph",
@@ -476,7 +476,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 13,
       "title": "Erros mais comuns encontrados em Angular",
-      "summary": "Erros mais comuns encontrados em Angular: Div clicável simulando botão.; Ícone clicável sem aria-label.; Input apenas com placeholder.",
+      "summary": "Div clicável, ícone sem label, input só com placeholder, falta de heading, modal sem foco e tabindex positivo.",
       "blocks": [
         {
           "kind": "list",
@@ -501,7 +501,7 @@ export const fundamentos: Part = {
       "partId": "fundamentos",
       "order": 14,
       "title": "Mentalidade para o time Angular",
-      "summary": "Mentalidade para o time Angular — acessibilidade em Angular.",
+      "summary": "Cinco perguntas antes de criar qualquer componente — elas pegam a maioria dos problemas antes da primeira linha.",
       "blocks": [
         {
           "kind": "callout",
