@@ -1,18 +1,23 @@
 import type { Locale, LocaleContent, Part, Section, Checklist } from './types';
 import { ptContent } from './pt';
 import { enContent } from './en';
+import { zhContent } from './zh';
 
 /**
  * Registro de conteúdo por idioma.
  *
- * `en` é gerado por `scripts/build-locale.js` a partir da estrutura do pt e do
- * catálogo em `i18n/`. `zh` ainda não tem tradução e cai no português — mas
- * também não está em `LOCALES`, então não é publicado. Ver types.ts.
+ * `en` e `zh` são gerados por `scripts/build-locale.js` a partir da estrutura
+ * do pt e do catálogo em `i18n/`.
+ *
+ * Um idioma novo precisa ser ligado AQUI além de entrar em LOCALES. Enquanto
+ * `zh` apontou para `ptContent`, as páginas chinesas saíram com a interface
+ * traduzida e o corpo em português, e nada falhou: rota existia, axe passava,
+ * o build ficava verde. Só aparece lendo a página.
  */
 const registry: Record<Locale, LocaleContent> = {
   pt: ptContent,
   en: enContent,
-  zh: ptContent,
+  zh: zhContent,
 };
 
 export function contentOf(locale: Locale): LocaleContent {
