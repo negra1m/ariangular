@@ -4,8 +4,10 @@
   gap: 0.6rem;
 }
 
+/* 1.75rem era pequeno demais: nesse tamanho a silhueta do escudo lia como um
+   quadrado arredondado e o anel de foco dentro sumia. */
 .brand__shield {
-  width: 1.75rem;
+  width: 2.15rem;
   height: auto;
   flex-shrink: 0;
 }
@@ -14,12 +16,12 @@
   fill: var(--color-accent);
 }
 
-/* O anel de foco do logo usa a cor de foco do próprio site — a marca conta
-   a mesma história que o produto. */
+/* O anel de foco do logo usa a mesma ideia do produto: o foco abraçando o
+   elemento. Traço mais grosso para sobreviver ao tamanho de favicon. */
 .brand__focus-ring {
   fill: none;
   stroke: var(--color-on-accent);
-  stroke-width: 3;
+  stroke-width: 3.5;
 }
 
 .brand__focus-dot {

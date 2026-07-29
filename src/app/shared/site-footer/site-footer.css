@@ -5,11 +5,18 @@
 
 /* ---------------- Mapa das partes ---------------- */
 
+/* Quatro colunas fixas no desktop: são 7 partes, e 4+3 fecha bem melhor que
+   6+1, que deixava a última sozinha ocupando um sexto da largura. */
 .footer__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   list-style: none;
   border-bottom: var(--border-thin) solid var(--color-rule);
+}
+
+/* A sétima ocupa o espaço que sobra, em vez de deixar um buraco na linha. */
+.footer__grid > li:last-child {
+  grid-column: span 2;
 }
 
 .footer__part {
@@ -126,7 +133,19 @@
   color: var(--color-accent-text);
 }
 
+@media (max-width: 64rem) {
+  .footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 48rem) {
+  .footer__grid,
+  .footer__grid > li:last-child {
+    grid-template-columns: 1fr;
+    grid-column: auto;
+  }
+
   .footer__part,
   .footer__tool {
     border-right: none;
