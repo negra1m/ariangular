@@ -23,7 +23,7 @@ const ORIGIN = process.env.SITE_ORIGIN || 'https://ariangular.vercel.app';
 // Espelha src/content/types.ts. Só entram os locales com conteúdo traduzido:
 // anunciar no sitemap uma página em inglês com corpo em português custa
 // indexação e confiança de domínio.
-const LOCALES = ['pt'];
+const LOCALES = ['pt', 'en'];
 const TAG = { pt: 'pt-BR', en: 'en', zh: 'zh-Hans' };
 const DEFAULT = 'pt';
 

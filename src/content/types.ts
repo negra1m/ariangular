@@ -30,19 +30,14 @@ export type Locale = (typeof ALL_LOCALES)[number];
 /**
  * Idiomas efetivamente publicados: rotas, hreflang e sitemap.
  *
- * Só `pt` por enquanto. A infraestrutura de i18n está completa — catálogo de
- * strings, builder por locale, rótulos de UI nos três idiomas, hreflang,
- * troca de idioma preservando a página. O que falta é a tradução do conteúdo:
- * 1.246 strings, 5.091 palavras.
+ * `zh` fica de fora até haver tradução: publicar 162 páginas em chinês com o
+ * corpo em português custa indexação e credibilidade. Melhor não existir do
+ * que existir errado.
  *
- * Publicar `/en` com o corpo em português seria pior que não publicar: o
- * descasamento entre `lang="en"` e o texto é detectável, custa indexação, e
- * quem clica sai da página em segundos.
- *
- * Para publicar, traduza `i18n/strings.en.json`, rode `npm run i18n:build` e
- * inclua 'en' aqui.
+ * Para publicar, traduza `i18n/zh/*.json`, rode `npm run i18n:build` e inclua
+ * 'zh' aqui.
  */
-export const LOCALES: readonly Locale[] = ['pt'];
+export const LOCALES: readonly Locale[] = ['pt', 'en'];
 
 export const DEFAULT_LOCALE: Locale = 'pt';
 

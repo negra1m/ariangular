@@ -1,0 +1,183 @@
+{
+  "part.componentes.title": "Interactive Components and Complex Structures",
+  "part.componentes.summary": "This part covers the components that produce the most accessibility bugs in Angular applications.",
+
+  "sec.componentes.botoes.title": "Buttons",
+  "sec.componentes.botoes.summary": "Use a real button. A clickable div loses the role, the keyboard, the state and the semantics all at once.",
+  "sec.componentes.botoes.0.str.0": "Continue",
+  "sec.componentes.botoes.1.text": "Continue, button",
+  "sec.componentes.botoes.2.str.0": "Continue",
+
+  "sec.componentes.botao-apenas-com-icone.title": "Icon-only Button",
+  "sec.componentes.botao-apenas-com-icone.summary": "Without a label, the screen reader announces just \"button\". The person knows a control exists but not what it does.",
+  "sec.componentes.botao-apenas-com-icone.0.str.0": "Edit address",
+  "sec.componentes.botao-apenas-com-icone.0.str.1": "edit",
+  "sec.componentes.botao-apenas-com-icone.1.text": "Edit address, button",
+
+  "sec.componentes.links.title": "Links",
+  "sec.componentes.links.summary": "Links navigate, buttons perform actions. Swapping them confuses anyone who relies on the announced role to know what will happen.",
+  "sec.componentes.links.0.str.0": "View account",
+  "sec.componentes.links.1.str.0": "Save",
+  "sec.componentes.links.2.text": "Links navigate. Buttons perform actions.",
+
+  "sec.componentes.cards-clicaveis.title": "Clickable Cards",
+  "sec.componentes.cards-clicaveis.summary": "Wrap the card in a real button or anchor. A div with a click handler is invisible to the keyboard.",
+  "sec.componentes.cards-clicaveis.0.str.0": "Current Account",
+  "sec.componentes.cards-clicaveis.1.text": "Alternative",
+  "sec.componentes.cards-clicaveis.2.str.0": "Current Account",
+
+  "sec.componentes.accordion.title": "Accordion",
+  "sec.componentes.accordion.summary": "The trigger needs aria-expanded and aria-controls, so the state is announced along with the name.",
+  "sec.componentes.accordion.0.str.0": "How does it work?",
+  "sec.componentes.accordion.0.str.1": "Content",
+  "sec.componentes.accordion.1.text": "How does it work?\nButton\nCollapsed",
+
+  "sec.componentes.accordion-com-angular.title": "Accordion in Angular",
+  "sec.componentes.accordion-com-angular.summary": "Bind aria-expanded to the real state. A hard-coded value announces \"collapsed\" forever, even with the panel open.",
+  "sec.componentes.accordion-com-angular.0.str.0": "Question",
+  "sec.componentes.accordion-com-angular.1.text": "aria-expanded has to reflect the real state.",
+
+  "sec.componentes.tabs.title": "Tabs",
+  "sec.componentes.tabs.summary": "role=tablist with aria-selected on each tab. Without it the screen reader says \"tab\" but never which one is active.",
+  "sec.componentes.tabs.0.str.0": "Details",
+  "sec.componentes.tabs.0.str.1": "Address",
+
+  "sec.componentes.tab-panel.title": "Tab Panel",
+  "sec.componentes.tab-panel.summary": "The panel that holds the content of the selected tab, tied to it so the reader can move between the two.",
+  "sec.componentes.tab-panel.0.str.0": "Tab content.",
+
+  "sec.componentes.modal.title": "Modal",
+  "sec.componentes.modal.summary": "role=dialog, aria-modal and a label. Without aria-modal the screen reader keeps reading the content behind it.",
+  "sec.componentes.modal.0.str.0": "Confirm payment",
+
+  "sec.componentes.checklist-modal.title": "Modal Checklist",
+  "sec.componentes.checklist-modal.summary": "Six things every modal has to do: role, aria-modal, take focus, trap focus, close on ESC, and give focus back.",
+  "sec.componentes.checklist-modal.0.item.0": "Does it have role=\"dialog\"?",
+  "sec.componentes.checklist-modal.0.item.1": "Does it have aria-modal?",
+  "sec.componentes.checklist-modal.0.item.2": "Does it receive focus when it opens?",
+  "sec.componentes.checklist-modal.0.item.3": "Does it trap focus inside?",
+  "sec.componentes.checklist-modal.0.item.4": "Does it close on ESC?",
+  "sec.componentes.checklist-modal.0.item.5": "Does it return focus when it closes?",
+
+  "sec.componentes.bottom-sheet.title": "Bottom Sheet",
+  "sec.componentes.bottom-sheet.summary": "It is a modal that happens to slide up from the bottom. Same rules apply, without exception.",
+  "sec.componentes.bottom-sheet.0.text": "Treat it as a modal.",
+
+  "sec.componentes.menu.title": "Menu",
+  "sec.componentes.menu.summary": "The trigger announces that it opens a menu, through aria-haspopup and aria-expanded.",
+  "sec.componentes.menu.0.str.0": "Actions",
+
+  "sec.componentes.itens-de-menu.title": "Menu Items",
+  "sec.componentes.itens-de-menu.summary": "Each item carries role=menuitem, and the whole set has to be reachable with the arrow keys.",
+  "sec.componentes.itens-de-menu.0.str.0": "Edit",
+  "sec.componentes.itens-de-menu.0.str.1": "Delete",
+
+  "sec.componentes.dropdown.title": "Dropdown",
+  "sec.componentes.dropdown.summary": "Prefer the native select whenever possible. It comes with keyboard, state and mobile behaviour already correct.",
+  "sec.componentes.dropdown.0.text": "Whenever possible, prefer the native select.",
+
+  "sec.componentes.combobox.title": "Combobox",
+  "sec.componentes.combobox.summary": "One of the hardest patterns to build correctly. Since Angular v22 there is an official answer: ngCombobox from @angular/aria.",
+  "sec.componentes.combobox.1.text": "Complex to implement. Avoid building it by hand — see Angular Aria.",
+
+  "sec.componentes.lista.title": "List",
+  "sec.componentes.lista.summary": "A real ul or ol makes the screen reader announce \"list with N items\", which tells the person how much is ahead.",
+  "sec.componentes.lista.0.str.0": "Item 1",
+  "sec.componentes.lista.0.str.1": "Item 2",
+  "sec.componentes.lista.1.text": "List with 2 items",
+
+  "sec.componentes.breadcrumb.title": "Breadcrumb",
+  "sec.componentes.breadcrumb.summary": "A labelled nav, with aria-current=\"page\" on the current item so it is announced as where you are.",
+  "sec.componentes.breadcrumb.0.str.0": "Breadcrumb",
+  "sec.componentes.breadcrumb.1.text": "Current item",
+
+  "sec.componentes.stepper.title": "Stepper",
+  "sec.componentes.stepper.summary": "aria-current=\"step\" marks the current step, so the person knows where they are in the flow without seeing the highlight.",
+  "sec.componentes.stepper.0.str.0": "Payment",
+  "sec.componentes.stepper.1.text": "Payment\nCurrent step",
+
+  "sec.componentes.tabela-simples.title": "Simple Table",
+  "sec.componentes.tabela-simples.summary": "caption, th and scope are what let the screen reader tie each cell to its header instead of reading loose numbers.",
+  "sec.componentes.tabela-simples.0.str.0": "Statement",
+  "sec.componentes.tabela-simples.0.str.1": "Date",
+  "sec.componentes.tabela-simples.0.str.2": "Amount",
+
+  "sec.componentes.tabela-boas-praticas.title": "Tables — Good Practice",
+  "sec.componentes.tabela-boas-praticas.summary": "Use caption, th and scope, and never build a table out of divs — it destroys the relationship between cell and header.",
+  "sec.componentes.tabela-boas-praticas.0.item.0": "Use caption.",
+  "sec.componentes.tabela-boas-praticas.0.item.1": "Use th.",
+  "sec.componentes.tabela-boas-praticas.0.item.2": "Use scope.",
+  "sec.componentes.tabela-boas-praticas.0.item.3": "Avoid tables built out of divs.",
+
+  "sec.componentes.tooltip.title": "Tooltip",
+  "sec.componentes.tooltip.summary": "Tie it with aria-describedby, and make it open on focus too — a tooltip that only responds to hover does not exist for the keyboard.",
+  "sec.componentes.tooltip.1.str.0": "Additional information",
+
+  "sec.componentes.toast.title": "Toast",
+  "sec.componentes.toast.summary": "role=status announces the message without stealing focus, which is what you want for a confirmation.",
+  "sec.componentes.toast.0.str.0": "Payment completed",
+
+  "sec.componentes.snackbar.title": "Snackbar",
+  "sec.componentes.snackbar.summary": "A polite live region: it announces when there is a pause, instead of cutting off whatever is being read.",
+  "sec.componentes.snackbar.0.str.0": "Item added",
+
+  "sec.componentes.alertas-criticos.title": "Critical Alerts",
+  "sec.componentes.alertas-criticos.summary": "role=alert interrupts immediately. Reserve it for what genuinely cannot wait — everything else is noise.",
+  "sec.componentes.alertas-criticos.0.str.0": "Transaction failed",
+  "sec.componentes.alertas-criticos.1.text": "Announced immediately.",
+
+  "sec.componentes.loading.title": "Loading",
+  "sec.componentes.loading.summary": "aria-busy tells assistive technology the region is still updating, so it does not announce a half-finished state.",
+  "sec.componentes.loading.0.str.0": "Loading",
+
+  "sec.componentes.progress-bar.title": "Progress Bar",
+  "sec.componentes.progress-bar.summary": "role=progressbar needs valuemin, valuemax and valuenow, otherwise the bar is announced with no number attached.",
+  "sec.componentes.progress-bar.1.text": "30%",
+
+  "sec.componentes.skeleton-loading.title": "Skeleton Loading",
+  "sec.componentes.skeleton-loading.summary": "The placeholder shapes carry no information. Hide them with aria-hidden so the screen reader is not read a wall of nothing.",
+  "sec.componentes.skeleton-loading.0.text": "The visual placeholder should be ignored by the screen reader.",
+
+  "sec.componentes.carrossel.title": "Carousel",
+  "sec.componentes.carrossel.summary": "Needs previous, next and pause controls, and slides that can be identified. Auto-rotation without a pause is a WCAG failure.",
+  "sec.componentes.carrossel.0.item.0": "Previous button.",
+  "sec.componentes.carrossel.0.item.1": "Next button.",
+  "sec.componentes.carrossel.0.item.2": "Pause button.",
+  "sec.componentes.carrossel.0.item.3": "Identifiable slides.",
+
+  "sec.componentes.infinite-scroll.title": "Infinite Scroll",
+  "sec.componentes.infinite-scroll.summary": "Announce the newly loaded items, keep focus where it was, and avoid the page jumping under the person.",
+  "sec.componentes.infinite-scroll.0.item.0": "Announce newly loaded items.",
+  "sec.componentes.infinite-scroll.0.item.1": "Preserve focus.",
+  "sec.componentes.infinite-scroll.0.item.2": "Avoid abrupt shifts.",
+
+  "sec.componentes.drag-and-drop.title": "Drag and Drop",
+  "sec.componentes.drag-and-drop.summary": "Never rely on the gesture alone. There has to be a click or keyboard path to the same result.",
+  "sec.componentes.drag-and-drop.0.text": "Never rely on the gesture alone.",
+  "sec.componentes.drag-and-drop.1.text": "Always offer a click or keyboard alternative.",
+
+  "sec.componentes.upload-de-arquivo.title": "File Upload",
+  "sec.componentes.upload-de-arquivo.summary": "A native file input with a real label. Custom upload widgets are a common place to lose the keyboard entirely.",
+  "sec.componentes.upload-de-arquivo.0.str.0": "Document",
+
+  "sec.componentes.mensagens-dinamicas.title": "Dynamic Messages",
+  "sec.componentes.mensagens-dinamicas.summary": "Anything that changes without a page load needs a live region: toasts, applied filters, finished searches, approved payments.",
+  "sec.componentes.mensagens-dinamicas.1.text": "Commonly used for:",
+  "sec.componentes.mensagens-dinamicas.2.item.0": "Toast.",
+  "sec.componentes.mensagens-dinamicas.2.item.1": "Filter applied.",
+  "sec.componentes.mensagens-dinamicas.2.item.2": "Search finished.",
+  "sec.componentes.mensagens-dinamicas.2.item.3": "Payment approved.",
+  "sec.componentes.mensagens-dinamicas.2.item.4": "Upload finished.",
+
+  "sec.componentes.checklist-de-componentes.title": "Component Checklist",
+  "sec.componentes.checklist-de-componentes.summary": "Nine questions to run over any component before calling it done — name, role, state, keyboard, focus and announcements.",
+  "sec.componentes.checklist-de-componentes.0.item.0": "Does it have an accessible name?",
+  "sec.componentes.checklist-de-componentes.0.item.1": "Does it have the correct role?",
+  "sec.componentes.checklist-de-componentes.0.item.2": "Does it have the correct state?",
+  "sec.componentes.checklist-de-componentes.0.item.3": "Does it work with the keyboard?",
+  "sec.componentes.checklist-de-componentes.0.item.4": "Is the focus visible?",
+  "sec.componentes.checklist-de-componentes.0.item.5": "Does it work with TalkBack?",
+  "sec.componentes.checklist-de-componentes.0.item.6": "Does it work with VoiceOver?",
+  "sec.componentes.checklist-de-componentes.0.item.7": "Does it announce important changes?",
+  "sec.componentes.checklist-de-componentes.0.item.8": "Does it keep a sensible focus order?"
+}

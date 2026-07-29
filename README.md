@@ -29,7 +29,8 @@ Três camadas de uso:
 | Lint | limpo, regras de acessibilidade como **erro** |
 | Contraste | 38 pares, WCAG AA nos dois temas |
 | axe | **zero violações A/AA** em todas as páginas geradas |
-| Build | 187 rotas prerenderizadas, saída estática |
+| Build | 373 rotas prerenderizadas, saída estática |
+| Idiomas | português e inglês, 100% traduzidos |
 
 Tudo isso roda no CI e quebra o build.
 
@@ -48,12 +49,16 @@ TalkBack consegue concluir a jornada sozinha?* — ainda não tem resposta.
 
 ### Idiomas
 
-Só **português** está publicado. A infraestrutura de i18n está completa (catálogo de
-strings, builder por locale, rótulos de UI em pt/en/zh, hreflang, troca de idioma
-preservando a página) — falta traduzir 1.246 strings.
+**Português e inglês**, ambos completos — 1.246 strings traduzidas, com hreflang
+ligando as duas versões e troca de idioma que preserva a página.
 
-Publicar `/en` com o corpo em português seria pior que não publicar: o descasamento
-entre `lang` e o texto é detectável e custa indexação.
+**Chinês** fica fora do build até haver tradução. Publicar 162 páginas em chinês com o
+corpo em português custaria indexação e credibilidade. A estrutura está pronta: traduzir
+`i18n/zh/*.json`, rodar `npm run i18n:build` e incluir `'zh'` em `LOCALES`.
+
+Ressalva honesta sobre a tradução: foi feita por mim, sem revisão de falante nativo. Em
+inglês a confiança é alta, mas termo técnico de acessibilidade tem convenção própria e
+uma segunda leitura seria bem-vinda.
 
 ---
 

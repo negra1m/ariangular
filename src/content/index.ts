@@ -1,16 +1,17 @@
 import type { Locale, LocaleContent, Part, Section, Checklist } from './types';
 import { ptContent } from './pt';
+import { enContent } from './en';
 
 /**
  * Registro de conteúdo por idioma.
  *
- * en e zh são gerados por `scripts/build-locale.js` a partir da estrutura do pt.
- * Enquanto não existirem, o registro cai no português — o site funciona nos três
- * locales desde o primeiro dia, com o conteúdo degradando em vez de quebrar.
+ * `en` é gerado por `scripts/build-locale.js` a partir da estrutura do pt e do
+ * catálogo em `i18n/`. `zh` ainda não tem tradução e cai no português — mas
+ * também não está em `LOCALES`, então não é publicado. Ver types.ts.
  */
 const registry: Record<Locale, LocaleContent> = {
   pt: ptContent,
-  en: ptContent,
+  en: enContent,
   zh: ptContent,
 };
 
