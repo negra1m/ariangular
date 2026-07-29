@@ -1,0 +1,89 @@
+:host {
+  display: block;
+}
+
+.art {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Ilustração é apoio, não conteúdo: nunca deve competir com o título ao
+     lado. O contraste do desenho não precisa passar em 1.4.11 justamente por
+     ser decorativo — mas se ele gritasse mais que o h1, a hierarquia visual
+     estaria mentindo sobre o que importa. */
+  opacity: 0.85;
+}
+
+.art__line,
+.art__node,
+.art__tag rect,
+.art__wave path,
+.art__check {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 2;
+}
+
+.art__line,
+.art__wave path {
+  stroke-linecap: square;
+}
+
+.art__node--root {
+  stroke: var(--color-text);
+}
+
+/* O anel de foco da marca aparecendo em cada parte: o elemento em destaque
+   é sempre o vermelho, em todas as sete.
+
+   Prefixados por `.art` para vencer `.art__tag rect` e `.art__wave path` acima
+   — duas classes batem uma classe mais um elemento. Sem isso os modificadores
+   perdem em silêncio e o desenho fica todo cinza. */
+.art .art__node--focus,
+.art .art__tag--focus,
+.art .art__line--accent,
+.art .art__wave--accent {
+  stroke: var(--color-accent);
+}
+
+.art .art__line--dashed {
+  stroke-dasharray: 4 5;
+  stroke: var(--color-rule);
+}
+
+.art__dot {
+  fill: var(--color-accent);
+}
+
+.art__check {
+  stroke: var(--color-text);
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.art__shield {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2;
+}
+
+.art__ring {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 2;
+}
+
+.art__ring-dot {
+  fill: var(--color-accent);
+}
+
+/* No tema claro o desenho fica fino demais sobre branco. Uma pontinha a mais
+   de traço resolve sem mudar o desenho. */
+:host-context([data-theme='light']) .art__line,
+:host-context([data-theme='light']) .art__node,
+:host-context([data-theme='light']) .art__tag rect,
+:host-context([data-theme='light']) .art__wave path,
+:host-context([data-theme='light']) .art__check,
+:host-context([data-theme='light']) .art__shield,
+:host-context([data-theme='light']) .art__ring {
+  stroke-width: 2.4;
+}

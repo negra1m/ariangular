@@ -1,0 +1,113 @@
+<!--
+  Ilustrações decorativas, uma por parte.
+
+  aria-hidden e role="presentation" porque nenhuma acrescenta informação: o
+  título e o resumo ao lado já dizem tudo. Dar alt a elas faria o leitor de
+  tela anunciar duas vezes a mesma coisa, o que é ruído, não acesso (WCAG
+  1.1.1 — imagem puramente decorativa deve ser ignorada pela tecnologia
+  assistiva).
+
+  Todas partilham o mesmo vocabulário: traço de 2, canto reto, e o anel de
+  foco em vermelho como elemento recorrente — é o tema do projeto.
+-->
+<svg class="art" viewBox="0 0 160 160" aria-hidden="true" focusable="false" role="presentation">
+  @switch (partId()) {
+    <!-- Fundamentos: a árvore de acessibilidade. A página não é lida como
+         retângulo, é percorrida como estrutura. -->
+    @case ('fundamentos') {
+      <g class="art__line">
+        <path d="M80 34v18M80 52H40v16M80 52h40v16M40 84v16M40 100H22v14M40 100h18v14M120 84v16" />
+      </g>
+      <rect class="art__node art__node--root" x="62" y="16" width="36" height="18" />
+      <rect class="art__node" x="26" y="68" width="28" height="16" />
+      <rect class="art__node" x="106" y="68" width="28" height="16" />
+      <rect class="art__node" x="10" y="114" width="24" height="14" />
+      <rect class="art__node" x="46" y="114" width="24" height="14" />
+      <rect class="art__node art__node--focus" x="106" y="100" width="28" height="16" />
+    }
+
+    <!-- ARIA: nome, role e estado — as três perguntas de que quase todo bug
+         de leitor de tela é feito. -->
+    @case ('aria') {
+      <rect class="art__node art__node--root" x="16" y="66" width="48" height="28" />
+      <g class="art__tag">
+        <rect x="94" y="30" width="52" height="20" />
+        <rect x="94" y="70" width="52" height="20" />
+        <rect class="art__tag--focus" x="94" y="110" width="52" height="20" />
+      </g>
+      <g class="art__line">
+        <path d="M94 40 64 76M94 80H64M94 120 64 84" />
+      </g>
+    }
+
+    <!-- Formulários: rótulo em cima, campo no meio, erro embaixo — e o erro
+         ligado ao campo, que é o que quase sempre falta. -->
+    @case ('formularios') {
+      <g class="art__line">
+        <path d="M20 30h44" />
+      </g>
+      <rect class="art__node art__node--focus" x="20" y="44" width="120" height="34" />
+      <g class="art__line">
+        <path d="M34 58h58" />
+      </g>
+      <circle class="art__dot" cx="34" cy="104" r="9" />
+      <g class="art__line art__line--accent">
+        <path d="M50 104h72M50 118h48" />
+      </g>
+      <!-- A ligação entre o campo e o erro: é ela que quase sempre falta. -->
+      <g class="art__line art__line--dashed">
+        <path d="M26 78v26" />
+      </g>
+    }
+
+    <!-- Componentes: o modal. Camada de trás inalcançável, foco preso na
+         frente — o erro mais caro da lista. -->
+    @case ('componentes') {
+      <g class="art__line art__line--dashed">
+        <rect x="12" y="20" width="110" height="90" />
+        <path d="M28 40h58M28 54h78M28 68h44" />
+      </g>
+      <rect class="art__node art__node--root" x="46" y="56" width="102" height="80" />
+      <g class="art__line">
+        <path d="M62 76h46M62 90h70" />
+      </g>
+      <rect class="art__node art__node--focus" x="106" y="106" width="30" height="16" />
+    }
+
+    <!-- Angular: o escudo com o anel de foco. Mesma ideia da marca, em
+         escala de ilustração. -->
+    @case ('angular') {
+      <path class="art__shield" d="M80 18 142 40 132 128 80 152 28 128 18 40Z" />
+      <circle class="art__ring" cx="80" cy="82" r="28" />
+      <circle class="art__ring-dot" cx="80" cy="82" r="9.5" />
+    }
+
+    <!-- Leitores de tela: o que sai do elemento focado. O que a pessoa ouve
+         é o produto, não o que está desenhado. -->
+    @case ('leitores-de-tela') {
+      <rect class="art__node art__node--focus" x="14" y="60" width="62" height="40" />
+      <g class="art__line">
+        <path d="M28 74h34M28 86h22" />
+      </g>
+      <g class="art__wave">
+        <path d="M92 66a24 24 0 0 1 0 28" />
+        <path d="M108 54a44 44 0 0 1 0 52" />
+        <path class="art__wave--accent" d="M124 42a64 64 0 0 1 0 76" />
+      </g>
+    }
+
+    <!-- QA e WCAG: o checklist. O último item é sempre o mesmo — a pessoa
+         conseguiu concluir a jornada sozinha? -->
+    @case ('qa-wcag') {
+      <g class="art__line">
+        <rect x="16" y="26" width="22" height="22" />
+        <rect x="16" y="69" width="22" height="22" />
+        <path d="M56 37h88M56 80h68M56 123h78" />
+      </g>
+      <g class="art__check">
+        <path d="M21 37l5 6 12-14M21 80l5 6 12-14" />
+      </g>
+      <rect class="art__node art__node--focus" x="16" y="112" width="22" height="22" />
+    }
+  }
+</svg>

@@ -3,12 +3,13 @@ import { RouterLink } from '@angular/router';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { SeoService } from '../../core/seo/seo.service';
 import { SectionHeader } from '../../shared/section-header/section-header';
+import { PartArt } from '../../shared/part-art/part-art';
 import { findPart } from '../../../content';
 
 /** Índice de uma parte: lista as seções, cada uma com o seu resumo. */
 @Component({
   selector: 'app-part-page',
-  imports: [RouterLink, SectionHeader],
+  imports: [RouterLink, SectionHeader, PartArt],
   templateUrl: './part-page.html',
   styleUrl: './part-page.css',
 })

@@ -7,6 +7,39 @@ app-section-header {
   display: block;
 }
 
+/* Texto à esquerda, ilustração à direita. A ilustração não tem largura fixa
+   em px: ela encolhe junto com a coluna, e some antes de espremer o título. */
+.part__intro {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 15rem);
+  align-items: center;
+  gap: var(--space-lg);
+  padding-right: var(--space-md);
+}
+
+.part__intro-text {
+  min-width: 0;
+  padding-right: 0;
+}
+
+.part__intro-art {
+  justify-self: end;
+  width: min(100%, 13rem);
+}
+
+/* Abaixo de 60rem a ilustração roubaria a largura de que o título precisa
+   para não quebrar em quatro linhas. Decoração cede espaço para conteúdo. */
+@media (max-width: 60rem) {
+  .part__intro {
+    grid-template-columns: 1fr;
+    padding-right: 0;
+  }
+
+  .part__intro-art {
+    display: none;
+  }
+}
+
 .part__list {
   list-style: none;
   margin-top: var(--space-xl);
