@@ -29,6 +29,10 @@
   },
   "private": true,
   "packageManager": "npm@11.16.0",
+  "//engines": "Espelha o que @angular/cli, core e build exigem. Sem isto a Vercel escolhe a versão padrão dela, que pode ser anterior à 22.22.3 e faz o build falhar na hora — foi exatamente o erro que apareceu no ambiente local com a 22.22.0.",
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+  },
   "dependencies": {
     "@angular/aria": "^22.0.6",
     "@angular/cdk": "^22.0.6",
