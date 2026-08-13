@@ -361,6 +361,59 @@ export const qaWcag: Part = {
             "Foco preso incorretamente.",
             "Campo sem label."
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Por que estes são críticos e não altos"
+        },
+        {
+          "kind": "paragraph",
+          "text": "O corte é um só: a pessoa não conclui a jornada. Não é \"fica ruim\", é \"não dá para terminar\". Cada exemplo abaixo trava um fluxo inteiro."
+        },
+        {
+          "kind": "code",
+          "code": "<!-- Botão principal sem nome.\n     Anunciado: \"botão\". A pessoa não confirma o pagamento\n     porque não sabe que aquilo confirma o pagamento. -->\n<button (click)=\"confirmar()\">\n  <mat-icon>check</mat-icon>\n</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- Modal inacessível.\n     Abre, o foco não entra, o leitor continua na página de trás.\n     A pessoa não sabe que existe algo para confirmar. -->\n<div class=\"modal\" *ngIf=\"aberto\">\n  <button (click)=\"excluirConta()\">Confirmar exclusão</button>\n</div>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- Erro não anunciado.\n     O envio falha em silêncio. A pessoa espera uma confirmação\n     que nunca vem, tenta de novo, e desiste. -->\n<span *ngIf=\"erro\" class=\"erro\">{{ erro }}</span>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- Foco preso incorretamente.\n     cdkTrapFocus sem forma de sair: nem ESC, nem botão fechar.\n     A pessoa fica presa até recarregar a página. -->\n<div cdkTrapFocus>\n  <p>Carregando…</p>\n</div>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- Campo sem label.\n     \"campo de edição\". Num cadastro de 8 campos iguais,\n     não há como saber qual é qual. -->\n<input type=\"text\" placeholder=\"CPF\">",
+          "variant": "neutral"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O teste de severidade"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Pergunte: desligando o monitor, uma pessoa consegue concluir esta tarefa?"
+        },
+        {
+          "kind": "list",
+          "ordered": false,
+          "items": [
+            "Não consegue de jeito nenhum: crítico.",
+            "Consegue com muita dificuldade ou tentativa e erro: alto.",
+            "Consegue, mas a experiência é pior: médio.",
+            "Consegue normalmente, há algo a melhorar: baixo."
+          ]
         }
       ]
     },
@@ -380,6 +433,44 @@ export const qaWcag: Part = {
             "Tooltip sem descrição.",
             "Leitura redundante."
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Médio é o que atrapalha sem impedir"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ salto de nível: sugere uma seção que não existe -->\n<h1>Extrato</h1>\n<h4>Últimos lançamentos</h4>\n\n<!-- ✅ -->\n<h1>Extrato</h1>\n<h2>Últimos lançamentos</h2>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ alt que descreve o arquivo, não a informação -->\n<img src=\"grafico.png\" alt=\"grafico\">\n\n<!-- ✅ o alt carrega o que a imagem informa -->\n<img src=\"grafico.png\"\n  alt=\"Gastos caíram de R$ 3.200 em janeiro para R$ 2.100 em junho\">\n\n<!-- ✅ imagem decorativa: alt vazio, nunca ausente -->\n<img src=\"ornamento.svg\" alt=\"\">",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ leitura redundante: o nome repete a role -->\n<button aria-label=\"Botão de salvar\">Salvar</button>\n<!-- ouve-se: \"Botão de salvar, botão\" -->\n\n<!-- ✅ -->\n<button>Salvar</button>\n<!-- ouve-se: \"Salvar, botão\" -->",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ ícone e texto dizendo a mesma coisa duas vezes -->\n<button>\n  <mat-icon>save</mat-icon>\n  Salvar\n</button>\n<!-- ouve-se: \"save Salvar, botão\" -->\n\n<!-- ✅ -->\n<button>\n  <mat-icon aria-hidden=\"true\">save</mat-icon>\n  Salvar\n</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Por que médio e não baixo"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Nenhum desses impede a conclusão da tarefa. Todos aumentam o esforço: heading errado quebra a navegação por títulos, alt ruim esconde a informação do gráfico, redundância dobra o tempo de escuta de cada tela."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Em volume, é o que faz a pessoa preferir o telefone ao aplicativo."
         }
       ]
     },
@@ -678,6 +769,88 @@ export const qaWcag: Part = {
             "Accessibility Insights.",
             "Angular CDK A11y."
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O que cada uma pega, e o que não pega"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Ferramenta",
+            "Boa para",
+            "Custo"
+          ],
+          "rows": [
+            [
+              "axe DevTools",
+              "Violação de regra no DOM. É a engine dentro do Lighthouse.",
+              "Extensão gratuita."
+            ],
+            [
+              "Lighthouse",
+              "Nota rápida e regressão. Roda no próprio Chrome.",
+              "Já vem no navegador."
+            ],
+            [
+              "Accessibility Insights",
+              "Roteiro guiado de teste manual, passo a passo.",
+              "Gratuito, Microsoft."
+            ],
+            [
+              "TalkBack e VoiceOver",
+              "A única resposta que importa: dá para concluir?",
+              "Já está no celular."
+            ],
+            [
+              "angular-eslint",
+              "Pegar no commit, antes de virar bug.",
+              "Já está no projeto."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Colocar no CI, não só no navegador"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Verificação que depende de alguém lembrar de rodar não é verificação. O axe roda sobre HTML gerado, sem navegador:"
+        },
+        {
+          "kind": "code",
+          "code": "npm install --save-dev axe-core jsdom",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "// scripts/check-a11y.js\nconst { JSDOM } = require('jsdom');\nconst fs = require('fs');\n\nconst axeSource = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');\n\nasync function verificar(arquivo) {\n  const dom = new JSDOM(fs.readFileSync(arquivo, 'utf8'), {\n    runScripts: 'outside-only',\n    pretendToBeVisual: true,\n  });\n\n  dom.window.eval(axeSource);\n\n  const r = await dom.window.axe.run(dom.window.document, {\n    runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] },\n    // Contraste precisa de CSS computado, que o jsdom não faz.\n    rules: { 'color-contrast': { enabled: false } },\n  });\n\n  return r.violations;\n}",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Ligue no pipeline com saída diferente de zero em caso de violação. Aviso que não quebra o build é aviso que ninguém lê."
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "A ordem que funciona"
+        },
+        {
+          "kind": "list",
+          "ordered": true,
+          "items": [
+            "Lint no editor: pega enquanto você escreve.",
+            "axe no CI: pega antes do merge.",
+            "Lighthouse antes de subir: pega regressão geral.",
+            "TalkBack e VoiceOver na entrega: pega o que importa."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Os três primeiros somam cerca de um terço dos problemas. O quarto é o que responde se alguém consegue usar."
         }
       ]
     },
@@ -706,6 +879,52 @@ export const qaWcag: Part = {
             "Anúncios confusos.",
             "Navegação complexa."
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Código que passa no axe e é inutilizável"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Os três exemplos abaixo têm zero violação em qualquer ferramenta automatizada. Os três são inacessíveis."
+        },
+        {
+          "kind": "code",
+          "code": "<!-- 1. Role sem comportamento.\n     Tem role, tem tabindex, tem nome. O axe aprova.\n     Enter e Espaço não fazem nada: role não traz comportamento. -->\n<div role=\"button\" tabindex=\"0\" (click)=\"salvar()\">Salvar</div>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- 2. Nome acessível mentiroso.\n     Existe nome, então a ferramenta passa.\n     O leitor de tela anuncia \"Editar\" num botão que exclui. -->\n<button aria-label=\"Editar\" (click)=\"excluir()\">\n  <mat-icon aria-hidden=\"true\">delete</mat-icon>\n</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- 3. Ordem de leitura invertida.\n     O HTML está impecável. O CSS troca a ordem, e o Tab\n     entrega Confirmar antes de Cancelar. -->\n<div style=\"display:flex; flex-direction:row-reverse\">\n  <button>Confirmar</button>\n  <button>Cancelar</button>\n</div>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Por que a ferramenta não vê"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Ela verifica o que é verificável sem entender a intenção: o atributo existe, o valor é válido, a relação está declarada. Nenhuma delas consegue responder \"esse nome descreve o que o botão faz?\" ou \"essa ordem faz sentido para quem está preenchendo o formulário?\"."
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "A conta real"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Ferramenta automatizada pega em torno de um terço dos problemas de acessibilidade. É um terço importante, barato e que roda em todo commit — mas é piso, não teto."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Os outros dois terços exigem alguém percorrendo a jornada com teclado e com leitor de tela, perguntando se dá para concluir a tarefa. Não existe atalho para isso."
         }
       ]
     },

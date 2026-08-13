@@ -555,6 +555,79 @@ Eles navegam por:
 <li>Landmarks.</li>
 </ul>
 
+<h4>A mesma tela, dos dois lados</h4>
+
+<p>
+Este é o HTML de um card de conta:
+</p>
+
+<pre><code>&lt;div class="card"&gt;
+  &lt;div class="titulo"&gt;Conta Corrente&lt;/div&gt;
+  &lt;div class="saldo"&gt;R$ 4.210,00&lt;/div&gt;
+  &lt;div class="acao" (click)="transferir()"&gt;Transferir&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<p>
+Visualmente: um card com título, valor e botão. Impecável.
+</p>
+
+<p>
+Leitura possível:
+</p>
+
+<pre><code>Conta Corrente
+R$ 4.210,00
+Transferir</code></pre>
+
+<p>
+Três textos soltos. Nenhum título para navegar, nenhum botão
+para acionar, nenhuma forma de saber que "Transferir" faz algo.
+Ao navegar por títulos ou por botões, esta tela está vazia.
+</p>
+
+<h4>O mesmo card, escrito para os dois</h4>
+
+<pre><code>&lt;article class="card"&gt;
+  &lt;h2 class="titulo"&gt;Conta Corrente&lt;/h2&gt;
+  &lt;p class="saldo"&gt;R$ 4.210,00&lt;/p&gt;
+  &lt;button type="button" class="acao" (click)="transferir()"&gt;
+    Transferir
+  &lt;/button&gt;
+&lt;/article&gt;</code></pre>
+
+<p>
+Leitura esperada:
+</p>
+
+<pre><code>Conta Corrente, título nível 2
+R$ 4.210,00
+Transferir, botão</code></pre>
+
+<h4>O que muda de verdade</h4>
+
+<p>
+O CSS é o mesmo. A tela é idêntica. O que mudou foi a
+<strong>árvore de acessibilidade</strong> — a estrutura paralela
+que o navegador constrói e entrega ao leitor de tela.
+</p>
+
+<p>
+Ela não vem das classes nem do visual. Vem das tags e dos
+atributos. É por isso que trocar <code>div</code> por
+<code>h2</code> e <code>button</code> não é preciosismo:
+é a diferença entre existir e não existir para uma parte
+das pessoas.
+</p>
+
+<h4>Veja a sua</h4>
+
+<p>
+No Chrome: F12, aba Elements, painel Accessibility.
+No Firefox: F12, aba Acessibilidade.
+É a página como o leitor de tela recebe — e costuma ser
+uma surpresa desconfortável na primeira vez.
+</p>
+
 <aside class="callout callout--warning" aria-label="Atenção">
 <p class="callout__label">Atenção</p>
 <p>Uma tela visualmente perfeita pode ser completamente inutilizável
@@ -1561,6 +1634,81 @@ Leitura:
 </tr>
 </tbody>
 </table></div>
+
+<h4>Antes de escrever a role: já existe tag para isso?</h4>
+
+<p>
+Metade da tabela acima você nunca precisa digitar,
+porque o HTML já entrega — com teclado e estado incluídos.
+</p>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: role contra elemento nativo"><table>
+<thead>
+<tr>
+<th scope="col">Em vez de</th>
+<th scope="col">Use</th>
+<th scope="col">O que ganha de graça</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>role="button"</td>
+<td>&lt;button&gt;</td>
+<td>Tab, Enter, Espaço, disabled.</td>
+</tr>
+<tr>
+<td>role="link"</td>
+<td>&lt;a href&gt;</td>
+<td>Tab, Enter, abrir em nova aba.</td>
+</tr>
+<tr>
+<td>role="checkbox"</td>
+<td>&lt;input type="checkbox"&gt;</td>
+<td>Espaço, estado sincronizado.</td>
+</tr>
+<tr>
+<td>role="dialog"</td>
+<td>&lt;dialog&gt;</td>
+<td>Foco preso, ESC, inerte atrás.</td>
+</tr>
+<tr>
+<td>role="progressbar"</td>
+<td>&lt;progress&gt;</td>
+<td>Valor anunciado sozinho.</td>
+</tr>
+<tr>
+<td>role="list"</td>
+<td>&lt;ul&gt; e &lt;li&gt;</td>
+<td>"lista com N itens".</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>As que não têm equivalente nativo</h4>
+
+<p>
+Estas você escreve mesmo, porque o HTML não tem tag para elas.
+São também as que exigem mais teclado escrito à mão — e onde
+o <code>@angular/aria</code> passa a valer mais que a
+implementação própria.
+</p>
+
+<pre><code>role="tablist"  role="tab"  role="tabpanel"
+role="menu"     role="menuitem"
+role="listbox"  role="option"
+role="alert"    role="status"</code></pre>
+
+<h4>role muda o que se anuncia, não o que acontece</h4>
+
+<pre><code>&lt;!-- ❌ anuncia "botão", não aciona com teclado --&gt;
+&lt;div role="button" (click)="salvar()"&gt;Salvar&lt;/div&gt;</code></pre>
+
+<p>
+Este é o mal-entendido mais caro sobre ARIA. A role é uma
+etiqueta para a tecnologia assistiva. Ela não adiciona
+comportamento nenhum — e prometer um botão que não funciona
+é pior do que não prometer nada.
+</p>
 
 </section>
 
@@ -4058,6 +4206,65 @@ Mesmo assim,
 deve ser testado.
 </p>
 
+<h4>O que vem pronto</h4>
+
+<ul>
+
+<li>Role e atributos ARIA de cada componente.</li>
+
+<li>Navegação por teclado nos padrões complexos.</li>
+
+<li>Foco preso e ESC nos overlays.</li>
+
+<li>Alvos de toque no tamanho mínimo.</li>
+
+</ul>
+
+<h4>O que continua sendo seu</h4>
+
+<pre><code>&lt;!-- ❌ o Material não adivinha o nome do seu botão --&gt;
+&lt;button mat-icon-button&gt;&lt;mat-icon&gt;delete&lt;/mat-icon&gt;&lt;/button&gt;
+
+&lt;!-- ✅ --&gt;
+&lt;button mat-icon-button aria-label="Excluir lançamento"&gt;
+  &lt;mat-icon aria-hidden="true"&gt;delete&lt;/mat-icon&gt;
+&lt;/button&gt;</code></pre>
+
+<p>
+A regra vale para todo componente do Material:
+<strong>estrutura e comportamento vêm prontos; o significado
+é você quem escreve.</strong> Nome acessível, rótulo de campo,
+texto alternativo, ordem do DOM e contraste do tema continuam
+sendo decisão sua.
+</p>
+
+<h4>Contraste do tema não é verificado por ninguém</h4>
+
+<p>
+Um tema customizado passa a compilar com qualquer cor.
+Nada avisa que o texto ficou em 3:1.
+</p>
+
+<pre><code>// Verifique os pares do seu tema antes de subir.
+// A conta é a razão de contraste da WCAG:
+// texto normal precisa de 4.5:1, texto grande e borda de 3:1.</code></pre>
+
+<h4>Ícone dentro de componente é sempre decorativo</h4>
+
+<p>
+Vale para botão, aba, item de menu, chip e campo.
+Se o ícone acompanha texto, ele é redundante; se está sozinho,
+o nome vai no controle, não nele.
+</p>
+
+<pre><code>&lt;mat-icon aria-hidden="true"&gt;home&lt;/mat-icon&gt;</code></pre>
+
+<p>
+Sem isso, o leitor de tela anuncia o nome da ligadura da fonte:
+"home", "delete", "more_vert" — que é o identificador interno,
+não a função.
+</p>
+
 </section>
 
 <section class="secao" id="matdialog" aria-labelledby="matdialog-titulo">
@@ -4606,6 +4813,101 @@ merece atenção extra.
 <li>Datepicker.</li>
 
 </ul>
+
+<h4>As cinco perguntas de todo overlay</h4>
+
+<p>
+Independente do componente, são sempre as mesmas.
+Se qualquer resposta for não, o overlay está quebrado
+para alguém.
+</p>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: as cinco perguntas de todo overlay"><table>
+<thead>
+<tr>
+<th scope="col">Pergunta</th>
+<th scope="col">Como se resolve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O foco entra ao abrir?</td>
+<td>focus() no primeiro controle, ou no dialog.</td>
+</tr>
+<tr>
+<td>O Tab fica preso dentro?</td>
+<td>cdkTrapFocus, ou dialog com showModal().</td>
+</tr>
+<tr>
+<td>O que está atrás é inalcançável?</td>
+<td>inert no conteúdo, ou aria-modal.</td>
+</tr>
+<tr>
+<td>ESC fecha?</td>
+<td>(keydown.escape) ou o dialog nativo.</td>
+</tr>
+<tr>
+<td>O foco volta ao abrir de novo?</td>
+<td>Guardar quem abriu e devolver ao fechar.</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>Tooltip e popover não seguem essas regras</h4>
+
+<p>
+São a exceção, e confundir os dois grupos é erro comum.
+</p>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: overlay modal contra não modal"><table>
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col">Modal (dialog, select, menu)</th>
+<th scope="col">Não modal (tooltip, popover)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prende o foco</td>
+<td>Sim</td>
+<td>Não</td>
+</tr>
+<tr>
+<td>Recebe o foco ao abrir</td>
+<td>Sim</td>
+<td>Não</td>
+</tr>
+<tr>
+<td>Bloqueia o que está atrás</td>
+<td>Sim</td>
+<td>Não</td>
+</tr>
+<tr>
+<td>Ligação com o gatilho</td>
+<td>aria-haspopup</td>
+<td>aria-describedby</td>
+</tr>
+</tbody>
+</table></div>
+
+<p>
+Prender o foco num tooltip é armadilha de teclado.
+Ele descreve o controle onde o foco já está — não é
+um destino, é um complemento.
+</p>
+
+<h4>❌ Evitar</h4>
+
+<pre><code>&lt;div class="popover" *ngIf="aberto"&gt;
+  &lt;button (click)="excluir()"&gt;Excluir&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+<p>
+Popover que contém controle acionável precisa das cinco
+respostas acima — nesse momento ele virou um modal na prática,
+por mais que o nome no código diga outra coisa.
+</p>
 
 </section>
 
@@ -5218,6 +5520,95 @@ Compare com a lista de componentes que mais geram bug de acessibilidade em
 Angular. É quase a mesma lista.
 </p>
 
+<h4>Instalação</h4>
+
+<pre><code>npm install @angular/aria</code></pre>
+
+<h4>✅ Correto — combobox, o padrão mais difícil de acertar</h4>
+
+<p>
+Antes do v22, a resposta para "preciso de um combobox acessível"
+era "a implementação é complexa, evite fazer à mão" — sem
+oferecer nada no lugar. Agora existe.
+</p>
+
+<pre><code>import { NgCombobox, NgComboboxInput, NgListbox, NgOption }
+  from '@angular/aria/combobox';
+
+@Component({
+  imports: [NgCombobox, NgComboboxInput, NgListbox, NgOption],
+  template: `
+    &lt;div ngCombobox&gt;
+
+      &lt;label for="cidade"&gt;Cidade&lt;/label&gt;
+      &lt;input id="cidade" ngComboboxInput [(value)]="termo"&gt;
+
+      &lt;ul ngListbox&gt;
+        @for (cidade of filtradas(); track cidade.id) {
+          &lt;li ngOption [value]="cidade"&gt;{{ cidade.nome }}&lt;/li&gt;
+        }
+      &lt;/ul&gt;
+
+    &lt;/div&gt;
+  `,
+})
+export class BuscaCidade {
+
+  protected readonly termo = signal('');
+
+  protected readonly filtradas = computed(() =&gt;
+    CIDADES.filter((c) =&gt; c.nome.toLowerCase().includes(this.termo().toLowerCase())),
+  );
+
+}</code></pre>
+
+<p>
+Leitura esperada:
+</p>
+
+<pre><code>Cidade, caixa de combinação, editável
+Recife, opção, 1 de 3</code></pre>
+
+<h4>O que as diretivas fazem por baixo</h4>
+
+<p>
+Tudo isto sai do seu código quando você usa o pacote:
+</p>
+
+<ul>
+
+<li><code>role</code> em cada elemento do padrão.</li>
+
+<li><code>aria-expanded</code>, <code>aria-controls</code>,
+<code>aria-activedescendant</code> sincronizados.</li>
+
+<li>Setas, Home, End, Enter e Escape tratados.</li>
+
+<li>Foco permanecendo no input, como o padrão exige.</li>
+
+<li><code>aria-selected</code> na opção certa.</li>
+
+</ul>
+
+<h4>Headless significa que o CSS é seu</h4>
+
+<p>
+As diretivas não trazem estilo nenhum. Você continua responsável
+pelo foco visível, pelo contraste e pela ordem do DOM —
+é possível usar <code>@angular/aria</code> e ainda entregar
+uma tela inacessível.
+</p>
+
+<pre><code>[ngOption][aria-selected='true'] {
+  background: var(--cor-selecao);
+}
+
+[ngOption]:focus-visible,
+[ngOption][data-active='true'] {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: -3px;
+}</code></pre>
+
 </section>
 
 <section class="secao" id="angular-aria-material-ou-cdk" aria-labelledby="angular-aria-material-ou-cdk-titulo">
@@ -5294,6 +5685,46 @@ acessibilidade em produção não é widget complexo.
 <li>Tabela sem cabeçalho associado.</li>
 
 </ul>
+
+<h4>O mesmo componente, os dois lados da fronteira</h4>
+
+<p>
+O <code>@angular/aria</code> cuida de tudo que está dentro do
+padrão. O que fica de fora continua sendo seu — e é onde
+mora a maior parte dos bugs reais.
+</p>
+
+<pre><code>&lt;div ngCombobox&gt;
+
+  &lt;!-- ❌ FORA do escopo da biblioteca: falta label.
+       O combobox funciona perfeitamente e não tem nome. --&gt;
+  &lt;input ngComboboxInput&gt;
+
+  &lt;ul ngListbox&gt;
+    @for (item of itens(); track item.id) {
+      &lt;!-- ✅ DENTRO: role, aria-selected, setas, foco.
+           Tudo isto a diretiva resolve. --&gt;
+      &lt;li ngOption [value]="item"&gt;{{ item.nome }}&lt;/li&gt;
+    }
+  &lt;/ul&gt;
+
+&lt;/div&gt;</code></pre>
+
+<pre><code>&lt;!-- ✅ com o que a biblioteca não faz por você --&gt;
+&lt;div ngCombobox&gt;
+  &lt;label for="cidade"&gt;Cidade&lt;/label&gt;
+  &lt;input id="cidade" ngComboboxInput&gt;
+  &lt;ul ngListbox&gt;&lt;!-- ... --&gt;&lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>E o foco visível continua sendo CSS</h4>
+
+<pre><code>/* Sem isto, quem navega por teclado não vê onde está —
+   por mais correta que a ARIA gerada seja. */
+[ngOption][data-active='true'] {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: -3px;
+}</code></pre>
 
 <aside class="callout callout--warning" aria-label="Atenção">
 <p class="callout__label">Atenção</p>
@@ -5408,6 +5839,71 @@ Leitores de tela dependem de:
 <li>Estado correto.</li>
 
 </ul>
+
+<h4>Os três, num elemento só</h4>
+
+<pre><code>&lt;button
+  [attr.aria-pressed]="favorito()"
+  aria-label="Favoritar Conta Corrente"
+  (click)="alternar()"
+&gt;
+  &lt;mat-icon aria-hidden="true"&gt;star&lt;/mat-icon&gt;
+&lt;/button&gt;</code></pre>
+
+<p>
+Leitura esperada:
+</p>
+
+<pre><code>Favoritar Conta Corrente, botão de alternância, não pressionado</code></pre>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: nome, role e estado no exemplo"><table>
+<thead>
+<tr>
+<th scope="col">Pergunta</th>
+<th scope="col">De onde vem</th>
+<th scope="col">O que a pessoa ouve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qual o nome?</td>
+<td>aria-label</td>
+<td>Favoritar Conta Corrente</td>
+</tr>
+<tr>
+<td>Qual a role?</td>
+<td>a tag button, mais o aria-pressed</td>
+<td>botão de alternância</td>
+</tr>
+<tr>
+<td>Qual o estado?</td>
+<td>aria-pressed ligado ao signal</td>
+<td>não pressionado</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>Diagnóstico em três perguntas</h4>
+
+<p>
+Diante de qualquer bug de leitor de tela, pergunte nesta ordem —
+o problema quase sempre está numa das três.
+</p>
+
+<pre><code>&lt;!-- Anunciou só "botão"? Falta NOME. --&gt;
+&lt;button&gt;&lt;mat-icon&gt;star&lt;/mat-icon&gt;&lt;/button&gt;
+
+&lt;!-- Anunciou como texto comum? Falta ROLE. --&gt;
+&lt;div (click)="alternar()"&gt;Favoritar&lt;/div&gt;
+
+&lt;!-- Anunciou certo, mas nunca muda? Falta ESTADO. --&gt;
+&lt;button aria-pressed="false" (click)="alternar()"&gt;Favoritar&lt;/button&gt;</code></pre>
+
+<p>
+O terceiro é o mais traiçoeiro: tudo parece implementado,
+e o atributo está congelado no valor inicial. Visualmente
+a estrela acende; para o leitor de tela, nada aconteceu.
+</p>
 
 <p>
 Quase todos os bugs podem ser analisados
@@ -5990,6 +6486,65 @@ Após concluir:
 </tbody>
 </table></div>
 
+<h4>Diferenças que mudam o que você escreve</h4>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: diferenças práticas entre TalkBack e VoiceOver"><table>
+<thead>
+<tr>
+<th scope="col">Situação</th>
+<th scope="col">TalkBack</th>
+<th scope="col">VoiceOver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aria-describedby</td>
+<td>Lê depois de uma pausa.</td>
+<td>Às vezes só com o rotor em "dicas".</td>
+</tr>
+<tr>
+<td>Dois aria-live na mesma tela</td>
+<td>Costuma enfileirar.</td>
+<td>Costuma descartar o primeiro.</td>
+</tr>
+<tr>
+<td>role="alert" ao inserir no DOM</td>
+<td>Frequentemente ignora.</td>
+<td>Frequentemente ignora.</td>
+</tr>
+<tr>
+<td>Posição no conjunto</td>
+<td>Anuncia "1 de 5" sozinho em listas.</td>
+<td>Exige aria-setsize e aria-posinset.</td>
+</tr>
+<tr>
+<td>Foco após remover elemento</td>
+<td>Vai para o próximo irmão.</td>
+<td>Costuma cair no topo.</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>A regra que sobrevive aos dois</h4>
+
+<p>
+Não escreva para um leitor de tela específico. Escreva HTML
+semântico correto e ARIA mínima — é o que os dois interpretam
+igual. Toda vez que algo funciona só em um deles, quase sempre
+é sinal de que a solução está apoiada num comportamento
+específico, e não na especificação.
+</p>
+
+<h4>Testar em um não cobre o outro</h4>
+
+<p>
+São motores diferentes, com heurísticas diferentes, em
+navegadores diferentes. A combinação que importa em produção:
+TalkBack com Chrome no Android, VoiceOver com Safari no iOS.
+Testar VoiceOver no Mac com Chrome não representa nem um
+nem outro.
+</p>
+
 </section>
 
 <section class="secao" id="roteiro-de-teste-manual" aria-labelledby="roteiro-de-teste-manual-titulo">
@@ -6019,6 +6574,108 @@ Após concluir:
 <li>Testar saída do fluxo.</li>
 
 </ol>
+
+<h4>Como ligar</h4>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: como ligar o leitor de tela"><table>
+<thead>
+<tr>
+<th scope="col">Leitor</th>
+<th scope="col">Onde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TalkBack</td>
+<td>Android: Configurações, Acessibilidade, TalkBack. Atalho: segurar os dois botões de volume por 3 segundos.</td>
+</tr>
+<tr>
+<td>VoiceOver</td>
+<td>iPhone: Ajustes, Acessibilidade, VoiceOver. Atalho: três cliques no botão lateral.</td>
+</tr>
+<tr>
+<td>VoiceOver</td>
+<td>Mac: Command + F5.</td>
+</tr>
+<tr>
+<td>NVDA</td>
+<td>Windows: gratuito, nvaccess.org. Insert + seta para baixo lê tudo.</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>Os gestos que resolvem 90% do teste</h4>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: gestos principais"><table>
+<thead>
+<tr>
+<th scope="col">O que fazer</th>
+<th scope="col">TalkBack</th>
+<th scope="col">VoiceOver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Próximo elemento</td>
+<td>Deslizar para a direita</td>
+<td>Deslizar para a direita</td>
+</tr>
+<tr>
+<td>Anterior</td>
+<td>Deslizar para a esquerda</td>
+<td>Deslizar para a esquerda</td>
+</tr>
+<tr>
+<td>Acionar</td>
+<td>Toque duplo</td>
+<td>Toque duplo</td>
+</tr>
+<tr>
+<td>Ler tudo a partir daqui</td>
+<td>Deslizar para baixo e para a direita</td>
+<td>Deslizar com dois dedos para baixo</td>
+</tr>
+<tr>
+<td>Trocar o modo de navegação</td>
+<td>Deslizar para cima e para a direita</td>
+<td>Girar dois dedos (rotor)</td>
+</tr>
+<tr>
+<td>Voltar</td>
+<td>Deslizar para baixo e para a esquerda</td>
+<td>Riscar dois dedos em Z</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>O modo por títulos é o mais revelador</h4>
+
+<p>
+Antes de percorrer elemento por elemento, mude a navegação
+para "títulos" e desça a página. Em 20 segundos você descobre
+se a estrutura faz sentido — e é assim que quem usa leitor de
+tela de verdade se orienta numa página nova. Ninguém percorre
+200 elementos um a um.
+</p>
+
+<p>
+Se ao navegar por títulos você não consegue dizer do que a
+página trata, a estrutura está errada, independente do que
+o axe disser.
+</p>
+
+<h4>O teste que vale por todos</h4>
+
+<p>
+Desligue o monitor, ou feche os olhos, e tente concluir a
+jornada inteira só com o som. É desconfortável e é exatamente
+o ponto: essa é a experiência que você está entregando.
+</p>
+
+<p>
+Se você, que escreveu a tela, não consegue concluir —
+ninguém consegue.
+</p>
 
 </section>
 
@@ -6567,6 +7224,64 @@ WCAG:
 
 </ul>
 
+<h4>Por que estes são críticos e não altos</h4>
+
+<p>
+O corte é um só: a pessoa <strong>não conclui a jornada</strong>.
+Não é "fica ruim", é "não dá para terminar". Cada exemplo
+abaixo trava um fluxo inteiro.
+</p>
+
+<pre><code>&lt;!-- Botão principal sem nome.
+     Anunciado: "botão". A pessoa não confirma o pagamento
+     porque não sabe que aquilo confirma o pagamento. --&gt;
+&lt;button (click)="confirmar()"&gt;
+  &lt;mat-icon&gt;check&lt;/mat-icon&gt;
+&lt;/button&gt;</code></pre>
+
+<pre><code>&lt;!-- Modal inacessível.
+     Abre, o foco não entra, o leitor continua na página de trás.
+     A pessoa não sabe que existe algo para confirmar. --&gt;
+&lt;div class="modal" *ngIf="aberto"&gt;
+  &lt;button (click)="excluirConta()"&gt;Confirmar exclusão&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+<pre><code>&lt;!-- Erro não anunciado.
+     O envio falha em silêncio. A pessoa espera uma confirmação
+     que nunca vem, tenta de novo, e desiste. --&gt;
+&lt;span *ngIf="erro" class="erro"&gt;{{ erro }}&lt;/span&gt;</code></pre>
+
+<pre><code>&lt;!-- Foco preso incorretamente.
+     cdkTrapFocus sem forma de sair: nem ESC, nem botão fechar.
+     A pessoa fica presa até recarregar a página. --&gt;
+&lt;div cdkTrapFocus&gt;
+  &lt;p&gt;Carregando…&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+<pre><code>&lt;!-- Campo sem label.
+     "campo de edição". Num cadastro de 8 campos iguais,
+     não há como saber qual é qual. --&gt;
+&lt;input type="text" placeholder="CPF"&gt;</code></pre>
+
+<h4>O teste de severidade</h4>
+
+<p>
+Pergunte: <em>desligando o monitor, uma pessoa consegue
+concluir esta tarefa?</em>
+</p>
+
+<ul>
+
+<li>Não consegue de jeito nenhum: <strong>crítico</strong>.</li>
+
+<li>Consegue com muita dificuldade ou tentativa e erro: <strong>alto</strong>.</li>
+
+<li>Consegue, mas a experiência é pior: <strong>médio</strong>.</li>
+
+<li>Consegue normalmente, há algo a melhorar: <strong>baixo</strong>.</li>
+
+</ul>
+
 </section>
 
 <section class="secao" id="exemplos-de-bugs-medios" aria-labelledby="exemplos-de-bugs-medios-titulo">
@@ -6584,6 +7299,60 @@ WCAG:
 <li>Leitura redundante.</li>
 
 </ul>
+
+<h4>Médio é o que atrapalha sem impedir</h4>
+
+<pre><code>&lt;!-- ❌ salto de nível: sugere uma seção que não existe --&gt;
+&lt;h1&gt;Extrato&lt;/h1&gt;
+&lt;h4&gt;Últimos lançamentos&lt;/h4&gt;
+
+&lt;!-- ✅ --&gt;
+&lt;h1&gt;Extrato&lt;/h1&gt;
+&lt;h2&gt;Últimos lançamentos&lt;/h2&gt;</code></pre>
+
+<pre><code>&lt;!-- ❌ alt que descreve o arquivo, não a informação --&gt;
+&lt;img src="grafico.png" alt="grafico"&gt;
+
+&lt;!-- ✅ o alt carrega o que a imagem informa --&gt;
+&lt;img src="grafico.png"
+  alt="Gastos caíram de R$ 3.200 em janeiro para R$ 2.100 em junho"&gt;
+
+&lt;!-- ✅ imagem decorativa: alt vazio, nunca ausente --&gt;
+&lt;img src="ornamento.svg" alt=""&gt;</code></pre>
+
+<pre><code>&lt;!-- ❌ leitura redundante: o nome repete a role --&gt;
+&lt;button aria-label="Botão de salvar"&gt;Salvar&lt;/button&gt;
+&lt;!-- ouve-se: "Botão de salvar, botão" --&gt;
+
+&lt;!-- ✅ --&gt;
+&lt;button&gt;Salvar&lt;/button&gt;
+&lt;!-- ouve-se: "Salvar, botão" --&gt;</code></pre>
+
+<pre><code>&lt;!-- ❌ ícone e texto dizendo a mesma coisa duas vezes --&gt;
+&lt;button&gt;
+  &lt;mat-icon&gt;save&lt;/mat-icon&gt;
+  Salvar
+&lt;/button&gt;
+&lt;!-- ouve-se: "save Salvar, botão" --&gt;
+
+&lt;!-- ✅ --&gt;
+&lt;button&gt;
+  &lt;mat-icon aria-hidden="true"&gt;save&lt;/mat-icon&gt;
+  Salvar
+&lt;/button&gt;</code></pre>
+
+<h4>Por que médio e não baixo</h4>
+
+<p>
+Nenhum desses impede a conclusão da tarefa. Todos aumentam o
+esforço: heading errado quebra a navegação por títulos, alt ruim
+esconde a informação do gráfico, redundância dobra o tempo de
+escuta de cada tela.
+</p>
+
+<p>
+Em volume, é o que faz a pessoa preferir o telefone ao aplicativo.
+</p>
 
 </section>
 
@@ -6891,6 +7660,101 @@ O CPF precisa ter 11. Confira e tente de novo.</code></pre>
 
 </ul>
 
+<h4>O que cada uma pega, e o que não pega</h4>
+
+<div class="tabela-wrap" tabindex="0" role="region" aria-label="Tabela: ferramentas e cobertura"><table>
+<thead>
+<tr>
+<th scope="col">Ferramenta</th>
+<th scope="col">Boa para</th>
+<th scope="col">Custo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>axe DevTools</td>
+<td>Violação de regra no DOM. É a engine dentro do Lighthouse.</td>
+<td>Extensão gratuita.</td>
+</tr>
+<tr>
+<td>Lighthouse</td>
+<td>Nota rápida e regressão. Roda no próprio Chrome.</td>
+<td>Já vem no navegador.</td>
+</tr>
+<tr>
+<td>Accessibility Insights</td>
+<td>Roteiro guiado de teste manual, passo a passo.</td>
+<td>Gratuito, Microsoft.</td>
+</tr>
+<tr>
+<td>TalkBack e VoiceOver</td>
+<td>A única resposta que importa: dá para concluir?</td>
+<td>Já está no celular.</td>
+</tr>
+<tr>
+<td>angular-eslint</td>
+<td>Pegar no commit, antes de virar bug.</td>
+<td>Já está no projeto.</td>
+</tr>
+</tbody>
+</table></div>
+
+<h4>Colocar no CI, não só no navegador</h4>
+
+<p>
+Verificação que depende de alguém lembrar de rodar não é
+verificação. O axe roda sobre HTML gerado, sem navegador:
+</p>
+
+<pre><code>npm install --save-dev axe-core jsdom</code></pre>
+
+<pre><code>// scripts/check-a11y.js
+const { JSDOM } = require('jsdom');
+const fs = require('fs');
+
+const axeSource = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
+
+async function verificar(arquivo) {
+  const dom = new JSDOM(fs.readFileSync(arquivo, 'utf8'), {
+    runScripts: 'outside-only',
+    pretendToBeVisual: true,
+  });
+
+  dom.window.eval(axeSource);
+
+  const r = await dom.window.axe.run(dom.window.document, {
+    runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] },
+    // Contraste precisa de CSS computado, que o jsdom não faz.
+    rules: { 'color-contrast': { enabled: false } },
+  });
+
+  return r.violations;
+}</code></pre>
+
+<p>
+Ligue no pipeline com saída diferente de zero em caso de violação.
+Aviso que não quebra o build é aviso que ninguém lê.
+</p>
+
+<h4>A ordem que funciona</h4>
+
+<ol>
+
+<li>Lint no editor: pega enquanto você escreve.</li>
+
+<li>axe no CI: pega antes do merge.</li>
+
+<li>Lighthouse antes de subir: pega regressão geral.</li>
+
+<li>TalkBack e VoiceOver na entrega: pega o que importa.</li>
+
+</ol>
+
+<p>
+Os três primeiros somam cerca de um terço dos problemas.
+O quarto é o que responde se alguém consegue usar.
+</p>
+
 </section>
 
 <section class="secao" id="o-que-ferramentas-nao-encontram" aria-labelledby="o-que-ferramentas-nao-encontram-titulo">
@@ -6919,6 +7783,57 @@ Elas não identificam bem:
 <li>Navegação complexa.</li>
 
 </ul>
+
+<h4>Código que passa no axe e é inutilizável</h4>
+
+<p>
+Os três exemplos abaixo têm zero violação em qualquer
+ferramenta automatizada. Os três são inacessíveis.
+</p>
+
+<pre><code>&lt;!-- 1. Role sem comportamento.
+     Tem role, tem tabindex, tem nome. O axe aprova.
+     Enter e Espaço não fazem nada: role não traz comportamento. --&gt;
+&lt;div role="button" tabindex="0" (click)="salvar()"&gt;Salvar&lt;/div&gt;</code></pre>
+
+<pre><code>&lt;!-- 2. Nome acessível mentiroso.
+     Existe nome, então a ferramenta passa.
+     O leitor de tela anuncia "Editar" num botão que exclui. --&gt;
+&lt;button aria-label="Editar" (click)="excluir()"&gt;
+  &lt;mat-icon aria-hidden="true"&gt;delete&lt;/mat-icon&gt;
+&lt;/button&gt;</code></pre>
+
+<pre><code>&lt;!-- 3. Ordem de leitura invertida.
+     O HTML está impecável. O CSS troca a ordem, e o Tab
+     entrega Confirmar antes de Cancelar. --&gt;
+&lt;div style="display:flex; flex-direction:row-reverse"&gt;
+  &lt;button&gt;Confirmar&lt;/button&gt;
+  &lt;button&gt;Cancelar&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>Por que a ferramenta não vê</h4>
+
+<p>
+Ela verifica o que é verificável sem entender a intenção:
+o atributo existe, o valor é válido, a relação está declarada.
+Nenhuma delas consegue responder <em>"esse nome descreve o que
+o botão faz?"</em> ou <em>"essa ordem faz sentido para quem
+está preenchendo o formulário?"</em>.
+</p>
+
+<h4>A conta real</h4>
+
+<p>
+Ferramenta automatizada pega em torno de um terço dos problemas
+de acessibilidade. É um terço importante, barato e que roda em
+todo commit — mas é piso, não teto.
+</p>
+
+<p>
+Os outros dois terços exigem alguém percorrendo a jornada com
+teclado e com leitor de tela, perguntando se dá para concluir
+a tarefa. Não existe atalho para isso.
+</p>
 
 </section>
 

@@ -32,6 +32,63 @@ export const leitoresDeTela: Part = {
           ]
         },
         {
+          "kind": "heading",
+          "level": 1,
+          "text": "Os três, num elemento só"
+        },
+        {
+          "kind": "code",
+          "code": "<button\n  [attr.aria-pressed]=\"favorito()\"\n  aria-label=\"Favoritar Conta Corrente\"\n  (click)=\"alternar()\"\n>\n  <mat-icon aria-hidden=\"true\">star</mat-icon>\n</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "reading",
+          "text": "Favoritar Conta Corrente, botão de alternância, não pressionado"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Pergunta",
+            "De onde vem",
+            "O que a pessoa ouve"
+          ],
+          "rows": [
+            [
+              "Qual o nome?",
+              "aria-label",
+              "Favoritar Conta Corrente"
+            ],
+            [
+              "Qual a role?",
+              "a tag button, mais o aria-pressed",
+              "botão de alternância"
+            ],
+            [
+              "Qual o estado?",
+              "aria-pressed ligado ao signal",
+              "não pressionado"
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Diagnóstico em três perguntas"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Diante de qualquer bug de leitor de tela, pergunte nesta ordem — o problema quase sempre está numa das três."
+        },
+        {
+          "kind": "code",
+          "code": "<!-- Anunciou só \"botão\"? Falta NOME. -->\n<button><mat-icon>star</mat-icon></button>\n\n<!-- Anunciou como texto comum? Falta ROLE. -->\n<div (click)=\"alternar()\">Favoritar</div>\n\n<!-- Anunciou certo, mas nunca muda? Falta ESTADO. -->\n<button aria-pressed=\"false\" (click)=\"alternar()\">Favoritar</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "O terceiro é o mais traiçoeiro: tudo parece implementado, e o atributo está congelado no valor inicial. Visualmente a estrela acende; para o leitor de tela, nada aconteceu."
+        },
+        {
           "kind": "paragraph",
           "text": "Quase todos os bugs podem ser analisados por esses três pontos."
         }
@@ -539,6 +596,64 @@ export const leitoresDeTela: Part = {
               "Muito dependente da implementação."
             ]
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Diferenças que mudam o que você escreve"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Situação",
+            "TalkBack",
+            "VoiceOver"
+          ],
+          "rows": [
+            [
+              "aria-describedby",
+              "Lê depois de uma pausa.",
+              "Às vezes só com o rotor em \"dicas\"."
+            ],
+            [
+              "Dois aria-live na mesma tela",
+              "Costuma enfileirar.",
+              "Costuma descartar o primeiro."
+            ],
+            [
+              "role=\"alert\" ao inserir no DOM",
+              "Frequentemente ignora.",
+              "Frequentemente ignora."
+            ],
+            [
+              "Posição no conjunto",
+              "Anuncia \"1 de 5\" sozinho em listas.",
+              "Exige aria-setsize e aria-posinset."
+            ],
+            [
+              "Foco após remover elemento",
+              "Vai para o próximo irmão.",
+              "Costuma cair no topo."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "A regra que sobrevive aos dois"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Não escreva para um leitor de tela específico. Escreva HTML semântico correto e ARIA mínima — é o que os dois interpretam igual. Toda vez que algo funciona só em um deles, quase sempre é sinal de que a solução está apoiada num comportamento específico, e não na especificação."
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Testar em um não cobre o outro"
+        },
+        {
+          "kind": "paragraph",
+          "text": "São motores diferentes, com heurísticas diferentes, em navegadores diferentes. A combinação que importa em produção: TalkBack com Chrome no Android, VoiceOver com Safari no iOS. Testar VoiceOver no Mac com Chrome não representa nem um nem outro."
         }
       ]
     },
@@ -564,6 +679,107 @@ export const leitoresDeTela: Part = {
             "Testar navegação.",
             "Testar saída do fluxo."
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Como ligar"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Leitor",
+            "Onde"
+          ],
+          "rows": [
+            [
+              "TalkBack",
+              "Android: Configurações, Acessibilidade, TalkBack. Atalho: segurar os dois botões de volume por 3 segundos."
+            ],
+            [
+              "VoiceOver",
+              "iPhone: Ajustes, Acessibilidade, VoiceOver. Atalho: três cliques no botão lateral."
+            ],
+            [
+              "VoiceOver",
+              "Mac: Command + F5."
+            ],
+            [
+              "NVDA",
+              "Windows: gratuito, nvaccess.org. Insert + seta para baixo lê tudo."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Os gestos que resolvem 90% do teste"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "O que fazer",
+            "TalkBack",
+            "VoiceOver"
+          ],
+          "rows": [
+            [
+              "Próximo elemento",
+              "Deslizar para a direita",
+              "Deslizar para a direita"
+            ],
+            [
+              "Anterior",
+              "Deslizar para a esquerda",
+              "Deslizar para a esquerda"
+            ],
+            [
+              "Acionar",
+              "Toque duplo",
+              "Toque duplo"
+            ],
+            [
+              "Ler tudo a partir daqui",
+              "Deslizar para baixo e para a direita",
+              "Deslizar com dois dedos para baixo"
+            ],
+            [
+              "Trocar o modo de navegação",
+              "Deslizar para cima e para a direita",
+              "Girar dois dedos (rotor)"
+            ],
+            [
+              "Voltar",
+              "Deslizar para baixo e para a esquerda",
+              "Riscar dois dedos em Z"
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O modo por títulos é o mais revelador"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Antes de percorrer elemento por elemento, mude a navegação para \"títulos\" e desça a página. Em 20 segundos você descobre se a estrutura faz sentido — e é assim que quem usa leitor de tela de verdade se orienta numa página nova. Ninguém percorre 200 elementos um a um."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Se ao navegar por títulos você não consegue dizer do que a página trata, a estrutura está errada, independente do que o axe disser."
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O teste que vale por todos"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Desligue o monitor, ou feche os olhos, e tente concluir a jornada inteira só com o som. É desconfortável e é exatamente o ponto: essa é a experiência que você está entregando."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Se você, que escreveu a tela, não consegue concluir — ninguém consegue."
         }
       ]
     },

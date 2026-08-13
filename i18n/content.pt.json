@@ -232,6 +232,68 @@
               ]
             },
             {
+              "kind": "heading",
+              "level": 1,
+              "text": "A mesma tela, dos dois lados"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Este é o HTML de um card de conta:"
+            },
+            {
+              "kind": "code",
+              "code": "<div class=\"card\">\n  <div class=\"titulo\">Conta Corrente</div>\n  <div class=\"saldo\">R$ 4.210,00</div>\n  <div class=\"acao\" (click)=\"transferir()\">Transferir</div>\n</div>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Visualmente: um card com título, valor e botão. Impecável."
+            },
+            {
+              "kind": "reading",
+              "text": "Conta Corrente\nR$ 4.210,00\nTransferir"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Três textos soltos. Nenhum título para navegar, nenhum botão para acionar, nenhuma forma de saber que \"Transferir\" faz algo. Ao navegar por títulos ou por botões, esta tela está vazia."
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "O mesmo card, escrito para os dois"
+            },
+            {
+              "kind": "code",
+              "code": "<article class=\"card\">\n  <h2 class=\"titulo\">Conta Corrente</h2>\n  <p class=\"saldo\">R$ 4.210,00</p>\n  <button type=\"button\" class=\"acao\" (click)=\"transferir()\">\n    Transferir\n  </button>\n</article>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "reading",
+              "text": "Conta Corrente, título nível 2\nR$ 4.210,00\nTransferir, botão"
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "O que muda de verdade"
+            },
+            {
+              "kind": "paragraph",
+              "text": "O CSS é o mesmo. A tela é idêntica. O que mudou foi a árvore de acessibilidade — a estrutura paralela que o navegador constrói e entrega ao leitor de tela."
+            },
+            {
+              "kind": "paragraph",
+              "text": "Ela não vem das classes nem do visual. Vem das tags e dos atributos. É por isso que trocar div por h2 e button não é preciosismo: é a diferença entre existir e não existir para uma parte das pessoas."
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Veja a sua"
+            },
+            {
+              "kind": "paragraph",
+              "text": "No Chrome: F12, aba Elements, painel Accessibility. No Firefox: F12, aba Acessibilidade. É a página como o leitor de tela recebe — e costuma ser uma surpresa desconfortável na primeira vez."
+            },
+            {
               "kind": "callout",
               "tone": "warning",
               "blocks": [
@@ -1244,6 +1306,83 @@
                   "Opção."
                 ]
               ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Antes de escrever a role: já existe tag para isso?"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Metade da tabela acima você nunca precisa digitar, porque o HTML já entrega — com teclado e estado incluídos."
+            },
+            {
+              "kind": "table",
+              "headers": [
+                "Em vez de",
+                "Use",
+                "O que ganha de graça"
+              ],
+              "rows": [
+                [
+                  "role=\"button\"",
+                  "<button>",
+                  "Tab, Enter, Espaço, disabled."
+                ],
+                [
+                  "role=\"link\"",
+                  "<a href>",
+                  "Tab, Enter, abrir em nova aba."
+                ],
+                [
+                  "role=\"checkbox\"",
+                  "<input type=\"checkbox\">",
+                  "Espaço, estado sincronizado."
+                ],
+                [
+                  "role=\"dialog\"",
+                  "<dialog>",
+                  "Foco preso, ESC, inerte atrás."
+                ],
+                [
+                  "role=\"progressbar\"",
+                  "<progress>",
+                  "Valor anunciado sozinho."
+                ],
+                [
+                  "role=\"list\"",
+                  "<ul> e <li>",
+                  "\"lista com N itens\"."
+                ]
+              ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "As que não têm equivalente nativo"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Estas você escreve mesmo, porque o HTML não tem tag para elas. São também as que exigem mais teclado escrito à mão — e onde o @angular/aria passa a valer mais que a implementação própria."
+            },
+            {
+              "kind": "code",
+              "code": "role=\"tablist\"  role=\"tab\"  role=\"tabpanel\"\nrole=\"menu\"     role=\"menuitem\"\nrole=\"listbox\"  role=\"option\"\nrole=\"alert\"    role=\"status\"",
+              "variant": "neutral"
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "role muda o que se anuncia, não o que acontece"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- ❌ anuncia \"botão\", não aciona com teclado -->\n<div role=\"button\" (click)=\"salvar()\">Salvar</div>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Este é o mal-entendido mais caro sobre ARIA. A role é uma etiqueta para a tecnologia assistiva. Ela não adiciona comportamento nenhum — e prometer um botão que não funciona é pior do que não prometer nada."
             }
           ]
         },
@@ -3289,6 +3428,67 @@
             {
               "kind": "paragraph",
               "text": "Mesmo assim, deve ser testado."
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "O que vem pronto"
+            },
+            {
+              "kind": "list",
+              "ordered": false,
+              "items": [
+                "Role e atributos ARIA de cada componente.",
+                "Navegação por teclado nos padrões complexos.",
+                "Foco preso e ESC nos overlays.",
+                "Alvos de toque no tamanho mínimo."
+              ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "O que continua sendo seu"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- ❌ o Material não adivinha o nome do seu botão -->\n<button mat-icon-button><mat-icon>delete</mat-icon></button>\n\n<!-- ✅ -->\n<button mat-icon-button aria-label=\"Excluir lançamento\">\n  <mat-icon aria-hidden=\"true\">delete</mat-icon>\n</button>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "paragraph",
+              "text": "A regra vale para todo componente do Material: estrutura e comportamento vêm prontos; o significado é você quem escreve. Nome acessível, rótulo de campo, texto alternativo, ordem do DOM e contraste do tema continuam sendo decisão sua."
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Contraste do tema não é verificado por ninguém"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Um tema customizado passa a compilar com qualquer cor. Nada avisa que o texto ficou em 3:1."
+            },
+            {
+              "kind": "code",
+              "code": "// Verifique os pares do seu tema antes de subir.\n// A conta é a razão de contraste da WCAG:\n// texto normal precisa de 4.5:1, texto grande e borda de 3:1.",
+              "variant": "neutral"
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Ícone dentro de componente é sempre decorativo"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Vale para botão, aba, item de menu, chip e campo. Se o ícone acompanha texto, ele é redundante; se está sozinho, o nome vai no controle, não nele."
+            },
+            {
+              "kind": "code",
+              "code": "<mat-icon aria-hidden=\"true\">home</mat-icon>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Sem isso, o leitor de tela anuncia o nome da ligadura da fonte: \"home\", \"delete\", \"more_vert\" — que é o identificador interno, não a função."
             }
           ]
         },
@@ -3720,6 +3920,96 @@
                 "Menu.",
                 "Datepicker."
               ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "As cinco perguntas de todo overlay"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Independente do componente, são sempre as mesmas. Se qualquer resposta for não, o overlay está quebrado para alguém."
+            },
+            {
+              "kind": "table",
+              "headers": [
+                "Pergunta",
+                "Como se resolve"
+              ],
+              "rows": [
+                [
+                  "O foco entra ao abrir?",
+                  "focus() no primeiro controle, ou no dialog."
+                ],
+                [
+                  "O Tab fica preso dentro?",
+                  "cdkTrapFocus, ou dialog com showModal()."
+                ],
+                [
+                  "O que está atrás é inalcançável?",
+                  "inert no conteúdo, ou aria-modal."
+                ],
+                [
+                  "ESC fecha?",
+                  "(keydown.escape) ou o dialog nativo."
+                ],
+                [
+                  "O foco volta ao abrir de novo?",
+                  "Guardar quem abriu e devolver ao fechar."
+                ]
+              ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Tooltip e popover não seguem essas regras"
+            },
+            {
+              "kind": "paragraph",
+              "text": "São a exceção, e confundir os dois grupos é erro comum."
+            },
+            {
+              "kind": "table",
+              "headers": [
+                "",
+                "Modal (dialog, select, menu)",
+                "Não modal (tooltip, popover)"
+              ],
+              "rows": [
+                [
+                  "Prende o foco",
+                  "Sim",
+                  "Não"
+                ],
+                [
+                  "Recebe o foco ao abrir",
+                  "Sim",
+                  "Não"
+                ],
+                [
+                  "Bloqueia o que está atrás",
+                  "Sim",
+                  "Não"
+                ],
+                [
+                  "Ligação com o gatilho",
+                  "aria-haspopup",
+                  "aria-describedby"
+                ]
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "text": "Prender o foco num tooltip é armadilha de teclado. Ele descreve o controle onde o foco já está — não é um destino, é um complemento."
+            },
+            {
+              "kind": "code",
+              "code": "<div class=\"popover\" *ngIf=\"aberto\">\n  <button (click)=\"excluir()\">Excluir</button>\n</div>",
+              "variant": "wrong"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Popover que contém controle acionável precisa das cinco respostas acima — nesse momento ele virou um modal na prática, por mais que o nome no código diga outra coisa."
             }
           ]
         },
@@ -4250,6 +4540,63 @@
             {
               "kind": "paragraph",
               "text": "Compare com a lista de componentes que mais geram bug de acessibilidade em Angular. É quase a mesma lista."
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Instalação"
+            },
+            {
+              "kind": "code",
+              "code": "npm install @angular/aria",
+              "variant": "neutral"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Antes do v22, a resposta para \"preciso de um combobox acessível\" era \"a implementação é complexa, evite fazer à mão\" — sem oferecer nada no lugar. Agora existe."
+            },
+            {
+              "kind": "code",
+              "code": "import { NgCombobox, NgComboboxInput, NgListbox, NgOption }\n  from '@angular/aria/combobox';\n\n@Component({\n  imports: [NgCombobox, NgComboboxInput, NgListbox, NgOption],\n  template: `\n    <div ngCombobox>\n\n      <label for=\"cidade\">Cidade</label>\n      <input id=\"cidade\" ngComboboxInput [(value)]=\"termo\">\n\n      <ul ngListbox>\n        @for (cidade of filtradas(); track cidade.id) {\n          <li ngOption [value]=\"cidade\">{{ cidade.nome }}</li>\n        }\n      </ul>\n\n    </div>\n  `,\n})\nexport class BuscaCidade {\n\n  protected readonly termo = signal('');\n\n  protected readonly filtradas = computed(() =>\n    CIDADES.filter((c) => c.nome.toLowerCase().includes(this.termo().toLowerCase())),\n  );\n\n}",
+              "variant": "correct"
+            },
+            {
+              "kind": "reading",
+              "text": "Cidade, caixa de combinação, editável\nRecife, opção, 1 de 3"
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "O que as diretivas fazem por baixo"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Tudo isto sai do seu código quando você usa o pacote:"
+            },
+            {
+              "kind": "list",
+              "ordered": false,
+              "items": [
+                "role em cada elemento do padrão.",
+                "aria-expanded, aria-controls, aria-activedescendant sincronizados.",
+                "Setas, Home, End, Enter e Escape tratados.",
+                "Foco permanecendo no input, como o padrão exige.",
+                "aria-selected na opção certa."
+              ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Headless significa que o CSS é seu"
+            },
+            {
+              "kind": "paragraph",
+              "text": "As diretivas não trazem estilo nenhum. Você continua responsável pelo foco visível, pelo contraste e pela ordem do DOM — é possível usar @angular/aria e ainda entregar uma tela inacessível."
+            },
+            {
+              "kind": "code",
+              "code": "[ngOption][aria-selected='true'] {\n  background: var(--cor-selecao);\n}\n\n[ngOption]:focus-visible,\n[ngOption][data-active='true'] {\n  outline: 3px solid var(--cor-foco);\n  outline-offset: -3px;\n}",
+              "variant": "neutral"
             }
           ]
         },
@@ -4320,6 +4667,35 @@
                 "Imagem sem texto alternativo.",
                 "Tabela sem cabeçalho associado."
               ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "O mesmo componente, os dois lados da fronteira"
+            },
+            {
+              "kind": "paragraph",
+              "text": "O @angular/aria cuida de tudo que está dentro do padrão. O que fica de fora continua sendo seu — e é onde mora a maior parte dos bugs reais."
+            },
+            {
+              "kind": "code",
+              "code": "<div ngCombobox>\n\n  <!-- ❌ FORA do escopo da biblioteca: falta label.\n       O combobox funciona perfeitamente e não tem nome. -->\n  <input ngComboboxInput>\n\n  <ul ngListbox>\n    @for (item of itens(); track item.id) {\n      <!-- ✅ DENTRO: role, aria-selected, setas, foco.\n           Tudo isto a diretiva resolve. -->\n      <li ngOption [value]=\"item\">{{ item.nome }}</li>\n    }\n  </ul>\n\n</div>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- ✅ com o que a biblioteca não faz por você -->\n<div ngCombobox>\n  <label for=\"cidade\">Cidade</label>\n  <input id=\"cidade\" ngComboboxInput>\n  <ul ngListbox><!-- ... --></ul>\n</div>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "E o foco visível continua sendo CSS"
+            },
+            {
+              "kind": "code",
+              "code": "/* Sem isto, quem navega por teclado não vê onde está —\n   por mais correta que a ARIA gerada seja. */\n[ngOption][data-active='true'] {\n  outline: 3px solid var(--cor-foco);\n  outline-offset: -3px;\n}",
+              "variant": "neutral"
             },
             {
               "kind": "callout",
@@ -4422,6 +4798,63 @@
                 "Role correta.",
                 "Estado correto."
               ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Os três, num elemento só"
+            },
+            {
+              "kind": "code",
+              "code": "<button\n  [attr.aria-pressed]=\"favorito()\"\n  aria-label=\"Favoritar Conta Corrente\"\n  (click)=\"alternar()\"\n>\n  <mat-icon aria-hidden=\"true\">star</mat-icon>\n</button>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "reading",
+              "text": "Favoritar Conta Corrente, botão de alternância, não pressionado"
+            },
+            {
+              "kind": "table",
+              "headers": [
+                "Pergunta",
+                "De onde vem",
+                "O que a pessoa ouve"
+              ],
+              "rows": [
+                [
+                  "Qual o nome?",
+                  "aria-label",
+                  "Favoritar Conta Corrente"
+                ],
+                [
+                  "Qual a role?",
+                  "a tag button, mais o aria-pressed",
+                  "botão de alternância"
+                ],
+                [
+                  "Qual o estado?",
+                  "aria-pressed ligado ao signal",
+                  "não pressionado"
+                ]
+              ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Diagnóstico em três perguntas"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Diante de qualquer bug de leitor de tela, pergunte nesta ordem — o problema quase sempre está numa das três."
+            },
+            {
+              "kind": "code",
+              "code": "<!-- Anunciou só \"botão\"? Falta NOME. -->\n<button><mat-icon>star</mat-icon></button>\n\n<!-- Anunciou como texto comum? Falta ROLE. -->\n<div (click)=\"alternar()\">Favoritar</div>\n\n<!-- Anunciou certo, mas nunca muda? Falta ESTADO. -->\n<button aria-pressed=\"false\" (click)=\"alternar()\">Favoritar</button>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "paragraph",
+              "text": "O terceiro é o mais traiçoeiro: tudo parece implementado, e o atributo está congelado no valor inicial. Visualmente a estrela acende; para o leitor de tela, nada aconteceu."
             },
             {
               "kind": "paragraph",
@@ -4931,6 +5364,64 @@
                   "Muito dependente da implementação."
                 ]
               ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Diferenças que mudam o que você escreve"
+            },
+            {
+              "kind": "table",
+              "headers": [
+                "Situação",
+                "TalkBack",
+                "VoiceOver"
+              ],
+              "rows": [
+                [
+                  "aria-describedby",
+                  "Lê depois de uma pausa.",
+                  "Às vezes só com o rotor em \"dicas\"."
+                ],
+                [
+                  "Dois aria-live na mesma tela",
+                  "Costuma enfileirar.",
+                  "Costuma descartar o primeiro."
+                ],
+                [
+                  "role=\"alert\" ao inserir no DOM",
+                  "Frequentemente ignora.",
+                  "Frequentemente ignora."
+                ],
+                [
+                  "Posição no conjunto",
+                  "Anuncia \"1 de 5\" sozinho em listas.",
+                  "Exige aria-setsize e aria-posinset."
+                ],
+                [
+                  "Foco após remover elemento",
+                  "Vai para o próximo irmão.",
+                  "Costuma cair no topo."
+                ]
+              ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "A regra que sobrevive aos dois"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Não escreva para um leitor de tela específico. Escreva HTML semântico correto e ARIA mínima — é o que os dois interpretam igual. Toda vez que algo funciona só em um deles, quase sempre é sinal de que a solução está apoiada num comportamento específico, e não na especificação."
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Testar em um não cobre o outro"
+            },
+            {
+              "kind": "paragraph",
+              "text": "São motores diferentes, com heurísticas diferentes, em navegadores diferentes. A combinação que importa em produção: TalkBack com Chrome no Android, VoiceOver com Safari no iOS. Testar VoiceOver no Mac com Chrome não representa nem um nem outro."
             }
           ]
         },
@@ -4956,6 +5447,107 @@
                 "Testar navegação.",
                 "Testar saída do fluxo."
               ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Como ligar"
+            },
+            {
+              "kind": "table",
+              "headers": [
+                "Leitor",
+                "Onde"
+              ],
+              "rows": [
+                [
+                  "TalkBack",
+                  "Android: Configurações, Acessibilidade, TalkBack. Atalho: segurar os dois botões de volume por 3 segundos."
+                ],
+                [
+                  "VoiceOver",
+                  "iPhone: Ajustes, Acessibilidade, VoiceOver. Atalho: três cliques no botão lateral."
+                ],
+                [
+                  "VoiceOver",
+                  "Mac: Command + F5."
+                ],
+                [
+                  "NVDA",
+                  "Windows: gratuito, nvaccess.org. Insert + seta para baixo lê tudo."
+                ]
+              ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Os gestos que resolvem 90% do teste"
+            },
+            {
+              "kind": "table",
+              "headers": [
+                "O que fazer",
+                "TalkBack",
+                "VoiceOver"
+              ],
+              "rows": [
+                [
+                  "Próximo elemento",
+                  "Deslizar para a direita",
+                  "Deslizar para a direita"
+                ],
+                [
+                  "Anterior",
+                  "Deslizar para a esquerda",
+                  "Deslizar para a esquerda"
+                ],
+                [
+                  "Acionar",
+                  "Toque duplo",
+                  "Toque duplo"
+                ],
+                [
+                  "Ler tudo a partir daqui",
+                  "Deslizar para baixo e para a direita",
+                  "Deslizar com dois dedos para baixo"
+                ],
+                [
+                  "Trocar o modo de navegação",
+                  "Deslizar para cima e para a direita",
+                  "Girar dois dedos (rotor)"
+                ],
+                [
+                  "Voltar",
+                  "Deslizar para baixo e para a esquerda",
+                  "Riscar dois dedos em Z"
+                ]
+              ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "O modo por títulos é o mais revelador"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Antes de percorrer elemento por elemento, mude a navegação para \"títulos\" e desça a página. Em 20 segundos você descobre se a estrutura faz sentido — e é assim que quem usa leitor de tela de verdade se orienta numa página nova. Ninguém percorre 200 elementos um a um."
+            },
+            {
+              "kind": "paragraph",
+              "text": "Se ao navegar por títulos você não consegue dizer do que a página trata, a estrutura está errada, independente do que o axe disser."
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "O teste que vale por todos"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Desligue o monitor, ou feche os olhos, e tente concluir a jornada inteira só com o som. É desconfortável e é exatamente o ponto: essa é a experiência que você está entregando."
+            },
+            {
+              "kind": "paragraph",
+              "text": "Se você, que escreveu a tela, não consegue concluir — ninguém consegue."
             }
           ]
         },
@@ -5444,6 +6036,59 @@
                 "Foco preso incorretamente.",
                 "Campo sem label."
               ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Por que estes são críticos e não altos"
+            },
+            {
+              "kind": "paragraph",
+              "text": "O corte é um só: a pessoa não conclui a jornada. Não é \"fica ruim\", é \"não dá para terminar\". Cada exemplo abaixo trava um fluxo inteiro."
+            },
+            {
+              "kind": "code",
+              "code": "<!-- Botão principal sem nome.\n     Anunciado: \"botão\". A pessoa não confirma o pagamento\n     porque não sabe que aquilo confirma o pagamento. -->\n<button (click)=\"confirmar()\">\n  <mat-icon>check</mat-icon>\n</button>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- Modal inacessível.\n     Abre, o foco não entra, o leitor continua na página de trás.\n     A pessoa não sabe que existe algo para confirmar. -->\n<div class=\"modal\" *ngIf=\"aberto\">\n  <button (click)=\"excluirConta()\">Confirmar exclusão</button>\n</div>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- Erro não anunciado.\n     O envio falha em silêncio. A pessoa espera uma confirmação\n     que nunca vem, tenta de novo, e desiste. -->\n<span *ngIf=\"erro\" class=\"erro\">{{ erro }}</span>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- Foco preso incorretamente.\n     cdkTrapFocus sem forma de sair: nem ESC, nem botão fechar.\n     A pessoa fica presa até recarregar a página. -->\n<div cdkTrapFocus>\n  <p>Carregando…</p>\n</div>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- Campo sem label.\n     \"campo de edição\". Num cadastro de 8 campos iguais,\n     não há como saber qual é qual. -->\n<input type=\"text\" placeholder=\"CPF\">",
+              "variant": "neutral"
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "O teste de severidade"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Pergunte: desligando o monitor, uma pessoa consegue concluir esta tarefa?"
+            },
+            {
+              "kind": "list",
+              "ordered": false,
+              "items": [
+                "Não consegue de jeito nenhum: crítico.",
+                "Consegue com muita dificuldade ou tentativa e erro: alto.",
+                "Consegue, mas a experiência é pior: médio.",
+                "Consegue normalmente, há algo a melhorar: baixo."
+              ]
             }
           ]
         },
@@ -5463,6 +6108,44 @@
                 "Tooltip sem descrição.",
                 "Leitura redundante."
               ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Médio é o que atrapalha sem impedir"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- ❌ salto de nível: sugere uma seção que não existe -->\n<h1>Extrato</h1>\n<h4>Últimos lançamentos</h4>\n\n<!-- ✅ -->\n<h1>Extrato</h1>\n<h2>Últimos lançamentos</h2>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- ❌ alt que descreve o arquivo, não a informação -->\n<img src=\"grafico.png\" alt=\"grafico\">\n\n<!-- ✅ o alt carrega o que a imagem informa -->\n<img src=\"grafico.png\"\n  alt=\"Gastos caíram de R$ 3.200 em janeiro para R$ 2.100 em junho\">\n\n<!-- ✅ imagem decorativa: alt vazio, nunca ausente -->\n<img src=\"ornamento.svg\" alt=\"\">",
+              "variant": "neutral"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- ❌ leitura redundante: o nome repete a role -->\n<button aria-label=\"Botão de salvar\">Salvar</button>\n<!-- ouve-se: \"Botão de salvar, botão\" -->\n\n<!-- ✅ -->\n<button>Salvar</button>\n<!-- ouve-se: \"Salvar, botão\" -->",
+              "variant": "neutral"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- ❌ ícone e texto dizendo a mesma coisa duas vezes -->\n<button>\n  <mat-icon>save</mat-icon>\n  Salvar\n</button>\n<!-- ouve-se: \"save Salvar, botão\" -->\n\n<!-- ✅ -->\n<button>\n  <mat-icon aria-hidden=\"true\">save</mat-icon>\n  Salvar\n</button>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Por que médio e não baixo"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Nenhum desses impede a conclusão da tarefa. Todos aumentam o esforço: heading errado quebra a navegação por títulos, alt ruim esconde a informação do gráfico, redundância dobra o tempo de escuta de cada tela."
+            },
+            {
+              "kind": "paragraph",
+              "text": "Em volume, é o que faz a pessoa preferir o telefone ao aplicativo."
             }
           ]
         },
@@ -5761,6 +6444,88 @@
                 "Accessibility Insights.",
                 "Angular CDK A11y."
               ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "O que cada uma pega, e o que não pega"
+            },
+            {
+              "kind": "table",
+              "headers": [
+                "Ferramenta",
+                "Boa para",
+                "Custo"
+              ],
+              "rows": [
+                [
+                  "axe DevTools",
+                  "Violação de regra no DOM. É a engine dentro do Lighthouse.",
+                  "Extensão gratuita."
+                ],
+                [
+                  "Lighthouse",
+                  "Nota rápida e regressão. Roda no próprio Chrome.",
+                  "Já vem no navegador."
+                ],
+                [
+                  "Accessibility Insights",
+                  "Roteiro guiado de teste manual, passo a passo.",
+                  "Gratuito, Microsoft."
+                ],
+                [
+                  "TalkBack e VoiceOver",
+                  "A única resposta que importa: dá para concluir?",
+                  "Já está no celular."
+                ],
+                [
+                  "angular-eslint",
+                  "Pegar no commit, antes de virar bug.",
+                  "Já está no projeto."
+                ]
+              ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Colocar no CI, não só no navegador"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Verificação que depende de alguém lembrar de rodar não é verificação. O axe roda sobre HTML gerado, sem navegador:"
+            },
+            {
+              "kind": "code",
+              "code": "npm install --save-dev axe-core jsdom",
+              "variant": "neutral"
+            },
+            {
+              "kind": "code",
+              "code": "// scripts/check-a11y.js\nconst { JSDOM } = require('jsdom');\nconst fs = require('fs');\n\nconst axeSource = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');\n\nasync function verificar(arquivo) {\n  const dom = new JSDOM(fs.readFileSync(arquivo, 'utf8'), {\n    runScripts: 'outside-only',\n    pretendToBeVisual: true,\n  });\n\n  dom.window.eval(axeSource);\n\n  const r = await dom.window.axe.run(dom.window.document, {\n    runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] },\n    // Contraste precisa de CSS computado, que o jsdom não faz.\n    rules: { 'color-contrast': { enabled: false } },\n  });\n\n  return r.violations;\n}",
+              "variant": "neutral"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Ligue no pipeline com saída diferente de zero em caso de violação. Aviso que não quebra o build é aviso que ninguém lê."
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "A ordem que funciona"
+            },
+            {
+              "kind": "list",
+              "ordered": true,
+              "items": [
+                "Lint no editor: pega enquanto você escreve.",
+                "axe no CI: pega antes do merge.",
+                "Lighthouse antes de subir: pega regressão geral.",
+                "TalkBack e VoiceOver na entrega: pega o que importa."
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "text": "Os três primeiros somam cerca de um terço dos problemas. O quarto é o que responde se alguém consegue usar."
             }
           ]
         },
@@ -5789,6 +6554,52 @@
                 "Anúncios confusos.",
                 "Navegação complexa."
               ]
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Código que passa no axe e é inutilizável"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Os três exemplos abaixo têm zero violação em qualquer ferramenta automatizada. Os três são inacessíveis."
+            },
+            {
+              "kind": "code",
+              "code": "<!-- 1. Role sem comportamento.\n     Tem role, tem tabindex, tem nome. O axe aprova.\n     Enter e Espaço não fazem nada: role não traz comportamento. -->\n<div role=\"button\" tabindex=\"0\" (click)=\"salvar()\">Salvar</div>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- 2. Nome acessível mentiroso.\n     Existe nome, então a ferramenta passa.\n     O leitor de tela anuncia \"Editar\" num botão que exclui. -->\n<button aria-label=\"Editar\" (click)=\"excluir()\">\n  <mat-icon aria-hidden=\"true\">delete</mat-icon>\n</button>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "code",
+              "code": "<!-- 3. Ordem de leitura invertida.\n     O HTML está impecável. O CSS troca a ordem, e o Tab\n     entrega Confirmar antes de Cancelar. -->\n<div style=\"display:flex; flex-direction:row-reverse\">\n  <button>Confirmar</button>\n  <button>Cancelar</button>\n</div>",
+              "variant": "neutral"
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "Por que a ferramenta não vê"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Ela verifica o que é verificável sem entender a intenção: o atributo existe, o valor é válido, a relação está declarada. Nenhuma delas consegue responder \"esse nome descreve o que o botão faz?\" ou \"essa ordem faz sentido para quem está preenchendo o formulário?\"."
+            },
+            {
+              "kind": "heading",
+              "level": 1,
+              "text": "A conta real"
+            },
+            {
+              "kind": "paragraph",
+              "text": "Ferramenta automatizada pega em torno de um terço dos problemas de acessibilidade. É um terço importante, barato e que roda em todo commit — mas é piso, não teto."
+            },
+            {
+              "kind": "paragraph",
+              "text": "Os outros dois terços exigem alguém percorrendo a jornada com teclado e com leitor de tela, perguntando se dá para concluir a tarefa. Não existe atalho para isso."
             }
           ]
         },
@@ -6451,7 +7262,7 @@
       "partTitle": "Fundamentos de Acessibilidade Angular",
       "sectionId": "como-um-leitor-de-tela-enxerga-uma-pagina",
       "sectionTitle": "Como um leitor de tela enxerga uma página?",
-      "text": "Usuários não enxergam a interface da mesma forma que usuários visuais. Eles navegam por: Títulos. Botões. Links. Campos. Landmarks. Uma tela visualmente perfeita pode ser completamente inutilizável para um leitor de tela.",
+      "text": "Usuários não enxergam a interface da mesma forma que usuários visuais. Eles navegam por: Títulos. Botões. Links. Campos. Landmarks. A mesma tela, dos dois lados Este é o HTML de um card de conta: Visualmente: um card com título, valor e botão. Impecável. Conta Corrente R$ 4.210,00 Transferir Três textos soltos. Nenhum título para navegar, nenhum botão para acionar, nenhuma forma de saber que \"Transferir\" faz algo. Ao navegar por títulos ou por botões, esta tela está vazia. O mesmo card, escrito para os dois Conta Corrente, título nível 2 R$ 4.210,00 Transferir, botão O que muda de verdade O CSS é o mesmo. A tela é idêntica. O que mudou foi a árvore de acessibilidade — a estrutura paralela que o navegador constrói e entrega ao leitor de tela. Ela não vem das classes nem do visual. Vem das tags e dos atributos. É por isso que trocar div por h2 e button não é preciosismo: é a diferença entre existir e não existir para uma parte das pessoas. Veja a sua No Chrome: F12, aba Elements, painel Accessibility. No Firefox: F12, aba Acessibilidade. É a página como o leitor de tela recebe — e costuma ser uma surpresa desconfortável na primeira vez. Uma tela visualmente perfeita pode ser completamente inutilizável para um leitor de tela.",
       "keywords": []
     },
     {
@@ -6806,8 +7617,24 @@
       "partTitle": "ARIA Completo para Angular",
       "sectionId": "principais-roles",
       "sectionTitle": "Principais Roles",
-      "text": "Role Uso button Botão. link Link. dialog Modal. alert Mensagem urgente. status Status informativo. tablist Container de abas. tab Aba. tabpanel Conteúdo da aba. checkbox Checkbox. switch Liga e desliga. menu Menu. menuitem Item menu. listbox Lista selecionável. option Opção.",
-      "keywords": []
+      "text": "Role Uso button Botão. link Link. dialog Modal. alert Mensagem urgente. status Status informativo. tablist Container de abas. tab Aba. tabpanel Conteúdo da aba. checkbox Checkbox. switch Liga e desliga. menu Menu. menuitem Item menu. listbox Lista selecionável. option Opção. Antes de escrever a role: já existe tag para isso? Metade da tabela acima você nunca precisa digitar, porque o HTML já entrega — com teclado e estado incluídos. Em vez de Use O que ganha de graça role=\"button\" <button> Tab, Enter, Espaço, disabled. role=\"link\" <a href> Tab, Enter, abrir em nova aba. role=\"checkbox\" <input type=\"checkbox\"> Espaço, estado sincronizado. role=\"dialog\" <dialog> Foco preso, ESC, inerte atrás. role=\"progressbar\" <progress> Valor anunciado sozinho. role=\"list\" <ul> e <li> \"lista com N itens\". As que não têm equivalente nativo Estas você escreve mesmo, porque o HTML não tem tag para elas. São também as que exigem mais teclado escrito à mão — e onde o @angular/aria passa a valer mais que a implementação própria. role muda o que se anuncia, não o que acontece Este é o mal-entendido mais caro sobre ARIA. A role é uma etiqueta para a tecnologia assistiva. Ela não adiciona comportamento nenhum — e prometer um botão que não funciona é pior do que não prometer nada.",
+      "keywords": [
+        "role:button",
+        "role:link",
+        "role:checkbox",
+        "role:dialog",
+        "role:progressbar",
+        "role:list",
+        "role:tablist",
+        "role:tab",
+        "role:tabpanel",
+        "role:menu",
+        "role:menuitem",
+        "role:listbox",
+        "role:option",
+        "role:alert",
+        "role:status"
+      ]
     },
     {
       "id": "aria/roles-que-voce-quase-nunca-precisara",
@@ -7510,8 +8337,11 @@
       "partTitle": "Angular, Angular Material e Angular CDK A11y",
       "sectionId": "angular-material",
       "sectionTitle": "Angular Material",
-      "text": "O Material já possui boa parte da acessibilidade implementada. Mesmo assim, deve ser testado.",
-      "keywords": []
+      "text": "O Material já possui boa parte da acessibilidade implementada. Mesmo assim, deve ser testado. O que vem pronto Role e atributos ARIA de cada componente. Navegação por teclado nos padrões complexos. Foco preso e ESC nos overlays. Alvos de toque no tamanho mínimo. O que continua sendo seu A regra vale para todo componente do Material: estrutura e comportamento vêm prontos; o significado é você quem escreve. Nome acessível, rótulo de campo, texto alternativo, ordem do DOM e contraste do tema continuam sendo decisão sua. Contraste do tema não é verificado por ninguém Um tema customizado passa a compilar com qualquer cor. Nada avisa que o texto ficou em 3:1. Ícone dentro de componente é sempre decorativo Vale para botão, aba, item de menu, chip e campo. Se o ícone acompanha texto, ele é redundante; se está sozinho, o nome vai no controle, não nele. Sem isso, o leitor de tela anuncia o nome da ligadura da fonte: \"home\", \"delete\", \"more_vert\" — que é o identificador interno, não a função.",
+      "keywords": [
+        "aria-label",
+        "aria-hidden"
+      ]
     },
     {
       "id": "angular/matdialog",
@@ -7608,8 +8438,14 @@
       "partTitle": "Angular, Angular Material e Angular CDK A11y",
       "sectionId": "overlay-components",
       "sectionTitle": "Overlay Components",
-      "text": "Todo componente que abre sobre a tela merece atenção extra. Modal. Popover. Tooltip. Select. Menu. Datepicker.",
-      "keywords": []
+      "text": "Todo componente que abre sobre a tela merece atenção extra. Modal. Popover. Tooltip. Select. Menu. Datepicker. As cinco perguntas de todo overlay Independente do componente, são sempre as mesmas. Se qualquer resposta for não, o overlay está quebrado para alguém. Pergunta Como se resolve O foco entra ao abrir? focus() no primeiro controle, ou no dialog. O Tab fica preso dentro? cdkTrapFocus, ou dialog com showModal(). O que está atrás é inalcançável? inert no conteúdo, ou aria-modal. ESC fecha? (keydown.escape) ou o dialog nativo. O foco volta ao abrir de novo? Guardar quem abriu e devolver ao fechar. Tooltip e popover não seguem essas regras São a exceção, e confundir os dois grupos é erro comum. Modal (dialog, select, menu) Não modal (tooltip, popover) Prende o foco Sim Não Recebe o foco ao abrir Sim Não Bloqueia o que está atrás Sim Não Ligação com o gatilho aria-haspopup aria-describedby Prender o foco num tooltip é armadilha de teclado. Ele descreve o controle onde o foco já está — não é um destino, é um complemento. Popover que contém controle acionável precisa das cinco respostas acima — nesse momento ele virou um modal na prática, por mais que o nome no código diga outra coisa.",
+      "keywords": [
+        "aria-modal",
+        "aria-haspopup",
+        "aria-describedby",
+        "cdkTrapFocus",
+        "ngIf"
+      ]
     },
     {
       "id": "angular/datepicker",
@@ -7715,8 +8551,13 @@
       "partTitle": "Angular, Angular Material e Angular CDK A11y",
       "sectionId": "padroes-do-angular-aria",
       "sectionTitle": "Padrões do Angular Aria",
-      "text": "São treze padrões disponíveis. Diretiva Uso ngCombobox Campo de texto coordenado com um popup. ngAutocomplete Campo com sugestões filtradas. ngListbox Lista de opções, seleção única ou múltipla. ngSelect Dropdown de seleção única. ngMultiselect Dropdown de seleção múltipla. ngMenu Menu com submenus. ngMenubar Barra de navegação horizontal. ngToolbar Grupo de controles. ngTabs Abas. ngAccordion Painéis expansíveis. ngTree Lista hierárquica com expandir e recolher. ngGrid Dados em duas dimensões com navegação por célula. Compare com a lista de componentes que mais geram bug de acessibilidade em Angular. É quase a mesma lista.",
-      "keywords": []
+      "text": "São treze padrões disponíveis. Diretiva Uso ngCombobox Campo de texto coordenado com um popup. ngAutocomplete Campo com sugestões filtradas. ngListbox Lista de opções, seleção única ou múltipla. ngSelect Dropdown de seleção única. ngMultiselect Dropdown de seleção múltipla. ngMenu Menu com submenus. ngMenubar Barra de navegação horizontal. ngToolbar Grupo de controles. ngTabs Abas. ngAccordion Painéis expansíveis. ngTree Lista hierárquica com expandir e recolher. ngGrid Dados em duas dimensões com navegação por célula. Compare com a lista de componentes que mais geram bug de acessibilidade em Angular. É quase a mesma lista. Instalação Antes do v22, a resposta para \"preciso de um combobox acessível\" era \"a implementação é complexa, evite fazer à mão\" — sem oferecer nada no lugar. Agora existe. Cidade, caixa de combinação, editável Recife, opção, 1 de 3 O que as diretivas fazem por baixo Tudo isto sai do seu código quando você usa o pacote: role em cada elemento do padrão. aria-expanded, aria-controls, aria-activedescendant sincronizados. Setas, Home, End, Enter e Escape tratados. Foco permanecendo no input, como o padrão exige. aria-selected na opção certa. Headless significa que o CSS é seu As diretivas não trazem estilo nenhum. Você continua responsável pelo foco visível, pelo contraste e pela ordem do DOM — é possível usar @angular/aria e ainda entregar uma tela inacessível.",
+      "keywords": [
+        "aria-expanded",
+        "aria-controls",
+        "aria-activedescendant",
+        "aria-selected"
+      ]
     },
     {
       "id": "angular/angular-aria-material-ou-cdk",
@@ -7737,8 +8578,10 @@
       "partTitle": "Angular, Angular Material e Angular CDK A11y",
       "sectionId": "o-que-o-angular-aria-nao-resolve",
       "sectionTitle": "O que o Angular Aria não resolve",
-      "text": "A biblioteca resolve padrões de widget. A maior parte dos bugs de acessibilidade em produção não é widget complexo. Div clicável no lugar de botão. Ícone clicável sem nome acessível. Input apenas com placeholder. Erro de formulário não anunciado. Foco perdido após navegação de rota. Heading fora de ordem. Contraste insuficiente. Imagem sem texto alternativo. Tabela sem cabeçalho associado. Diretiva headless significa que você fornece o HTML e o CSS. Dá para usar o Angular Aria e ainda assim entregar uma tela inacessível: foco invisível, contraste ruim, ordem de DOM diferente da ordem visual. A biblioteca elimina uma classe de erro. Ela não substitui saber o assunto, nem testar com TalkBack e VoiceOver.",
-      "keywords": []
+      "text": "A biblioteca resolve padrões de widget. A maior parte dos bugs de acessibilidade em produção não é widget complexo. Div clicável no lugar de botão. Ícone clicável sem nome acessível. Input apenas com placeholder. Erro de formulário não anunciado. Foco perdido após navegação de rota. Heading fora de ordem. Contraste insuficiente. Imagem sem texto alternativo. Tabela sem cabeçalho associado. O mesmo componente, os dois lados da fronteira O @angular/aria cuida de tudo que está dentro do padrão. O que fica de fora continua sendo seu — e é onde mora a maior parte dos bugs reais. E o foco visível continua sendo CSS Diretiva headless significa que você fornece o HTML e o CSS. Dá para usar o Angular Aria e ainda assim entregar uma tela inacessível: foco invisível, contraste ruim, ordem de DOM diferente da ordem visual. A biblioteca elimina uma classe de erro. Ela não substitui saber o assunto, nem testar com TalkBack e VoiceOver.",
+      "keywords": [
+        "aria-selected"
+      ]
     },
     {
       "id": "angular/erro-mais-comum-do-time-front",
@@ -7764,8 +8607,12 @@
       "partTitle": "TalkBack, VoiceOver e Testes Reais",
       "sectionId": "principio-fundamental",
       "sectionTitle": "Princípio Fundamental",
-      "text": "Leitores de tela dependem de: Nome acessível. Role correta. Estado correto. Quase todos os bugs podem ser analisados por esses três pontos.",
-      "keywords": []
+      "text": "Leitores de tela dependem de: Nome acessível. Role correta. Estado correto. Os três, num elemento só Favoritar Conta Corrente, botão de alternância, não pressionado Pergunta De onde vem O que a pessoa ouve Qual o nome? aria-label Favoritar Conta Corrente Qual a role? a tag button, mais o aria-pressed botão de alternância Qual o estado? aria-pressed ligado ao signal não pressionado Diagnóstico em três perguntas Diante de qualquer bug de leitor de tela, pergunte nesta ordem — o problema quase sempre está numa das três. O terceiro é o mais traiçoeiro: tudo parece implementado, e o atributo está congelado no valor inicial. Visualmente a estrela acende; para o leitor de tela, nada aconteceu. Quase todos os bugs podem ser analisados por esses três pontos.",
+      "keywords": [
+        "aria-label",
+        "aria-pressed",
+        "aria-hidden"
+      ]
     },
     {
       "id": "leitores-de-tela/exemplo-de-leitura",
@@ -7943,8 +8790,14 @@
       "partTitle": "TalkBack, VoiceOver e Testes Reais",
       "sectionId": "talkback-x-voiceover",
       "sectionTitle": "TalkBack x VoiceOver",
-      "text": "Cenário Diferenças comuns Forms Pequenas diferenças de anúncio. Tabs Ordem de anúncio pode variar. Modais Foco pode variar. Selects Muito dependente da implementação.",
-      "keywords": []
+      "text": "Cenário Diferenças comuns Forms Pequenas diferenças de anúncio. Tabs Ordem de anúncio pode variar. Modais Foco pode variar. Selects Muito dependente da implementação. Diferenças que mudam o que você escreve Situação TalkBack VoiceOver aria-describedby Lê depois de uma pausa. Às vezes só com o rotor em \"dicas\". Dois aria-live na mesma tela Costuma enfileirar. Costuma descartar o primeiro. role=\"alert\" ao inserir no DOM Frequentemente ignora. Frequentemente ignora. Posição no conjunto Anuncia \"1 de 5\" sozinho em listas. Exige aria-setsize e aria-posinset. Foco após remover elemento Vai para o próximo irmão. Costuma cair no topo. A regra que sobrevive aos dois Não escreva para um leitor de tela específico. Escreva HTML semântico correto e ARIA mínima — é o que os dois interpretam igual. Toda vez que algo funciona só em um deles, quase sempre é sinal de que a solução está apoiada num comportamento específico, e não na especificação. Testar em um não cobre o outro São motores diferentes, com heurísticas diferentes, em navegadores diferentes. A combinação que importa em produção: TalkBack com Chrome no Android, VoiceOver com Safari no iOS. Testar VoiceOver no Mac com Chrome não representa nem um nem outro.",
+      "keywords": [
+        "aria-describedby",
+        "aria-live",
+        "aria-setsize",
+        "aria-posinset",
+        "role:alert"
+      ]
     },
     {
       "id": "leitores-de-tela/roteiro-de-teste-manual",
@@ -7952,7 +8805,7 @@
       "partTitle": "TalkBack, VoiceOver e Testes Reais",
       "sectionId": "roteiro-de-teste-manual",
       "sectionTitle": "Roteiro de Teste Manual",
-      "text": "Ativar leitor de tela. Percorrer toda tela. Verificar títulos. Verificar botões. Verificar formulários. Testar erros. Testar loading. Testar modal. Testar navegação. Testar saída do fluxo.",
+      "text": "Ativar leitor de tela. Percorrer toda tela. Verificar títulos. Verificar botões. Verificar formulários. Testar erros. Testar loading. Testar modal. Testar navegação. Testar saída do fluxo. Como ligar Leitor Onde TalkBack Android: Configurações, Acessibilidade, TalkBack. Atalho: segurar os dois botões de volume por 3 segundos. VoiceOver iPhone: Ajustes, Acessibilidade, VoiceOver. Atalho: três cliques no botão lateral. VoiceOver Mac: Command + F5. NVDA Windows: gratuito, nvaccess.org. Insert + seta para baixo lê tudo. Os gestos que resolvem 90% do teste O que fazer TalkBack VoiceOver Próximo elemento Deslizar para a direita Deslizar para a direita Anterior Deslizar para a esquerda Deslizar para a esquerda Acionar Toque duplo Toque duplo Ler tudo a partir daqui Deslizar para baixo e para a direita Deslizar com dois dedos para baixo Trocar o modo de navegação Deslizar para cima e para a direita Girar dois dedos (rotor) Voltar Deslizar para baixo e para a esquerda Riscar dois dedos em Z O modo por títulos é o mais revelador Antes de percorrer elemento por elemento, mude a navegação para \"títulos\" e desça a página. Em 20 segundos você descobre se a estrutura faz sentido — e é assim que quem usa leitor de tela de verdade se orienta numa página nova. Ninguém percorre 200 elementos um a um. Se ao navegar por títulos você não consegue dizer do que a página trata, a estrutura está errada, independente do que o axe disser. O teste que vale por todos Desligue o monitor, ou feche os olhos, e tente concluir a jornada inteira só com o som. É desconfortável e é exatamente o ponto: essa é a experiência que você está entregando. Se você, que escreveu a tela, não consegue concluir — ninguém consegue.",
       "keywords": []
     },
     {
@@ -8115,8 +8968,11 @@
       "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
       "sectionId": "exemplos-de-bugs-criticos",
       "sectionTitle": "Exemplos de Bugs Críticos",
-      "text": "Botão principal sem nome. Modal inacessível. Erro não anunciado. Foco preso incorretamente. Campo sem label.",
-      "keywords": []
+      "text": "Botão principal sem nome. Modal inacessível. Erro não anunciado. Foco preso incorretamente. Campo sem label. Por que estes são críticos e não altos O corte é um só: a pessoa não conclui a jornada. Não é \"fica ruim\", é \"não dá para terminar\". Cada exemplo abaixo trava um fluxo inteiro. O teste de severidade Pergunte: desligando o monitor, uma pessoa consegue concluir esta tarefa? Não consegue de jeito nenhum: crítico. Consegue com muita dificuldade ou tentativa e erro: alto. Consegue, mas a experiência é pior: médio. Consegue normalmente, há algo a melhorar: baixo.",
+      "keywords": [
+        "ngIf",
+        "cdkTrapFocus"
+      ]
     },
     {
       "id": "qa-wcag/exemplos-de-bugs-medios",
@@ -8124,8 +8980,11 @@
       "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
       "sectionId": "exemplos-de-bugs-medios",
       "sectionTitle": "Exemplos de Bugs Médios",
-      "text": "Heading incorreto. Texto alternativo ruim. Tooltip sem descrição. Leitura redundante.",
-      "keywords": []
+      "text": "Heading incorreto. Texto alternativo ruim. Tooltip sem descrição. Leitura redundante. Médio é o que atrapalha sem impedir Por que médio e não baixo Nenhum desses impede a conclusão da tarefa. Todos aumentam o esforço: heading errado quebra a navegação por títulos, alt ruim esconde a informação do gráfico, redundância dobra o tempo de escuta de cada tela. Em volume, é o que faz a pessoa preferir o telefone ao aplicativo.",
+      "keywords": [
+        "aria-label",
+        "aria-hidden"
+      ]
     },
     {
       "id": "qa-wcag/definition-of-done-acessivel",
@@ -8181,7 +9040,7 @@
       "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
       "sectionId": "ferramentas-recomendadas",
       "sectionTitle": "Ferramentas Recomendadas",
-      "text": "TalkBack. VoiceOver. Chrome Lighthouse. axe DevTools. Accessibility Insights. Angular CDK A11y.",
+      "text": "TalkBack. VoiceOver. Chrome Lighthouse. axe DevTools. Accessibility Insights. Angular CDK A11y. O que cada uma pega, e o que não pega Ferramenta Boa para Custo axe DevTools Violação de regra no DOM. É a engine dentro do Lighthouse. Extensão gratuita. Lighthouse Nota rápida e regressão. Roda no próprio Chrome. Já vem no navegador. Accessibility Insights Roteiro guiado de teste manual, passo a passo. Gratuito, Microsoft. TalkBack e VoiceOver A única resposta que importa: dá para concluir? Já está no celular. angular-eslint Pegar no commit, antes de virar bug. Já está no projeto. Colocar no CI, não só no navegador Verificação que depende de alguém lembrar de rodar não é verificação. O axe roda sobre HTML gerado, sem navegador: Ligue no pipeline com saída diferente de zero em caso de violação. Aviso que não quebra o build é aviso que ninguém lê. A ordem que funciona Lint no editor: pega enquanto você escreve. axe no CI: pega antes do merge. Lighthouse antes de subir: pega regressão geral. TalkBack e VoiceOver na entrega: pega o que importa. Os três primeiros somam cerca de um terço dos problemas. O quarto é o que responde se alguém consegue usar.",
       "keywords": []
     },
     {
@@ -8190,8 +9049,13 @@
       "partTitle": "QA, Auditoria e WCAG 2.2 Aplicada ao Time Angular",
       "sectionId": "o-que-ferramentas-nao-encontram",
       "sectionTitle": "O que Ferramentas NÃO Encontram",
-      "text": "Ferramentas automatizadas não substituem testes reais. Elas não identificam bem: Fluxos quebrados. Foco ruim. Experiência ruim. Anúncios confusos. Navegação complexa.",
-      "keywords": []
+      "text": "Ferramentas automatizadas não substituem testes reais. Elas não identificam bem: Fluxos quebrados. Foco ruim. Experiência ruim. Anúncios confusos. Navegação complexa. Código que passa no axe e é inutilizável Os três exemplos abaixo têm zero violação em qualquer ferramenta automatizada. Os três são inacessíveis. Por que a ferramenta não vê Ela verifica o que é verificável sem entender a intenção: o atributo existe, o valor é válido, a relação está declarada. Nenhuma delas consegue responder \"esse nome descreve o que o botão faz?\" ou \"essa ordem faz sentido para quem está preenchendo o formulário?\". A conta real Ferramenta automatizada pega em torno de um terço dos problemas de acessibilidade. É um terço importante, barato e que roda em todo commit — mas é piso, não teto. Os outros dois terços exigem alguém percorrendo a jornada com teclado e com leitor de tela, perguntando se dá para concluir a tarefa. Não existe atalho para isso.",
+      "keywords": [
+        "aria-label",
+        "aria-hidden",
+        "role:button",
+        "tabindex"
+      ]
     },
     {
       "id": "qa-wcag/mentalidade-final",

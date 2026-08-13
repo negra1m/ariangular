@@ -236,6 +236,68 @@ export const fundamentos: Part = {
           ]
         },
         {
+          "kind": "heading",
+          "level": 1,
+          "text": "A mesma tela, dos dois lados"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Este é o HTML de um card de conta:"
+        },
+        {
+          "kind": "code",
+          "code": "<div class=\"card\">\n  <div class=\"titulo\">Conta Corrente</div>\n  <div class=\"saldo\">R$ 4.210,00</div>\n  <div class=\"acao\" (click)=\"transferir()\">Transferir</div>\n</div>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Visualmente: um card com título, valor e botão. Impecável."
+        },
+        {
+          "kind": "reading",
+          "text": "Conta Corrente\nR$ 4.210,00\nTransferir"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Três textos soltos. Nenhum título para navegar, nenhum botão para acionar, nenhuma forma de saber que \"Transferir\" faz algo. Ao navegar por títulos ou por botões, esta tela está vazia."
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O mesmo card, escrito para os dois"
+        },
+        {
+          "kind": "code",
+          "code": "<article class=\"card\">\n  <h2 class=\"titulo\">Conta Corrente</h2>\n  <p class=\"saldo\">R$ 4.210,00</p>\n  <button type=\"button\" class=\"acao\" (click)=\"transferir()\">\n    Transferir\n  </button>\n</article>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "reading",
+          "text": "Conta Corrente, título nível 2\nR$ 4.210,00\nTransferir, botão"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O que muda de verdade"
+        },
+        {
+          "kind": "paragraph",
+          "text": "O CSS é o mesmo. A tela é idêntica. O que mudou foi a árvore de acessibilidade — a estrutura paralela que o navegador constrói e entrega ao leitor de tela."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Ela não vem das classes nem do visual. Vem das tags e dos atributos. É por isso que trocar div por h2 e button não é preciosismo: é a diferença entre existir e não existir para uma parte das pessoas."
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Veja a sua"
+        },
+        {
+          "kind": "paragraph",
+          "text": "No Chrome: F12, aba Elements, painel Accessibility. No Firefox: F12, aba Acessibilidade. É a página como o leitor de tela recebe — e costuma ser uma surpresa desconfortável na primeira vez."
+        },
+        {
           "kind": "callout",
           "tone": "warning",
           "blocks": [

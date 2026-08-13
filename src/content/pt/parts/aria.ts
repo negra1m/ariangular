@@ -633,6 +633,83 @@ export const aria: Part = {
               "Opção."
             ]
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Antes de escrever a role: já existe tag para isso?"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Metade da tabela acima você nunca precisa digitar, porque o HTML já entrega — com teclado e estado incluídos."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Em vez de",
+            "Use",
+            "O que ganha de graça"
+          ],
+          "rows": [
+            [
+              "role=\"button\"",
+              "<button>",
+              "Tab, Enter, Espaço, disabled."
+            ],
+            [
+              "role=\"link\"",
+              "<a href>",
+              "Tab, Enter, abrir em nova aba."
+            ],
+            [
+              "role=\"checkbox\"",
+              "<input type=\"checkbox\">",
+              "Espaço, estado sincronizado."
+            ],
+            [
+              "role=\"dialog\"",
+              "<dialog>",
+              "Foco preso, ESC, inerte atrás."
+            ],
+            [
+              "role=\"progressbar\"",
+              "<progress>",
+              "Valor anunciado sozinho."
+            ],
+            [
+              "role=\"list\"",
+              "<ul> e <li>",
+              "\"lista com N itens\"."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "As que não têm equivalente nativo"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Estas você escreve mesmo, porque o HTML não tem tag para elas. São também as que exigem mais teclado escrito à mão — e onde o @angular/aria passa a valer mais que a implementação própria."
+        },
+        {
+          "kind": "code",
+          "code": "role=\"tablist\"  role=\"tab\"  role=\"tabpanel\"\nrole=\"menu\"     role=\"menuitem\"\nrole=\"listbox\"  role=\"option\"\nrole=\"alert\"    role=\"status\"",
+          "variant": "neutral"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "role muda o que se anuncia, não o que acontece"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ anuncia \"botão\", não aciona com teclado -->\n<div role=\"button\" (click)=\"salvar()\">Salvar</div>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Este é o mal-entendido mais caro sobre ARIA. A role é uma etiqueta para a tecnologia assistiva. Ela não adiciona comportamento nenhum — e prometer um botão que não funciona é pior do que não prometer nada."
         }
       ]
     },

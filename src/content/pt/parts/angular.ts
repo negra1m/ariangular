@@ -884,6 +884,67 @@ export const angular: Part = {
         {
           "kind": "paragraph",
           "text": "Mesmo assim, deve ser testado."
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O que vem pronto"
+        },
+        {
+          "kind": "list",
+          "ordered": false,
+          "items": [
+            "Role e atributos ARIA de cada componente.",
+            "Navegação por teclado nos padrões complexos.",
+            "Foco preso e ESC nos overlays.",
+            "Alvos de toque no tamanho mínimo."
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O que continua sendo seu"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ o Material não adivinha o nome do seu botão -->\n<button mat-icon-button><mat-icon>delete</mat-icon></button>\n\n<!-- ✅ -->\n<button mat-icon-button aria-label=\"Excluir lançamento\">\n  <mat-icon aria-hidden=\"true\">delete</mat-icon>\n</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "A regra vale para todo componente do Material: estrutura e comportamento vêm prontos; o significado é você quem escreve. Nome acessível, rótulo de campo, texto alternativo, ordem do DOM e contraste do tema continuam sendo decisão sua."
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Contraste do tema não é verificado por ninguém"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Um tema customizado passa a compilar com qualquer cor. Nada avisa que o texto ficou em 3:1."
+        },
+        {
+          "kind": "code",
+          "code": "// Verifique os pares do seu tema antes de subir.\n// A conta é a razão de contraste da WCAG:\n// texto normal precisa de 4.5:1, texto grande e borda de 3:1.",
+          "variant": "neutral"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Ícone dentro de componente é sempre decorativo"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Vale para botão, aba, item de menu, chip e campo. Se o ícone acompanha texto, ele é redundante; se está sozinho, o nome vai no controle, não nele."
+        },
+        {
+          "kind": "code",
+          "code": "<mat-icon aria-hidden=\"true\">home</mat-icon>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Sem isso, o leitor de tela anuncia o nome da ligadura da fonte: \"home\", \"delete\", \"more_vert\" — que é o identificador interno, não a função."
         }
       ]
     },
@@ -1315,6 +1376,96 @@ export const angular: Part = {
             "Menu.",
             "Datepicker."
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "As cinco perguntas de todo overlay"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Independente do componente, são sempre as mesmas. Se qualquer resposta for não, o overlay está quebrado para alguém."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Pergunta",
+            "Como se resolve"
+          ],
+          "rows": [
+            [
+              "O foco entra ao abrir?",
+              "focus() no primeiro controle, ou no dialog."
+            ],
+            [
+              "O Tab fica preso dentro?",
+              "cdkTrapFocus, ou dialog com showModal()."
+            ],
+            [
+              "O que está atrás é inalcançável?",
+              "inert no conteúdo, ou aria-modal."
+            ],
+            [
+              "ESC fecha?",
+              "(keydown.escape) ou o dialog nativo."
+            ],
+            [
+              "O foco volta ao abrir de novo?",
+              "Guardar quem abriu e devolver ao fechar."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Tooltip e popover não seguem essas regras"
+        },
+        {
+          "kind": "paragraph",
+          "text": "São a exceção, e confundir os dois grupos é erro comum."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "",
+            "Modal (dialog, select, menu)",
+            "Não modal (tooltip, popover)"
+          ],
+          "rows": [
+            [
+              "Prende o foco",
+              "Sim",
+              "Não"
+            ],
+            [
+              "Recebe o foco ao abrir",
+              "Sim",
+              "Não"
+            ],
+            [
+              "Bloqueia o que está atrás",
+              "Sim",
+              "Não"
+            ],
+            [
+              "Ligação com o gatilho",
+              "aria-haspopup",
+              "aria-describedby"
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Prender o foco num tooltip é armadilha de teclado. Ele descreve o controle onde o foco já está — não é um destino, é um complemento."
+        },
+        {
+          "kind": "code",
+          "code": "<div class=\"popover\" *ngIf=\"aberto\">\n  <button (click)=\"excluir()\">Excluir</button>\n</div>",
+          "variant": "wrong"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Popover que contém controle acionável precisa das cinco respostas acima — nesse momento ele virou um modal na prática, por mais que o nome no código diga outra coisa."
         }
       ]
     },
@@ -1845,6 +1996,63 @@ export const angular: Part = {
         {
           "kind": "paragraph",
           "text": "Compare com a lista de componentes que mais geram bug de acessibilidade em Angular. É quase a mesma lista."
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Instalação"
+        },
+        {
+          "kind": "code",
+          "code": "npm install @angular/aria",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Antes do v22, a resposta para \"preciso de um combobox acessível\" era \"a implementação é complexa, evite fazer à mão\" — sem oferecer nada no lugar. Agora existe."
+        },
+        {
+          "kind": "code",
+          "code": "import { NgCombobox, NgComboboxInput, NgListbox, NgOption }\n  from '@angular/aria/combobox';\n\n@Component({\n  imports: [NgCombobox, NgComboboxInput, NgListbox, NgOption],\n  template: `\n    <div ngCombobox>\n\n      <label for=\"cidade\">Cidade</label>\n      <input id=\"cidade\" ngComboboxInput [(value)]=\"termo\">\n\n      <ul ngListbox>\n        @for (cidade of filtradas(); track cidade.id) {\n          <li ngOption [value]=\"cidade\">{{ cidade.nome }}</li>\n        }\n      </ul>\n\n    </div>\n  `,\n})\nexport class BuscaCidade {\n\n  protected readonly termo = signal('');\n\n  protected readonly filtradas = computed(() =>\n    CIDADES.filter((c) => c.nome.toLowerCase().includes(this.termo().toLowerCase())),\n  );\n\n}",
+          "variant": "correct"
+        },
+        {
+          "kind": "reading",
+          "text": "Cidade, caixa de combinação, editável\nRecife, opção, 1 de 3"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O que as diretivas fazem por baixo"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Tudo isto sai do seu código quando você usa o pacote:"
+        },
+        {
+          "kind": "list",
+          "ordered": false,
+          "items": [
+            "role em cada elemento do padrão.",
+            "aria-expanded, aria-controls, aria-activedescendant sincronizados.",
+            "Setas, Home, End, Enter e Escape tratados.",
+            "Foco permanecendo no input, como o padrão exige.",
+            "aria-selected na opção certa."
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Headless significa que o CSS é seu"
+        },
+        {
+          "kind": "paragraph",
+          "text": "As diretivas não trazem estilo nenhum. Você continua responsável pelo foco visível, pelo contraste e pela ordem do DOM — é possível usar @angular/aria e ainda entregar uma tela inacessível."
+        },
+        {
+          "kind": "code",
+          "code": "[ngOption][aria-selected='true'] {\n  background: var(--cor-selecao);\n}\n\n[ngOption]:focus-visible,\n[ngOption][data-active='true'] {\n  outline: 3px solid var(--cor-foco);\n  outline-offset: -3px;\n}",
+          "variant": "neutral"
         }
       ]
     },
@@ -1915,6 +2123,35 @@ export const angular: Part = {
             "Imagem sem texto alternativo.",
             "Tabela sem cabeçalho associado."
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O mesmo componente, os dois lados da fronteira"
+        },
+        {
+          "kind": "paragraph",
+          "text": "O @angular/aria cuida de tudo que está dentro do padrão. O que fica de fora continua sendo seu — e é onde mora a maior parte dos bugs reais."
+        },
+        {
+          "kind": "code",
+          "code": "<div ngCombobox>\n\n  <!-- ❌ FORA do escopo da biblioteca: falta label.\n       O combobox funciona perfeitamente e não tem nome. -->\n  <input ngComboboxInput>\n\n  <ul ngListbox>\n    @for (item of itens(); track item.id) {\n      <!-- ✅ DENTRO: role, aria-selected, setas, foco.\n           Tudo isto a diretiva resolve. -->\n      <li ngOption [value]=\"item\">{{ item.nome }}</li>\n    }\n  </ul>\n\n</div>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ✅ com o que a biblioteca não faz por você -->\n<div ngCombobox>\n  <label for=\"cidade\">Cidade</label>\n  <input id=\"cidade\" ngComboboxInput>\n  <ul ngListbox><!-- ... --></ul>\n</div>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "E o foco visível continua sendo CSS"
+        },
+        {
+          "kind": "code",
+          "code": "/* Sem isto, quem navega por teclado não vê onde está —\n   por mais correta que a ARIA gerada seja. */\n[ngOption][data-active='true'] {\n  outline: 3px solid var(--cor-foco);\n  outline-offset: -3px;\n}",
+          "variant": "neutral"
         },
         {
           "kind": "callout",
