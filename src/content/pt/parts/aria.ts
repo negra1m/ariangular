@@ -705,6 +705,67 @@ export const aria: Part = {
             "aria-describedby apontando para id inexistente.",
             "Criar componente customizado sem teclado."
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Cada erro, lado a lado"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ role redundante: button já é button -->\n<button role=\"button\">Salvar</button>\n\n<!-- ✅ -->\n<button>Salvar</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ o aria-label SUBSTITUI o texto visível.\n     Quem usa comando de voz diz \"clicar em Salvar\" e nada acontece,\n     porque o nome real virou \"Salvar formulário\". -->\n<button aria-label=\"Salvar formulário\">Salvar</button>\n\n<!-- ✅ o texto visível já é o nome -->\n<button>Salvar</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ some da árvore de acessibilidade, mas o Tab continua chegando:\n     a pessoa foca um botão que não é anunciado -->\n<button aria-hidden=\"true\">Fechar</button>\n\n<!-- ✅ esconda o ícone, nunca o controle -->\n<button aria-label=\"Fechar\">\n  <svg aria-hidden=\"true\"><!-- ... --></svg>\n</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ valor fixo: anuncia \"recolhido\" para sempre -->\n<button aria-expanded=\"false\" (click)=\"alternar()\">Detalhes</button>\n\n<!-- ✅ ligado ao estado real -->\n<button [attr.aria-expanded]=\"aberto()\" (click)=\"alternar()\">Detalhes</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ id que não existe: o leitor não lê descrição nenhuma,\n     e não avisa que a referência quebrou -->\n<input aria-describedby=\"dica-cpf\">\n\n<!-- ✅ o id existe no DOM -->\n<input aria-describedby=\"dica-cpf\">\n<p id=\"dica-cpf\">Apenas números</p>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O erro que não aparece em ferramenta nenhuma"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Todos acima o axe encontra. Este não:"
+        },
+        {
+          "kind": "code",
+          "code": "<div role=\"button\" tabindex=\"0\" (click)=\"salvar()\">Salvar</div>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Tem role, tem tabindex, tem nome. O axe aprova. E Enter e Espaço não acionam nada, porque role=\"button\" não traz comportamento — só muda o que é anunciado."
+        },
+        {
+          "kind": "paragraph",
+          "text": "O resultado é pior que a div nua: o leitor de tela promete um botão que não funciona. Informação falsa com confiança."
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "A regra que evita a lista inteira"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Antes de escrever qualquer atributo ARIA, pergunte se existe elemento HTML que já faz aquilo. Na maioria esmagadora dos casos existe, e ele vem com teclado, estado e semântica de graça."
         }
       ]
     },

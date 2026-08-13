@@ -74,8 +74,12 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Fundamentos de Acessibilidade Angular",
     "sectionId": "landmarks",
     "sectionTitle": "Landmarks",
-    "text": "Landmarks permitem que leitores de tela naveguem rapidamente pelas regiões importantes da página. Tag Função header Cabeçalho. nav Navegação. main Conteúdo principal. aside Conteúdo complementar. footer Rodapé.",
-    "keywords": []
+    "text": "Landmarks permitem que leitores de tela naveguem rapidamente pelas regiões importantes da página. Tag Função header Cabeçalho. nav Navegação. main Conteúdo principal. aside Conteúdo complementar. footer Rodapé. Leitura esperada, ao listar as regiões: Um main por página <main> é o destino do \"pular para o conteúdo\" e o ponto de partida de quem navega por regiões. Dois na mesma página tornam o atalho ambíguo, e o leitor passa a perguntar qual deles. Sem landmark, a única forma de chegar ao conteúdo é percorrer a página inteira desde o topo — a cada visita, em toda tela.",
+    "keywords": [
+      "aria-label",
+      "routerLink",
+      "tabindex"
+    ]
   },
   {
     "id": "fundamentos/headings",
@@ -123,10 +127,18 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Fundamentos de Acessibilidade Angular",
     "sectionId": "erros-mais-comuns-encontrados-em-angular",
     "sectionTitle": "Erros mais comuns encontrados em Angular",
-    "text": "Div clicável simulando botão. Ícone clicável sem aria-label. Input apenas com placeholder. Ausência de heading principal. Modal sem gerenciamento de foco. Erros de formulário não anunciados. Uso excessivo de ARIA. Links agindo como botão. Botões agindo como links. tabindex positivo.",
+    "text": "Div clicável simulando botão. Ícone clicável sem aria-label. Input apenas com placeholder. Ausência de heading principal. Modal sem gerenciamento de foco. Erros de formulário não anunciados. Uso excessivo de ARIA. Links agindo como botão. Botões agindo como links. tabindex positivo. Os dez, com a correção ao lado O tabindex positivo é o pior da lista porque contamina a página inteira: qualquer valor maior que zero salta na frente de todos os elementos naturais, inclusive os de outros componentes.",
     "keywords": [
       "aria-label",
-      "tabindex"
+      "aria-hidden",
+      "aria-labelledby",
+      "aria-describedby",
+      "aria-invalid",
+      "role:alert",
+      "role:button",
+      "tabindex",
+      "ngIf",
+      "routerLink"
     ]
   },
   {
@@ -419,14 +431,15 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "ARIA Completo para Angular",
     "sectionId": "erros-mais-comuns-com-aria",
     "sectionTitle": "Erros mais comuns com ARIA",
-    "text": "Adicionar role=\"button\" em botão. Adicionar aria-label desnecessária. aria-hidden em conteúdo importante. aria-live em excesso. Estado aria-expanded desatualizado. aria-describedby apontando para id inexistente. Criar componente customizado sem teclado.",
+    "text": "Adicionar role=\"button\" em botão. Adicionar aria-label desnecessária. aria-hidden em conteúdo importante. aria-live em excesso. Estado aria-expanded desatualizado. aria-describedby apontando para id inexistente. Criar componente customizado sem teclado. Cada erro, lado a lado O erro que não aparece em ferramenta nenhuma Todos acima o axe encontra. Este não: Tem role, tem tabindex, tem nome. O axe aprova. E Enter e Espaço não acionam nada, porque role=\"button\" não traz comportamento — só muda o que é anunciado. O resultado é pior que a div nua: o leitor de tela promete um botão que não funciona. Informação falsa com confiança. A regra que evita a lista inteira Antes de escrever qualquer atributo ARIA, pergunte se existe elemento HTML que já faz aquilo. Na maioria esmagadora dos casos existe, e ele vem com teclado, estado e semântica de graça.",
     "keywords": [
       "aria-label",
       "aria-hidden",
       "aria-live",
       "aria-expanded",
       "aria-describedby",
-      "role:button"
+      "role:button",
+      "tabindex"
     ]
   },
   {
@@ -507,9 +520,14 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Formulários Acessíveis",
     "sectionId": "erro-dinamico-com-aria-live",
     "sectionTitle": "Erro Dinâmico com aria-live",
-    "text": "",
+    "text": "Erro que aparece depois do envio precisa de região viva. Sem ela, quem usa leitor de tela não fica sabendo que ele existe. A armadilha da região que ainda não existe Este é o erro mais comum de todos, e ele parece certo no código: Não funciona. role=\"alert\" e aria-live avisam o leitor de tela quando o conteúdo da região muda. Se a região inteira só entra no DOM no momento do erro, não houve mudança de conteúdo para observar — houve o nascimento de um elemento novo, que o leitor não estava monitorando. Vale para *ngIf, para @if e para o <mat-error> do Angular Material, que tem role=\"alert\" por dentro e esbarra exatamente nisso. Esconder com CSS quando não há erro é seguro — :empty não tira a região da árvore de acessibilidade. Alternativa quando a estrutura não permite manter a região montada. Duas armadilhas do Angular Material matInput sobrescreve o seu aria-describedby. O <mat-form-field> monta esse atributo sozinho, juntando hint e error. Um aria-describedby escrito na mão no input é substituído em silêncio, e a ligação com a sua mensagem se perde. aria-describedby apontando para o vazio. Quando não há erro, o atributo precisa sair do DOM. Apontar para um elemento vazio faz o leitor anunciar o nome do campo e cair num silêncio que a pessoa interpreta como conteúdo perdido. null remove o atributo. String vazia, não — aria-describedby=\"\" continua presente no HTML.",
     "keywords": [
-      "aria-live"
+      "aria-live",
+      "aria-describedby",
+      "aria-invalid",
+      "role:alert",
+      "ngIf",
+      "LiveAnnouncer"
     ]
   },
   {
@@ -726,8 +744,12 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Componentes Interativos e Estruturas Complexas",
     "sectionId": "tabela-boas-praticas",
     "sectionTitle": "Tabela - Boas Práticas",
-    "text": "Usar caption. Usar th. Usar scope. Evitar tabela feita com div.",
-    "keywords": []
+    "text": "Usar caption. Usar th. Usar scope. Evitar tabela feita com div. Quando há cabeçalho na coluna e na linha, o scope é o que permite ao leitor de tela dizer \"Março, Energia, R$ 210\" em vez de só \"R$ 210\". Leitura esperada, na célula de 198: Tabela larga precisa de rolagem alcançável Contêiner com rolagem horizontal e sem tabindex é uma armadilha: dá para ver que há mais coluna, e não dá para chegar nela sem mouse. Tabela montada com div perde a relação entre célula e cabeçalho. O leitor de tela lê uma sequência de números soltos, sem dizer a que mês ou categoria cada um pertence, e os comandos de navegação por tabela deixam de funcionar.",
+    "keywords": [
+      "aria-label",
+      "role:region",
+      "tabindex"
+    ]
   },
   {
     "id": "componentes/tooltip",
@@ -816,8 +838,17 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Componentes Interativos e Estruturas Complexas",
     "sectionId": "carrossel",
     "sectionTitle": "Carrossel",
-    "text": "Botão anterior. Botão próximo. Botão pausar. Slides identificáveis.",
-    "keywords": []
+    "text": "Botão anterior. Botão próximo. Botão pausar. Slides identificáveis. Ofertas da semana, carrossel Pausar rotação, botão 1 de 4, slide Pausar não é opcional Conteúdo que se move sozinho por mais de 5 segundos precisa ter como parar. É critério de nível A — o mais básico da WCAG (2.2.2). Carrossel que gira sem botão de pausa é falha, não questão de gosto. O motivo não é só leitor de tela: quem tem dislexia ou déficit de atenção perde a linha quando algo se mexe ao lado do texto que está lendo. Respeite quem pediu menos movimento Setas em div não são alcançáveis por teclado, os slides escondidos continuam no DOM sendo lidos, não há pausa, e nada indica quantos itens existem.",
+    "keywords": [
+      "aria-roledescription",
+      "aria-label",
+      "aria-hidden",
+      "aria-live",
+      "role:region",
+      "role:group",
+      "ngFor",
+      "2.2.2"
+    ]
   },
   {
     "id": "componentes/infinite-scroll",
@@ -825,8 +856,11 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Componentes Interativos e Estruturas Complexas",
     "sectionId": "infinite-scroll",
     "sectionTitle": "Infinite Scroll",
-    "text": "Anunciar novos itens carregados. Preservar foco. Evitar mudanças bruscas.",
-    "keywords": []
+    "text": "Anunciar novos itens carregados. Preservar foco. Evitar mudanças bruscas. O problema que ninguém vê Rolagem infinita empurra o rodapé para longe a cada carga. Quem navega por teclado nunca chega nos links do rodapé — eles fogem. E quem usa leitor de tela não tem como saber quantos itens existem, nem se o carregamento terminou. A solução mais acessível para rolagem infinita é não usar rolagem infinita. Um botão dá controle, deixa o rodapé alcançável, e resolve o anúncio de graça. Carregar mais 20, botão 40 de 137 resultados Carregar só no evento de rolagem exclui quem navega por teclado: sem rolar com o mouse, o carregamento nunca dispara e a lista termina no vigésimo item para sempre.",
+    "keywords": [
+      "role:status",
+      "ngFor"
+    ]
   },
   {
     "id": "componentes/drag-and-drop",
@@ -834,8 +868,12 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Componentes Interativos e Estruturas Complexas",
     "sectionId": "drag-and-drop",
     "sectionTitle": "Drag and Drop",
-    "text": "Nunca dependa exclusivamente do gesto. Sempre ofereça alternativa por clique ou teclado.",
-    "keywords": []
+    "text": "Nunca dependa exclusivamente do gesto. Sempre ofereça alternativa por clique ou teclado. O CDK entrega o arrastar. O caminho por teclado é seu. Revisar contrato movido para a posição 2 de 5 Os dois detalhes que costumam faltar O foco segue o item. Se ficar na posição, a pessoa aperta \"subir\" duas vezes e move dois itens diferentes. Parece que a interface está quebrada. Anuncie a posição, não só a ação. \"Movido para cima\" não diz onde parou. \"Posição 2 de 5\" diz. Só arrastar exclui quem usa teclado, leitor de tela, ou tem limitação motora que dificulta o gesto de segurar e mover. É uma das falhas mais comuns em quadro de tarefas (WCAG 2.1.1).",
+    "keywords": [
+      "aria-label",
+      "aria-hidden",
+      "2.1.1"
+    ]
   },
   {
     "id": "componentes/upload-de-arquivo",
@@ -872,8 +910,14 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "angular-e-acessivel-por-padrao",
     "sectionTitle": "Angular é acessível por padrão?",
-    "text": "Não. Angular renderiza o HTML que você escreve. Se o HTML for acessível, a aplicação tende a ser acessível. Se o HTML for ruim, Angular não corrige isso.",
-    "keywords": []
+    "text": "Não. Angular renderiza o HTML que você escreve. Se o HTML for acessível, a aplicação tende a ser acessível. Se o HTML for ruim, Angular não corrige isso. O mesmo componente, dois resultados Os dois trechos abaixo produzem a mesma tela. Um funciona para todo mundo, o outro só para quem usa mouse e enxerga. Leitura esperada do segundo: O que o framework faz e o que não faz O Angular ajuda O Angular não faz Lint com regras de acessibilidade no template. Escolher o elemento certo por você. CDK A11y: foco, anúncio, teclado. Chamar essas ferramentas sozinho. Material com boa parte pronta. Garantir que o resultado funciona. @angular/aria com padrões da WAI-ARIA. Impedir uma div clicável. Ligue o lint hoje As regras de template do angular-eslint pegam parte da lista de erros comuns antes do commit. Como error, não warn — aviso que não quebra o build é aviso que ninguém lê.",
+    "keywords": [
+      "aria-pressed",
+      "aria-label",
+      "aria-hidden",
+      "routerLink",
+      "tabindex"
+    ]
   },
   {
     "id": "angular/regra-principal-para-angular",
@@ -924,8 +968,11 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "router-angular",
     "sectionTitle": "Router Angular",
-    "text": "Aplicações SPA não recarregam a página. O leitor de tela não percebe automaticamente que houve mudança de tela.",
-    "keywords": []
+    "text": "Aplicações SPA não recarregam a página. O leitor de tela não percebe automaticamente que houve mudança de tela. O que se perde quando a página não recarrega Num carregamento normal, o navegador entrega três coisas de graça. No SPA, as três param de acontecer e viram trabalho seu. O navegador fazia No SPA Quem resolve Reposicionar o foco no topo. O foco fica no link acionado, que já não existe. Serviço de foco de rota. Anunciar o título da nova página. Silêncio total. LiveAnnouncer ou TitleStrategy. Atualizar o título da aba. Fica o título da primeira tela. Title ou TitleStrategy. O título da aba é o primeiro texto que muitos leitores de tela anunciam ao trocar de contexto. Deixar o mesmo em todas as telas faz a pessoa perder a referência de onde está. Para título dinâmico, uma TitleStrategy resolve para toda a aplicação: Navegação por clique em div não é alcançável por Tab, não é anunciada como link, e tira da pessoa o \"abrir em nova aba\". Use routerLink numa âncora de verdade.",
+    "keywords": [
+      "LiveAnnouncer",
+      "routerLink"
+    ]
   },
   {
     "id": "angular/foco-apos-navegacao",
@@ -933,8 +980,13 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "foco-apos-navegacao",
     "sectionTitle": "Foco Após Navegação",
-    "text": "Após a navegação: Mover foco para o H1. Ou para o conteúdo principal.",
-    "keywords": []
+    "text": "Após a navegação: Mover foco para o H1. Ou para o conteúdo principal. Este é o arquivo completo. Registre uma vez, no componente raiz, e vale para todas as rotas da aplicação. Ligando no componente raiz: Três detalhes que decidem se funciona Ignorar mudança de âncora. Clicar num link interno da mesma página dispara evento de rota. Sem a guarda, o foco pula para o topo e a pessoa perde o trecho que pediu para ver. Anunciar depois de focar. Mover o foco cancela a fala em andamento. Anunciar antes faz o texto ser cortado no meio. tabindex=\"-1\", nunca 0. Com 0 o título entra na ordem do Tab e vira uma parada extra em toda navegação por teclado, sem fazer nada. Bônus: aria-current sem escrever código O RouterLinkActive tem uma entrada dedicada que aplica aria-current no link ativo. Resolve um item inteiro de checklist numa linha. Extrato, link, página atual",
+    "keywords": [
+      "aria-current",
+      "tabindex",
+      "LiveAnnouncer",
+      "routerLink"
+    ]
   },
   {
     "id": "angular/exemplo-de-destino-de-foco",
@@ -962,13 +1014,14 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "angular-cdk-accessibility",
     "sectionTitle": "Angular CDK Accessibility",
-    "text": "O pacote mais importante para acessibilidade na stack Angular. LiveAnnouncer FocusMonitor FocusTrap FocusKeyManager InteractivityChecker",
+    "text": "O pacote mais importante para acessibilidade na stack Angular. LiveAnnouncer FocusMonitor FocusTrap FocusKeyManager InteractivityChecker Instalação Não precisa do Angular Material. O CDK é independente e não traz estilo nenhum. O que cada um resolve Utilitário Problema que resolve LiveAnnouncer Algo mudou e o leitor de tela precisa saber. cdkTrapFocus O Tab escapa de dentro do modal. FocusMonitor Mostrar o anel de foco só para quem usa teclado. FocusKeyManager Setas não navegam dentro do componente. InteractivityChecker Descobrir, em código, se um elemento é focável. cdkAriaLive Região viva declarativa, direto no template. Quando o texto já está no template, é mais simples que injetar o LiveAnnouncer. InteractivityChecker Útil ao escrever componente que precisa decidir para onde mandar o foco sem chutar.",
     "keywords": [
       "LiveAnnouncer",
       "FocusMonitor",
       "FocusTrap",
       "FocusKeyManager",
-      "InteractivityChecker"
+      "InteractivityChecker",
+      "cdkTrapFocus"
     ]
   },
   {
@@ -977,7 +1030,7 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "liveannouncer",
     "sectionTitle": "LiveAnnouncer",
-    "text": "Permite criar anúncios para leitores de tela.",
+    "text": "Permite criar anúncios para leitores de tela. Pagamento aprovado A armadilha do texto repetido Chamar duas vezes seguidas com o mesmo texto anuncia uma vez só. A região viva recebe a mesma string, não houve mudança de conteúdo, e o leitor de tela não tem o que reanunciar. É a causa de \"o anúncio funcionou no primeiro clique e depois parou\" — o código está certo, o comportamento é esperado. A correção é fazer a mensagem carregar o que mudou de verdade. Quase sempre isso deixa o anúncio melhor, não pior: Quando não há nada que varie, limpar a região antes força o anúncio. assertive interrompe a leitura em andamento. Numa confirmação de sucesso isso corta a frase que a pessoa estava ouvindo para dizer algo que podia esperar dois segundos. Reserve para erro que bloqueia o fluxo.",
     "keywords": [
       "LiveAnnouncer"
     ]
@@ -988,7 +1041,7 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "quando-usar-liveannouncer",
     "sectionTitle": "Quando usar LiveAnnouncer",
-    "text": "Pagamento concluído. Filtro aplicado. Busca concluída. Upload concluído. Erro importante.",
+    "text": "Pagamento concluído. Filtro aplicado. Busca concluída. Upload concluído. Erro importante. A regra por trás da lista Anuncie quando o resultado acontece sem trocar de tela e sem mover o foco. Se a pessoa vai perceber pelo foco que chegou em outro lugar, o anúncio vira repetição. Situação Anunciar? Por quê Filtro aplicado, lista atualizou na mesma tela. Sim Nada indica que mudou. Item removido do carrinho. Sim O elemento sumiu sem aviso. Modal abriu e recebeu foco. Não O foco já anuncia o dialog. Campo ficou inválido ao sair dele. Não Anuncia ao voltar o foco no campo. Botão virou \"Salvando…\". Não Foco está no botão, muda sozinho. 12 resultados para transferência Num campo de busca, isso dispara um anúncio por caractere digitado. O leitor de tela vira uma metralhadora e a pessoa não consegue nem terminar de escrever. Use debounce de uns 400ms — o tempo de parar de digitar.",
     "keywords": [
       "LiveAnnouncer"
     ]
@@ -999,9 +1052,13 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "cdktrapfocus",
     "sectionTitle": "cdkTrapFocus",
-    "text": "Prende o foco em uma região. Ideal para: Modal. Bottom Sheet. Dialog.",
+    "text": "Prende o foco em uma região. Ideal para: Modal. Bottom Sheet. Dialog. Prender o foco é metade do trabalho. As outras metades são devolver o foco ao fechar e tornar o resto da página inalcançável. cdkTrapFocusAutoCapture Sem [cdkTrapFocusAutoCapture]=\"true\" a diretiva prende o foco mas não o move para dentro. O Tab passa a circular na região certa — só que a pessoa continua fora dela. Falta role=\"dialog\", falta aria-modal, falta rótulo, falta ESC e falta devolver o foco. Prender o Tab sozinho não faz um modal acessível — faz uma armadilha de teclado (WCAG 2.1.2).",
     "keywords": [
-      "cdkTrapFocus"
+      "aria-modal",
+      "aria-labelledby",
+      "role:dialog",
+      "cdkTrapFocus",
+      "2.1.2"
     ]
   },
   {
@@ -1021,9 +1078,10 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "focusmonitor",
     "sectionTitle": "FocusMonitor",
-    "text": "Identifica como o foco chegou até o elemento. Mouse. Teclado. Touch. Programático.",
+    "text": "Identifica como o foco chegou até o elemento. Mouse. Teclado. Touch. Programático. Antes de usar: você precisa mesmo disto? O caso mais comum — mostrar o anel de foco só para quem navega por teclado — o CSS resolve sozinho, sem nenhum código: :focus-visible é suportado em todos os navegadores atuais e já aplica a heurística de \"chegou por teclado\". O FocusMonitor vale quando a decisão precisa acontecer no TypeScript, não no estilo: registrar analytics, escolher para onde mandar o foco seguinte, mudar comportamento por origem. Remover o contorno sem substituto é o erro mais comum de todos. Para quem navega por teclado, equivale a esconder o cursor do mouse: a pessoa perde o rastro de onde está (WCAG 2.4.7).",
     "keywords": [
-      "FocusMonitor"
+      "FocusMonitor",
+      "2.4.7"
     ]
   },
   {
@@ -1032,9 +1090,14 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "focuskeymanager",
     "sectionTitle": "FocusKeyManager",
-    "text": "Gerencia navegação por setas. Muito utilizado em: Tabs. Menus. Listbox. Combobox.",
+    "text": "Gerencia navegação por setas. Muito utilizado em: Tabs. Menus. Listbox. Combobox. Antes de escrever: já existe pronto? Desde o Angular v22, @angular/aria entrega listbox, menu, tabs e combobox como diretiva, com teclado e ARIA implementados segundo a especificação. Escrever à mão só se justifica quando nenhum padrão de lá serve. O que vem abaixo é para esse caso — e para entender o que a diretiva faz por baixo. O padrão é sempre o mesmo: consultar as opções, inicializar o manager, encaminhar o teclado para ele. Cada opção precisa implementar FocusableOption — é o contrato que o manager usa para mover o foco. FocusKeyManager ou ListKeyManager? Classe O que faz Quando usar FocusKeyManager Move o foco de verdade para cada item. Menu e toolbar, onde o item recebe foco. ActiveDescendantKeyManager Marca o item ativo sem tirar o foco do campo. Combobox, onde o foco fica no input. ListKeyManager Base das duas. Só controla o índice ativo. Quando o comportamento de foco é seu. Dar tabindex=\"0\" a cada opção transforma uma lista de 40 itens em 40 paradas do Tab. O padrão correto é o contêiner receber o Tab uma vez, e as setas moverem dentro dele.",
     "keywords": [
-      "FocusKeyManager"
+      "aria-selected",
+      "role:listbox",
+      "role:option",
+      "FocusKeyManager",
+      "tabindex",
+      "ngFor"
     ]
   },
   {
@@ -1052,7 +1115,7 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "matdialog",
     "sectionTitle": "MatDialog",
-    "text": "Benefícios Role dialog. Gerenciamento de foco. ESC. Backdrop.",
+    "text": "Benefícios Role dialog. Gerenciamento de foco. ESC. Backdrop. O componente do dialog, com título e descrição ligados por id. E a abertura, com os dois atributos que o Material não infere sozinho. O foco que não volta O problema mais reportado do MatDialog: ao fechar, o foco vai para o início do documento em vez de voltar ao botão que abriu. Quem usa leitor de tela perde o lugar e precisa percorrer a página inteira de novo. O restoreFocus: true resolve a maior parte dos casos. Quando o botão que abriu deixa de existir — uma linha de tabela que some depois da ação, por exemplo — é preciso escolher o destino na mão. Sem ariaLabelledBy o dialog abre sem nome acessível: o leitor de tela anuncia apenas \"diálogo\", e a pessoa não sabe o que está confirmando.",
     "keywords": [
       "MatDialog"
     ]
@@ -1074,8 +1137,10 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "mattabs",
     "sectionTitle": "MatTabs",
-    "text": "Implementa a estrutura de tabs. Mesmo assim valide: Setas funcionam. TalkBack anuncia corretamente. VoiceOver anuncia corretamente.",
+    "text": "Implementa a estrutura de tabs. Mesmo assim valide: Setas funcionam. TalkBack anuncia corretamente. VoiceOver anuncia corretamente. Extrato, aba, selecionada, 1 de 2 Rótulo com ícone Ícone dentro do rótulo precisa ser escondido, senão o leitor tenta ler o nome da ligadura da fonte. Aba só com ícone é anunciada como \"receipt, aba\" — o nome da ligadura, não a função. Se o espaço não permite texto, use aria-label na aba.",
     "keywords": [
+      "aria-label",
+      "aria-hidden",
       "MatTabs"
     ]
   },
@@ -1085,8 +1150,12 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "matmenu",
     "sectionTitle": "MatMenu",
-    "text": "Preferível criar menus usando MatMenu ao invés de implementação caseira.",
+    "text": "Preferível criar menus usando MatMenu ao invés de implementação caseira. Ações da conta, botão, tem menu suspenso O matMenuTriggerFor aplica aria-haspopup e aria-expanded sozinho, e move o foco para o primeiro item ao abrir. Isso é o principal motivo de não fazer menu à mão — é fácil errar em silêncio. Sem aria-label o gatilho é anunciado como \"more_vert, botão\" — o nome do ícone. O menu funciona, mas ninguém sabe o que ele abre.",
     "keywords": [
+      "aria-haspopup",
+      "aria-expanded",
+      "aria-label",
+      "aria-hidden",
       "MatMenu"
     ]
   },
@@ -1096,9 +1165,12 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "matselect",
     "sectionTitle": "MatSelect",
-    "text": "Componente mais propenso a bugs de acessibilidade. Sempre validar: Abertura. Fechamento. Leitura da opção. Estado selecionado.",
+    "text": "Componente mais propenso a bugs de acessibilidade. Não é opinião: é o componente com mais issues de acessibilidade abertas no repositório oficial do Angular Material. Problemas conhecidos, reportados no repositório oficial Sintoma Issue Ao receber foco, não anuncia o valor já selecionado. material2#12297 Anuncia o mesmo item três vezes ao navegar com as setas. components#21410 Não anuncia expandido e recolhido ao abrir e fechar. components#20533 Dentro de um dialog, o VoiceOver não lê as opções. components#21787 Dentro do paginator, o leitor não acompanha a troca. components#20333 A lição vale mais que a lista: um componente mantido pelo time do framework, com anos de uso, ainda tem esses casos em aberto. Usar Material não substitui testar. Estado, caixa de combinação, São Paulo Onde o serviço será prestado Contorno quando a seleção não é anunciada Se o leitor de tela não falar o valor escolhido depois de selecionar, anuncie você mesmo. É o único caminho confiável hoje. Placeholder não é rótulo. Sem <mat-label> o campo é anunciado sem nome, e o placeholder some assim que a seleção acontece. O que testar, sempre Abertura: o leitor anuncia que a lista abriu? Fechamento: o leitor anuncia que fechou? Leitura da opção: cada opção é lida uma vez, não três? Estado selecionado: ao voltar o foco ao campo, o valor é falado? Dentro de dialog: as opções continuam sendo lidas?",
     "keywords": [
-      "MatSelect"
+      "aria-describedby",
+      "MatSelect",
+      "ngFor",
+      "LiveAnnouncer"
     ]
   },
   {
@@ -1107,7 +1179,7 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "matexpansionpanel",
     "sectionTitle": "MatExpansionPanel",
-    "text": "Equivalente ao Accordion. Verificar: aria-expanded. Foco. Anúncio do estado.",
+    "text": "Equivalente ao Accordion. Verificar: aria-expanded. Foco. Anúncio do estado. Dados pessoais, Nome, CPF e nascimento, botão, recolhido O aria-expanded é aplicado e mantido pelo componente. Não escreva na mão: um valor fixo anuncia \"recolhido\" para sempre, inclusive com o painel aberto. Cuidado com o nível de heading O header do painel não é um heading. Numa página que navega por títulos, os painéis somem da árvore. Quando o accordion organiza o conteúdo principal da tela, envolva o título: Escrever aria-expanded na mão sobrepõe o que o componente calcula, e o valor congela. É o erro clássico de accordion: visualmente abre, o leitor de tela continua dizendo que está fechado.",
     "keywords": [
       "aria-expanded",
       "MatExpansionPanel"
@@ -1119,8 +1191,10 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "mattable",
     "sectionTitle": "MatTable",
-    "text": "Não assumir que toda tabela Material é automaticamente acessível. Validar: caption. headers. sort. foco.",
+    "text": "Não assumir que toda tabela Material é automaticamente acessível. Validar: caption. headers. sort. foco. Lançamentos dos últimos 30 dias, tabela, 2 colunas Data, cabeçalho de coluna, Ordenar por data, botão Use a versão com table, não com div O MatTable tem duas formas. A que usa <table>, <th> e <td> nativos entrega a semântica de graça. A versão com <mat-table> e <mat-cell> renderiza div com role, e depende de o navegador e o leitor de tela concordarem — o que nem sempre acontece. Ação dentro da linha Botão de ação repetido em toda linha precisa de nome único. Vinte botões \"Editar\" seguidos não dizem editar o quê.",
     "keywords": [
+      "aria-label",
+      "aria-hidden",
       "MatTable"
     ]
   },
@@ -1139,8 +1213,10 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "datepicker",
     "sectionTitle": "Datepicker",
-    "text": "Validar: Navegação por teclado. Leitura do dia. Leitura do mês. Leitura do ano. Seleção correta.",
-    "keywords": []
+    "text": "Validar: Navegação por teclado. Leitura do dia. Leitura do mês. Leitura do ano. Seleção correta. O campo de texto é a acessibilidade, não o calendário O ponto mais importante do datepicker: deixe digitar. Uma grade de calendário exige 15 ou 20 toques de seta para chegar numa data distante. Digitar \"15/03/1985\" leva segundos. O mat-hint com o formato esperado não é detalhe: é o que permite a pessoa acertar de primeira sem abrir a grade. readonly para \"forçar\" o uso do calendário é o erro mais comum aqui. Quem usa teclado ou leitor de tela perde o caminho rápido e fica preso na navegação por setas — e em telas de cadastro isso costuma ser o ponto de desistência. Teclado dentro do calendário Tecla Ação Setas Move um dia ou uma semana. Page Up / Page Down Mês anterior e seguinte. Home / End Primeiro e último dia do mês. Enter Seleciona e fecha. Esc Fecha sem selecionar.",
+    "keywords": [
+      "aria-label"
+    ]
   },
   {
     "id": "angular/loading-angular",
@@ -1159,8 +1235,12 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "lazy-loading",
     "sectionTitle": "Lazy Loading",
-    "text": "Quando conteúdo aparece após carregamento assíncrono, o foco e o anúncio devem ser avaliados.",
-    "keywords": []
+    "text": "Quando conteúdo aparece após carregamento assíncrono, o foco e o anúncio devem ser avaliados. Carregando gráfico de gastos Os dois parâmetros que evitam o pior after 100ms — não mostra o \"carregando\" se a resposta vier rápido. Sem isso, um flash aparece e some, e o leitor de tela anuncia algo que já não existe. minimum 500ms — se aparecer, fica tempo suficiente para ser lido. Um estado que dura 80ms é ruído, não informação. Onde o foco deve ficar A regra depende de quem pediu o carregamento: Situação O foco Carregou ao entrar na viewport. Não move. Ninguém pediu. Pessoa clicou em \"ver detalhes\". Move para o conteúdo novo. Erro depois de uma ação. Move para a mensagem de erro. Spinner sem texto não diz nada a quem não vê a tela. O silêncio durante a espera é indistinguível de página quebrada — e depois de alguns segundos a pessoa desiste.",
+    "keywords": [
+      "aria-busy",
+      "role:status",
+      "role:alert"
+    ]
   },
   {
     "id": "angular/signals-e-acessibilidade",
@@ -1168,11 +1248,13 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "signals-e-acessibilidade",
     "sectionTitle": "Signals e Acessibilidade",
-    "text": "Signals atualizam a UI automaticamente. Mas leitores de tela não são notificados automaticamente. Use: aria-live LiveAnnouncer",
+    "text": "Signals atualizam a UI automaticamente. Mas leitores de tela não são notificados automaticamente. Use: aria-live LiveAnnouncer Onde o mal-entendido mora Signal atualiza o DOM. Atualizar o DOM não avisa ninguém. Um contador que vai de 3 para 4 muda na tela e não produz som nenhum — a menos que aquele pedaço de DOM esteja numa região viva declarada. 4 itens no carrinho Quando a mudança não tem representação visual em texto, o effect conecta o signal ao anúncio. O effect roda a cada mudança do signal. Ligado num campo de texto, isso é um anúncio por tecla digitada. Use um signal derivado que mude com menos frequência, ou debounce. Nada mudou com signals Signals não têm regra de acessibilidade própria. O que muda é que a atualização ficou mais fácil de escrever — e, com isso, ficou mais fácil atualizar a tela em lugares onde antes ninguém mexia. Cada um desses lugares é um anúncio a decidir.",
     "keywords": [
       "aria-live",
+      "role:status",
       "Signals",
-      "LiveAnnouncer"
+      "LiveAnnouncer",
+      "Signal"
     ]
   },
   {
@@ -1199,8 +1281,11 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "Angular, Angular Material e Angular CDK A11y",
     "sectionId": "custom-components",
     "sectionTitle": "Custom Components",
-    "text": "A maior origem de bugs em Angular. Botões customizados. Select customizado. Dropdown customizado. Stepper customizado. Menu customizado.",
-    "keywords": []
+    "text": "A maior origem de bugs em Angular. Botões customizados. Select customizado. Dropdown customizado. Stepper customizado. Menu customizado. O que se perde ao trocar o nativo por um customizado Vem de graça no nativo Vira trabalho seu Role anunciada. Escrever e manter a role certa. Alcançável por Tab. tabindex correto em cada estado. Enter e Espaço acionam. Tratar as duas teclas na mão. Estado desabilitado anunciado. aria-disabled sincronizado. Envia formulário. Não envia mais. Funciona com voz e switch. Depende do que você escreveu. Se a estilização exige um elemento próprio, replique o contrato inteiro. Este é o mínimo de um botão feito à mão: Salvar, botão Isso ainda é pior que o nativo Mesmo bem escrito, o componente acima não envia formulário, não responde ao modo de voz do sistema em todos os casos, e precisa de teste em cada leitor de tela. Um <button type=\"button\"> com CSS resolve os mesmos casos sem nada disso. Funciona com mouse e falha em tudo o mais: não é anunciado como botão, o Tab não alcança, Enter e Espaço não acionam. É o erro número um de acessibilidade em Angular.",
+    "keywords": [
+      "aria-disabled",
+      "tabindex"
+    ]
   },
   {
     "id": "angular/regra-para-custom-components",
@@ -1410,8 +1495,10 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "TalkBack, VoiceOver e Testes Reais",
     "sectionId": "sequencia-de-foco",
     "sectionTitle": "Sequência de Foco",
-    "text": "A ordem do DOM deve refletir a ordem visual. Usuários de leitor de tela navegam seguindo a estrutura da página.",
-    "keywords": []
+    "text": "A ordem do DOM deve refletir a ordem visual. Usuários de leitor de tela navegam seguindo a estrutura da página. O CSS que quebra a ordem sem avisar order, row-reverse e grid-area mudam o que se vê, e não mudam o DOM. O resultado: a pessoa vê \"Cancelar, Confirmar\" e o Tab entrega \"Confirmar, Cancelar\". É uma falha de WCAG 1.3.2, e das mais difíceis de perceber: para quem enxerga, a tela está perfeita. Quando o DOM precisa divergir de propósito Barra lateral que aparece à esquerda mas deve ser lida depois do conteúdo é um caso legítimo. A saída é colocar no DOM na ordem de leitura e posicionar por grid — nunca o contrário. Como testar em 30 segundos Clique na barra de endereço e vá apertando Tab. O anel de foco tem que descer a página numa linha previsível. Todo pulo para trás, ou para um canto distante, é um defeito.",
+    "keywords": [
+      "1.3.2"
+    ]
   },
   {
     "id": "leitores-de-tela/modais",
@@ -1419,8 +1506,12 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "TalkBack, VoiceOver e Testes Reais",
     "sectionId": "modais",
     "sectionTitle": "Modais",
-    "text": "Ao abrir: Foco vai para o modal. Conteúdo anterior fica inacessível. Tab navega apenas dentro dele. Ao fechar: Foco retorna ao elemento que abriu.",
-    "keywords": []
+    "text": "Ao abrir: Foco vai para o modal. Conteúdo anterior fica inacessível. Tab navega apenas dentro dele. Ao fechar: Foco retorna ao elemento que abriu. <dialog> com showModal() entrega role, aria-modal, foco preso e ESC já implementados e testados pelo navegador. Reimplementar isso à mão é a origem clássica de modal inacessível. Leitura esperada, ao abrir: show() e showModal() não são a mesma coisa show() showModal() Conteúdo de trás fica inerte Não Sim ESC fecha Não Sim Tab preso dentro Não Sim Usar show() num modal é o erro silencioso mais comum aqui: visualmente idêntico, e o leitor de tela continua lendo a página inteira por trás. Sem role, sem aria-modal, sem foco, sem ESC, sem retorno de foco. O Tab sai pela parte de trás e a pessoa se perde dentro da página que deveria estar bloqueada.",
+    "keywords": [
+      "aria-modal",
+      "aria-labelledby",
+      "ngIf"
+    ]
   },
   {
     "id": "leitores-de-tela/problema-classico",
@@ -1466,10 +1557,13 @@ export const searchIndex: SearchEntry[] = [
     "partTitle": "TalkBack, VoiceOver e Testes Reais",
     "sectionId": "bugs-mais-comuns-encontrados-em-producao",
     "sectionTitle": "Bugs Mais Comuns Encontrados em Produção",
-    "text": "Botão sem nome acessível. Ícone clicável sem label. Modal sem foco. Erro não anunciado. Toast não anunciado. Foco perdido após navegação. Ordem de foco incorreta. Accordion sem aria-expanded. Tabs sem aria-selected. Select customizado incompleto.",
+    "text": "Botão sem nome acessível. Ícone clicável sem label. Modal sem foco. Erro não anunciado. Toast não anunciado. Foco perdido após navegação. Ordem de foco incorreta. Accordion sem aria-expanded. Tabs sem aria-selected. Select customizado incompleto. Como cada um soa para quem usa leitor de tela A lista acima é técnica. Esta é a mesma lista traduzida para o que a pessoa de fato ouve — que é o que decide se ela conclui a tarefa ou desiste. Bug O que a pessoa ouve O que ela faz Botão sem nome. \"botão\" Aciona no escuro ou desiste. Ícone sem label. \"delete, botão\" Lê o nome da fonte, não a ação. Modal sem foco. Silêncio; continua na página de trás. Não sabe que algo abriu. Erro não anunciado. Nada. O envio parece ter funcionado. Espera uma confirmação que não vem. Toast não anunciado. Nada. Repete a ação, achando que falhou. Foco perdido após navegar. Silêncio; foco no começo do documento. Percorre o menu inteiro de novo. Accordion sem aria-expanded. \"Detalhes, botão\" — sempre igual. Não sabe se abriu. Tabs sem aria-selected. \"Extrato, aba\" — sem dizer qual está ativa. Perde a referência do contexto. Como achar os quatro primeiros em cinco minutos Sem instalar nada, no console do navegador: Isso não substitui axe nem teste real — pega três classes de erro das mais comuns, e roda em qualquer página em segundos.",
     "keywords": [
       "aria-expanded",
-      "aria-selected"
+      "aria-selected",
+      "aria-label",
+      "aria-labelledby",
+      "tabindex"
     ]
   },
   {

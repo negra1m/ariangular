@@ -338,6 +338,38 @@ export const fundamentos: Part = {
               "Rodapé."
             ]
           ]
+        },
+        {
+          "kind": "code",
+          "code": "<a class=\"pular\" href=\"#conteudo\">Pular para o conteúdo</a>\n\n<header>\n  <!-- Duas navegações na mesma página precisam de nomes\n       diferentes, senão o leitor lista \"navegação, navegação\". -->\n  <nav aria-label=\"Principal\">\n    <a routerLink=\"/extrato\">Extrato</a>\n    <a routerLink=\"/pix\">Pix</a>\n  </nav>\n</header>\n\n<main id=\"conteudo\" tabindex=\"-1\">\n  <h1>Extrato</h1>\n  <!-- ... -->\n</main>\n\n<aside aria-label=\"Ofertas\">\n  <!-- ... -->\n</aside>\n\n<footer>\n  <nav aria-label=\"Rodapé\">\n    <a routerLink=\"/ajuda\">Ajuda</a>\n  </nav>\n</footer>",
+          "variant": "correct"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Leitura esperada, ao listar as regiões:"
+        },
+        {
+          "kind": "code",
+          "code": "Banner\nNavegação, Principal\nPrincipal\nComplementar, Ofertas\nRodapé de página\nNavegação, Rodapé",
+          "variant": "neutral"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Um main por página"
+        },
+        {
+          "kind": "paragraph",
+          "text": "<main> é o destino do \"pular para o conteúdo\" e o ponto de partida de quem navega por regiões. Dois na mesma página tornam o atalho ambíguo, e o leitor passa a perguntar qual deles."
+        },
+        {
+          "kind": "code",
+          "code": "<div class=\"header\">\n  <div class=\"nav\"><!-- ... --></div>\n</div>\n<div class=\"conteudo\"><!-- ... --></div>",
+          "variant": "wrong"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Sem landmark, a única forma de chegar ao conteúdo é percorrer a página inteira desde o topo — a cada visita, em toda tela."
         }
       ]
     },
@@ -493,6 +525,65 @@ export const fundamentos: Part = {
             "Botões agindo como links.",
             "tabindex positivo."
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Os dez, com a correção ao lado"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ 1. div clicável -->\n<div (click)=\"salvar()\">Salvar</div>\n<!-- ✅ -->\n<button type=\"button\" (click)=\"salvar()\">Salvar</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ 2. ícone sem nome -->\n<button><mat-icon>delete</mat-icon></button>\n<!-- ✅ -->\n<button aria-label=\"Excluir item\">\n  <mat-icon aria-hidden=\"true\">delete</mat-icon>\n</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ 3. só placeholder -->\n<input placeholder=\"E-mail\">\n<!-- ✅ -->\n<label for=\"email\">E-mail</label>\n<input id=\"email\" type=\"email\">",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ 4. sem heading principal -->\n<div class=\"titulo\">Extrato</div>\n<!-- ✅ -->\n<h1>Extrato</h1>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ 5. modal sem foco -->\n<div class=\"modal\" *ngIf=\"aberto\"></div>\n<!-- ✅ -->\n<dialog #d aria-labelledby=\"t\"><h2 id=\"t\">Confirmar</h2></dialog>\n<!-- + d.showModal() ao abrir, e devolver o foco ao fechar -->",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ 6. erro não anunciado -->\n<span *ngIf=\"invalido\" class=\"erro\">CPF inválido</span>\n<!-- ✅ região já no DOM, ligada ao campo -->\n<input [attr.aria-describedby]=\"invalido ? 'e' : null\"\n       [attr.aria-invalid]=\"invalido\">\n<span id=\"e\" role=\"alert\">{{ invalido ? 'CPF inválido' : '' }}</span>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ 7. ARIA em excesso -->\n<button role=\"button\" aria-label=\"Salvar\">Salvar</button>\n<!-- ✅ -->\n<button>Salvar</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ 8. link que age como botão -->\n<a href=\"#\" (click)=\"excluir()\">Excluir</a>\n<!-- ✅ link navega, botão executa -->\n<button type=\"button\" (click)=\"excluir()\">Excluir</button>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ 9. botão que age como link -->\n<button (click)=\"router.navigate(['/extrato'])\">Extrato</button>\n<!-- ✅ -->\n<a routerLink=\"/extrato\">Extrato</a>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ 10. tabindex positivo -->\n<input tabindex=\"3\">\n<!-- ✅ a ordem vem do DOM; 0 entra na sequência, -1 sai dela -->\n<input>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "O tabindex positivo é o pior da lista porque contamina a página inteira: qualquer valor maior que zero salta na frente de todos os elementos naturais, inclusive os de outros componentes."
         }
       ]
     },

@@ -301,6 +301,67 @@ export const leitoresDeTela: Part = {
         {
           "kind": "paragraph",
           "text": "Usuários de leitor de tela navegam seguindo a estrutura da página."
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "O CSS que quebra a ordem sem avisar"
+        },
+        {
+          "kind": "paragraph",
+          "text": "order, row-reverse e grid-area mudam o que se vê, e não mudam o DOM. O resultado: a pessoa vê \"Cancelar, Confirmar\" e o Tab entrega \"Confirmar, Cancelar\"."
+        },
+        {
+          "kind": "code",
+          "code": "<!-- ❌ o visual inverte, o Tab não -->\n<div class=\"acoes\">\n  <button>Confirmar</button>\n  <button>Cancelar</button>\n</div>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": ".acoes {\n  display: flex;\n  flex-direction: row-reverse;\n}",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "É uma falha de WCAG 1.3.2, e das mais difíceis de perceber: para quem enxerga, a tela está perfeita."
+        },
+        {
+          "kind": "code",
+          "code": "<div class=\"acoes\">\n  <button>Cancelar</button>\n  <button>Confirmar</button>\n</div>",
+          "variant": "correct"
+        },
+        {
+          "kind": "code",
+          "code": ".acoes {\n  display: flex;\n  justify-content: flex-end;\n}",
+          "variant": "neutral"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Quando o DOM precisa divergir de propósito"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Barra lateral que aparece à esquerda mas deve ser lida depois do conteúdo é um caso legítimo. A saída é colocar no DOM na ordem de leitura e posicionar por grid — nunca o contrário."
+        },
+        {
+          "kind": "code",
+          "code": "<div class=\"pagina\">\n  <main><!-- primeiro no DOM: é o que importa --></main>\n  <aside><!-- depois --></aside>\n</div>",
+          "variant": "neutral"
+        },
+        {
+          "kind": "code",
+          "code": ".pagina {\n  display: grid;\n  grid-template-columns: 16rem 1fr;\n}\n/* O aside vai para a coluna 1 sem sair do lugar no DOM. */\n.pagina aside { grid-column: 1; grid-row: 1; }\n.pagina main  { grid-column: 2; grid-row: 1; }",
+          "variant": "neutral"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Como testar em 30 segundos"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Clique na barra de endereço e vá apertando Tab. O anel de foco tem que descer a página numa linha previsível. Todo pulo para trás, ou para um canto distante, é um defeito."
         }
       ]
     },
@@ -334,6 +395,67 @@ export const leitoresDeTela: Part = {
           "items": [
             "Foco retorna ao elemento que abriu."
           ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "<dialog> com showModal() entrega role, aria-modal, foco preso e ESC já implementados e testados pelo navegador. Reimplementar isso à mão é a origem clássica de modal inacessível."
+        },
+        {
+          "kind": "code",
+          "code": "@Component({\n  template: `\n    <button #abridor (click)=\"abrir()\">Excluir conta</button>\n\n    <dialog #dialog (close)=\"aoFechar()\" aria-labelledby=\"excluir-titulo\">\n\n      <h2 id=\"excluir-titulo\">Excluir conta</h2>\n      <p>Esta ação não pode ser desfeita.</p>\n\n      <button (click)=\"dialog.close()\">Cancelar</button>\n      <button (click)=\"confirmar()\">Excluir</button>\n\n    </dialog>\n  `,\n})\nexport class ExcluirConta {\n\n  private readonly dialog = viewChild<ElementRef<HTMLDialogElement>>('dialog');\n  private readonly abridor = viewChild<ElementRef<HTMLElement>>('abridor');\n\n  protected abrir(): void {\n    // showModal(), não show(): só ele torna o resto inerte.\n    this.dialog()?.nativeElement.showModal();\n  }\n\n  protected aoFechar(): void {\n    // A única parte que o navegador não faz sozinho.\n    this.abridor()?.nativeElement.focus();\n  }\n\n}",
+          "variant": "correct"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Leitura esperada, ao abrir:"
+        },
+        {
+          "kind": "code",
+          "code": "Excluir conta, diálogo\nEsta ação não pode ser desfeita.\nCancelar, botão",
+          "variant": "neutral"
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "show() e showModal() não são a mesma coisa"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "",
+            "show()",
+            "showModal()"
+          ],
+          "rows": [
+            [
+              "Conteúdo de trás fica inerte",
+              "Não",
+              "Sim"
+            ],
+            [
+              "ESC fecha",
+              "Não",
+              "Sim"
+            ],
+            [
+              "Tab preso dentro",
+              "Não",
+              "Sim"
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Usar show() num modal é o erro silencioso mais comum aqui: visualmente idêntico, e o leitor de tela continua lendo a página inteira por trás."
+        },
+        {
+          "kind": "code",
+          "code": "<div class=\"overlay\" *ngIf=\"aberto\">\n  <div class=\"modal\">\n    <h2>Excluir conta</h2>\n  </div>\n</div>",
+          "variant": "wrong"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Sem role, sem aria-modal, sem foco, sem ESC, sem retorno de foco. O Tab sai pela parte de trás e a pessoa se perde dentro da página que deveria estar bloqueada."
         }
       ]
     },
@@ -467,6 +589,83 @@ export const leitoresDeTela: Part = {
             "Tabs sem aria-selected.",
             "Select customizado incompleto."
           ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Como cada um soa para quem usa leitor de tela"
+        },
+        {
+          "kind": "paragraph",
+          "text": "A lista acima é técnica. Esta é a mesma lista traduzida para o que a pessoa de fato ouve — que é o que decide se ela conclui a tarefa ou desiste."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Bug",
+            "O que a pessoa ouve",
+            "O que ela faz"
+          ],
+          "rows": [
+            [
+              "Botão sem nome.",
+              "\"botão\"",
+              "Aciona no escuro ou desiste."
+            ],
+            [
+              "Ícone sem label.",
+              "\"delete, botão\"",
+              "Lê o nome da fonte, não a ação."
+            ],
+            [
+              "Modal sem foco.",
+              "Silêncio; continua na página de trás.",
+              "Não sabe que algo abriu."
+            ],
+            [
+              "Erro não anunciado.",
+              "Nada. O envio parece ter funcionado.",
+              "Espera uma confirmação que não vem."
+            ],
+            [
+              "Toast não anunciado.",
+              "Nada.",
+              "Repete a ação, achando que falhou."
+            ],
+            [
+              "Foco perdido após navegar.",
+              "Silêncio; foco no começo do documento.",
+              "Percorre o menu inteiro de novo."
+            ],
+            [
+              "Accordion sem aria-expanded.",
+              "\"Detalhes, botão\" — sempre igual.",
+              "Não sabe se abriu."
+            ],
+            [
+              "Tabs sem aria-selected.",
+              "\"Extrato, aba\" — sem dizer qual está ativa.",
+              "Perde a referência do contexto."
+            ]
+          ]
+        },
+        {
+          "kind": "heading",
+          "level": 1,
+          "text": "Como achar os quatro primeiros em cinco minutos"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Sem instalar nada, no console do navegador:"
+        },
+        {
+          "kind": "code",
+          "code": "// Botões e links sem nome acessível\ndocument.querySelectorAll('button, a').forEach((el) => {\n  const nome = (\n    el.getAttribute('aria-label') ??\n    el.textContent ??\n    ''\n  ).trim();\n  if (!nome) console.warn('sem nome:', el);\n});\n\n// Campos sem label associado\ndocument.querySelectorAll('input, select, textarea').forEach((el) => {\n  const temLabel =\n    el.labels?.length ||\n    el.getAttribute('aria-label') ||\n    el.getAttribute('aria-labelledby');\n  if (!temLabel) console.warn('sem label:', el);\n});\n\n// tabindex positivo\ndocument.querySelectorAll('[tabindex]').forEach((el) => {\n  if (Number(el.getAttribute('tabindex')) > 0) console.warn('tabindex+:', el);\n});",
+          "variant": "neutral"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Isso não substitui axe nem teste real — pega três classes de erro das mais comuns, e roda em qualquer página em segundos."
         }
       ]
     },
